@@ -1,0 +1,9 @@
+File: C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before
+
+# Open End-day_before folder
+# pyautogui.hotkey("win", "e", interval=0.01)
+# time.sleep(1)
+# pyautogui.press("tab", presses=5, interval=0.01)
+# pyautogui.write(r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before")
+# pyautogui.press("enter")
+# pyautogui.hotkey("win", "up")
