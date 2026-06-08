@@ -35,9 +35,9 @@ pyautogui.press("right", presses=6, interval=.01)
 pyautogui.press("down", interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(3.5)
+pyautogui.press("tab", interval=.01)
 
 # # Report: Room Discrepancy
-# pyautogui.press("tab", interval=.01)
 # pyautogui.write("hkroomdiscrepancy", interval=.01)
 # pyautogui.press("enter", interval=.01)
 # time.sleep(2.5)
@@ -68,7 +68,6 @@ time.sleep(3.5)
 # pyautogui.press("tab", presses=29, interval=.01)
 
 # # Report: Guests INH Complimentary and Houseuse
-# pyautogui.press("tab", interval=.01)
 # pyautogui.write("gi_c_h", interval=.01)
 # pyautogui.press("enter", interval=.01)
 # time.sleep(2.5)
@@ -99,7 +98,6 @@ time.sleep(3.5)
 # pyautogui.press("tab", presses=29, interval=.01)
 
 # # Report: Guests in house Pseudo room Rate Check
-# pyautogui.press("tab", interval=.01)
 # pyautogui.write("giratecheck", interval=.01)
 # pyautogui.press("enter", interval=.01)
 # time.sleep(2.5)
@@ -142,3 +140,14 @@ time.sleep(3.5)
 # pyautogui.press("enter", interval=.01)
 # time.sleep(5)
 # pyautogui.press("tab", interval=.01)
+
+# Report: Expected Arrival
+pyautogui.write("Arrivals: Detailed FO", interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(2.5)
+pyautogui.press("tab", presses=9, interval=.01)
+pyautogui.press("down", presses=2, interval=.01)
+time.sleep(1)
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(3.5)
