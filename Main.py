@@ -88,3 +88,18 @@ time.sleep(.5)
 pyautogui.hotkey("ctrl", "w")
 time.sleep(.5)
 pyautogui.press("tab", presses=29, interval=.01)
+
+# Report: Guests in house Pseudo room Rate Check
+pyautogui.press("tab", interval=.01)
+pyautogui.write("giratecheck", interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(1)
+pyautogui.press("tab", presses=9, interval=.01)
+pyautogui.press("down", presses=2, interval=.01)
+time.sleep(1)
+pyautogui.press("tab", presses=13, interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(3)
+# Report: Guests in house Pseudo room Rate Check: Config
+pyautogui.click(125,303, interval=.01)
+pyautogui.click(119,523, interval=.5)
