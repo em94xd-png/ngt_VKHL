@@ -12,21 +12,21 @@ pyautogui.press("enter")
 # In Opera
 time.sleep(1)
 pyautogui.hotkey("win", "up")
+
+time.sleep(0.1)
+
 # Zoom out
-pyautogui.hotkey("ctrl", "-", interval=0.01)
-pyautogui.hotkey("ctrl", "-")
-pyautogui.hotkey("ctrl", "-")
-pyautogui.hotkey("ctrl", "-")
-pyautogui.hotkey("ctrl", "-")
-pyautogui.hotkey("ctrl", "-")
-pyautogui.hotkey("ctrl", "-")
-pyautogui.hotkey("ctrl", "-")
-pyautogui.hotkey("ctrl", "-")
-pyautogui.hotkey("ctrl", "-")
+def zoom_out(times):
+    for _ in range(times):
+        pyautogui.hotkey("ctrl", "-")
+
 # Zoom in
-pyautogui.hotkey("ctrl", "=")
-pyautogui.hotkey("ctrl", "=")
-pyautogui.hotkey("ctrl", "=")
+def zoom_in(times):
+    for _ in range(times):
+        pyautogui.hotkey("ctrl", "=")
+
+zoom_out(10)
+zoom_in(3)
 time.sleep(3.5)
 
 # To report search
@@ -226,13 +226,15 @@ time.sleep(0.5)
 pyautogui.hotkey("ctrl", "w")
 
 # Report: Out of Order by Reason
-pyautogui.hotkey("shift", "tab", interval=0.01)
-pyautogui.hotkey("shift", "tab")
-pyautogui.hotkey("shift", "tab")
-pyautogui.hotkey("shift", "tab")
-pyautogui.hotkey("shift", "tab")
-pyautogui.hotkey("shift", "tab")
+time.sleep(0.1)
+
+def ooo_reverse(times):
+    for _ in range(times):
+        pyautogui.hotkey("shift", "tab")
+
+ooo_reverse(6)
 time.sleep(0.5)
+
 # Report: Out of Order by Reason: config
 pyautogui.press("up", interval=0.01)
 time.sleep(0.5)
