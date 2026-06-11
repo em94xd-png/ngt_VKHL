@@ -285,8 +285,54 @@ def find_reserve(times):
 # time.sleep(5)
 # pyautogui.press("tab", interval=0.01)
 
-# Report: Credit Limit
-pyautogui.write("gi_authlimit", interval=0.01)
+# # Report: Credit Limit
+# pyautogui.write("gi_authlimit", interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# time.sleep(2.5)
+# pyautogui.press("tab", presses=9, interval=0.01)
+# pyautogui.press("down", presses=2, interval=0.01)
+# time.sleep(1.5)
+# pyautogui.click(x=748, y=520, interval=.01)
+# pyautogui.press("tab", presses=3, interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# time.sleep(3.5)
+# # Report: Credit Limit: Config
+# pyautogui.press("tab", presses=4, interval=0.01)
+# pyautogui.press("space", interval=0.01) # Pseudo Rooms
+# pyautogui.press("tab", presses=12, interval=0.01)
+# pyautogui.press("space", interval=0.01) # Include Internal Notes
+# pyautogui.press("tab", interval=0.01)
+# pyautogui.write("Resv. - GEN", interval=0.01)
+# pyautogui.press("tab", presses=8, interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# time.sleep(15)
+# # Report: Credit Limit: Save
+# pyautogui.click(600, 84, interval=0.01)
+# pyautogui.press("tab", presses=18, interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# time.sleep(1)
+# pyautogui.hotkey("ctrl", "f", interval=.01)
+# find_reserve(2)
+# time.sleep(0.1)
+# pyautogui.press("enter", interval=0.01)
+# pyautogui.write(r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before")
+# pyautogui.press("enter", interval=0.01)
+# time.sleep(.5)
+# pyautogui.press("tab", presses=4, interval=0.01)
+# pyautogui.press("down", presses=1, interval=0.01)  # Report position
+# pyautogui.press("enter", interval=0.01)
+# pyautogui.press("left", interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# time.sleep(0.5)
+# pyautogui.hotkey("ctrl", "w")
+# time.sleep(0.5)
+# pyautogui.press("tab", presses=25, interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# time.sleep(5)
+# pyautogui.press("tab", interval=0.01)
+
+# Report: Rebate and Correction Transactions
+pyautogui.write("Journal by Cashier and Transaction Code", interval=0.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(2.5)
 pyautogui.press("tab", presses=9, interval=0.01)
@@ -296,19 +342,25 @@ pyautogui.click(x=748, y=520, interval=.01)
 pyautogui.press("tab", presses=3, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(3.5)
-# Report: Credit Limit: Config
-pyautogui.press("tab", presses=4, interval=0.01)
-pyautogui.press("space", interval=0.01) # Pseudo Rooms
-pyautogui.press("tab", presses=12, interval=0.01)
-pyautogui.press("space", interval=0.01) # Include Internal Notes
+# Report: Rebate and Correction Transactions: Config
+pyautogui.click(x=122, y=302, interval=0.01)
+pyautogui.click(x=123, y=520, interval=0.01)
+time.sleep(1)
+pyautogui.hotkey("ctrl", "c", interval=0.01)
 pyautogui.press("tab", interval=0.01)
-pyautogui.write("Resv. - GEN", interval=0.01)
-pyautogui.press("tab", presses=8, interval=0.01)
+pyautogui.hotkey("ctrl", "v", interval=0.01)
+pyautogui.press("tab", presses=4, interval=0.01)
+time.sleep(.5)
+pyautogui.press("delete", interval=0.01)
+time.sleep(.5)
+pyautogui.press("tab", presses=2, interval=0.01)
+pyautogui.press("space", interval=0.01) # Negative Postings Only
+pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(15)
-# Report: Credit Limit: Save
+time.sleep(8.5)
+# Report: Rebate and Correction Transactions: Save
 pyautogui.click(600, 84, interval=0.01)
-pyautogui.press("tab", presses=18, interval=0.01)
+pyautogui.press("tab", presses=17, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
@@ -319,16 +371,10 @@ pyautogui.write(r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_befor
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=4, interval=0.01)
-pyautogui.press("down", presses=1, interval=0.01)  # Report position
+pyautogui.press("space", interval=0.01)  # Report position
 pyautogui.press("enter", interval=0.01)
 pyautogui.press("left", interval=0.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(0.5)
 pyautogui.hotkey("ctrl", "w")
 time.sleep(0.5)
-pyautogui.press("tab", presses=25, interval=0.01)
-pyautogui.press("enter", interval=0.01)
-time.sleep(5)
-pyautogui.press("tab", interval=0.01)
-
-# Report: Rebate and Correction Transactions
