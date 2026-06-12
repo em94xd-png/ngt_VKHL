@@ -2,10 +2,3 @@ File: C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before
 
 OPERA: https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud
 
-# Open End-day_before folder
-# pyautogui.hotkey("win", "e", interval=0.01)
-# time.sleep(1)
-# pyautogui.press("tab", presses=5, interval=0.01)
-# pyautogui.write(r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before")
-# pyautogui.press("enter")
-# pyautogui.hotkey("win", "up")
