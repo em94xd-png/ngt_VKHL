@@ -4,8 +4,10 @@ from datetime import date, timedelta
 
 # Clear report store
 pyautogui.press("win", interval=.01)
-pyautogui.write("C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before")
-pyautogui.press("enter")
+pyautogui.write(r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before")
+time.sleep(1)
+pyautogui.press("enter", interval=.01)
+time.sleep(1)
 pyautogui.press("tab", presses=13, interval=.01)
 pyautogui.hotkey("ctrl", "a", interval=.01)
 pyautogui.press("del", interval=.01)
@@ -392,8 +394,10 @@ time.sleep(0.5)
 
 # Open report store
 pyautogui.press("win", interval=.01)
-pyautogui.write("C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before")
-pyautogui.press("enter")
+pyautogui.write(r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before")
+time.sleep(1)
+pyautogui.press("enter", interval=.01)
+time.sleep(1)
 pyautogui.press("tab", presses=13, interval=.01)
 pyautogui.press("down", presses=7, interval=.01)
 pyautogui.press("enter", interval=.01)
