@@ -1,37 +1,100 @@
-from selenium import webdriver
+import pyautogui
 import time
-from selenium.webdriver.edge.options import Options
-import json
+from datetime import date, timedelta
+import os
+from selenium import webdriver
 
-edge_options = Options()
-# edge_options.add_argument("--headless")      # Runs silently in the background
-edge_options.add_argument('--kiosk-printing') # Skips the confirmation dialog
+# Open Opera
+pyautogui.press("win")
+pyautogui.write(
+    "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
+)
+time.sleep(0.5)
+pyautogui.press("enter")
 
-# Define your exact print format parameters
-print_formatting = {
-    "version": 2,
-    "isHeaderFooterEnabled": False,  # True to include URL/date headers, False to hide them
-    "isLandscapeEnabled": True,     # True for Landscape layout, False for Portrait
-    
-    # 1. SET BOTH SIDES (DUPLEX) PRINTING
-    # 0 = Simplex (One-sided), 1 = Duplex Long Edge (Flip Book style), 2 = Duplex Short Edge (Tablet style)
-    "duplex": 2, 
-    
-    # 2. SET PAGES PER SHEET
-    # Options: 1, 2, 4, 6, 9, 16 pages per sheet layout
-    "pagesPerSheet": 1 
-}
+# In Opera  
+time.sleep(1)
+pyautogui.hotkey("win", "up")
+pyautogui.hotkey("win", "down")
+pyautogui.hotkey("win", "up")
 
-# Inject these custom format settings directly into Edge's sticky browser properties
-edge_options.add_experimental_option("prefs", {
-    "printing.print_preview_sticky_settings.appState": json.dumps(print_formatting)
-})
+time.sleep(0.1)
 
-driver = webdriver.Edge(options=edge_options)
-driver.get("https://example.com")
+# Zoom out
+def zoom_out(times):
+    for _ in range(times):
+        pyautogui.hotkey("ctrl", "-")
 
-# Fires the print command and completes automatically
-driver.execute_script("window.print();") 
+# Zoom in
+def zoom_in(times):
+    for _ in range(times):
+        pyautogui.hotkey("ctrl", "=")
 
-# time.sleep(.5)
-# driver.quit()
+zoom_out(10)
+zoom_in(3)
+time.sleep(5)
+
+# To report search
+pyautogui.press("tab", presses=5, interval=0.01)
+pyautogui.press("right", presses=6, interval=0.01)
+pyautogui.press("down", interval=0.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(4.5)
+pyautogui.press("tab", interval=0.01)
+
+# Report: Room Discrepancy
+pyautogui.write("hkroomdiscrepancy", interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(2.5)
+pyautogui.press("tab", presses=9, interval=.01)
+pyautogui.press("down", presses=2, interval=.01)
+time.sleep(1.5)
+pyautogui.click(x=748, y=520, interval=.01)
+pyautogui.press("tab", presses=4, interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(8.5)
+# Report: Room Discrepancy: Save
+pyautogui.click(600,84, interval=.01)
+pyautogui.press("tab", presses=17, interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(1)
+pyautogui.hotkey("ctrl", "f", interval=.01)
+
+def find_reserve(times):
+    for _ in range(times):
+        pyautogui.hotkey("shift", "tab")
+
+find_reserve(2)
+time.sleep(0.1)
+
+pyautogui.press("enter", interval=.01)
+pyautogui.write(r"D:\Users\fo.vkhl\Documents\Runit")
+pyautogui.press("enter", interval=.01)
+time.sleep(.5)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.write("Room Discrepancy")
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(.5)
+pyautogui.hotkey("ctrl", "w")
+time.sleep(.5)
+pyautogui.press("tab", presses=29, interval=.01)
+
+def print_it(file_from):
+    driver = webdriver.Edge()
+    driver.get(file_from)
+
+    # Trigger print asynchronously so Python doesn't freeze
+    driver.execute_script("setTimeout(function() { window.print(); }, 0);")
+
+    time.sleep(1)
+
+    pyautogui.press('tab', presses=9, interval=.01)
+    # pyautogui.press("enter")
+    time.sleep(3)
+
+# Convert your local absolute file path into a file:// URL structure
+local_file = r"D:\Users\fo.vkhl\Documents\Runit\Room Discrepancy.PDF"
+file_url = "file:///" + os.path.abspath(local_file).replace("\\", "/")
+
+print_it(file_url)

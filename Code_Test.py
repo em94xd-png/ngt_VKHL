@@ -15,5 +15,10 @@ def print_it(file_from):
     # pyautogui.press("enter")
     time.sleep(3)
 
+
+# # Convert your local absolute file path into a file:// URL structure
+# local_file = r"C:\path\to\your\document.html"
+# file_url = "file:///" + os.path.abspath(local_file).replace("\\", "/")
+
 file_ = r"file:///D:/Users/fo.vkhl/Downloads/ExampleDomain.pdf"
 print_it(file_)
