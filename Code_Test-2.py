@@ -1,14 +1,14 @@
 from selenium import webdriver
 import time
+from selenium.webdriver.edge.options import Options
 import json
 
-chrome_options = webdriver.ChromeOptions()
-# chrome_options.add_argument("--headless")      # Runs silently in the background
-chrome_options.add_argument('--kiosk-printing') # Skips the confirmation dialog
+edge_options = Options()
+# edge_options.add_argument("--headless")      # Runs silently in the background
+edge_options.add_argument('--kiosk-printing') # Skips the confirmation dialog
 
 # Define your exact print format parameters
 print_formatting = {
-    # "selectedDestinationId": "RICOH P 502 PCL 6",
     "version": 2,
     "isHeaderFooterEnabled": False,  # True to include URL/date headers, False to hide them
     "isLandscapeEnabled": True,     # True for Landscape layout, False for Portrait
@@ -23,10 +23,11 @@ print_formatting = {
 }
 
 # Inject these custom format settings directly into Edge's sticky browser properties
-prefs = {'printing.print_preview_sticky_settings.appState': json.dumps(print_formatting)}
-chrome_options.add_experimental_option('prefs', prefs)
+edge_options.add_experimental_option("prefs", {
+    "printing.print_preview_sticky_settings.appState": json.dumps(print_formatting)
+})
 
-driver = webdriver.Chrome(options=chrome_options)
+driver = webdriver.Edge(options=edge_options)
 driver.get("https://example.com")
 
 # Fires the print command and completes automatically
