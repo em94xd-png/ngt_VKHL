@@ -1,36 +1,19 @@
-from selenium import webdriver
 import time
-import json
+from selenium import webdriver
+import pyautogui
 
-chrome_options = webdriver.ChromeOptions()
-# chrome_options.add_argument("--headless")      # Runs silently in the background
-chrome_options.add_argument('--kiosk-printing') # Skips the confirmation dialog
+def print_it(file_from):
+    driver = webdriver.Edge()
+    driver.get(file_from)
 
-# Define your exact print format parameters
-print_formatting = {
-    # "selectedDestinationId": "RICOH P 502 PCL 6",
-    "version": 2,
-    "isHeaderFooterEnabled": False,  # True to include URL/date headers, False to hide them
-    "isLandscapeEnabled": True,     # True for Landscape layout, False for Portrait
-    
-    # 1. SET BOTH SIDES (DUPLEX) PRINTING
-    # 0 = Simplex (One-sided), 1 = Duplex Long Edge (Flip Book style), 2 = Duplex Short Edge (Tablet style)
-    "duplex": 2, 
-    
-    # 2. SET PAGES PER SHEET
-    # Options: 1, 2, 4, 6, 9, 16 pages per sheet layout
-    "pagesPerSheet": 1 
-}
+    # Trigger print asynchronously so Python doesn't freeze
+    driver.execute_script("setTimeout(function() { window.print(); }, 0);")
 
-# Inject these custom format settings directly into Edge's sticky browser properties
-prefs = {'printing.print_preview_sticky_settings.appState': json.dumps(print_formatting)}
-chrome_options.add_experimental_option('prefs', prefs)
+    time.sleep(1)
 
-driver = webdriver.Chrome(options=chrome_options)
-driver.get("https://example.com")
+    pyautogui.press('tab', presses=9, interval=.01)
+    # pyautogui.press("enter")
+    time.sleep(3)
 
-# Fires the print command and completes automatically
-driver.execute_script("window.print();") 
-
-# time.sleep(.5)
-# driver.quit()
+file_ = r"file:///D:/Users/fo.vkhl/Downloads/ExampleDomain.pdf"
+print_it(file_)
