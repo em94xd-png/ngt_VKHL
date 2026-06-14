@@ -1,11 +1,10 @@
-from datetime import date, timedelta
-import pyautogui
+import os
 
+Endday_before_folder = r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before"
 
-def yesterday():
-    today = date.today()
-    yesterday = today - timedelta(days=1)
-    return yesterday.strftime("%d.%m")
+Room_Discrepancy = "Room Discrepancy"
 
-# print(f"IS {yesterday()}")
-pyautogui.write(f"IS: {yesterday()}")
+local_file = os.path.join(Endday_before_folder, Room_Discrepancy)
+file_url = "file:///" + os.path.abspath(local_file).replace("\\", "/").__add__(".PDF")
+
+print(file_url)
