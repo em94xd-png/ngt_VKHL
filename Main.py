@@ -1,10 +1,15 @@
 import pyautogui
 import time
 from datetime import date, timedelta
+import os
+from selenium import webdriver
 
 # Clear report store
 pyautogui.press("win", interval=.01)
-pyautogui.write(r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before")
+
+Endday_before_folder = r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before"
+
+pyautogui.write(Endday_before_folder)
 time.sleep(1)
 pyautogui.press("enter", interval=.01)
 time.sleep(1)
@@ -15,9 +20,10 @@ pyautogui.hotkey("ctrl", "w", interval=.01)
 
 # Open Opera
 pyautogui.press("win")
-pyautogui.write(
-    "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
-)
+
+site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
+
+pyautogui.write(site_OPERA)
 time.sleep(0.5)
 pyautogui.press("enter")
 
@@ -77,11 +83,14 @@ find_reserve(2)
 time.sleep(0.1)
 
 pyautogui.press("enter", interval=.01)
-pyautogui.write(r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before")
+pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.write("Room Discrepancy")
+
+Room_Discrepancy = "Room Discrepancy"
+
+pyautogui.write(Room_Discrepancy)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
@@ -109,11 +118,14 @@ pyautogui.hotkey("ctrl", "f", interval=.01)
 find_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=.01)
-pyautogui.write(r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before")
+pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.write("Guests INH Complimentary and Houseuse")
+
+Guests_INH_Complimentary_and_Houseuse = "Guests INH Complimentary and Houseuse"
+
+pyautogui.write(Guests_INH_Complimentary_and_Houseuse)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
@@ -152,11 +164,14 @@ pyautogui.hotkey("ctrl", "f", interval=.01)
 find_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=.01)
-pyautogui.write(r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before")
+pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.write("Guests in house Pseudo room Rate Check")
+
+Guests_in_house_Pseudo_room_Rate_Check = "Guests in house Pseudo room Rate Check"
+
+pyautogui.write(Guests_in_house_Pseudo_room_Rate_Check)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
@@ -191,14 +206,14 @@ pyautogui.press("enter", interval=0.01)
 time.sleep(8.5)
 # Report: Expected Arrival: Save
 pyautogui.click(600, 84, interval=0.01)
-pyautogui.press("tab", presses=18, interval=0.01)
+pyautogui.press("tab", presses=17, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
 find_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=0.01)
-pyautogui.write(r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before")
+pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -208,7 +223,9 @@ def yesterday():
     yesterday = today - timedelta(days=1)
     return yesterday.strftime("%d.%m")
 
-pyautogui.write(f"Expected Arrival {yesterday()}")
+Expected_Arrival = f"Expected Arrival {yesterday()}"
+
+pyautogui.write(Expected_Arrival)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(0.5)
@@ -251,11 +268,14 @@ pyautogui.hotkey("ctrl", "f", interval=0.01)
 find_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=0.01)
-pyautogui.write(r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before")
+pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.write(f"17. Out of Service by Reason {yesterday()}")
+
+Out_of_Service_by_Reason = f"17. Out of Service by Reason {yesterday()}"
+
+pyautogui.write(Out_of_Service_by_Reason)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(0.5)
@@ -284,11 +304,14 @@ pyautogui.press("enter", interval=0.01)
 time.sleep(1)
 pyautogui.press("tab", presses=6, interval=0.01)
 pyautogui.press("enter", interval=0.01)
-pyautogui.write(r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before")
+pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.write(f"17. Out of Order by Reason {yesterday()}")
+
+Out_of_Order_by_Reason = f"17. Out of Order by Reason {yesterday()}"
+
+pyautogui.write(Out_of_Order_by_Reason)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(0.5)
@@ -330,11 +353,14 @@ pyautogui.hotkey("ctrl", "f", interval=.01)
 find_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=0.01)
-pyautogui.write(r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before")
+pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.write(f"15. Credit Limit {yesterday()}")
+
+Credit_Limit = f"15. Credit Limit {yesterday()}"
+
+pyautogui.write(Credit_Limit)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(0.5)
@@ -374,30 +400,51 @@ pyautogui.press("enter", interval=0.01)
 time.sleep(8.5)
 # Report: Rebate and Correction Transactions: Save
 pyautogui.click(600, 84, interval=0.01)
-pyautogui.press("tab", presses=17, interval=0.01)
+pyautogui.press("tab", presses=18, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
 find_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=0.01)
-pyautogui.write(r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before")
+pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.write("12. Rebate and Correction Transactions")
+
+Rebate_and_Correction_Transactions = "12. Rebate and Correction Transactions"
+
+pyautogui.write(Rebate_and_Correction_Transactions)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(0.5)
 pyautogui.hotkey("ctrl", "w")
 time.sleep(0.5)
 
-# Open report store
-pyautogui.press("win", interval=.01)
-pyautogui.write(r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before")
-time.sleep(1)
-pyautogui.press("enter", interval=.01)
-time.sleep(1)
-pyautogui.press("tab", presses=13, interval=.01)
-pyautogui.press("down", presses=7, interval=.01)
-pyautogui.press("enter", interval=.01)
+# # Print
+# def print_it(file_from):
+#     driver = webdriver.Edge()
+#     driver.get(file_from)
+
+#     driver.execute_script("setTimeout(function() { window.print(); }, 0);") # Trigger print asynchronously so Python doesn't freeze
+
+#     time.sleep(1)
+
+#     pyautogui.press('tab', presses=6, interval=.01)
+#     pyautogui.press('up', presses=2, interval=.01)
+#     pyautogui.press('tab', interval=.01)
+#     pyautogui.press('enter', interval=.01)
+#     pyautogui.press('tab', presses=3, interval=.01)
+#     pyautogui.press('up', presses=2, interval=.01)
+#     pyautogui.press('tab', presses=3, interval=.01)
+#     pyautogui.press('enter', interval=.01)
+
+# config_print_Room_Discrepancy = [
+#     ("tab", 6, .01),
+#     ("up", 2, .01),
+
+# ]
+# file_local = os.path.join(Endday_before_folder, Room_Discrepancy)
+# file_url = "file:///" + os.path.abspath(file_local).replace("\\", "/").__add__(".PDF") # Convert your local absolute file path into a file:// URL structure
+
+# print_it(file_url)

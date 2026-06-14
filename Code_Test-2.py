@@ -6,9 +6,9 @@ from selenium import webdriver
 
 # Open Opera
 pyautogui.press("win")
-pyautogui.write(
-    "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
-)
+
+site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
+pyautogui.write(site_OPERA)
 time.sleep(0.5)
 pyautogui.press("enter")
 
@@ -68,11 +68,17 @@ find_reserve(2)
 time.sleep(0.1)
 
 pyautogui.press("enter", interval=.01)
-pyautogui.write(r"D:\Users\fo.vkhl\Documents\Runit")
+
+Endday_before_folder = r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before"
+
+pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.write("Room Discrepancy")
+
+Room_Discrepancy = "Room Discrepancy"
+
+pyautogui.write(Room_Discrepancy)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
@@ -84,17 +90,20 @@ def print_it(file_from):
     driver = webdriver.Edge()
     driver.get(file_from)
 
-    # Trigger print asynchronously so Python doesn't freeze
-    driver.execute_script("setTimeout(function() { window.print(); }, 0);")
+    driver.execute_script("setTimeout(function() { window.print(); }, 0);") # Trigger print asynchronously so Python doesn't freeze
 
     time.sleep(1)
 
-    pyautogui.press('tab', presses=9, interval=.01)
-    # pyautogui.press("enter")
-    time.sleep(3)
+    pyautogui.press('tab', presses=6, interval=.01)
+    pyautogui.press('up', presses=2, interval=.01)
+    pyautogui.press('tab', interval=.01)
+    pyautogui.press('enter', interval=.01)
+    pyautogui.press('tab', presses=3, interval=.01)
+    pyautogui.press('up', presses=2, interval=.01)
+    pyautogui.press('tab', presses=3, interval=.01)
+    pyautogui.press('enter', interval=.01)
 
-# Convert your local absolute file path into a file:// URL structure
-local_file = r"D:\Users\fo.vkhl\Documents\Runit\Room Discrepancy.PDF"
-file_url = "file:///" + os.path.abspath(local_file).replace("\\", "/")
+file_local = os.path.join(Endday_before_folder, Room_Discrepancy)
+file_url = "file:///" + os.path.abspath(file_local).replace("\\", "/").__add__(".PDF") # Convert your local absolute file path into a file:// URL structure
 
 print_it(file_url)
