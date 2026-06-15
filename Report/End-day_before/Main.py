@@ -50,7 +50,6 @@ time.sleep(2.5)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
 time.sleep(1.5)
-# pyautogui.click(x=748, y=520, interval=.01)
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=4, interval=.01)
 pyautogui.press("enter", interval=.01)
@@ -92,7 +91,6 @@ time.sleep(2.5)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
 time.sleep(1.5)
-# pyautogui.click(x=748, y=520, interval=.01)
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=4, interval=.01)
 pyautogui.press("enter", interval=.01)
@@ -128,14 +126,19 @@ time.sleep(2.5)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
 time.sleep(1.5)
-# pyautogui.click(x=748, y=520, interval=.01)
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(3.5)
 # Report: Guests in house Pseudo room Rate Check: Config
-pyautogui.click(125,303, interval=.01)
-pyautogui.click(119,523, interval=.5)
+pyautogui.hotkey("ctrl", "a", interval=.01)
+
+def format2_yesterday():
+    today = date.today()
+    yesterday = today - timedelta(days=1)
+    return yesterday.strftime("%d%m")
+
+pyautogui.write(format2_yesterday(), interval=.01)
 pyautogui.press("tab", presses=7, interval=.01)
 pyautogui.press("space", interval=.01) # Pseudo Rooms
 pyautogui.press("tab", presses=10, interval=.01)
@@ -178,19 +181,16 @@ time.sleep(2.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
 time.sleep(1.5)
-# pyautogui.click(x=748, y=520, interval=.01)
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=3, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(3.5)
 # Report: Expected Arrival: Config
-pyautogui.click(123, 302, interval=0.01)
-pyautogui.click(123, 520, interval=0.01)
-time.sleep(1)
-pyautogui.hotkey("ctrl", "c", interval=0.01)
+pyautogui.hotkey("ctrl", "a", interval=.01)
+pyautogui.write(format2_yesterday(), interval=.01)
 pyautogui.press("tab", presses=2, interval=0.01)
 time.sleep(1)
-pyautogui.hotkey("ctrl", "v", interval=0.01)
+pyautogui.write(format2_yesterday(), interval=.01)
 pyautogui.press("tab", presses=53, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(8.5)
@@ -208,12 +208,12 @@ pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
 
-def yesterday():
+def format1_yesterday():
     today = date.today()
     yesterday = today - timedelta(days=1)
     return yesterday.strftime("%d.%m")
 
-Expected_Arrival = f"Expected Arrival {yesterday()}"
+Expected_Arrival = f"Expected Arrival {format1_yesterday()}"
 
 pyautogui.write(Expected_Arrival)
 pyautogui.press("tab", presses=3, interval=.01)
@@ -233,7 +233,6 @@ time.sleep(2.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
 time.sleep(1.5)
-# pyautogui.click(x=748, y=520, interval=.01)
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=3, interval=0.01)
 pyautogui.press("enter", interval=0.01)
@@ -264,7 +263,7 @@ pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
 
-Out_of_Service_by_Reason = f"17. Out of Service by Reason {yesterday()}"
+Out_of_Service_by_Reason = f"17. Out of Service by Reason {format1_yesterday()}"
 
 pyautogui.write(Out_of_Service_by_Reason)
 pyautogui.press("tab", presses=3, interval=.01)
@@ -296,7 +295,7 @@ pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
 
-Out_of_Order_by_Reason = f"17. Out of Order by Reason {yesterday()}"
+Out_of_Order_by_Reason = f"17. Out of Order by Reason {format1_yesterday()}"
 
 pyautogui.write(Out_of_Order_by_Reason)
 pyautogui.press("tab", presses=3, interval=.01)
@@ -316,7 +315,6 @@ time.sleep(2.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
 time.sleep(1.5)
-# pyautogui.click(x=748, y=520, interval=.01)
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=3, interval=0.01)
 pyautogui.press("enter", interval=0.01)
@@ -346,7 +344,7 @@ pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
 
-Credit_Limit = f"15. Credit Limit {yesterday()}"
+Credit_Limit = f"15. Credit Limit {format1_yesterday()}"
 
 pyautogui.write(Credit_Limit)
 pyautogui.press("tab", presses=3, interval=.01)
@@ -366,18 +364,16 @@ time.sleep(2.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
 time.sleep(1.5)
-# pyautogui.click(x=748, y=520, interval=.01)
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=3, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(3.5)
 # Report: Rebate and Correction Transactions: Config
-pyautogui.click(x=122, y=302, interval=0.01)
-pyautogui.click(x=123, y=520, interval=0.01)
-time.sleep(1)
-pyautogui.hotkey("ctrl", "c", interval=0.01)
+pyautogui.hotkey("ctrl", "a", interval=.01)
+pyautogui.write(format2_yesterday(), interval=.01)
 pyautogui.press("tab", interval=0.01)
-pyautogui.hotkey("ctrl", "v", interval=0.01)
+time.sleep(1)
+pyautogui.write(format2_yesterday(), interval=.01)
 pyautogui.press("tab", presses=4, interval=0.01)
 time.sleep(1)
 pyautogui.press("delete", interval=0.01)
@@ -411,7 +407,6 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(1)
 
 # Print
-
 file_local_Room_Discrepancy = os.path.join(Endday_before_folder, Room_Discrepancy)
 
 file_url_Room_Discrepancy = "file:///" + os.path.abspath(file_local_Room_Discrepancy).replace("\\", "/").__add__(".PDF")
@@ -432,7 +427,7 @@ def print_Room_Discrepancy(file_from):
         ("tab", 3),
         ("up", 2),
         ("tab", 3),
-        # ("enter", 1)
+        ("enter", 1)
     ]
 
     for key, presses in config_print_Room_Discrepancy:
@@ -462,7 +457,7 @@ def print_Guests_INH_Complimentary_and_Houseuse(file_from):
         ("up", 2),
         ("down", 1),
         ("tab", 3),
-        # ("enter", 1)
+        ("enter", 1)
     ]
 
     for key, presses in config_print_Guests_INH_Complimentary_and_Houseuse:
@@ -492,7 +487,7 @@ def print_Guests_in_house_Pseudo_room_Rate_Check(file_from):
         ("up", 2),
         ("down", 1),
         ("tab", 3),
-        # ("enter", 1)
+        ("enter", 1)
     ]
 
     for key, presses in config_print_Guests_in_house_Pseudo_room_Rate_Check:
@@ -522,7 +517,7 @@ def print_Expected_Arrival(file_from):
         ("up", 2),
         ("down", 1),
         ("tab", 3),
-        # ("enter", 1)
+        ("enter", 1)
     ]
 
     for key, presses in config_print_Expected_Arrival:
@@ -552,7 +547,7 @@ def print_Out_of_Service_by_Reason(file_from):
         ("up", 2),
         ("down", 1),
         ("tab", 3),
-        # ("enter", 1)
+        ("enter", 1)
     ]
 
     for key, presses in config_print_Out_of_Service_by_Reason:
@@ -582,7 +577,7 @@ def print_Out_of_Order_by_Reason(file_from):
         ("up", 2),
         ("down", 1),
         ("tab", 3),
-        # ("enter", 1)
+        ("enter", 1)
     ]
 
     for key, presses in config_print_Out_of_Order_by_Reason:
@@ -612,7 +607,7 @@ def print_Credit_Limit(file_from):
         ("up", 2),
         ("down", 1),
         ("tab", 3),
-        # ("enter", 1)
+        ("enter", 1)
     ]
 
     for key, presses in config_print_Credit_Limit:
@@ -642,7 +637,7 @@ def print_Rebate_and_Correction_Transactions(file_from):
         ("up", 2),
         ("down", 1),
         ("tab", 3),
-        # ("enter", 1)
+        ("enter", 1)
     ]
 
     for key, presses in config_print_Rebate_and_Correction_Transactions:
@@ -653,7 +648,7 @@ def print_Rebate_and_Correction_Transactions(file_from):
 print_Room_Discrepancy(file_url_Room_Discrepancy)
 print_Guests_INH_Complimentary_and_Houseuse(file_url_Guests_INH_Complimentary_and_Houseuse)
 print_Guests_in_house_Pseudo_room_Rate_Check(file_url_Guests_in_house_Pseudo_room_Rate_Check)
-print_Expected_Arrival(file_url_Expected_Arrival)
+# print_Expected_Arrival(file_url_Expected_Arrival)
 print_Out_of_Service_by_Reason(file_url_Out_of_Service_by_Reason)
 print_Out_of_Order_by_Reason(file_url_Out_of_Order_by_Reason)
 print_Credit_Limit(file_url_Credit_Limit)
