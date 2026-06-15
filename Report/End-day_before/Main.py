@@ -407,7 +407,6 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(1)
 
 # Print
-
 file_local_Room_Discrepancy = os.path.join(Endday_before_folder, Room_Discrepancy)
 
 file_url_Room_Discrepancy = "file:///" + os.path.abspath(file_local_Room_Discrepancy).replace("\\", "/").__add__(".PDF")
@@ -428,7 +427,7 @@ def print_Room_Discrepancy(file_from):
         ("tab", 3),
         ("up", 2),
         ("tab", 3),
-        # ("enter", 1)
+        ("enter", 1)
     ]
 
     for key, presses in config_print_Room_Discrepancy:
@@ -458,7 +457,7 @@ def print_Guests_INH_Complimentary_and_Houseuse(file_from):
         ("up", 2),
         ("down", 1),
         ("tab", 3),
-        # ("enter", 1)
+        ("enter", 1)
     ]
 
     for key, presses in config_print_Guests_INH_Complimentary_and_Houseuse:
@@ -488,7 +487,7 @@ def print_Guests_in_house_Pseudo_room_Rate_Check(file_from):
         ("up", 2),
         ("down", 1),
         ("tab", 3),
-        # ("enter", 1)
+        ("enter", 1)
     ]
 
     for key, presses in config_print_Guests_in_house_Pseudo_room_Rate_Check:
@@ -518,7 +517,7 @@ def print_Expected_Arrival(file_from):
         ("up", 2),
         ("down", 1),
         ("tab", 3),
-        # ("enter", 1)
+        ("enter", 1)
     ]
 
     for key, presses in config_print_Expected_Arrival:
@@ -548,7 +547,7 @@ def print_Out_of_Service_by_Reason(file_from):
         ("up", 2),
         ("down", 1),
         ("tab", 3),
-        # ("enter", 1)
+        ("enter", 1)
     ]
 
     for key, presses in config_print_Out_of_Service_by_Reason:
@@ -578,7 +577,7 @@ def print_Out_of_Order_by_Reason(file_from):
         ("up", 2),
         ("down", 1),
         ("tab", 3),
-        # ("enter", 1)
+        ("enter", 1)
     ]
 
     for key, presses in config_print_Out_of_Order_by_Reason:
@@ -608,7 +607,7 @@ def print_Credit_Limit(file_from):
         ("up", 2),
         ("down", 1),
         ("tab", 3),
-        # ("enter", 1)
+        ("enter", 1)
     ]
 
     for key, presses in config_print_Credit_Limit:
@@ -638,7 +637,7 @@ def print_Rebate_and_Correction_Transactions(file_from):
         ("up", 2),
         ("down", 1),
         ("tab", 3),
-        # ("enter", 1)
+        ("enter", 1)
     ]
 
     for key, presses in config_print_Rebate_and_Correction_Transactions:
@@ -649,7 +648,7 @@ def print_Rebate_and_Correction_Transactions(file_from):
 print_Room_Discrepancy(file_url_Room_Discrepancy)
 print_Guests_INH_Complimentary_and_Houseuse(file_url_Guests_INH_Complimentary_and_Houseuse)
 print_Guests_in_house_Pseudo_room_Rate_Check(file_url_Guests_in_house_Pseudo_room_Rate_Check)
-print_Expected_Arrival(file_url_Expected_Arrival)
+# print_Expected_Arrival(file_url_Expected_Arrival)
 print_Out_of_Service_by_Reason(file_url_Out_of_Service_by_Reason)
 print_Out_of_Order_by_Reason(file_url_Out_of_Order_by_Reason)
 print_Credit_Limit(file_url_Credit_Limit)
