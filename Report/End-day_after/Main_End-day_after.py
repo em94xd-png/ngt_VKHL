@@ -3,6 +3,21 @@ import time
 from datetime import date
 from Code_Store import *
 
+# Clear report store
+Endday_after_folder = r"C:\Users\%USERPROFILE%\Documents\Runit\Report\End-day_after"
+
+pyautogui.hotkey("win", "e", interval=.01)
+time.sleep(1)
+pyautogui.hotkey("ctrl", "f", interval=.01)
+tab_reserve(2)
+pyautogui.write(Endday_after_folder)
+pyautogui.press("enter", interval=.01)
+time.sleep(1)
+pyautogui.press("tab", presses=13, interval=.01)
+pyautogui.hotkey("ctrl", "a", interval=.01)
+pyautogui.press("del", interval=.01)
+pyautogui.hotkey("ctrl", "w", interval=.01)
+
 # Open Opera
 pyautogui.press("win")
 

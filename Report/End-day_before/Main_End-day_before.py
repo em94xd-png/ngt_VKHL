@@ -5,12 +5,18 @@ import os
 from selenium import webdriver
 
 # Clear report store
-pyautogui.press("win", interval=.01)
+Endday_before_folder = r"C:\Users\%USERPROFILE%\Documents\Runit\Report\End-day_before"
 
-Endday_before_folder = r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before"
-
-pyautogui.write(Endday_before_folder)
+pyautogui.hotkey("win", "e", interval=.01)
 time.sleep(1)
+pyautogui.hotkey("ctrl", "f", interval=.01)
+
+def tab_reserve(times):
+    for _ in range(times):
+        pyautogui.hotkey("shift", "tab")
+
+tab_reserve(2)
+pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=.01)
 time.sleep(1)
 pyautogui.press("tab", presses=13, interval=.01)
@@ -60,14 +66,8 @@ time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
 time.sleep(1.5)
 pyautogui.hotkey("ctrl", "f", interval=.01)
-
-def tab_reserve(times):
-    for _ in range(times):
-        pyautogui.hotkey("shift", "tab")
-
 tab_reserve(2)
 time.sleep(0.1)
-
 pyautogui.press("enter", interval=.01)
 pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=.01)
@@ -656,6 +656,6 @@ print_Rebate_and_Correction_Transactions(file_url_Rebate_and_Correction_Transact
 
 # Open Room Discrepancy
 pyautogui.press("win", interval=.01)
-pyautogui.write(r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before\Room Discrepancy.PDF")
+pyautogui.write(r"C:\Users\%USERPROFILE%\Documents\Runit\Report\End-day_before\Room Discrepancy.PDF")
 time.sleep(1)
 pyautogui.press("enter", interval=.01)
