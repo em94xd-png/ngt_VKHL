@@ -43,7 +43,7 @@ pyautogui.press("enter", interval=0.01)
 time.sleep(4.5)
 pyautogui.press("tab", interval=0.01)
 
-# 4. VKHL Arrivals
+# VKHL Arrivals
 pyautogui.write("Arrivals: Detailed FO", interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(2.5)
@@ -54,7 +54,7 @@ pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(3.5)
-# 4. VKHL Arrivals: config
+# VKHL Arrivals: config
 pyautogui.hotkey("ctrl", "a", interval=.01)
 
 def format1_today():
@@ -77,7 +77,7 @@ time.sleep(.5)
 pyautogui.press("tab", presses=11, interval=.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(8.5)
-# 4. VKHL Arrivals: Save
+# VKHL Arrivals: Save
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
@@ -89,11 +89,11 @@ pyautogui.press("enter", interval=0.01)
 pyautogui.write(Endday_after_folder)
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
-pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("tab", presses=7, interval=.01)
 
 VKHL_Arrivals = "4. VKHL Arrivals"
 
-pyautogui.write(VKHL_Arrivals)
+pyautogui.write(VKHL_Arrivals, interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(0.5)
@@ -103,3 +103,57 @@ tab_reserve(3)
 pyautogui.press("enter", interval=0.01)
 time.sleep(5)
 pyautogui.press("tab", interval=0.01)
+
+# VKHL Departures
+pyautogui.write("departure_all", interval=.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(2.5)
+pyautogui.press("tab", presses=9, interval=0.01)
+pyautogui.press("down", presses=2, interval=0.01)
+time.sleep(1.5)
+pyautogui.press("right", interval=.01)
+pyautogui.press("tab", presses=3, interval=0.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(3.5)
+# VKHL Departures: config
+pyautogui.press("tab", presses=3, interval=0.01)
+time.sleep(.75)
+pyautogui.write(Room_Type, interval=.01)
+pyautogui.press("tab", presses=10, interval=.01)
+pyautogui.press("space", interval=.01) # Pseudo Rooms
+pyautogui.press("tab", presses=12, interval=.01)
+pyautogui.press("space", interval=.01) # Membership Type
+time.sleep(.5)
+pyautogui.press("tab", interval=.01)
+pyautogui.press("space", interval=.01) # Membership Level
+time.sleep(.5)
+pyautogui.press("tab", presses=13, interval=.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(8.5)
+# VKHL Departures: Save
+pyautogui.click(600, 84, interval=0.01)
+time.sleep(.5)
+pyautogui.hotkey("ctrl", "s", interval=.01)
+time.sleep(1.5)
+pyautogui.hotkey("ctrl", "f", interval=.01)
+tab_reserve(2)
+time.sleep(0.1)
+pyautogui.press("enter", interval=0.01)
+pyautogui.write(Endday_after_folder)
+pyautogui.press("enter", interval=0.01)
+time.sleep(.5)
+pyautogui.press("tab", presses=7, interval=.01)
+
+VKHL_Departures = "5. VKHL Departures"
+
+pyautogui.write(VKHL_Departures, interval=.01)
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(0.5)
+pyautogui.hotkey("ctrl", "w")
+time.sleep(0.5)
+tab_reserve(3)
+pyautogui.press("enter", interval=0.01)
+time.sleep(5)
+pyautogui.press("tab", interval=0.01)
+

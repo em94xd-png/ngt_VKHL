@@ -72,7 +72,7 @@ pyautogui.press("enter", interval=.01)
 pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
-pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("tab", presses=7, interval=.01)
 
 Room_Discrepancy = "Room Discrepancy"
 
@@ -107,7 +107,7 @@ pyautogui.press("enter", interval=.01)
 pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
-pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("tab", presses=7, interval=.01)
 
 Guests_INH_Complimentary_and_Houseuse = "Guests INH Complimentary and Houseuse"
 
@@ -159,7 +159,7 @@ pyautogui.press("enter", interval=.01)
 pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
-pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("tab", presses=7, interval=.01)
 
 Guests_in_house_Pseudo_room_Rate_Check = "Guests in house Pseudo room Rate Check"
 
@@ -206,7 +206,7 @@ pyautogui.press("enter", interval=0.01)
 pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
-pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("tab", presses=7, interval=.01)
 
 def format1_yesterday():
     today = date.today()
@@ -261,7 +261,7 @@ pyautogui.press("enter", interval=0.01)
 pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
-pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("tab", presses=7, interval=.01)
 
 Out_of_Service_by_Reason = f"17. Out of Service by Reason {format1_yesterday()}"
 
@@ -293,7 +293,7 @@ pyautogui.press("enter", interval=0.01)
 pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
-pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("tab", presses=7, interval=.01)
 
 Out_of_Order_by_Reason = f"17. Out of Order by Reason {format1_yesterday()}"
 
@@ -342,7 +342,7 @@ pyautogui.press("enter", interval=0.01)
 pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
-pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("tab", presses=7, interval=.01)
 
 Credit_Limit = f"15. Credit Limit {format1_yesterday()}"
 
@@ -395,7 +395,7 @@ pyautogui.press("enter", interval=0.01)
 pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
-pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("tab", presses=7, interval=.01)
 
 Rebate_and_Correction_Transactions = "12. Rebate and Correction Transactions"
 
@@ -655,7 +655,9 @@ print_Credit_Limit(file_url_Credit_Limit)
 print_Rebate_and_Correction_Transactions(file_url_Rebate_and_Correction_Transactions)
 
 # Open Room Discrepancy
-pyautogui.press("win", interval=.01)
-pyautogui.write(r"C:\Users\%USERPROFILE%\Documents\Runit\Report\End-day_before\Room Discrepancy.PDF")
+pyautogui.hotkey("win", "e", interval=.01)
 time.sleep(1)
+pyautogui.hotkey("ctrl", "f", interval=.01)
+tab_reserve(2)
+pyautogui.write(r"C:\Users\%USERPROFILE%\Documents\Runit\Report\End-day_before\Room Discrepancy.PDF")
 pyautogui.press("enter", interval=.01)
