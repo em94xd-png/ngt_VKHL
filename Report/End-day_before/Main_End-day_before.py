@@ -275,7 +275,7 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(0.1)
 tab_reserve(6)
 time.sleep(0.5)
-# Report: Out of Order by Reason: config
+# Report: Out of Order by Reason: Config
 pyautogui.press("up", interval=0.01)
 time.sleep(0.5)
 pyautogui.press("tab", presses=6, interval=0.01)
