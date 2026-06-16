@@ -1,11 +1,9 @@
 import pyautogui
 import time
 from datetime import date
-from Code_Store import *
+from ..Code_Store import *
 
 # Clear report store
-Endday_after_folder = r"C:\Users\%USERPROFILE%\Documents\Runit\Report\End-day_after"
-
 pyautogui.hotkey("win", "e", interval=.01)
 time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
@@ -20,9 +18,6 @@ pyautogui.hotkey("ctrl", "w", interval=.01)
 
 # Open Opera
 pyautogui.press("win")
-
-site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
-
 pyautogui.write(site_OPERA)
 time.sleep(0.5)
 pyautogui.press("enter")
@@ -56,20 +51,12 @@ pyautogui.press("enter", interval=.01)
 time.sleep(3.5)
 # VKHL Arrivals: Config
 pyautogui.hotkey("ctrl", "a", interval=.01)
-
-def format1_today():
-    today = date.today()
-    return today.strftime("%d%m")
-
 pyautogui.write(format1_today(), interval=.01)
 pyautogui.press("tab", presses=2, interval=.01)
 time.sleep(1)
 pyautogui.write(format1_today(), interval=.01)
 pyautogui.press("tab", presses=4, interval=.01)
 time.sleep(.75)
-
-Room_Type = "1H2XK,1H2XT,1H3XK,1H4XK,1H4XT,2U1XKT,2U2XKT,2U3XKT,1V1XK,1V2XK,3U1CKT,2V1C2K,1H1VK,1U1VK,1U2VK,2U1VKT,2U2VKT,2U3VKT,3U2VKT,1H2VK,2U4XKT,3U1C2K"
-
 pyautogui.write(Room_Type, interval=.01)
 pyautogui.press("tab", presses=38, interval=.01)
 pyautogui.press("delete", interval=.01)
@@ -208,6 +195,7 @@ pyautogui.hotkey("ctrl", "w")
 
 # VKHL VIP Guests INH
 time.sleep(0.1)
+# VKHL VIP Guests INH: Config
 tab_reserve(19)
 pyautogui.press("space", interval=.01) # VIP Only
 time.sleep(1)
@@ -241,3 +229,4 @@ pyautogui.press("enter", interval=0.01)
 time.sleep(5)
 pyautogui.press("tab", interval=0.01)
 
+# History and Forecast
