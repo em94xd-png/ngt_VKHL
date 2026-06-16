@@ -76,7 +76,7 @@ pyautogui.press("tab", presses=6, interval=.01)
 
 Room_Discrepancy = "Room Discrepancy"
 
-pyautogui.write(Room_Discrepancy)
+pyautogui.write(Room_Discrepancy, interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
@@ -111,7 +111,7 @@ pyautogui.press("tab", presses=6, interval=.01)
 
 Guests_INH_Complimentary_and_Houseuse = "Guests INH Complimentary and Houseuse"
 
-pyautogui.write(Guests_INH_Complimentary_and_Houseuse)
+pyautogui.write(Guests_INH_Complimentary_and_Houseuse, interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
@@ -163,7 +163,7 @@ pyautogui.press("tab", presses=6, interval=.01)
 
 Guests_in_house_Pseudo_room_Rate_Check = "Guests in house Pseudo room Rate Check"
 
-pyautogui.write(Guests_in_house_Pseudo_room_Rate_Check)
+pyautogui.write(Guests_in_house_Pseudo_room_Rate_Check, interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
@@ -215,7 +215,7 @@ def format1_yesterday():
 
 Expected_Arrival = f"Expected Arrival {format1_yesterday()}"
 
-pyautogui.write(Expected_Arrival)
+pyautogui.write(Expected_Arrival, interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(0.5)
@@ -265,7 +265,7 @@ pyautogui.press("tab", presses=6, interval=.01)
 
 Out_of_Service_by_Reason = f"17. Out of Service by Reason {format1_yesterday()}"
 
-pyautogui.write(Out_of_Service_by_Reason)
+pyautogui.write(Out_of_Service_by_Reason, interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(0.5)
@@ -297,7 +297,7 @@ pyautogui.press("tab", presses=6, interval=.01)
 
 Out_of_Order_by_Reason = f"17. Out of Order by Reason {format1_yesterday()}"
 
-pyautogui.write(Out_of_Order_by_Reason)
+pyautogui.write(Out_of_Order_by_Reason, interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(0.5)
@@ -346,7 +346,7 @@ pyautogui.press("tab", presses=6, interval=.01)
 
 Credit_Limit = f"15. Credit Limit {format1_yesterday()}"
 
-pyautogui.write(Credit_Limit)
+pyautogui.write(Credit_Limit, interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(0.5)
@@ -399,7 +399,7 @@ pyautogui.press("tab", presses=6, interval=.01)
 
 Rebate_and_Correction_Transactions = "12. Rebate and Correction Transactions"
 
-pyautogui.write(Rebate_and_Correction_Transactions)
+pyautogui.write(Rebate_and_Correction_Transactions, interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(0.5)
