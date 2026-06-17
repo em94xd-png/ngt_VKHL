@@ -1,7 +1,20 @@
 import pyautogui
 import time
 from datetime import date
-from ..Code_Store import *
+
+Endday_after_folder = r"C:\Users\%USERPROFILE%\Documents\Runit\Report\End-day_after"
+
+site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
+
+Room_Type = "1H2XK,1H2XT,1H3XK,1H4XK,1H4XT,2U1XKT,2U2XKT,2U3XKT,1V1XK,1V2XK,3U1CKT,2V1C2K,1H1VK,1U1VK,1U2VK,2U1VKT,2U2VKT,2U3VKT,3U2VKT,1H2VK,2U4XKT,3U1C2K"
+
+def tab_reserve(times):
+    for _ in range(times):
+        pyautogui.hotkey("shift", "tab")
+
+def format1_today():
+    today = date.today()
+    return today.strftime("%d%m")
 
 # Clear report store
 pyautogui.hotkey("win", "e", interval=.01)

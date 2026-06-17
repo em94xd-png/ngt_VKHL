@@ -14,6 +14,16 @@ def format1_today():
     today = date.today()
     return today.strftime("%d%m")
 
+def format1_yesterday():
+    today = date.today()
+    yesterday = today - timedelta(days=1)
+    return yesterday.strftime("%d.%m")
+
+def format2_yesterday():
+    today = date.today()
+    yesterday = today - timedelta(days=1)
+    return yesterday.strftime("%d%m")
+
 def tab_reserve(times):
     for _ in range(times):
         pyautogui.hotkey("shift", "tab")

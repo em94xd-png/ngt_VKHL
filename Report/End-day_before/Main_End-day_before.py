@@ -4,17 +4,28 @@ from datetime import date, timedelta
 import os
 from selenium import webdriver
 
-# Clear report store
 Endday_before_folder = r"C:\Users\%USERPROFILE%\Documents\Runit\Report\End-day_before"
 
-pyautogui.hotkey("win", "e", interval=.01)
-time.sleep(1)
-pyautogui.hotkey("ctrl", "f", interval=.01)
+site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
 
 def tab_reserve(times):
     for _ in range(times):
         pyautogui.hotkey("shift", "tab")
 
+def format1_yesterday():
+    today = date.today()
+    yesterday = today - timedelta(days=1)
+    return yesterday.strftime("%d.%m")
+
+def format2_yesterday():
+    today = date.today()
+    yesterday = today - timedelta(days=1)
+    return yesterday.strftime("%d%m")
+
+# Clear report store
+pyautogui.hotkey("win", "e", interval=.01)
+time.sleep(1)
+pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=.01)
@@ -26,9 +37,6 @@ pyautogui.hotkey("ctrl", "w", interval=.01)
 
 # Open Opera
 pyautogui.press("win")
-
-site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
-
 pyautogui.write(site_OPERA)
 time.sleep(0.5)
 pyautogui.press("enter")
@@ -132,12 +140,6 @@ pyautogui.press("enter", interval=.01)
 time.sleep(3.5)
 # Report: Guests in house Pseudo room Rate Check: Config
 pyautogui.hotkey("ctrl", "a", interval=.01)
-
-def format2_yesterday():
-    today = date.today()
-    yesterday = today - timedelta(days=1)
-    return yesterday.strftime("%d%m")
-
 pyautogui.write(format2_yesterday(), interval=.01)
 pyautogui.press("tab", presses=7, interval=.01)
 pyautogui.press("space", interval=.01) # Pseudo Rooms
@@ -207,11 +209,6 @@ pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=7, interval=.01)
-
-def format1_yesterday():
-    today = date.today()
-    yesterday = today - timedelta(days=1)
-    return yesterday.strftime("%d.%m")
 
 Expected_Arrival = f"Expected Arrival {format1_yesterday()}"
 

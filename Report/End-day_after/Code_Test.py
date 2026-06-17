@@ -4,6 +4,12 @@ from datetime import date
 from Code_Store import *
 import calendar
 
+Endday_after_folder = r"C:\Users\%USERPROFILE%\Documents\Runit\Report\End-day_after"
+
+site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
+
+Room_Type = "1H2XK,1H2XT,1H3XK,1H4XK,1H4XT,2U1XKT,2U2XKT,2U3XKT,1V1XK,1V2XK,3U1CKT,2V1C2K,1H1VK,1U1VK,1U2VK,2U1VKT,2U2VKT,2U3VKT,3U2VKT,1H2VK,2U4XKT,3U1C2K"
+
 # Clear report store
 pyautogui.hotkey("win", "e", interval=.01)
 time.sleep(1)
@@ -38,8 +44,6 @@ pyautogui.press("down", interval=0.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(4.5)
 pyautogui.press("tab", interval=0.01)
-
-Room_Type = "1H2XK,1H2XT,1H3XK,1H4XK,1H4XT,2U1XKT,2U2XKT,2U3XKT,1V1XK,1V2XK,3U1CKT,2V1C2K,1H1VK,1U1VK,1U2VK,2U1VKT,2U2VKT,2U3VKT,3U2VKT,1H2VK,2U4XKT,3U1C2K"
 
 # History and Forecast
 pyautogui.write("History and Forecast FO", interval=.01)
