@@ -1,10 +1,13 @@
 import pyautogui
 from datetime import date, timedelta
 import calendar
+import os
+import subprocess
+import time
 
 site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
 
-Endday_before_folder = r"C:\Users\%USERPROFILE%\Documents\Runit\Report\End-day_before"
+Endday_before_folder = os.environ.get("USERPROFILE").__add__(r"\Documents\Runit\Report\End-day_before")
 
 Endday_after_folder = r"C:\Users\%USERPROFILE%\Documents\Runit\Report\End-day_after"
 
@@ -39,3 +42,30 @@ def date_end():
     _, last_day = calendar.monthrange(today.year, today.month)
     month_end = today.replace(day=last_day)
     return month_end.strftime("%d%m")
+
+def report_print(report_name):                                  
+
+    Endday_before_folder = os.environ.get("USERPROFILE").__add__(r"..")
+
+    folder_report = os.path.join(Endday_before_folder, report_name).__add__(".PDF")
+
+    print_url_add = "file:///" + folder_report.replace("\\", "/")
+
+    subprocess.run(["cmd", "/c", "start", "msedge", print_url_add])
+
+def page_print(times):
+    pyautogui.hotkey("ctrl", "p", interval=.01)
+    time.sleep(1)
+    pyautogui.press("tab", presses=6, interval=.01)          
+    pyautogui.press("up", presses=2, interval=.01)
+    pyautogui.press("down", presses=(times), interval=.01)
+    pyautogui.press("tab", interval=.01)
+    pyautogui.press("enter", interval=.01)
+    time.sleep(.01)
+    pyautogui.press("tab", presses=3, interval=.01)
+    pyautogui.press("up", presses=2, interval=.01)
+    pyautogui.press("down", presses=(times), interval=.01)
+    pyautogui.press("tab", presses=3, interval=.01)
+    # pyautogui.press("enter", interval=.01)
+    time.sleep(5)
+    pyautogui.hotkey("ctrl", "w", interval=.01)
