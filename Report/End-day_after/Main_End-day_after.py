@@ -1,6 +1,6 @@
 import pyautogui
 import time
-from datetime import date
+from datetime import date, timedelta
 import os
 import calendar
 import subprocess
@@ -18,6 +18,11 @@ def tab_reserve(times):
 def format1_today():
     today = date.today()
     return today.strftime("%d%m")
+
+def format2_yesterday():
+    today = date.today()
+    yesterday = today - timedelta(days=1)
+    return yesterday.strftime("%d%m")
 
 def date_first():
     today = date.today()
@@ -326,4 +331,83 @@ tab_reserve(3)
 pyautogui.press("enter", interval=0.01)
 time.sleep(5)
 pyautogui.press("tab", interval=0.01)
+
+# Market Segment Statistics
+pyautogui.write("stat_dmy_seg", interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(2.5)
+pyautogui.press("tab", presses=9, interval=.01)
+pyautogui.press("down", presses=2, interval=.01)
+time.sleep(1.5)
+pyautogui.press("right", interval=.01)
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(3.5)
+# Market Segment Statistics: Config
+pyautogui.press("tab", interval=.01)
+pyautogui.write(format2_yesterday(), interval=.01)
+pyautogui.press("tab", presses=17, interval=.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(8.5)
+# Market Segment Statistics: Save
+pyautogui.click(600, 84, interval=0.01)
+time.sleep(.5)
+pyautogui.hotkey("ctrl", "s", interval=.01)
+time.sleep(1.5)
+pyautogui.hotkey("ctrl", "f", interval=.01)
+tab_reserve(2)
+time.sleep(0.1)
+pyautogui.press("enter", interval=0.01)
+pyautogui.write(Endday_after_folder)
+pyautogui.press("enter", interval=0.01)
+time.sleep(.5)
+pyautogui.press("tab", presses=6, interval=.01)
+
+Market_Segment_Statistics = "10. Market Segment Statistics"
+
+pyautogui.write(Market_Segment_Statistics, interval=.01)
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(0.5)
+pyautogui.hotkey("ctrl", "w")
+time.sleep(0.5)
+tab_reserve(3)
+pyautogui.press("enter", interval=0.01)
+time.sleep(5)
+pyautogui.press("tab", interval=0.01)
+
+# AR Credit Limit
+pyautogui.write("ar_balance", interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(2.5)
+pyautogui.press("tab", presses=9, interval=.01)
+pyautogui.press("down", presses=2, interval=.01)
+time.sleep(1.5)
+pyautogui.press("right", interval=.01)
+pyautogui.press("tab", presses=4, interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(8.5)
+# AR Credit Limit: Save
+pyautogui.click(600, 84, interval=0.01)
+time.sleep(.5)
+pyautogui.hotkey("ctrl", "s", interval=.01)
+time.sleep(1.5)
+pyautogui.hotkey("ctrl", "f", interval=.01)
+tab_reserve(2)
+time.sleep(0.1)
+pyautogui.press("enter", interval=0.01)
+pyautogui.write(Endday_after_folder)
+pyautogui.press("enter", interval=0.01)
+time.sleep(.5)
+pyautogui.press("tab", presses=6, interval=.01)
+
+AR_Credit_Limit = "16. AR Credit Limit"
+
+pyautogui.write(AR_Credit_Limit, interval=.01)
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(0.5)
+pyautogui.hotkey("ctrl", "w")
+time.sleep(.5)
+pyautogui.press("tab", presses=29, interval=.01)
 
