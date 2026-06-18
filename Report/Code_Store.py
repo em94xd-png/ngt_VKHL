@@ -1,16 +1,21 @@
-import os
 import pyautogui
-import time
-import subprocess
 from datetime import date, timedelta
-
-Endday_before_folder = os.environ.get("USERPROFILE").__add__(r"\Documents\Runit\Report\End-day_before")
+import calendar
+import os
+import subprocess
+import time
 
 site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
 
-def tab_reserve(times):
-    for _ in range(times):
-        pyautogui.hotkey("shift", "tab")
+Endday_before_folder = os.environ.get("USERPROFILE").__add__(r"\Documents\Runit\Report\End-day_before")
+
+Endday_after_folder = os.environ.get("USERPROFILE").__add__(r"\Documents\Runit\Report\End-day_after")
+
+Room_Type = "1H2XK,1H2XT,1H3XK,1H4XK,1H4XT,2U1XKT,2U2XKT,2U3XKT,1V1XK,1V2XK,3U1CKT,2V1C2K,1H1VK,1U1VK,1U2VK,2U1VKT,2U2VKT,2U3VKT,3U2VKT,1H2VK,2U4XKT,3U1C2K"
+
+def format1_today():
+    today = date.today()
+    return today.strftime("%d%m")
 
 def format1_yesterday():
     today = date.today()
@@ -22,28 +27,25 @@ def format2_yesterday():
     yesterday = today - timedelta(days=1)
     return yesterday.strftime("%d%m")
 
-# # Open Opera
-# subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
+def tab_reserve(times):
+    for _ in range(times):
+        pyautogui.hotkey("shift", "tab")
 
-# # In Opera  
-# time.sleep(1)
-# pyautogui.hotkey("win", "up", "down", "up" ,interval=.1)
-# time.sleep(0.1)
-# pyautogui.hotkey("ctrl", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",)
-# pyautogui.hotkey("ctrl", "=", "=", "=",)
-# time.sleep(5)
+def date_first():
+    today = date.today()
+    today_1 = today.replace(day=1)
+    return today_1.strftime("%d%m")
 
-# # To report search
-# pyautogui.press("tab", presses=5, interval=0.01)
-# pyautogui.press("right", presses=6, interval=0.01)
-# pyautogui.press("down", interval=0.01)
-# pyautogui.press("enter", interval=0.01)
-# time.sleep(4.5)
-# pyautogui.press("tab", interval=0.01)
+def date_end():
+    today = date.today()
+
+    _, last_day = calendar.monthrange(today.year, today.month)
+    month_end = today.replace(day=last_day)
+    return month_end.strftime("%d%m")
 
 def report_print(report_name):                                  
 
-    Endday_before_folder = os.environ.get("USERPROFILE").__add__(r"\Documents\Runit\Report\End-day_before")
+    Endday_before_folder = os.environ.get("USERPROFILE").__add__(r"..")
 
     folder_report = os.path.join(Endday_before_folder, report_name).__add__(".PDF")
 
@@ -67,9 +69,3 @@ def page_print(times):
     # pyautogui.press("enter", interval=.01)
     time.sleep(5)
     pyautogui.hotkey("ctrl", "w", interval=.01)
-
-Room_Discrepancy = "Room Discrepancy"
-
-report_print(Room_Discrepancy)
-time.sleep(.5)
-page_print(0)

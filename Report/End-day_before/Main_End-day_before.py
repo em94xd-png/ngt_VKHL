@@ -2,16 +2,28 @@ import pyautogui
 import time
 from datetime import date, timedelta
 import os
-from selenium import webdriver
+import subprocess
+
+Endday_before_folder = os.environ.get("USERPROFILE").__add__(r"\Documents\Runit\Report\End-day_before")
+
+site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
+
+def tab_reserve(times):
+    for _ in range(times):
+        pyautogui.hotkey("shift", "tab")
+
+def format1_yesterday():
+    today = date.today()
+    yesterday = today - timedelta(days=1)
+    return yesterday.strftime("%d.%m")
+
+def format2_yesterday():
+    today = date.today()
+    yesterday = today - timedelta(days=1)
+    return yesterday.strftime("%d%m")
 
 # Clear report store
-pyautogui.press("win", interval=.01)
-
-Endday_before_folder = r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before"
-
-pyautogui.write(Endday_before_folder)
-time.sleep(1)
-pyautogui.press("enter", interval=.01)
+os.startfile(Endday_before_folder)
 time.sleep(1)
 pyautogui.press("tab", presses=13, interval=.01)
 pyautogui.hotkey("ctrl", "a", interval=.01)
@@ -19,13 +31,7 @@ pyautogui.press("del", interval=.01)
 pyautogui.hotkey("ctrl", "w", interval=.01)
 
 # Open Opera
-pyautogui.press("win")
-
-site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
-
-pyautogui.write(site_OPERA)
-time.sleep(0.5)
-pyautogui.press("enter")
+subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
 
 # In Opera  
 time.sleep(1)
@@ -60,14 +66,8 @@ time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
 time.sleep(1.5)
 pyautogui.hotkey("ctrl", "f", interval=.01)
-
-def tab_reserve(times):
-    for _ in range(times):
-        pyautogui.hotkey("shift", "tab")
-
 tab_reserve(2)
 time.sleep(0.1)
-
 pyautogui.press("enter", interval=.01)
 pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=.01)
@@ -132,12 +132,6 @@ pyautogui.press("enter", interval=.01)
 time.sleep(3.5)
 # Report: Guests in house Pseudo room Rate Check: Config
 pyautogui.hotkey("ctrl", "a", interval=.01)
-
-def format2_yesterday():
-    today = date.today()
-    yesterday = today - timedelta(days=1)
-    return yesterday.strftime("%d%m")
-
 pyautogui.write(format2_yesterday(), interval=.01)
 pyautogui.press("tab", presses=7, interval=.01)
 pyautogui.press("space", interval=.01) # Pseudo Rooms
@@ -193,7 +187,7 @@ time.sleep(1)
 pyautogui.write(format2_yesterday(), interval=.01)
 pyautogui.press("tab", presses=53, interval=0.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(8.5)
+time.sleep(10)
 # Report: Expected Arrival: Save
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
@@ -207,11 +201,6 @@ pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
-
-def format1_yesterday():
-    today = date.today()
-    yesterday = today - timedelta(days=1)
-    return yesterday.strftime("%d.%m")
 
 Expected_Arrival = f"Expected Arrival {format1_yesterday()}"
 
@@ -275,7 +264,7 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(0.1)
 tab_reserve(6)
 time.sleep(0.5)
-# Report: Out of Order by Reason: config
+# Report: Out of Order by Reason: Config
 pyautogui.press("up", interval=0.01)
 time.sleep(0.5)
 pyautogui.press("tab", presses=6, interval=0.01)
@@ -374,12 +363,8 @@ pyautogui.write(format2_yesterday(), interval=.01)
 pyautogui.press("tab", interval=0.01)
 time.sleep(1)
 pyautogui.write(format2_yesterday(), interval=.01)
-pyautogui.press("tab", presses=4, interval=0.01)
-time.sleep(1)
-pyautogui.press("delete", interval=0.01)
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=0.01)
-pyautogui.press("space", interval=0.01) # Negative Postings Only
+pyautogui.press("tab", presses=5, interval=0.01)
+pyautogui.press("space", interval=0.01)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(8.5)
@@ -407,255 +392,64 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(1)
 
 # Print
-file_local_Room_Discrepancy = os.path.join(Endday_before_folder, Room_Discrepancy)
+def report_print(report_name):                                  
 
-file_url_Room_Discrepancy = "file:///" + os.path.abspath(file_local_Room_Discrepancy).replace("\\", "/").__add__(".PDF")
+    Endday_before_folder = os.environ.get("USERPROFILE").__add__(r"\Documents\Runit\Report\End-day_before")
 
-def print_Room_Discrepancy(file_from):
-    driver = webdriver.Edge()
-    driver.get(file_from)
+    folder_report = os.path.join(Endday_before_folder, report_name).__add__(".PDF")
 
-    driver.execute_script("setTimeout(function() { window.print(); }, 0);") # Trigger print asynchronously so Python doesn't freeze
+    print_url_add = "file:///" + folder_report.replace("\\", "/")
 
+    subprocess.run(["cmd", "/c", "start", "msedge", print_url_add])
+
+def page_print(times):
+    pyautogui.hotkey("ctrl", "p", interval=.01)
     time.sleep(1)
+    pyautogui.press("tab", presses=6, interval=.01)          
+    pyautogui.press("up", presses=2, interval=.01)
+    pyautogui.press("down", presses=(times), interval=.01)
+    pyautogui.press("tab", interval=.01)
+    pyautogui.press("enter", interval=.01)
+    time.sleep(.01)
+    pyautogui.press("tab", presses=3, interval=.01)
+    pyautogui.press("up", presses=2, interval=.01)
+    pyautogui.press("down", presses=(times), interval=.01)
+    pyautogui.press("tab", presses=3, interval=.01)
+    # pyautogui.press("enter", interval=.01)
+    time.sleep(5)
+    pyautogui.hotkey("ctrl", "w", interval=.01)
 
-    config_print_Room_Discrepancy = [
-        ("tab", 6),
-        ("up", 2),
-        ("tab", 1),
-        ("enter", 1),
-        ("tab", 3),
-        ("up", 2),
-        ("tab", 3),
-        ("enter", 1)
-    ]
+report_print(Room_Discrepancy)
+time.sleep(.5)
+page_print(0)
 
-    for key, presses in config_print_Room_Discrepancy:
-        pyautogui.press(key, presses=presses)
+report_print(Guests_INH_Complimentary_and_Houseuse)
+time.sleep(.5)
+page_print(1)
 
-    time.sleep(.1)
+report_print(Guests_in_house_Pseudo_room_Rate_Check)
+time.sleep(.5)
+page_print(1)
 
-file_local_Guests_INH_Complimentary_and_Houseuse = os.path.join(Endday_before_folder, Guests_INH_Complimentary_and_Houseuse)
+report_print(Expected_Arrival)
+time.sleep(.5)
+page_print(1)
 
-file_url_Guests_INH_Complimentary_and_Houseuse = "file:///" + os.path.abspath(file_local_Guests_INH_Complimentary_and_Houseuse).replace("\\", "/").__add__(".PDF")
+report_print(Out_of_Service_by_Reason)
+time.sleep(.5)
+page_print(1)
 
-def print_Guests_INH_Complimentary_and_Houseuse(file_from):
-    driver = webdriver.Edge()
-    driver.get(file_from)
+report_print(Out_of_Order_by_Reason)
+time.sleep(.5)
+page_print(1)
 
-    driver.execute_script("setTimeout(function() { window.print(); }, 0);") # Trigger print asynchronously so Python doesn't freeze
+report_print(Credit_Limit)
+time.sleep(.5)
+page_print(1)
 
-    time.sleep(1)
-
-    config_print_Guests_INH_Complimentary_and_Houseuse = [
-        ("tab", 6),
-        ("up", 2),
-        ("down", 1),
-        ("tab", 1),
-        ("enter", 1),
-        ("tab", 3),
-        ("up", 2),
-        ("down", 1),
-        ("tab", 3),
-        ("enter", 1)
-    ]
-
-    for key, presses in config_print_Guests_INH_Complimentary_and_Houseuse:
-        pyautogui.press(key, presses=presses)
-
-    time.sleep(.1)
-
-file_local_Guests_in_house_Pseudo_room_Rate_Check = os.path.join(Endday_before_folder, Guests_in_house_Pseudo_room_Rate_Check)
-
-file_url_Guests_in_house_Pseudo_room_Rate_Check = "file:///" + os.path.abspath(file_local_Guests_in_house_Pseudo_room_Rate_Check).replace("\\", "/").__add__(".PDF")
-
-def print_Guests_in_house_Pseudo_room_Rate_Check(file_from):
-    driver = webdriver.Edge()
-    driver.get(file_from)
-
-    driver.execute_script("setTimeout(function() { window.print(); }, 0);") # Trigger print asynchronously so Python doesn't freeze
-
-    time.sleep(1)
-
-    config_print_Guests_in_house_Pseudo_room_Rate_Check = [
-        ("tab", 6),
-        ("up", 2),
-        ("down", 1),
-        ("tab", 1),
-        ("enter", 1),
-        ("tab", 3),
-        ("up", 2),
-        ("down", 1),
-        ("tab", 3),
-        ("enter", 1)
-    ]
-
-    for key, presses in config_print_Guests_in_house_Pseudo_room_Rate_Check:
-        pyautogui.press(key, presses=presses)
-
-    time.sleep(.1)
-
-file_local_Expected_Arrival = os.path.join(Endday_before_folder, Expected_Arrival)
-
-file_url_Expected_Arrival = "file:///" + os.path.abspath(file_local_Expected_Arrival).replace("\\", "/").__add__(".PDF")
-
-def print_Expected_Arrival(file_from):
-    driver = webdriver.Edge()
-    driver.get(file_from)
-
-    driver.execute_script("setTimeout(function() { window.print(); }, 0);") # Trigger print asynchronously so Python doesn't freeze
-
-    time.sleep(1)
-
-    config_print_Expected_Arrival = [
-        ("tab", 6),
-        ("up", 2),
-        ("down", 1),
-        ("tab", 1),
-        ("enter", 1),
-        ("tab", 3),
-        ("up", 2),
-        ("down", 1),
-        ("tab", 3),
-        ("enter", 1)
-    ]
-
-    for key, presses in config_print_Expected_Arrival:
-        pyautogui.press(key, presses=presses)
-
-    time.sleep(.1)
-
-file_local_Out_of_Service_by_Reason = os.path.join(Endday_before_folder, Out_of_Service_by_Reason)
-
-file_url_Out_of_Service_by_Reason = "file:///" + os.path.abspath(file_local_Out_of_Service_by_Reason).replace("\\", "/").__add__(".PDF")
-
-def print_Out_of_Service_by_Reason(file_from):
-    driver = webdriver.Edge()
-    driver.get(file_from)
-
-    driver.execute_script("setTimeout(function() { window.print(); }, 0);") # Trigger print asynchronously so Python doesn't freeze
-
-    time.sleep(1)
-
-    config_print_Out_of_Service_by_Reason = [
-        ("tab", 6),
-        ("up", 2),
-        ("down", 1),
-        ("tab", 1),
-        ("enter", 1),
-        ("tab", 3),
-        ("up", 2),
-        ("down", 1),
-        ("tab", 3),
-        ("enter", 1)
-    ]
-
-    for key, presses in config_print_Out_of_Service_by_Reason:
-        pyautogui.press(key, presses=presses)
-
-    time.sleep(.1)
-
-file_local_Out_of_Order_by_Reason = os.path.join(Endday_before_folder, Out_of_Order_by_Reason)
-
-file_url_Out_of_Order_by_Reason = "file:///" + os.path.abspath(file_local_Out_of_Order_by_Reason).replace("\\", "/").__add__(".PDF")
-
-def print_Out_of_Order_by_Reason(file_from):
-    driver = webdriver.Edge()
-    driver.get(file_from)
-
-    driver.execute_script("setTimeout(function() { window.print(); }, 0);") # Trigger print asynchronously so Python doesn't freeze
-
-    time.sleep(1)
-
-    config_print_Out_of_Order_by_Reason = [
-        ("tab", 6),
-        ("up", 2),
-        ("down", 1),
-        ("tab", 1),
-        ("enter", 1),
-        ("tab", 3),
-        ("up", 2),
-        ("down", 1),
-        ("tab", 3),
-        ("enter", 1)
-    ]
-
-    for key, presses in config_print_Out_of_Order_by_Reason:
-        pyautogui.press(key, presses=presses)
-
-    time.sleep(.1)
-
-file_local_Credit_Limit = os.path.join(Endday_before_folder, Credit_Limit)
-
-file_url_Credit_Limit = "file:///" + os.path.abspath(file_local_Credit_Limit).replace("\\", "/").__add__(".PDF")
-
-def print_Credit_Limit(file_from):
-    driver = webdriver.Edge()
-    driver.get(file_from)
-
-    driver.execute_script("setTimeout(function() { window.print(); }, 0);") # Trigger print asynchronously so Python doesn't freeze
-
-    time.sleep(1)
-
-    config_print_Credit_Limit = [
-        ("tab", 6),
-        ("up", 2),
-        ("down", 1),
-        ("tab", 1),
-        ("enter", 1),
-        ("tab", 3),
-        ("up", 2),
-        ("down", 1),
-        ("tab", 3),
-        ("enter", 1)
-    ]
-
-    for key, presses in config_print_Credit_Limit:
-        pyautogui.press(key, presses=presses)
-
-    time.sleep(.1)
-
-file_local_Rebate_and_Correction_Transactions = os.path.join(Endday_before_folder, Rebate_and_Correction_Transactions)
-
-file_url_Rebate_and_Correction_Transactions = "file:///" + os.path.abspath(file_local_Rebate_and_Correction_Transactions).replace("\\", "/").__add__(".PDF")
-
-def print_Rebate_and_Correction_Transactions(file_from):
-    driver = webdriver.Edge()
-    driver.get(file_from)
-
-    driver.execute_script("setTimeout(function() { window.print(); }, 0);") # Trigger print asynchronously so Python doesn't freeze
-
-    time.sleep(1)
-
-    config_print_Rebate_and_Correction_Transactions = [
-        ("tab", 6),
-        ("up", 2),
-        ("down", 1),
-        ("tab", 1),
-        ("enter", 1),
-        ("tab", 3),
-        ("up", 2),
-        ("down", 1),
-        ("tab", 3),
-        ("enter", 1)
-    ]
-
-    for key, presses in config_print_Rebate_and_Correction_Transactions:
-        pyautogui.press(key, presses=presses)
-
-    time.sleep(.1)
-
-print_Room_Discrepancy(file_url_Room_Discrepancy)
-print_Guests_INH_Complimentary_and_Houseuse(file_url_Guests_INH_Complimentary_and_Houseuse)
-print_Guests_in_house_Pseudo_room_Rate_Check(file_url_Guests_in_house_Pseudo_room_Rate_Check)
-# print_Expected_Arrival(file_url_Expected_Arrival)
-print_Out_of_Service_by_Reason(file_url_Out_of_Service_by_Reason)
-print_Out_of_Order_by_Reason(file_url_Out_of_Order_by_Reason)
-print_Credit_Limit(file_url_Credit_Limit)
-print_Rebate_and_Correction_Transactions(file_url_Rebate_and_Correction_Transactions)
+report_print(Rebate_and_Correction_Transactions)
+time.sleep(.5)
+page_print(1)
 
 # Open Room Discrepancy
-pyautogui.press("win", interval=.01)
-pyautogui.write(r"C:\Users\dutymanager.vkhl\Documents\Runit\Report\End-day_before\Room Discrepancy.PDF")
-time.sleep(1)
-pyautogui.press("enter", interval=.01)
+report_print(Room_Discrepancy)
