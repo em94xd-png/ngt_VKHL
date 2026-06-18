@@ -1,8 +1,11 @@
 import pyautogui
 import time
 from datetime import date
+import os
+import calendar
+import subprocess
 
-Endday_after_folder = r"C:\Users\%USERPROFILE%\Documents\Runit\Report\End-day_after"
+Endday_after_folder = os.environ.get("USERPROFILE").__add__(r"\Documents\Runit\Report\End-day_after")
 
 site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
 
@@ -29,12 +32,7 @@ def date_end():
     return month_end.strftime("%d%m")
 
 # Clear report store
-pyautogui.hotkey("win", "e", interval=.01)
-time.sleep(1)
-pyautogui.hotkey("ctrl", "f", interval=.01)
-tab_reserve(2)
-pyautogui.write(Endday_after_folder)
-pyautogui.press("enter", interval=.01)
+os.startfile(Endday_after_folder)
 time.sleep(1)
 pyautogui.press("tab", presses=13, interval=.01)
 pyautogui.hotkey("ctrl", "a", interval=.01)
@@ -42,10 +40,7 @@ pyautogui.press("del", interval=.01)
 pyautogui.hotkey("ctrl", "w", interval=.01)
 
 # Open Opera
-pyautogui.press("win")
-pyautogui.write(site_OPERA)
-time.sleep(0.5)
-pyautogui.press("enter")
+subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
 
 # In Opera  
 time.sleep(1)
@@ -88,7 +83,7 @@ pyautogui.press("delete", interval=.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=11, interval=.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(8.5)
+time.sleep(10)
 # VKHL Arrivals: Save
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
@@ -101,7 +96,7 @@ pyautogui.press("enter", interval=0.01)
 pyautogui.write(Endday_after_folder)
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
-pyautogui.press("tab", presses=7, interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
 
 VKHL_Arrivals = "4. VKHL Arrivals"
 
@@ -154,7 +149,7 @@ pyautogui.press("enter", interval=0.01)
 pyautogui.write(Endday_after_folder)
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
-pyautogui.press("tab", presses=7, interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
 
 VKHL_Departures = "5. VKHL Departures"
 
@@ -208,7 +203,7 @@ pyautogui.press("enter", interval=0.01)
 pyautogui.write(Endday_after_folder)
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
-pyautogui.press("tab", presses=7, interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
 
 VKHL_Guests_INH = "6. VKHL Guests INH"
 
@@ -239,7 +234,7 @@ pyautogui.press("enter", interval=0.01)
 pyautogui.write(Endday_after_folder)
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
-pyautogui.press("tab", presses=7, interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
 
 VKHL_VIP_Guests_INH = "3. VKHL VIP Guests INH"
 
@@ -286,7 +281,7 @@ pyautogui.press("enter", interval=0.01)
 pyautogui.write(Endday_after_folder)
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
-pyautogui.press("tab", presses=7, interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
 
 History_and_Forecast = "7. History and Forecast"
 
@@ -317,7 +312,7 @@ pyautogui.press("enter", interval=0.01)
 pyautogui.write(Endday_after_folder)
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
-pyautogui.press("tab", presses=7, interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
 
 History_and_Forecast_AVC = "7. History and Forecast (AVC)"
 
@@ -331,3 +326,4 @@ tab_reserve(3)
 pyautogui.press("enter", interval=0.01)
 time.sleep(5)
 pyautogui.press("tab", interval=0.01)
+
