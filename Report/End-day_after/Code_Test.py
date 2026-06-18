@@ -36,13 +36,13 @@ def date_end():
     month_end = today.replace(day=last_day)
     return month_end.strftime("%d%m")
 
-# Clear report store
-os.startfile(Endday_after_folder)
-time.sleep(1)
-pyautogui.press("tab", presses=13, interval=.01)
-pyautogui.hotkey("ctrl", "a", interval=.01)
-pyautogui.press("del", interval=.01)
-pyautogui.hotkey("ctrl", "w", interval=.01)
+# # Clear report store
+# os.startfile(Endday_after_folder)
+# time.sleep(1)
+# pyautogui.press("tab", presses=13, interval=.01)
+# pyautogui.hotkey("ctrl", "a", interval=.01)
+# pyautogui.press("del", interval=.01)
+# pyautogui.hotkey("ctrl", "w", interval=.01)
 
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
@@ -63,18 +63,25 @@ pyautogui.press("enter", interval=0.01)
 time.sleep(4.5)
 pyautogui.press("tab", interval=0.01)
 
-# AR Credit Limit
-pyautogui.write("ar_balance", interval=.01)
+# Vacant Rooms
+pyautogui.write("Vacant Rooms", interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(2.5)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
 time.sleep(1.5)
 pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=4, interval=.01)
+pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
+time.sleep(3.5)
+# Vacant Rooms: Config
+pyautogui.press("tab", interval=.01)
+time.sleep(.75)
+pyautogui.write("1H4XK,1H4XT,2U2XKT,2U3XKT", interval=.01)
+pyautogui.press("tab", presses=15, interval=.01)
+pyautogui.press("enter", interval=0.01)
 time.sleep(8.5)
-# AR Credit Limit: Save
+# Vacant Rooms: Save
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
@@ -88,12 +95,15 @@ pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
 
-AR_Credit_Limit = "16. AR Credit Limit"
+Vacant_Rooms = "18. Vacant Rooms"
 
-pyautogui.write(AR_Credit_Limit, interval=.01)
+pyautogui.write(Vacant_Rooms, interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(0.5)
 pyautogui.hotkey("ctrl", "w")
-time.sleep(.5)
-pyautogui.press("tab", presses=29, interval=.01)
+time.sleep(0.5)
+tab_reserve(3)
+pyautogui.press("enter", interval=0.01)
+time.sleep(5)
+pyautogui.press("tab", interval=0.01)
