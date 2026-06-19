@@ -19,6 +19,11 @@ def format1_today():
     today = date.today()
     return today.strftime("%d%m")
 
+def format1_yesterday():
+    today = date.today()
+    yesterday = today - timedelta(days=1)
+    return yesterday.strftime("%d.%m")
+
 def format2_yesterday():
     today = date.today()
     yesterday = today - timedelta(days=1)
@@ -35,6 +40,16 @@ def date_end():
     _, last_day = calendar.monthrange(today.year, today.month)
     month_end = today.replace(day=last_day)
     return month_end.strftime("%d%m")
+
+def report_print(report_name):
+
+    Endday_before_folder = os.environ.get("USERPROFILE").__add__(r"\Documents\Runit\Report\End-day_after")
+
+    folder_report = os.path.join(Endday_before_folder, report_name).__add__(".PDF")
+
+    print_url_add = "file:///" + folder_report.replace("\\", "/")
+
+    subprocess.run(["cmd", "/c", "start", "msedge", print_url_add])
 
 # Clear report store
 os.startfile(Endday_after_folder)
@@ -511,3 +526,139 @@ pyautogui.press("down", presses=3, interval=.01)
 pyautogui.press("right", presses=1, interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(1.5)
+pyautogui.press("tab", presses=2, interval=.01)
+
+# Guest Ledger Detail
+pyautogui.write("gl_led_de", interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(1)
+pyautogui.press("tab", presses=8, interval=.01)
+pyautogui.press("down", interval=.01)
+pyautogui.press("enter", presses=3, interval=1.5)
+time.sleep(5)
+# Guest Ledger Detail: Save
+pyautogui.click(600, 84, interval=0.01)
+time.sleep(.5)
+pyautogui.hotkey("ctrl", "s", interval=.01)
+time.sleep(1.5)
+pyautogui.hotkey("ctrl", "f", interval=.01)
+tab_reserve(2)
+time.sleep(0.1)
+pyautogui.press("enter", interval=0.01)
+pyautogui.write(Endday_after_folder)
+pyautogui.press("enter", interval=0.01)
+time.sleep(.5)
+pyautogui.press("tab", presses=6, interval=.01)
+
+Guest_Ledger_Detail = "14. Guest Ledger Detail"
+
+pyautogui.write(Guest_Ledger_Detail, interval=.01)
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(0.5)
+pyautogui.hotkey("ctrl", "w")
+time.sleep(0.5)
+tab_reserve(11)
+time.sleep(0.5)
+
+# Manager Flash
+pyautogui.write("manager", interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(1)
+pyautogui.press("tab", presses=8, interval=.01)
+pyautogui.press("down", interval=.01)
+pyautogui.press("enter", presses=3, interval=1.5)
+time.sleep(5)
+# Manager Flash: Save
+pyautogui.click(600, 84, interval=0.01)
+time.sleep(.5)
+pyautogui.hotkey("ctrl", "s", interval=.01)
+time.sleep(1.5)
+pyautogui.hotkey("ctrl", "f", interval=.01)
+tab_reserve(2)
+time.sleep(0.1)
+pyautogui.press("enter", interval=0.01)
+pyautogui.write(Endday_after_folder)
+pyautogui.press("enter", interval=0.01)
+time.sleep(.5)
+pyautogui.press("tab", presses=6, interval=.01)
+
+Manager_Flash = "8. Manager Flash"
+
+pyautogui.write(Manager_Flash, interval=.01)
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(0.5)
+pyautogui.hotkey("ctrl", "w")
+time.sleep(0.5)
+tab_reserve(11)
+time.sleep(0.5)
+
+# Trial Balance
+pyautogui.write("tb", interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(1)
+pyautogui.press("tab", presses=8, interval=.01)
+pyautogui.press("down", interval=.01)
+pyautogui.press("enter", presses=3, interval=1.5)
+time.sleep(5)
+# Trial Balance: Save
+pyautogui.click(600, 84, interval=0.01)
+time.sleep(.5)
+pyautogui.hotkey("ctrl", "s", interval=.01)
+time.sleep(1.5)
+pyautogui.hotkey("ctrl", "f", interval=.01)
+tab_reserve(2)
+time.sleep(0.1)
+pyautogui.press("enter", interval=0.01)
+pyautogui.write(Endday_after_folder)
+pyautogui.press("enter", interval=0.01)
+time.sleep(.5)
+pyautogui.press("tab", presses=6, interval=.01)
+
+Trial_Balance = "9. Trial Balance"
+
+pyautogui.write(Trial_Balance, interval=.01)
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(0.5)
+pyautogui.hotkey("ctrl", "w")
+time.sleep(0.5)
+tab_reserve(11)
+time.sleep(0.5)
+
+# No Show
+pyautogui.write("noshow", interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(1)
+pyautogui.press("tab", presses=8, interval=.01)
+pyautogui.press("down", interval=.01)
+pyautogui.press("enter", presses=3, interval=1.5)
+time.sleep(5)
+# No Show: Save
+pyautogui.click(600, 84, interval=0.01)
+time.sleep(.5)
+pyautogui.hotkey("ctrl", "s", interval=.01)
+time.sleep(1.5)
+pyautogui.hotkey("ctrl", "f", interval=.01)
+tab_reserve(2)
+time.sleep(0.1)
+pyautogui.press("enter", interval=0.01)
+pyautogui.write(Endday_after_folder)
+pyautogui.press("enter", interval=0.01)
+time.sleep(.5)
+pyautogui.press("tab", presses=6, interval=.01)
+
+No_Show = f"11. No Show on {format1_yesterday()}"
+
+pyautogui.write(No_Show, interval=.01)
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(0.5)
+pyautogui.hotkey("ctrl", "w")
+time.sleep(0.5)
+
+# Open 4. VKHL Arrivals
+report_print(VKHL_Arrivals)
+time.sleep(.5)
+pyautogui.press("end", interval=.01)
