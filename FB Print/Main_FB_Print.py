@@ -24,8 +24,7 @@ def page_print(times):
     pyautogui.press("up", presses=2, interval=.01)
     pyautogui.press("down", presses=(times), interval=.01)
     pyautogui.press("tab", presses=3, interval=.01)
-    # pyautogui.press("enter", interval=.01)
-    time.sleep(5)
+    pyautogui.press("enter", interval=.01)
     pyautogui.hotkey("ctrl", "w", interval=.01)
 
 def page_print_copy2(times):
@@ -43,8 +42,7 @@ def page_print_copy2(times):
     pyautogui.press("up", presses=2, interval=.01)
     pyautogui.press("down", presses=(times), interval=.01)
     pyautogui.press("tab", presses=3, interval=.01)
-    # pyautogui.press("enter", interval=.01)
-    time.sleep(5)
+    pyautogui.press("enter", interval=.01)
     pyautogui.hotkey("ctrl", "w", interval=.01)
 
 def tab_reserve(times):
