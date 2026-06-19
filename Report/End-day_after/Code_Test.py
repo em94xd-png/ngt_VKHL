@@ -19,6 +19,11 @@ def format1_today():
     today = date.today()
     return today.strftime("%d%m")
 
+def format1_yesterday():
+    today = date.today()
+    yesterday = today - timedelta(days=1)
+    return yesterday.strftime("%d.%m")
+
 def format2_yesterday():
     today = date.today()
     yesterday = today - timedelta(days=1)
@@ -36,55 +41,27 @@ def date_end():
     month_end = today.replace(day=last_day)
     return month_end.strftime("%d%m")
 
-# Clear report store
-os.startfile(Endday_after_folder)
-time.sleep(1)
-pyautogui.press("tab", presses=13, interval=.01)
-pyautogui.hotkey("ctrl", "a", interval=.01)
-pyautogui.press("del", interval=.01)
-pyautogui.hotkey("ctrl", "w", interval=.01)
+# print(pyautogui.position())
+pyautogui.click(x=72, y=304, interval=.01)
 
-# Open Opera
-subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
-
-# In Opera  
-time.sleep(1)
-pyautogui.hotkey("win", "up", "down", "up" ,interval=.1)
-time.sleep(0.1)
-pyautogui.hotkey("ctrl", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",)
-pyautogui.hotkey("ctrl", "=", "=", "=",)
-time.sleep(5)
-
-# To report search
-pyautogui.press("tab", presses=5, interval=0.01)
-pyautogui.press("right", presses=6, interval=0.01)
-pyautogui.press("down", interval=0.01)
-pyautogui.press("enter", interval=0.01)
-time.sleep(4.5)
-pyautogui.press("tab", interval=0.01)
-
-# Reservation Cancellations
-pyautogui.write("rescancel", interval=.01)
+# To End of Day Reports
+tab_reserve(7)
+pyautogui.press("left", presses=2, interval=.01)
+pyautogui.press("down", presses=3, interval=.01)
+pyautogui.press("right", presses=1, interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(2.5)
-pyautogui.press("tab", presses=9, interval=.01)
-pyautogui.press("down", presses=2, interval=.01)
 time.sleep(1.5)
-pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=3, interval=.01)
-pyautogui.press("enter", interval=.01)
-time.sleep(3.5)
-# Reservation Cancellations: Config
-pyautogui.hotkey("ctrl", "a", interval=.01)
-pyautogui.write(format2_yesterday(), interval=.01)
 pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.hotkey("ctrl", "a", interval=.01)
-time.sleep(1)
-pyautogui.write(format2_yesterday(), interval=.01)
-pyautogui.press("tab", presses=18, interval=.01)
+
+# Guest Ledger Detail
+pyautogui.write("gl_led_de", interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(8.5)
-# Reservation Cancellations: Save
+time.sleep(1.5)
+pyautogui.press("tab", presses=8, interval=.01)
+pyautogui.press("down", interval=.01)
+pyautogui.press("enter", presses=3, interval=1)
+time.sleep(5)
+# Guest Ledger Detail: Save
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
@@ -98,21 +75,116 @@ pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
 
-Reservation_Cancellations = "Reservation Cancellations"
+Guest_Ledger_Detail = "14. Guest Ledger Detail"
 
-pyautogui.write(Reservation_Cancellations, interval=.01)
+pyautogui.write(Guest_Ledger_Detail, interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(0.5)
 pyautogui.hotkey("ctrl", "w")
 time.sleep(0.5)
-tab_reserve(3)
+tab_reserve(1)
 pyautogui.press("enter", interval=0.01)
-time.sleep(5)
+time.sleep(1)
+tab_reserve(9)
 
-tab_reserve(7)
-pyautogui.press("left", presses=2, interval=.01)
-pyautogui.press("down", presses=3, interval=.01)
-pyautogui.press("right", presses=1, interval=.01)
+# Manager Flash
+pyautogui.write("manager", interval=.01)
 pyautogui.press("enter", interval=.01)
 time.sleep(1.5)
+pyautogui.press("tab", presses=8, interval=.01)
+pyautogui.press("down", interval=.01)
+pyautogui.press("enter", presses=3, interval=1)
+time.sleep(5)
+# Manager Flash: Save
+pyautogui.click(600, 84, interval=0.01)
+time.sleep(.5)
+pyautogui.hotkey("ctrl", "s", interval=.01)
+time.sleep(1.5)
+pyautogui.hotkey("ctrl", "f", interval=.01)
+tab_reserve(2)
+time.sleep(0.1)
+pyautogui.press("enter", interval=0.01)
+pyautogui.write(Endday_after_folder)
+pyautogui.press("enter", interval=0.01)
+time.sleep(.5)
+pyautogui.press("tab", presses=6, interval=.01)
+
+Manager_Flash = "8. Manager Flash"
+
+pyautogui.write(Manager_Flash, interval=.01)
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(0.5)
+pyautogui.hotkey("ctrl", "w")
+time.sleep(0.5)
+tab_reserve(1)
+pyautogui.press("enter", interval=0.01)
+time.sleep(1)
+tab_reserve(9)
+
+# Trial Balance
+pyautogui.write("tb", interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(1.5)
+pyautogui.press("tab", presses=8, interval=.01)
+pyautogui.press("down", interval=.01)
+pyautogui.press("enter", presses=3, interval=1)
+time.sleep(5)
+# Trial Balance: Save
+pyautogui.click(600, 84, interval=0.01)
+time.sleep(.5)
+pyautogui.hotkey("ctrl", "s", interval=.01)
+time.sleep(1.5)
+pyautogui.hotkey("ctrl", "f", interval=.01)
+tab_reserve(2)
+time.sleep(0.1)
+pyautogui.press("enter", interval=0.01)
+pyautogui.write(Endday_after_folder)
+pyautogui.press("enter", interval=0.01)
+time.sleep(.5)
+pyautogui.press("tab", presses=6, interval=.01)
+
+Trial_Balance = "9. Trial Balance"
+
+pyautogui.write(Trial_Balance, interval=.01)
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(0.5)
+pyautogui.hotkey("ctrl", "w")
+time.sleep(0.5)
+tab_reserve(1)
+pyautogui.press("enter", interval=0.01)
+time.sleep(1)
+tab_reserve(9)
+
+# No Show
+pyautogui.write("noshow", interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(1.5)
+pyautogui.press("tab", presses=8, interval=.01)
+pyautogui.press("down", interval=.01)
+pyautogui.press("enter", presses=3, interval=1)
+time.sleep(5)
+# No Show: Save
+pyautogui.click(600, 84, interval=0.01)
+time.sleep(.5)
+pyautogui.hotkey("ctrl", "s", interval=.01)
+time.sleep(1.5)
+pyautogui.hotkey("ctrl", "f", interval=.01)
+tab_reserve(2)
+time.sleep(0.1)
+pyautogui.press("enter", interval=0.01)
+pyautogui.write(Endday_after_folder)
+pyautogui.press("enter", interval=0.01)
+time.sleep(.5)
+pyautogui.press("tab", presses=6, interval=.01)
+
+No_Show = f"11. No Show on {format1_yesterday()}"
+
+pyautogui.write(No_Show, interval=.01)
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(0.5)                             
+pyautogui.hotkey("ctrl", "w")
+time.sleep(0.5)

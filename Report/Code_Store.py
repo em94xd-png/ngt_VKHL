@@ -43,7 +43,7 @@ def date_end():
     month_end = today.replace(day=last_day)
     return month_end.strftime("%d%m")
 
-def report_print(report_name):                                  
+def report_print(report_name):
 
     Endday_before_folder = os.environ.get("USERPROFILE").__add__(r"..")
 
