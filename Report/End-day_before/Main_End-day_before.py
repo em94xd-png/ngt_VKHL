@@ -415,8 +415,7 @@ def page_print(times):
     pyautogui.press("up", presses=2, interval=.01)
     pyautogui.press("down", presses=(times), interval=.01)
     pyautogui.press("tab", presses=3, interval=.01)
-    # pyautogui.press("enter", interval=.01)
-    time.sleep(5)
+    pyautogui.press("enter", interval=.01)
     pyautogui.hotkey("ctrl", "w", interval=.01)
 
 report_print(Room_Discrepancy)
@@ -431,9 +430,9 @@ report_print(Guests_in_house_Pseudo_room_Rate_Check)
 time.sleep(.5)
 page_print(1)
 
-report_print(Expected_Arrival)
-time.sleep(.5)
-page_print(1)
+# report_print(Expected_Arrival)
+# time.sleep(.5)
+# page_print(1)
 
 report_print(Out_of_Service_by_Reason)
 time.sleep(.5)
