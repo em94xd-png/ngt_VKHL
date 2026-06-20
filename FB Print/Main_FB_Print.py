@@ -27,7 +27,7 @@ def page_print(times):
     pyautogui.press("enter", interval=.01)
     pyautogui.hotkey("ctrl", "w", interval=.01)
 
-def page_print_copy2(times):
+def page_print_2copy(times):
     pyautogui.hotkey("ctrl", "p", interval=.01)
     time.sleep(1)
     pyautogui.press("tab", presses=3, interval=.01)
@@ -241,4 +241,4 @@ time.sleep(12.5)
 # VKHL Guests INH (Full): Print
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
-page_print_copy2(1)
+page_print_2copy(1)

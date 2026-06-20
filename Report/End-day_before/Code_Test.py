@@ -22,25 +22,6 @@ def format2_yesterday():
     yesterday = today - timedelta(days=1)
     return yesterday.strftime("%d%m")
 
-# # Open Opera
-# subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
-
-# # In Opera  
-# time.sleep(1)
-# pyautogui.hotkey("win", "up", "down", "up" ,interval=.1)
-# time.sleep(0.1)
-# pyautogui.hotkey("ctrl", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",)
-# pyautogui.hotkey("ctrl", "=", "=", "=",)
-# time.sleep(5)
-
-# # To report search
-# pyautogui.press("tab", presses=5, interval=0.01)
-# pyautogui.press("right", presses=6, interval=0.01)
-# pyautogui.press("down", interval=0.01)
-# pyautogui.press("enter", interval=0.01)
-# time.sleep(4.5)
-# pyautogui.press("tab", interval=0.01)
-
 def report_print(report_name):                                  
 
     Endday_before_folder = os.environ.get("USERPROFILE").__add__(r"\Documents\Runit\Report\End-day_before")
@@ -51,25 +32,28 @@ def report_print(report_name):
 
     subprocess.run(["cmd", "/c", "start", "msedge", print_url_add])
 
-def page_print(times):
+def page_print(copy_set, both_set, numbpage_set):
     pyautogui.hotkey("ctrl", "p", interval=.01)
     time.sleep(1)
-    pyautogui.press("tab", presses=6, interval=.01)          
+    pyautogui.press("tab", presses=3, interval=.01)
+    pyautogui.write(f"{copy_set}", interval=.01)
+    pyautogui.press("tab", interval=.01)
+    pyautogui.press("tab", presses=3, interval=.01)
     pyautogui.press("up", presses=2, interval=.01)
-    pyautogui.press("down", presses=(times), interval=.01)
+    pyautogui.press("down", presses=(both_set), interval=.01)
     pyautogui.press("tab", interval=.01)
     pyautogui.press("enter", interval=.01)
     time.sleep(.01)
     pyautogui.press("tab", presses=3, interval=.01)
     pyautogui.press("up", presses=2, interval=.01)
-    pyautogui.press("down", presses=(times), interval=.01)
+    pyautogui.press("down", presses=(numbpage_set), interval=.01)
     pyautogui.press("tab", presses=3, interval=.01)
     # pyautogui.press("enter", interval=.01)
     time.sleep(5)
-    pyautogui.hotkey("ctrl", "w", interval=.01)
+    # pyautogui.hotkey("ctrl", "w", interval=.01)
 
 Room_Discrepancy = "Room Discrepancy"
 
 report_print(Room_Discrepancy)
 time.sleep(.5)
-page_print(0)
+page_print(2, 1, 1)
