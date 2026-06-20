@@ -27,7 +27,7 @@ os.startfile(Endday_before_folder)
 time.sleep(1)
 pyautogui.press("tab", presses=13, interval=.01)
 pyautogui.hotkey("ctrl", "a", interval=.01)
-pyautogui.press("del", interval=.01)
+pyautogui.press("delete", interval=.01)
 pyautogui.hotkey("ctrl", "w", interval=.01)
 
 # Open Opera
@@ -71,7 +71,7 @@ time.sleep(0.1)
 pyautogui.press("enter", interval=.01)
 pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=.01)
-time.sleep(.5)
+time.sleep(1)
 pyautogui.press("tab", presses=6, interval=.01)
 
 Room_Discrepancy = "Room Discrepancy"
