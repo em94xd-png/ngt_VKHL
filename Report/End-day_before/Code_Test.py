@@ -53,11 +53,18 @@ def page_print(set_copy, set_both, set_page):
     pyautogui.press("up", presses=2, interval=.01)
     pyautogui.press("down", presses=(set_page), interval=.01)
     pyautogui.press("tab", presses=3, interval=.01)
+    time.sleep(.5)
     # pyautogui.press("enter", interval=.01)
     # pyautogui.hotkey("ctrl", "w", interval=.01)
 
 Room_Discrepancy = "Room Discrepancy"
 
-report_print(Room_Discrepancy)
+# report_print(Room_Discrepancy)
+# time.sleep(.5)
+# page_print(2, 1, 1)
+
+Guests_in_house_Pseudo_room_Rate_Check = "Guests in house Pseudo room Rate Check"
+
+report_print(Guests_in_house_Pseudo_room_Rate_Check)
 time.sleep(.5)
-page_print(2, 1, 1)
+page_print(1, 1, 1)

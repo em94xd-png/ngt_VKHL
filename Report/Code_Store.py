@@ -74,5 +74,6 @@ def page_print(set_copy, set_both, set_page):
     pyautogui.press("up", presses=2, interval=.01)
     pyautogui.press("down", presses=(set_page), interval=.01)
     pyautogui.press("tab", presses=3, interval=.01)
+    time.sleep(.5)
     # pyautogui.press("enter", interval=.01)
     # pyautogui.hotkey("ctrl", "w", interval=.01)
