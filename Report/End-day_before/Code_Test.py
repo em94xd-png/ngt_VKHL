@@ -32,24 +32,28 @@ def report_print(report_name):
 
     subprocess.run(["cmd", "/c", "start", "msedge", print_url_add])
 
-def page_print(copy_set, both_set, numbpage_set):
+def page_print(set_copy, set_both, set_page):
     pyautogui.hotkey("ctrl", "p", interval=.01)
     time.sleep(1)
-    pyautogui.press("tab", presses=3, interval=.01)
-    pyautogui.write(f"{copy_set}", interval=.01)
-    pyautogui.press("tab", interval=.01)
-    pyautogui.press("tab", presses=3, interval=.01)
+    pyautogui.press("tab", presses=(set_copy), interval=.01)
+
+    if set_copy == 1:
+        pyautogui.press("tab", presses=5, interval=.01)
+    elif set_copy == 2:
+        pyautogui.press("tab", interval=.01)
+        pyautogui.write("2", interval=.01)
+        pyautogui.press("tab", presses=4, interval=.01)
+
     pyautogui.press("up", presses=2, interval=.01)
-    pyautogui.press("down", presses=(both_set), interval=.01)
+    pyautogui.press("down", presses=(set_both), interval=.01)
     pyautogui.press("tab", interval=.01)
     pyautogui.press("enter", interval=.01)
     time.sleep(.01)
     pyautogui.press("tab", presses=3, interval=.01)
     pyautogui.press("up", presses=2, interval=.01)
-    pyautogui.press("down", presses=(numbpage_set), interval=.01)
+    pyautogui.press("down", presses=(set_page), interval=.01)
     pyautogui.press("tab", presses=3, interval=.01)
     # pyautogui.press("enter", interval=.01)
-    time.sleep(5)
     # pyautogui.hotkey("ctrl", "w", interval=.01)
 
 Room_Discrepancy = "Room Discrepancy"
