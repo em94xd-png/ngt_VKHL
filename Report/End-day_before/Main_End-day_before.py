@@ -27,7 +27,7 @@ os.startfile(Endday_before_folder)
 time.sleep(1)
 pyautogui.press("tab", presses=13, interval=.01)
 pyautogui.hotkey("ctrl", "a", interval=.01)
-pyautogui.press("del", interval=.01)
+pyautogui.press("delete", interval=.01)
 pyautogui.hotkey("ctrl", "w", interval=.01)
 
 # Open Opera
@@ -71,7 +71,7 @@ time.sleep(0.1)
 pyautogui.press("enter", interval=.01)
 pyautogui.write(Endday_before_folder)
 pyautogui.press("enter", interval=.01)
-time.sleep(.5)
+time.sleep(1)
 pyautogui.press("tab", presses=6, interval=.01)
 
 Room_Discrepancy = "Room Discrepancy"
@@ -402,53 +402,62 @@ def report_print(report_name):
 
     subprocess.run(["cmd", "/c", "start", "msedge", print_url_add])
 
-def page_print(times):
+def page_print(set_copy, set_both, set_page):
     pyautogui.hotkey("ctrl", "p", interval=.01)
     time.sleep(1)
-    pyautogui.press("tab", presses=6, interval=.01)          
+    pyautogui.press("tab", presses=(set_copy), interval=.01)
+
+    if set_copy == 1:
+        pyautogui.press("tab", presses=5, interval=.01)
+    elif set_copy == 2:
+        pyautogui.press("tab", interval=.01)
+        pyautogui.write("2", interval=.01)
+        pyautogui.press("tab", presses=4, interval=.01)
+
     pyautogui.press("up", presses=2, interval=.01)
-    pyautogui.press("down", presses=(times), interval=.01)
+    pyautogui.press("down", presses=(set_both), interval=.01)
     pyautogui.press("tab", interval=.01)
     pyautogui.press("enter", interval=.01)
     time.sleep(.01)
     pyautogui.press("tab", presses=3, interval=.01)
     pyautogui.press("up", presses=2, interval=.01)
-    pyautogui.press("down", presses=(times), interval=.01)
+    pyautogui.press("down", presses=(set_page), interval=.01)
     pyautogui.press("tab", presses=3, interval=.01)
+    time.sleep(.5)
     pyautogui.press("enter", interval=.01)
     pyautogui.hotkey("ctrl", "w", interval=.01)
 
 report_print(Room_Discrepancy)
 time.sleep(.5)
-page_print(0)
+page_print(1, 1, 0)
 
 report_print(Guests_INH_Complimentary_and_Houseuse)
 time.sleep(.5)
-page_print(1)
+page_print(1, 1, 1)
 
 report_print(Guests_in_house_Pseudo_room_Rate_Check)
 time.sleep(.5)
-page_print(1)
+page_print(1, 1, 1)
 
 # report_print(Expected_Arrival)
 # time.sleep(.5)
-# page_print(1)
+# page_print(1, 1, 1)
 
 report_print(Out_of_Service_by_Reason)
 time.sleep(.5)
-page_print(1)
+page_print(1, 1, 1)
 
 report_print(Out_of_Order_by_Reason)
 time.sleep(.5)
-page_print(1)
+page_print(1, 1, 1)
 
 report_print(Credit_Limit)
 time.sleep(.5)
-page_print(1)
+page_print(1, 1, 1)
 
 report_print(Rebate_and_Correction_Transactions)
 time.sleep(.5)
-page_print(1)
+page_print(1, 1, 1)
 
 # Open Room Discrepancy
 report_print(Room_Discrepancy)
