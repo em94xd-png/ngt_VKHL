@@ -8,10 +8,11 @@ customtkinter.set_default_color_theme("green")
 
 window_main = customtkinter.CTk()
 window_main.title("ngt")
+# window_main.overrideredirect(True)
+window_main.geometry("1700+30")
 
-# Locked_x = 2300
-# Locked_y = 100
-# window_main.geometry("")
+# customtkinter.set_widget_scaling(.9)
+# customtkinter.set_window_scaling(.9)
 
 window_main.attributes("-topmost", True)
 window_main.resizable(False, False)
@@ -81,5 +82,8 @@ button_3.place(relx=.5, rely=.53, anchor=CENTER)
 
 button_stop = customtkinter.CTkButton(master=frame_1, text="Stop", fg_color="#428475", hover_color="#E05454", command=stop_all)
 button_stop.place(relx=.5, rely=.885, anchor=CENTER)
+
+# button_exit = customtkinter.CTkButton(master=frame_1, width=10, height=30, text="x", font=("Sans-serif", 10), fg_color="transparent", hover=False, corner_radius=30, command=window_main.quit)
+# button_exit.place(relx=.9185, rely=.05, anchor=CENTER)
 
 window_main.mainloop()

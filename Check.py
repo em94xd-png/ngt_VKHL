@@ -1,6 +1,7 @@
-import os
+import pyautogui
 
-path = "fb print"
+print(position)
 
-if os.path.exists(path): print(True) 
-else: print(False)
+
+
+
