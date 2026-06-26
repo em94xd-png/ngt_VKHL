@@ -1,7 +1,6 @@
 import customtkinter
 from tkinter import *
 import subprocess
-import os
 import threading
 
 customtkinter.set_appearance_mode("dark")
@@ -58,16 +57,16 @@ def stop_all():
     
     running_active = [running_endday_before, running_endday_after, running_FB_print]
 
-    for running in running_active:
-        if running and running.poll() is None:
-            running.terminate()
+    for _ in running_active:
+        if _ and _.poll() is None:
+            _.terminate()
 
     button_toggle("normal")
 
 frame_1 = customtkinter.CTkFrame(master=window_main, width=200, height=325)
 frame_1.pack()
 
-label_1 = customtkinter.CTkLabel(master=frame_1, text="OI", font=("Sans-serif", 20) )
+label_1 = customtkinter.CTkLabel(master=frame_1, text="OI", font=("Sans-serif", 20))
 label_1.place(relx=.5, rely=.13, anchor=CENTER)
 
 button_1 = customtkinter.CTkButton(master=frame_1, text="Before", command=report_endday_before)
