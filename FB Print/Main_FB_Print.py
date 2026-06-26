@@ -148,17 +148,12 @@ time.sleep(3.5)
 pyautogui.press("tab", interval=.01)
 time.sleep(.75)
 pyautogui.write(Room_Type, interval=.01)
-pyautogui.press("tab", presses=5, interval=.01)
-pyautogui.press("space", interval=.01) # Pseudo Rooms
-pyautogui.press("tab", presses=5, interval=.01)
-pyautogui.press("space", interval=.01) # Accompanying Names
-pyautogui.press("tab", presses=3, interval=.01)
-pyautogui.press("space", interval=.01) # Notes
-time.sleep(1)
-pyautogui.press("tab", presses=2, interval=.01)
+pyautogui.press("tab", presses=14, interval=.01)
+pyautogui.press("space", interval=.01) # Include Internal Notes
+pyautogui.press("tab", interval=.01)
 pyautogui.write("Resv. - GEN", interval=.01)
 time.sleep(.5)
-pyautogui.press("tab", presses=7, interval=.01)
+pyautogui.press("tab", presses=8, interval=.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(12.5)
 # VKHL Guests INH: Print
@@ -217,15 +212,9 @@ time.sleep(3.5)
 pyautogui.press("tab", interval=.01)
 time.sleep(.75)
 pyautogui.write(Room_Type, interval=.01)
-pyautogui.press("tab", presses=5, interval=.01)
-pyautogui.press("space", interval=.01) # Pseudo Rooms
-pyautogui.press("tab", presses=5, interval=.01)
-pyautogui.press("space", interval=.01) # Accompanying Names
-pyautogui.press("tab", presses=3, interval=.01)
-pyautogui.press("space", interval=.01) # Notes
-time.sleep(1)
-pyautogui.press("tab", interval=.01)
-pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=15, interval=.01)
+pyautogui.press("delete", interval=.01)
+time.sleep(.5)
 pyautogui.press("tab", presses=8, interval=.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(12.5)
