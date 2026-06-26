@@ -25,7 +25,8 @@ def button_toggle(state):
     button_2.configure(state=state)
     button_3.configure(state=state)
 
-def monitor_process():
+def monitor_process(process):
+    process.wait()
     window_main.after(0, lambda: button_toggle("normal"))
 
 def script_run(script_path, process_var):
