@@ -8,8 +8,10 @@ ytd_month_full = yesterday.strftime("%b")
 ytd_year = yesterday.strftime("%y")
 ytd_year_full = yesterday.strftime("%Y")
 
-path = fr"\\LMPC202507256L\Keeper\Daily's Report\Report {ytd_year_full}\{ytd_month} - {ytd_month_full} {ytd_year}\{ytd_date} {ytd_month_full}\Before Closeday"
+# path = fr"\\LMPC202507256L\Keeper\Daily's Report\Report {ytd_year_full}\{ytd_month} - {ytd_month_full} {ytd_year}\{ytd_date} {ytd_month_full}\Before Closeday"
+
+path = os.environ.get("USERPROFILE").__add__(r"\Documents").__add__(r"\D")
 
 path_to = os.path.exists(path)
 
-print(path_to)
+os.makedirs(path, exist_ok=True)
