@@ -421,7 +421,8 @@ pyautogui.press("enter", interval=0.01)
 time.sleep(0.5)
 pyautogui.hotkey("ctrl", "w")
 time.sleep(.5)
-pyautogui.press("tab", presses=29, interval=.01)
+# pyautogui.press("tab", presses=29, interval=.01)
+tab_reserve(14)
 
 # Vacant Rooms
 pyautogui.write("Vacant Rooms", interval=.01)
