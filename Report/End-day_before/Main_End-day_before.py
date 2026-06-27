@@ -4,9 +4,17 @@ from datetime import date, timedelta
 import os
 import subprocess
 
-Endday_before_folder = os.environ.get("USERPROFILE").__add__(r"\Documents\Runit\Report\End-day_before")
-
 site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
+
+def report_path():
+    yesterday = date.today() - timedelta(days=1)
+    ytd_date = yesterday.strftime("%#d")
+    ytd_month_number = yesterday.strftime("%#m")
+    ytd_month_short = yesterday.strftime("%b")
+    ytd_month_full = yesterday.strftime("%B")
+    ytd_year_full = yesterday.strftime("%Y")
+
+    return fr"\\LMPC202507256L\Keeper\Daily's Report\Report {ytd_year_full}\{ytd_month_number} - {ytd_month_short} {ytd_year_full}\{ytd_date} {ytd_month_full}"
 
 def tab_reserve(times):
     for _ in range(times):
@@ -22,13 +30,8 @@ def format2_yesterday():
     yesterday = today - timedelta(days=1)
     return yesterday.strftime("%d%m")
 
-# Clear report store
-os.startfile(Endday_before_folder)
-time.sleep(1)
-pyautogui.press("tab", presses=13, interval=.01)
-pyautogui.hotkey("ctrl", "a", interval=.01)
-pyautogui.press("delete", interval=.01)
-pyautogui.hotkey("ctrl", "w", interval=.01)
+# Create folder
+os.makedirs(report_path().__add__(r"\Before Closeday"), exist_ok=True)
 
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
@@ -69,7 +72,7 @@ pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=.01)
-pyautogui.write(Endday_before_folder)
+pyautogui.write(report_path().__add__(r"\Before Closeday"))
 pyautogui.press("enter", interval=.01)
 time.sleep(1)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -104,7 +107,7 @@ pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=.01)
-pyautogui.write(Endday_before_folder)
+pyautogui.write(report_path().__add__(r"\Before Closeday"))
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -150,7 +153,7 @@ pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=.01)
-pyautogui.write(Endday_before_folder)
+pyautogui.write(report_path().__add__(r"\Before Closeday"))
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -197,7 +200,7 @@ pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=0.01)
-pyautogui.write(Endday_before_folder)
+pyautogui.write(report_path().__add__(r"\Before Closeday"))
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -247,7 +250,7 @@ pyautogui.hotkey("ctrl", "f", interval=0.01)
 tab_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=0.01)
-pyautogui.write(Endday_before_folder)
+pyautogui.write(report_path().__add__(r"\Before Closeday"))
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -279,7 +282,7 @@ pyautogui.hotkey("ctrl", "f", interval=0.01)
 tab_reserve(2)
 time.sleep(.01)
 pyautogui.press("enter", interval=0.01)
-pyautogui.write(Endday_before_folder)
+pyautogui.write(report_path().__add__(r"\Before Closeday"))
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -328,7 +331,7 @@ pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=0.01)
-pyautogui.write(Endday_before_folder)
+pyautogui.write(report_path().__add__(r"\Before Closeday"))
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -377,7 +380,7 @@ pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=0.01)
-pyautogui.write(Endday_before_folder)
+pyautogui.write(report_path().__add__(r"\Before Closeday"))
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -394,11 +397,11 @@ time.sleep(1)
 # Print
 def report_print(report_name):                                  
 
-    Endday_before_folder = os.environ.get("USERPROFILE").__add__(r"\Documents\Runit\Report\End-day_before")
+    Endday_before_folder = report_path().__add__(r"\Before Closeday")
 
     folder_report = os.path.join(Endday_before_folder, report_name).__add__(".PDF")
 
-    print_url_add = "file:///" + folder_report.replace("\\", "/")
+    print_url_add = "file:" + folder_report.replace("\\", "/")
 
     subprocess.run(["cmd", "/c", "start", "msedge", print_url_add])
 
