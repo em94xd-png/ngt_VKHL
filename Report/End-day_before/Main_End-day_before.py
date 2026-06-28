@@ -86,7 +86,7 @@ time.sleep(.5)
 pyautogui.hotkey("ctrl", "w")
 time.sleep(.5)
 # pyautogui.press("tab", presses=29, interval=.01)
-tab_reserve(14)
+tab_reserve(13)
 
 # Report: Guests INH Complimentary and Houseuse
 pyautogui.write("gi_c_h", interval=.01)
@@ -122,7 +122,7 @@ time.sleep(.5)
 pyautogui.hotkey("ctrl", "w")
 time.sleep(.5)
 # pyautogui.press("tab", presses=29, interval=.01)
-tab_reserve(14)
+tab_reserve(13)
 
 # Report: Guests in house Pseudo room Rate Check
 pyautogui.write("giratecheck", interval=.01)

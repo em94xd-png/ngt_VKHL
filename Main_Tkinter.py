@@ -17,6 +17,11 @@ window_main.geometry("1700+30")
 window_main.attributes("-topmost", True)
 window_main.resizable(False, False)
 
+drop_1_store = StringVar()
+drop_1_items = {}
+
+
+
 running_endday_before = None
 running_endday_after = None
 running_FB_print = None
@@ -67,6 +72,9 @@ def stop_all():
 
 frame_1 = customtkinter.CTkFrame(master=window_main)
 frame_1.pack(padx=2.5, pady=2.5, fill="both", expand=True)
+
+# drop_1 = customtkinter.CTkComboBox(master=frame_1, variable=drop_1_store, values=drop_1_items)
+# drop_1.pack()
 
 label_1 = customtkinter.CTkLabel(master=frame_1, text="OI", font=("Sans-serif", 20))
 label_1.pack(pady=25)
