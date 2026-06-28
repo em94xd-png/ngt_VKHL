@@ -30,8 +30,17 @@ def format2_yesterday():
     yesterday = today - timedelta(days=1)
     return yesterday.strftime("%d%m")
 
+def file_remove(path):
+    for _ in os.listdir(path):
+        to_file = os.path.join(path, _)
+        if os.path.isfile(to_file):
+            os.remove(to_file)
+
 # Create folder
-os.makedirs(report_path().__add__(r"\Before Closeday"), exist_ok=True)
+path_report = os.makedirs(report_path().__add__(r"\Before Closeday"), exist_ok=True)
+
+# Delete files
+file_remove(path_report)
 
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])

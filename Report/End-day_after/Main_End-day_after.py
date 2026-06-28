@@ -59,6 +59,15 @@ def report_print(report_name):
 
     subprocess.run(["cmd", "/c", "start", "msedge", print_url_add])
 
+def file_remove(path):
+    for _ in os.listdir(path):
+        to_file = os.path.join(path, _)
+        if os.path.isfile(to_file):
+            os.remove(to_file)
+
+# Delete files
+file_remove(report_path())
+
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
 

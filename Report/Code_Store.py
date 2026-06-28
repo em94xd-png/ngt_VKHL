@@ -87,3 +87,9 @@ def page_print(set_copy, set_both, set_page):
     time.sleep(.5)
     # pyautogui.press("enter", interval=.01)
     # pyautogui.hotkey("ctrl", "w", interval=.01)
+
+def file_remove(path):
+    for _ in os.listdir(path):
+        to_file = os.path.join(path, _)
+        if os.path.isfile(to_file):
+            os.remove(to_file)

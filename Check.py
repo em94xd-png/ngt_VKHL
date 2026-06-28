@@ -1,13 +1,11 @@
 import os
+import shutil
 
-def theme_path():
-    path_1 = os.path.dirname(os.path.abspath(__file__))
-    path_2 = os.path.join(path_1, "themes")
-    
-    for _ in os.listdir(path_2):
-        if _.endswith(".json"):
-            theme_key = os.path.splitext(_)[0]
-            theme_key_path = os.path.join(path_2, _)
-            
+path = r"\\LMPC202507256L\Keeper\Daily's Report\DDD"
 
-theme_path()
+# os.makedirs(path.__add__("\DDD"), exist_ok=True)
+
+for _ in os.listdir(path):
+    to_file = os.path.join(path, _)
+    if os.path.isfile(to_file):
+        os.remove(to_file)
