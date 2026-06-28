@@ -27,10 +27,6 @@ def format2_yesterday():
     yesterday = today - timedelta(days=1)
     return yesterday.strftime("%d%m")
 
-def tab_reserve(times):
-    for _ in range(times):
-        pyautogui.hotkey("shift", "tab")
-
 def date_first():
     today = date.today()
     today_1 = today.replace(day=1)
@@ -42,6 +38,20 @@ def date_end():
     _, last_day = calendar.monthrange(today.year, today.month)
     month_end = today.replace(day=last_day)
     return month_end.strftime("%d%m")
+
+def report_path():
+    yesterday = date.today() - timedelta(days=1)
+    ytd_date = yesterday.strftime("%#d")
+    ytd_month_number = yesterday.strftime("%#m")
+    ytd_month_short = yesterday.strftime("%b")
+    ytd_month_full = yesterday.strftime("%B")
+    ytd_year_full = yesterday.strftime("%Y")
+
+    return fr"\\LMPC202507256L\Keeper\Daily's Report\Report {ytd_year_full}\{ytd_month_number} - {ytd_month_short} {ytd_year_full}\{ytd_date} {ytd_month_full}"
+
+def tab_reserve(times):
+    for _ in range(times):
+        pyautogui.hotkey("shift", "tab")
 
 def report_print(report_name):
 
