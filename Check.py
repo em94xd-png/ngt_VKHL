@@ -6,7 +6,8 @@ def theme_path():
     
     for _ in os.listdir(path_2):
         if _.endswith(".json"):
-            print
-
+            theme_key = os.path.splitext(_)[0]
+            theme_key_path = os.path.join(path_2, _)
+            
 
 theme_path()
