@@ -37,9 +37,11 @@ def file_remove(path):
             os.remove(to_file)
 
 # Create folder
-path_report = os.makedirs(report_path().__add__(r"\Before Closeday"), exist_ok=True)
+os.makedirs(report_path().__add__(r"\Before Closeday"), exist_ok=True)
 
 # Delete files
+path_report = report_path() + r"\Before Closeday"
+
 file_remove(path_report)
 
 # Open Opera
