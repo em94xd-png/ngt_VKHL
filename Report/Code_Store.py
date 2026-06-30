@@ -13,6 +13,8 @@ Endday_after_folder = os.environ.get("USERPROFILE").__add__(r"\Documents\Runit\R
 
 Room_Type = "1H2XK,1H2XT,1H3XK,1H4XK,1H4XT,2U1XKT,2U2XKT,2U3XKT,1V1XK,1V2XK,3U1CKT,2V1C2K,1H1VK,1U1VK,1U2VK,2U1VKT,2U2VKT,2U3VKT,3U2VKT,1H2VK,2U4XKT,3U1C2K"
 
+Room_Class = "HRA,HRB,HRC,HRD,HSA,HSB,HSC,HSD,HSE,HVA,HVB,HVC"
+
 def format1_today():
     today = date.today()
     return today.strftime("%d%m")
