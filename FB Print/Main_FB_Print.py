@@ -81,7 +81,7 @@ pyautogui.press("tab", presses=5, interval=0.01)
 pyautogui.press("right", presses=6, interval=0.01)
 pyautogui.press("down", interval=0.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(4.5)
+time.sleep(5)
 pyautogui.press("tab", interval=0.01)
 
 # # VKHL Arrivals
