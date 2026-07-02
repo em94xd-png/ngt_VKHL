@@ -67,8 +67,8 @@ def file_remove(path):
         if os.path.isfile(to_file):
             os.remove(to_file)
 
-# Delete files
-file_remove(report_path())
+# # Delete files
+# file_remove(report_path())
 
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
@@ -89,8 +89,8 @@ pyautogui.press("enter", interval=0.01)
 time.sleep(4.5)
 pyautogui.press("tab", interval=0.01)
 
-# Package Forecast
-pyautogui.write("Package Forecast - Detailed", interval=.01)
+# VKHL Guests INH
+pyautogui.write("gibyroom", interval=.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(3)
 pyautogui.press("tab", presses=9, interval=0.01)
@@ -100,19 +100,20 @@ pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=3, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(3.5)
-# Package Forecast: Config
-pyautogui.press("tab", presses=2, interval=0.01)
-pyautogui.write(format1_today(), interval=.01)
-pyautogui.press("tab", interval=0.01)
-time.sleep(1)
-pyautogui.write(format1_today(), interval=.01)
-pyautogui.press("tab", presses=3, interval=0.01)
+# VKHL Guests INH: Config
+pyautogui.press("tab", interval=.01)
 time.sleep(.75)
-pyautogui.write("BFB01E,BFB01I,BFB02E,BFB02I,BFB03I,BFB04I", interval=.01)
-pyautogui.press("tab", presses=13, interval=0.01)
+pyautogui.write(Room_Type, interval=.01)
+pyautogui.press("tab", presses=14, interval=.01)
+pyautogui.press("space", interval=.01) # Include Internal Notes
+time.sleep(.1)
+pyautogui.press("tab", interval=.01)
+pyautogui.write("Resv. - GEN", interval=.01)
+time.sleep(.5)
+pyautogui.press("tab", presses=8, interval=.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(8.5)
-# Package Forecast: Save
+time.sleep(12.5)
+# VKHL Guests INH: Save
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
@@ -126,9 +127,40 @@ pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
 
-Package_Forecast = "19. Package Forecast"
+VKHL_Guests_INH = "6. VKHL Guests INH"
 
-pyautogui.write(Package_Forecast, interval=.01)
+pyautogui.write(VKHL_Guests_INH, interval=.01)
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(0.5)
+pyautogui.hotkey("ctrl", "w")
+time.sleep(0.5)
+
+# VKHL VIP Guests INH
+tab_reserve(19)
+# VKHL VIP Guests INH: Config
+pyautogui.press("space", interval=.01) # VIP Only
+time.sleep(1)
+pyautogui.press("tab", presses=20, interval=.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(8.5)
+# VKHL VIP Guests INH: Save
+pyautogui.click(600, 84, interval=0.01)
+time.sleep(.5)
+pyautogui.hotkey("ctrl", "s", interval=.01)
+time.sleep(1.5)
+pyautogui.hotkey("ctrl", "f", interval=.01)
+tab_reserve(2)
+time.sleep(0.1)
+pyautogui.press("enter", interval=0.01)
+pyautogui.write(report_path())
+pyautogui.press("enter", interval=0.01)
+time.sleep(.5)
+pyautogui.press("tab", presses=6, interval=.01)
+
+VKHL_VIP_Guests_INH = "3. VKHL VIP Guests INH"
+
+pyautogui.write(VKHL_VIP_Guests_INH, interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(0.5)
