@@ -23,6 +23,7 @@ def report_path():
     return fr"\\LMPC202507256L\Keeper\Daily's Report\Report {ytd_year_full}\{ytd_month_number} - {ytd_month_short} {ytd_year_full}\{ytd_date} {ytd_month_full}"
 
 def tab_reserve(times):
+    pyautogui.PAUSE = 0.01
     for _ in range(times):
         pyautogui.hotkey("shift", "tab")
 
@@ -115,7 +116,7 @@ pyautogui.press("delete", interval=.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=11, interval=.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(10)
+time.sleep(12.5)
 # VKHL Arrivals: Save
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
@@ -152,10 +153,10 @@ pyautogui.press("delete", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("space", interval=0.01) # Zero Rates Only
-time.sleep(.1)
+time.sleep(.25)
 pyautogui.press("tab", presses=2, interval=0.01)
 pyautogui.press("space", interval=0.01) # Departures
-time.sleep(.1)
+time.sleep(.25)
 pyautogui.press("tab", presses=33, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(10)
@@ -203,13 +204,13 @@ time.sleep(.75)
 pyautogui.write(Room_Type, interval=.01)
 pyautogui.press("tab", presses=10, interval=.01)
 pyautogui.press("space", interval=.01) # Pseudo Rooms
-time.sleep(.1)
+time.sleep(.25)
 pyautogui.press("tab", presses=12, interval=.01)
 pyautogui.press("space", interval=.01) # Membership Type
-time.sleep(.5)
+time.sleep(.75)
 pyautogui.press("tab", interval=.01)
 pyautogui.press("space", interval=.01) # Membership Level
-time.sleep(.5)
+time.sleep(.75)
 pyautogui.press("tab", presses=13, interval=.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(8.5)
@@ -257,7 +258,7 @@ time.sleep(.75)
 pyautogui.write(Room_Type, interval=.01)
 pyautogui.press("tab", presses=14, interval=.01)
 pyautogui.press("space", interval=.01) # Include Internal Notes
-time.sleep(.1)
+time.sleep(.25)
 pyautogui.press("tab", interval=.01)
 pyautogui.write("Resv. - GEN", interval=.01)
 time.sleep(.5)
@@ -403,7 +404,7 @@ time.sleep(.1)
 # History and Forecast (AVC): Config
 tab_reserve(14)
 pyautogui.press("space", interval=.01) # Pseudo Rooms
-time.sleep(.1)
+time.sleep(.25)
 pyautogui.press("tab", presses=14, interval=.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(8.5)
