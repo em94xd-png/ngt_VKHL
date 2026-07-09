@@ -14,7 +14,7 @@ target_title = "Guest information panel"
 
 def running_set(times):
 
-    # pyautogui.PAUSE = 0.01
+    pyautogui.PAUSE = 0.001
 
     for _ in range(times):
         pyautogui.press("tab")
@@ -28,29 +28,31 @@ while True:
 
     try:
 
-        find_title = pygetwindow.getWindowsWithTitle(target_title)
+        find_title = pygetwindow.getWindowsWithTitle(target_title)[0]
 
-        if not find_title and find_title[0] and find_title[0].title.isMinimized:
+        if not find_title.isMinimized:
 
-            find_title[0].activate()
+            find_title.activate()
             time.sleep(1)
 
-            LN = running_set(3)
+            last_name = running_set(3)
 
-            FN = running_set(4)
+            first_name = running_set(4)
 
-            BD = running_set(9)
+            birth_day = running_set(9)
 
-            CT = running_set(5)
+            country = running_set(5)
 
-            PN = running_set(6)
+            passport_number = running_set(6)
 
-            # tm = openpyxl.load_workbook("tm.xlsx")
-            # sheet = tm.active
-            # sheet.append([LN, FN, BD, CT, PN])
-            # tm.save("tm.xlsx")
+            wb = openpyxl.load_workbook("Oo.xlsx")
+            sheet = wb.active
+            sheet.append([last_name, first_name, birth_day, country, passport_number])
+            wb.save("Oo.xlsx")
             
-            time.sleep(5)
+            # print(f"Last Name: {last_name}, First Name: {first_name}, Birth Date: {birth_day}, Country: {country}, Pass Number: {passport_number}")
+
+            time.sleep(15)
 
     except Exception as error:
         pass
