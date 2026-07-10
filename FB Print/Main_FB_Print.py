@@ -59,6 +59,7 @@ def page_print(set_copy, set_both, set_page):
     pyautogui.hotkey("ctrl", "w", interval=.01)
 
 def tab_reserve(times):
+    pyautogui.PAUSE = 0.01
     for _ in range(times):
         pyautogui.hotkey("shift", "tab")
 
