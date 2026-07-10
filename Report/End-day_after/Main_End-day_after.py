@@ -116,7 +116,7 @@ pyautogui.press("delete", interval=.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=11, interval=.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(12.5)
+time.sleep(14.5)
 # VKHL Arrivals: Save
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
