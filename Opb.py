@@ -34,16 +34,11 @@ for _ in root.findall(".//G_IMMIGRATION"):
         ln = _.find("LAST_NAME").text if _.find("LAST_NAME") is not None else ""
         gd = _.find("SEX").text if _.find("SEX") is not None else ""
         pn = _.find("PASSPORT").text if _.find("PASSPORT") is not None else ""
-        nt = _.find("NATIONALITY").text if _.find("NATIONALITY") is not None else ""
-        if nt in ct_json:
-             nt_match = ct_json[nt]
-        else:
-             nt_match = nt
         bd = _.find("DATE_OF_BIRTH").text if _.find("DATE_OF_BIRTH") is not None else ""
         bd_sw = sw_date_format(bd)
         dep = _.find("DEPARTURE_DATE").text if _.find("DEPARTURE_DATE") is not None else ""
         dep_sw = sw_date_format(dep)
-        all_data = [fn, None, ln, gd, pn, nt_match, bd_sw, dep_sw]
+        all_data = [fn, None, ln, gd, pn, None, bd_sw, dep_sw]
         ws2.append(all_data)
 
 # ws2 = wb.active
@@ -51,27 +46,42 @@ ws1 = wb["Sheet"]
 wb.active = ws1
 
 ws1_fn_ln_pn = {}
+ws1_fn_ln_ct = {}
 for _ in ws1.iter_rows(values_only=True, min_row=2):
     ws1_fn = _[1]
     ws1_ln = _[0]    
     ws1_pn = _[4]     
+    ws1_ct = _[3]
     if ws1_fn and ws1_ln and ws1_pn != "":
         ws1_key = f"{str(ws1_fn).strip()}_{str(ws1_ln).strip()}"
         ws1_fn_ln_pn[ws1_key] = str(ws1_pn).strip()
+        ws1_fn_ln_ct[ws1_key] = str(ws1_ct).strip()
 
 for _ in range(2, ws2.max_row + 1):
     ws2_fn = ws2.cell(row=_, column=1).value
     ws2_ln = ws2.cell(row=_, column=3).value
+    ws2_pn = ws2.cell(row=_, column=5).value
+    ws2_nt = ws2.cell(row=_, column=6).value
     if ws2_fn and ws2_ln != "":
-         ws2_key = f"{str(ws2_fn).strip()}_{str(ws2_ln).strip()}"
-         if ws2_key in ws1_fn_ln_pn:
-              for_empty_passport = ws1_fn_ln_pn[ws2_key]
-              ws2.cell(row=_, column=5, value=for_empty_passport)
+          ws2_key = f"{str(ws2_fn).strip()}_{str(ws2_ln).strip()}"
+          if ws2_key in ws1_fn_ln_pn:
+               for_empty_passport = ws1_fn_ln_pn[ws2_key]
+               if ws2_pn == None:
+                    ws2.cell(row=_, column=5, value=for_empty_passport)
+          elif ws2_key in ws1_fn_ln_ct:
+               for_THA_passport = ws1_fn_ln_ct[ws2_key]
+               if ws2_nt == "Thailand":
+                    ws2.cell(row=_, column=6, value=for_THA_passport)
 
-for _ in range(ws2.max_row, 1 ,-1):
-     pn = ws2.cell(row=_, column=5).value
-     if pn is None:
-          ws2.delete_rows(_, amount=1)
+for _ in root.findall(".//G_IMMIGRATION"):
+        nt = _.find("NATIONALITY").text if _.find("NATIONALITY") is not None else ""
+        all_data = [None, None, None, None, None, nt]
+        ws2.append(all_data)
+
+# for _ in range(ws2.max_row, 1 ,-1):
+#      pn = ws2.cell(row=_, column=5).value
+#      if pn is None:
+#           ws2.delete_rows(_, amount=1)
 
 # for _ in ws2.iter_rows(values_only=True):
 #      print(_[4])
