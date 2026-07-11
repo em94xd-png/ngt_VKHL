@@ -1,14 +1,18 @@
 import openpyxl
+import json
 
-wb = openpyxl.load_workbook("Oo.xlsx")
-ws = wb.active
-ws2 = wb["Sheet2"]
-ws3 = wb["Sheet3"]
+excel_file = "ct.xlsx"
 
-ws3.append([])
+wb = openpyxl.load_workbook(excel_file)
+ws1 = wb["Sheet1"]
 
-for _ in ws2.iter_rows(values_only=True, min_row=2):
-    c1 = [None] + [_[0]]
-    ws3.append(c1)
+ct = {}
 
-wb.save("Oo.xlsx")
+for _ in ws1.iter_rows(values_only=True, min_row=2):
+    ct_full = _[0]
+    ct_code = _[1]
+    if ct_full and ct_code:
+        ct[ct_full] = ct_code
+
+with open ("ct.json", "w", encoding="utf-8") as file:
+    json.dump(ct, file, ensure_ascii=False, indent=4)
