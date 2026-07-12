@@ -1,18 +1,13 @@
 import openpyxl
-import json
 
-excel_file = "ct.xlsx"
+excel_file = "get_data.xlsx"
+ws2 = "Sheet2"
 
 wb = openpyxl.load_workbook(excel_file)
-ws1 = wb["Sheet1"]
+ws2 = wb[ws2]
+for _ in range(ws2.max_row, 0, -1):
+    ws2.delete_rows(_, amount=1)
 
-ct = {}
+wb.save(excel_file)
 
-for _ in ws1.iter_rows(values_only=True, min_row=2):
-    ct_full = _[0]
-    ct_code = _[1]
-    if ct_full and ct_code:
-        ct[ct_full] = ct_code
-
-with open ("ct.json", "w", encoding="utf-8") as file:
-    json.dump(ct, file, ensure_ascii=False, indent=4)
+# print(ws2)
