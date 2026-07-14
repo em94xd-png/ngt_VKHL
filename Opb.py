@@ -1,8 +1,10 @@
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
+import openpyxl
 import xml.etree.ElementTree
 from datetime import datetime, timedelta, date
 import json
+import os
 
 excel_file = "get_data.xlsx"
 ws1 = "Sheet1"
@@ -44,17 +46,17 @@ def sw_date_format(ad, be):
                return be
 
 for _ in root.findall(".//G_IMMIGRATION"):
-        fn = _.find("FIRST_NAME").text if _.find("FIRST_NAME") is not None else ""
-        ln = _.find("LAST_NAME").text if _.find("LAST_NAME") is not None else ""
-        gd = _.find("SEX").text if _.find("SEX") is not None else ""
-        pn = _.find("PASSPORT").text if _.find("PASSPORT") is not None else ""
-        nt = _.find("NATIONALITY").text if _.find("NATIONALITY") is not None else ""
-        bd = _.find("DATE_OF_BIRTH").text if _.find("DATE_OF_BIRTH") is not None else ""
+        fn = _.find("FIRST_NAME").text
+        ln = _.find("LAST_NAME").text
+        gd = _.find("SEX").text
+        pn = _.find("PASSPORT").text
+        nt = _.find("NATIONALITY").text
+        bd = _.find("DATE_OF_BIRTH").text
         bd_ad = sw_date_format(bd, None)
-        dep = _.find("DEPARTURE_DATE").text if _.find("DEPARTURE_DATE") is not None else ""
+        dep = _.find("DEPARTURE_DATE").text
         dep_ad = sw_date_format(dep, None)
         dep_be = sw_date_format(None, dep)
-        rn = _.find("ROOM").text if _.find("ROOM") is not None else ""
+        rn = _.find("ROOM").text
         tm_data = [fn, None, ln, gd, pn, nt, bd_ad, dep_ad]
         rr_data = [None, None, None, rn, None, None, None, None, gd, fn, None, ln, nt, None, pn, None, None, None, None, nt, nt, None, None, dep_be, None, None]
         ws1.append(tm_data)
@@ -171,6 +173,17 @@ for _ in range(ws2.max_row, 3, -1):
           else:
                ws2.cell(row=_, column=9).fill = red_color
 
+for _ in range(ws1.max_row, 1, -1):
+     gd = ws1.cell(row=_, column=4).value
+     nt = ws1.cell(row=_, column=6).value
+     bd = ws1.cell(row=_, column=7).value
+     if str(gd).strip() is None or str(gd).strip() == "U" or str(gd).strip() == "":
+          ws1.cell(row=_, column=4).fill = red_color
+     if nt is None or str(nt).strip() == "":
+          ws1.cell(row=_, column=6).fill = red_color
+     elif not bd is not None or str(bd).strip() == "":
+          ws1.cell(row=_, column=7).fill = red_color
+
 for _ in range(ws2.max_row, 3, -1):
      nt = ws2.cell(row=_, column=13).value
      if not nt or str(nt).strip() == "":
@@ -199,8 +212,28 @@ ytd = date.today() - timedelta(days=1)
 full_ytd = ytd.strftime("%m/%d/%Y")
 ws2.cell(row=2, column=14, value=sw_date_format(None, full_ytd))
 
-for _ in wb.worksheets:
-     _.views.sheetView[0].tabSelected = False
-         
-wb.active = wb["Sheet1"]
-wb.save(excel_file)
+ytd = date.today() - timedelta(days=1)
+ytd_y = ytd.strftime("%Y")
+ytd_m = ytd.strftime("%B")
+tm_date = ytd.strftime("%d.%m.%Y")
+
+tm_path = fr"\\LMPC202507256L\Keeper\TM\{ytd_y}\{ytd_m}"
+os.makedirs(tm_path, exist_ok=True)
+
+tm_excel = f"{tm_date}.xlsx"
+path_tm_excel = os.path.join(tm_path, tm_excel)
+
+wb.save(path_tm_excel)
+
+tm_wb = openpyxl.load_workbook(path_tm_excel)
+tm_ws = "Sheet1"
+
+for _ in tm_wb.sheetnames:
+     if _ != tm_ws:
+          del tm_wb[_]
+
+tm_wb.save(path_tm_excel)
+
+# for _ in wb.worksheets:
+#      _.views.sheetView[0].tabSelected = False
+# wb.save(excel_file)

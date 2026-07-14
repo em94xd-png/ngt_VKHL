@@ -1,18 +1,22 @@
 import openpyxl
-import json
+import os
+from datetime import date, timedelta
 
-excel_file = "rr_ct_code.xlsm"
+ytd = date.today() - timedelta(days=1)
+ytd_y = ytd.strftime("%Y")
+ytd_m = ytd.strftime("%B")
+tm_date = ytd.strftime("%d.%m.%Y")
 
-wb = openpyxl.load_workbook(excel_file, data_only=True)
-ws1 = wb["Sheet1"]
+tm_path = fr"\\LMPC202507256L\Keeper\TM\{ytd_y}\{ytd_m}"
+save_tm_excel = os.path.join(tm_path, tm_date)
 
-json_data = {}
-for _ in ws1.iter_rows(values_only=True):
-    ct = _[0]
-    code = _[1]
-    json_data[ct] = code
+print(save_tm_excel)
 
-with open("output.json", "w", encoding="utf-8") as file:
-    json.dump(json_data, file, ensure_ascii=False, indent=4)
+# tm_path = fr"\\LMPC202507256L\Keeper\TM\{ytd_y}\{ytd_m}"
 
-# wb.save(excel_file)
+# os.makedirs(tm_path, exist_ok=True)
+
+# wb = openpyxl.Workbook()
+# excel_file = "test.xlsx"
+# path_excel = os.path.join(tm_path, excel_file)
+# wb.save(path_excel)
