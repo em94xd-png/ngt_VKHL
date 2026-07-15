@@ -95,3 +95,32 @@ def file_remove(path):
         to_file = os.path.join(path, _)
         if os.path.isfile(to_file):
             os.remove(to_file)
+
+import pygetwindow
+
+# for _ in pygetwindow.getAllTitles():
+#     print(_)
+
+# gt = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# gt.activate()
+
+import requests
+import re
+
+link = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/OPERA9/opera/operacloud/reportviewer?ex=PREVIEW&rep=1602968062_141328988&run=DOWNLOAD"
+response = requests.get(link, stream=True)
+
+td = date.today()
+td_date = td.strftime("%d.%m.%y")
+
+data_path = r"\\LMPC202507256L\Keeper\OTH"
+new_data = f"get_{td_date}.XML"
+path_new_data = os.path.join(data_path, new_data)
+
+raw = response.text
+
+repaire = re.sub(r"&(?!amp;|lt;|gt;|apos;|quot;)", "&amp;", raw)
+
+
+with open (path_new_data, "w", encoding="utf-8") as file:
+    file.write(repaire)
