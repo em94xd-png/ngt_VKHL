@@ -5,10 +5,14 @@ import xml.etree.ElementTree
 from datetime import datetime, timedelta, date
 import json
 import os
+import shutil
 
-excel_file = "get_data.xlsx"
-ws1 = "Sheet1"
-ws2 = "Sheet2"
+ytd = date.today() - timedelta(days=1)
+ytd_date = ytd.strftime("%d.%m.%y")
+
+data_path = r"\\LMPC202507256L\Keeper\OTH"
+data_excel = f"get_{ytd_date}.xlsx"
+path_data_excel = os.path.join(data_path, data_excel)
 
 current_path = os.path.dirname(os.path.abspath(__file__))
 
@@ -16,15 +20,13 @@ xml_file = "immigration_report_140258562.XML"
 tree = xml.etree.ElementTree.parse(os.path.join(current_path, xml_file))
 root = tree.getroot()
 
-wb = load_workbook(os.path.join(current_path, excel_file))
+ws1 = "Sheet1"
+ws2 = "Sheet2"
+
+wb = load_workbook(os.path.join(path_data_excel))
 
 ws1 = wb[ws1]
 ws2 = wb[ws2]
-
-for _ in range(ws1.max_row, 1, -1):
-     ws1.delete_rows(_, amount=1)
-for _ in range(ws2.max_row, 3, -1):
-     ws2.delete_rows(_, amount=1)
 
 with open((os.path.join(current_path, "tm_nt.json")), "r", encoding="utf-8") as file:
      tm_nt_json = json.load(file)
@@ -104,8 +106,9 @@ for _ in range(ws1.max_row, 1, -1):
      if ws1_nt == "Thailand":
           ws1_key = f"{str(ws1_fn).strip().lower()}_{str(ws1_ln).strip().lower()}"
           if ws1_key in ws3_fn_ln_ct:
-               for_THA_passport = ws3_fn_ln_ct[ws1_key]  
-               ws1.cell(row=_, column=6, value=for_THA_passport)
+               for_THA_passport = ws3_fn_ln_ct[ws1_key]
+               if str(for_THA_passport).isalpha():
+                    ws1.cell(row=_, column=6, value=for_THA_passport)
      if ws1_bd is None or str(ws1_bd).strip() == "":
           ws1_key = f"{str(ws1_fn).strip().lower()}_{str(ws1_ln).strip().lower()}"
           if ws1_key in ws3_fn_ln_bd:
@@ -127,10 +130,12 @@ for _ in range(ws2.max_row, 3, -1):
           ws2_key = f"{str(ws2_fn).strip().lower()}_{str(ws2_ln).strip().lower()}"
           if ws2_key in ws3_fn_ln_ct:
                for_THA_passport = ws3_fn_ln_ct[ws2_key]
-               ws2.cell(row=_, column=13, value=for_THA_passport)
+               if str(for_THA_passport).isalpha():
+                    ws2.cell(row=_, column=13, value=for_THA_passport)
           if ws2_key in ws3_fn_ln_ct:
                for_THA_passport = ws3_fn_ln_ct[ws2_key]
-               ws2.cell(row=_, column=20, value=for_THA_passport)
+               if str(for_THA_passport).isalpha():
+                    ws2.cell(row=_, column=20, value=for_THA_passport)
 
 for _ in range(ws1.max_row, 1, -1):
      nt = ws1.cell(row=_, column=6).value
@@ -153,17 +158,18 @@ for _ in range(ws2.max_row, 3, -1):
 
 for _ in range(ws1.max_row, 1, -1):
      pn = ws1.cell(row=_, column=5).value
+     nt = ws1.cell(row=_, column=6).value
      if pn is None or pn == "":
+          ws1.delete_rows(_, amount=1)
+     if nt == "THA":
           ws1.delete_rows(_, amount=1)
 
 for _ in range(ws2.max_row, 3, -1):
      pn = ws2.cell(row=_, column=15).value
+     ct = ws2.cell(row=_, column=20).value
      if pn is None or pn == "":
           ws2.delete_rows(_, amount=1)
-
-for _ in range(ws2.max_row, 3, -1):
-     pn = ws2.cell(row=_, column=20).value
-     if pn is None or pn == "":
+     if ct is None or pn == "":
           ws2.delete_rows(_, amount=1)
 
 duplicate_pn = set()
@@ -245,29 +251,29 @@ ytd_m = ytd.strftime("%B")
 tm_date = ytd.strftime("%d.%m.%Y")
 rr_date = ytd.strftime(f"%d%m{ytd_y_be}")
 
-# tm_path = fr"\\LMPC202507256L\Keeper\TM\{ytd_y}\{ytd_m}"
-# os.makedirs(tm_path, exist_ok=True)
+tm_path = fr"\\LMPC202507256L\Keeper\TM\{ytd_y}\{ytd_m}"
+rr_path = fr"\\LMPC202507256L\Keeper\RR.4\{ytd_y}\{ytd_m}"
+os.makedirs(tm_path, exist_ok=True)
+os.makedirs(rr_path, exist_ok=True)
 
 tm_excel = f"{tm_date}.xlsx"
 rr_excel = f"{rr_date}.xlsx"
-# path_tm_excel = os.path.join(tm_path, tm_excel)
+path_tm_excel = os.path.join(tm_path, tm_excel)
+path_rr_excel = os.path.join(rr_path, rr_excel)
 
-# wb.save(path_tm_excel)
-# wb.save(os.path.join(current_path, tm_excel))
-wb.save(os.path.join(current_path, rr_excel))
+wb.save(path_tm_excel)
+wb.save(path_rr_excel)
 
-# tm_wb = openpyxl.load_workbook(path_tm_excel)
-# tm_wb = openpyxl.load_workbook(os.path.join(current_path, tm_excel))
-# tm_ws = "Sheet1"
+tm_wb = openpyxl.load_workbook(path_tm_excel)
+tm_ws = "Sheet1"
 
-# for _ in tm_wb.sheetnames:
-#      if _ != tm_ws:
-#           del tm_wb[_]
+for _ in tm_wb.sheetnames:
+     if _ != tm_ws:
+          del tm_wb[_]
 
-# # tm_wb.save(path_tm_excel)
-# tm_wb.save(os.path.join(current_path, tm_excel))
+tm_wb.save(path_tm_excel)
 
-rr_wb = openpyxl.load_workbook(os.path.join(current_path, rr_excel))
+rr_wb = openpyxl.load_workbook(path_rr_excel)
 rr_ws = "Sheet2"
 
 for _ in rr_wb.sheetnames:
@@ -276,9 +282,34 @@ for _ in rr_wb.sheetnames:
 
 rr_ws = rr_wb[rr_ws]
 rr_ws.title = "Sheet1"
-# tm_wb.save(path_tm_excel)
-rr_wb.save(os.path.join(current_path, rr_excel))
+rr_wb.save(path_rr_excel)
 
-# for _ in wb.worksheets:
-#      _.views.sheetView[0].tabSelected = False
-# wb.save(excel_file)
+td = date.today()
+td_date = td.strftime("%d.%m.%y")
+
+data_path = r"\\LMPC202507256L\Keeper\OTH"
+os.makedirs(data_path, exist_ok=True)
+
+new_data_excel = f"get_{td_date}.xlsx"
+path_new_data_excel = os.path.join(data_path, new_data_excel)
+shutil.copy(path_data_excel, path_new_data_excel)
+
+new_data_wb = load_workbook(path_new_data_excel)
+
+new_data_ws1 = "Sheet1"
+new_data_ws2 = "Sheet2"
+new_data_ws3 = "Sheet3"
+
+new_data_ws1 = new_data_wb[new_data_ws1]
+new_data_ws2 = new_data_wb[new_data_ws2]
+new_data_ws3 = new_data_wb[new_data_ws3]
+
+for _ in range(new_data_ws1.max_row, 1, -1):
+     new_data_ws1.delete_rows(_, amount=1)
+for _ in range(new_data_ws2.max_row, 3, -1):
+     new_data_ws2.delete_rows(_, amount=1)
+for _ in range(new_data_ws3.max_row, 1, -1):
+     new_data_ws3.delete_rows(_, amount=1)
+
+new_data_wb.active = new_data_ws3
+new_data_wb.save(path_new_data_excel)
