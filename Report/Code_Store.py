@@ -106,8 +106,19 @@ import pygetwindow
 
 import requests
 
-link = "https://sample-files.com/downloads/data/xml/namespaces.xml"
-response = requests.get(link, stream=True)
+link = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/OPERA9/opera/operacloud/reportviewer?ex=PREVIEW&rep=1602968062_141328988&run=DOWNLOAD"
 
-with open("file2.xml", "wb") as file:
-    file.write(response.content)
+# response = requests.get(link, stream=True)
+
+# with open("file2.xml", "wb") as file:
+#     file.write(response.content)
+
+from urllib.parse import urlparse, parse_qs
+
+parsed_url = urlparse(link)
+query_params = parse_qs(parsed_url.query)
+
+if "rep" in query_params:
+    report_id = query_params["rep"][0]
+    file_id = report_id.split("_")[0]
+    print(file_id)
