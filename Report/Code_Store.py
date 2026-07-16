@@ -4,6 +4,9 @@ import calendar
 import os
 import subprocess
 import time
+import pygetwindow
+import pyperclip
+
 
 site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
 
@@ -96,7 +99,69 @@ def file_remove(path):
         if os.path.isfile(to_file):
             os.remove(to_file)
 
-import pygetwindow
+# Open Opera
+subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
+
+pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
+
+# In Opera  
+time.sleep(2.5)
+pyautogui.hotkey("ctrl", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",)
+pyautogui.hotkey("ctrl", "=", "=", "=",)
+time.sleep(5)
+
+# To report search
+pyautogui.press("tab", presses=5, interval=0.01)
+pyautogui.press("right", presses=6, interval=0.01)
+pyautogui.press("down", interval=0.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(5)
+pyautogui.press("tab", interval=0.01)
+
+# Immigration Report
+pyautogui.write("immigration_report", interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(3)
+pyautogui.press("tab", presses=9, interval=.01)
+pyautogui.press("down", presses=2, interval=.01)
+time.sleep(1.5)
+pyautogui.press("right", interval=.01)
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(3.5)
+# Immigration Report: Config
+pyautogui.hotkey("ctrl", "a", interval=.01)
+pyautogui.write(format2_yesterday(), interval=.01)
+pyautogui.press("tab", interval=.01)
+pyautogui.write("ARRIVAL", interval=.01)
+pyautogui.press("tab", presses=2, interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.5)
+pyautogui.press("tab", presses=2, interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(1)
+# Immigration Report: Save
+pyautogui.press("tab", presses=2, interval=.01)
+pyautogui.press("space", presses=2, interval=.01)
+pyautogui.press("tab", presses=2, interval=.01)
+time.sleep(.5)
+pyautogui.press("enter", interval=.01)
+# time.sleep(1)
+# pygetwindow.getWindowsWithTitle("Untitled")[0].activate()
+# time.sleep(.5)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# immigration_url = pyperclip.paste()
+
+# from urllib.parse import urlparse, parse_qs
+
+# parse_url = urlparse(immigration_url)
+# query_url = parse_qs(parse_url.query)
+
+# if "rep" in query_url:
+#     rep_id = query_url["rep"]
+#     print(rep_id)
+
 
 # for _ in pygetwindow.getAllTitles():
 #     print(_)
@@ -104,21 +169,21 @@ import pygetwindow
 # gt = pygetwindow.getWindowsWithTitle("Untitled")[0]
 # gt.activate()
 
-import requests
+# import requests
 
-link = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/OPERA9/opera/operacloud/reportviewer?ex=PREVIEW&rep=1602968062_141328988&run=DOWNLOAD"
+# link = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/OPERA9/opera/operacloud/reportviewer?ex=PREVIEW&rep=1602968062_141328988&run=DOWNLOAD"
 
-# response = requests.get(link, stream=True)
+# # response = requests.get(link, stream=True)
 
-# with open("file2.xml", "wb") as file:
-#     file.write(response.content)
+# # with open("file2.xml", "wb") as file:
+# #     file.write(response.content)
 
-from urllib.parse import urlparse, parse_qs
+# from urllib.parse import urlparse, parse_qs
 
-parsed_url = urlparse(link)
-query_params = parse_qs(parsed_url.query)
+# parsed_url = urlparse(link)
+# query_params = parse_qs(parsed_url.query)
 
-if "rep" in query_params:
-    report_id = query_params["rep"][0]
-    file_id = report_id.split("_")[0]
-    print(file_id)
+# if "rep" in query_params:
+#     report_id = query_params["rep"][0]
+#     file_id = report_id.split("_")[0]
+#     print(file_id)
