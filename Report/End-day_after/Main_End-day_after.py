@@ -69,6 +69,8 @@ def file_remove(path):
         if os.path.isfile(to_file):
             os.remove(to_file)
 
+pyautogui.FAILSAFE = True
+
 # Delete files
 file_remove(report_path())
 

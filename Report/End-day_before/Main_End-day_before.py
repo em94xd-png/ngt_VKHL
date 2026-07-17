@@ -38,6 +38,8 @@ def file_remove(path):
         if os.path.isfile(to_file):
             os.remove(to_file)
 
+pyautogui.FAILSAFE = True
+
 # Create folder
 os.makedirs(report_path().__add__(r"\Before Closeday"), exist_ok=True)
 

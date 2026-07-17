@@ -12,6 +12,8 @@ def format2_yesterday():
     yesterday = today - timedelta(days=1)
     return yesterday.strftime("%d%m")
 
+pyautogui.FAILSAFE = True
+
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
 
@@ -243,17 +245,21 @@ for _ in range(ws2.max_row, 4, -1):
 
 for _ in range(ws1.max_row, 1, -1):
      pn = ws1.cell(row=_, column=5).value
-     nt = ws1.cell(row=_, column=6).value
      if pn is None or pn == "":
           ws1.delete_rows(_, amount=1)
+
+for _ in range(ws1.max_row, 1, -1):
+     nt = ws1.cell(row=_, column=6).value
      if nt == "THA":
           ws1.delete_rows(_, amount=1)
 
 for _ in range(ws2.max_row, 4, -1):
      pn = ws2.cell(row=_, column=15).value
-     ct = ws2.cell(row=_, column=20).value
      if pn is None or pn == "":
           ws2.delete_rows(_, amount=1)
+
+for _ in range(ws2.max_row, 4, -1):
+     ct = ws2.cell(row=_, column=20).value
      if ct is None or pn == "":
           ws2.delete_rows(_, amount=1)
 
