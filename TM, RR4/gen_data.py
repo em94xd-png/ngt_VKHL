@@ -1,11 +1,90 @@
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
-import openpyxl
+import openpyxl, json, os, shutil, pyautogui, subprocess, pygetwindow, time, pyperclip, sys
 import xml.etree.ElementTree
 from datetime import datetime, timedelta, date
-import json
-import os
-import shutil
+from urllib.parse import urlparse, parse_qs
+
+site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
+
+def format2_yesterday():
+    today = date.today()
+    yesterday = today - timedelta(days=1)
+    return yesterday.strftime("%d%m")
+
+# Open Opera
+subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
+
+pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
+
+# In Opera  
+time.sleep(2.5)
+pyautogui.hotkey("ctrl", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",)
+pyautogui.hotkey("ctrl", "=", "=", "=",)
+time.sleep(5)
+
+# To report search
+pyautogui.press("tab", presses=5, interval=0.01)
+pyautogui.press("right", presses=6, interval=0.01)
+pyautogui.press("down", interval=0.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(5)
+pyautogui.press("tab", interval=0.01)
+
+# Immigration Report
+pyautogui.write("immigration_report", interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(3)
+pyautogui.press("tab", presses=9, interval=.01)
+pyautogui.press("down", presses=2, interval=.01)
+time.sleep(1.5)
+pyautogui.press("right", interval=.01)
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(3.5)
+# Immigration Report: Config
+pyautogui.hotkey("ctrl", "a", interval=.01)
+pyautogui.write(format2_yesterday(), interval=.01)
+pyautogui.press("tab", interval=.01)
+time.sleep(1)
+pyautogui.write("ARRIVAL", interval=.01)
+pyautogui.press("tab", presses=2, interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.5)
+pyautogui.press("tab", presses=2, interval=.01)
+pyautogui.press("enter", interval=.01)
+time.sleep(1)
+# Immigration Report: Save
+pyautogui.press("tab", presses=2, interval=.01)
+pyautogui.press("space", presses=2, interval=.01)
+pyautogui.press("tab", presses=2, interval=.01)
+time.sleep(.5)
+pyautogui.press("enter", interval=.01)
+time.sleep(5)
+# Immigration Report: Download
+pyautogui.hotkey("ctrl", "j", interval=.01)
+time.sleep(.5)
+pyautogui.hotkey("ctrl", "l", interval=.01)
+pyautogui.hotkey("ctrl", "c", interval=.01)
+
+immigration_url = pyperclip.paste()
+
+parse_url = urlparse(immigration_url)
+query_url = parse_qs(parse_url.query)
+
+def immigration_id():
+     if "rep" in query_url:
+          rep_id = query_url["rep"][0]
+          split_id = rep_id.split("_")[1]
+          return split_id
+
+path_download = os.environ.get("USERPROFILE").__add__(r"\Downloads")
+immigration_file = f"immigration_report_{immigration_id()}.XML"
+
+time.sleep(1)
+pyautogui.hotkey("ctrl", "j", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
 
 ytd = date.today() - timedelta(days=1)
 ytd_date = ytd.strftime("%d.%m.%y")
@@ -14,10 +93,14 @@ data_path = r"\\LMPC202507256L\Keeper\OTH"
 data_excel = f"get_{ytd_date}.xlsx"
 path_data_excel = os.path.join(data_path, data_excel)
 
-current_path = os.path.dirname(os.path.abspath(__file__))
+xml_file = os.path.join(path_download, immigration_file)
 
-xml_file = "immigration_report_140258562.XML"
-tree = xml.etree.ElementTree.parse(os.path.join(current_path, xml_file))
+time.sleep(2.5)
+
+if not os.path.exists(xml_file):
+     sys.exit()
+
+tree = xml.etree.ElementTree.parse(xml_file)
 root = tree.getroot()
 
 ws1 = "Sheet1"
@@ -27,6 +110,8 @@ wb = load_workbook(os.path.join(path_data_excel))
 
 ws1 = wb[ws1]
 ws2 = wb[ws2]
+
+current_path = os.path.dirname(os.path.abspath(__file__))
 
 with open((os.path.join(current_path, "tm_nt.json")), "r", encoding="utf-8") as file:
      tm_nt_json = json.load(file)
@@ -115,7 +200,7 @@ for _ in range(ws1.max_row, 1, -1):
                for_empty_birthday = ws3_fn_ln_bd[ws1_key]
                ws1.cell(row=_, column=7, value=sw_date_format(None, None, for_empty_birthday))
 
-for _ in range(ws2.max_row, 3, -1):
+for _ in range(ws2.max_row, 4, -1):
      ws2_fn = ws2.cell(row=_, column=10).value
      ws2_ln = ws2.cell(row=_, column=12).value
      ws2_pn = ws2.cell(row=_, column=15).value
@@ -143,7 +228,7 @@ for _ in range(ws1.max_row, 1, -1):
           nt_match = tm_nt_json[nt]
           ws1.cell(row=_, column=6, value=nt_match)
 
-for _ in range(ws2.max_row, 3, -1):
+for _ in range(ws2.max_row, 4, -1):
      nt = ws2.cell(row=_, column=13).value
      ct = ws2.cell(row=_, column=20).value
      if nt or ct != "":
@@ -164,7 +249,7 @@ for _ in range(ws1.max_row, 1, -1):
      if nt == "THA":
           ws1.delete_rows(_, amount=1)
 
-for _ in range(ws2.max_row, 3, -1):
+for _ in range(ws2.max_row, 4, -1):
      pn = ws2.cell(row=_, column=15).value
      ct = ws2.cell(row=_, column=20).value
      if pn is None or pn == "":
@@ -181,7 +266,7 @@ for _ in range(ws1.max_row, 1, -1):
          duplicate_pn.add(pn)
 
 duplicate_pn = set()
-for _ in range(ws2.max_row, 3, -1):
+for _ in range(ws2.max_row, 4, -1):
     pn = ws2.cell(row=_, column=15).value
     if pn in duplicate_pn:
           ws2.delete_rows(_, amount=1)
@@ -203,7 +288,7 @@ for _ in range(ws1.max_row, 1, -1):
      if bd is None or str(bd).strip() == "":
           ws1.cell(row=_, column=7).fill = red_color
 
-for _ in range(ws2.max_row, 3, -1):
+for _ in range(ws2.max_row, 4, -1):
      gd = ws2.cell(row=_, column=9).value
      nt = ws2.cell(row=_, column=13).value
      ct = ws2.cell(row=_, column=21).value
@@ -223,11 +308,11 @@ for _ in range(ws2.max_row, 3, -1):
 
 run_num = 1
 
-for _ in range(4, ws2.max_row + 1):
+for _ in range(5, ws2.max_row + 1):
      ws2.cell(row=_, column=1, value=run_num)
      run_num += 1
 
-for _ in range(ws2.max_row, 3, -1):
+for _ in range(ws2.max_row, 4, -1):
      ytd = date.today() - timedelta(days=1)
      full_ytd = ytd.strftime("%m/%d/%Y")
      ws2.cell(row=_, column=2, value=sw_date_format(None, full_ytd, None))
@@ -306,7 +391,7 @@ new_data_ws3 = new_data_wb[new_data_ws3]
 
 for _ in range(new_data_ws1.max_row, 1, -1):
      new_data_ws1.delete_rows(_, amount=1)
-for _ in range(new_data_ws2.max_row, 3, -1):
+for _ in range(new_data_ws2.max_row, 4, -1):
      new_data_ws2.delete_rows(_, amount=1)
 for _ in range(new_data_ws3.max_row, 1, -1):
      new_data_ws3.delete_rows(_, amount=1)

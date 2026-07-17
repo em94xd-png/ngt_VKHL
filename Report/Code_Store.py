@@ -6,6 +6,7 @@ import subprocess
 import time
 import pygetwindow
 import pyperclip
+from urllib.parse import urlparse, parse_qs
 
 
 site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
@@ -133,6 +134,7 @@ time.sleep(3.5)
 pyautogui.hotkey("ctrl", "a", interval=.01)
 pyautogui.write(format2_yesterday(), interval=.01)
 pyautogui.press("tab", interval=.01)
+time.sleep(1)
 pyautogui.write("ARRIVAL", interval=.01)
 pyautogui.press("tab", presses=2, interval=.01)
 pyautogui.press("space", interval=.01)
@@ -146,44 +148,26 @@ pyautogui.press("space", presses=2, interval=.01)
 pyautogui.press("tab", presses=2, interval=.01)
 time.sleep(.5)
 pyautogui.press("enter", interval=.01)
-# time.sleep(1)
-# pygetwindow.getWindowsWithTitle("Untitled")[0].activate()
-# time.sleep(.5)
-# pyautogui.hotkey("ctrl", "l", interval=.01)
-# pyautogui.hotkey("ctrl", "c", interval=.01)
-# immigration_url = pyperclip.paste()
+time.sleep(5)
+# Immigration Report: Download
+pyautogui.hotkey("ctrl", "j", interval=.01)
+time.sleep(.5)
+pyautogui.hotkey("ctrl", "l", interval=.01)
+pyautogui.hotkey("ctrl", "c", interval=.01)
 
-# from urllib.parse import urlparse, parse_qs
+immigration_url = pyperclip.paste()
 
-# parse_url = urlparse(immigration_url)
-# query_url = parse_qs(parse_url.query)
+parse_url = urlparse(immigration_url)
+query_url = parse_qs(parse_url.query)
 
-# if "rep" in query_url:
-#     rep_id = query_url["rep"]
-#     print(rep_id)
+def immigration_id():
+     if "rep" in query_url:
+          rep_id = query_url["rep"][0]
+          split_id = rep_id.split("_")[1]
+          return split_id
 
+path_download = os.environ.get("USERPROFILE").__add__(r"\Downloads")
+immigration_file = f"immigration_report_{immigration_id()}.XML"
 
-# for _ in pygetwindow.getAllTitles():
-#     print(_)
-
-# gt = pygetwindow.getWindowsWithTitle("Untitled")[0]
-# gt.activate()
-
-# import requests
-
-# link = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/OPERA9/opera/operacloud/reportviewer?ex=PREVIEW&rep=1602968062_141328988&run=DOWNLOAD"
-
-# # response = requests.get(link, stream=True)
-
-# # with open("file2.xml", "wb") as file:
-# #     file.write(response.content)
-
-# from urllib.parse import urlparse, parse_qs
-
-# parsed_url = urlparse(link)
-# query_params = parse_qs(parsed_url.query)
-
-# if "rep" in query_params:
-#     report_id = query_params["rep"][0]
-#     file_id = report_id.split("_")[0]
-#     print(file_id)
+# print(os.path.join(path_download, immigration_file))
+print(immigration_id())
