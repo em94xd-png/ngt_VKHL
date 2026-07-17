@@ -100,74 +100,8 @@ def file_remove(path):
         if os.path.isfile(to_file):
             os.remove(to_file)
 
-# Open Opera
-subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
 
-pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
-
-# In Opera  
-time.sleep(2.5)
-pyautogui.hotkey("ctrl", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",)
-pyautogui.hotkey("ctrl", "=", "=", "=",)
-time.sleep(5)
-
-# To report search
-pyautogui.press("tab", presses=5, interval=0.01)
-pyautogui.press("right", presses=6, interval=0.01)
-pyautogui.press("down", interval=0.01)
-pyautogui.press("enter", interval=0.01)
-time.sleep(5)
-pyautogui.press("tab", interval=0.01)
-
-# Immigration Report
-pyautogui.write("immigration_report", interval=.01)
-pyautogui.press("enter", interval=.01)
-time.sleep(3)
-pyautogui.press("tab", presses=9, interval=.01)
-pyautogui.press("down", presses=2, interval=.01)
-time.sleep(1.5)
-pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=3, interval=.01)
-pyautogui.press("enter", interval=.01)
-time.sleep(3.5)
-# Immigration Report: Config
-pyautogui.hotkey("ctrl", "a", interval=.01)
-pyautogui.write(format2_yesterday(), interval=.01)
-pyautogui.press("tab", interval=.01)
+open = subprocess.run(["cmd", "/c", "start", "chrome", "www.google.com"])
+pyautogui.FAILSAFE = True
 time.sleep(1)
-pyautogui.write("ARRIVAL", interval=.01)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("enter", interval=.01)
-time.sleep(1)
-# Immigration Report: Save
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", presses=2, interval=.01)
-pyautogui.press("tab", presses=2, interval=.01)
-time.sleep(.5)
-pyautogui.press("enter", interval=.01)
-time.sleep(5)
-# Immigration Report: Download
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.5)
-pyautogui.hotkey("ctrl", "l", interval=.01)
-pyautogui.hotkey("ctrl", "c", interval=.01)
-
-immigration_url = pyperclip.paste()
-
-parse_url = urlparse(immigration_url)
-query_url = parse_qs(parse_url.query)
-
-def immigration_id():
-     if "rep" in query_url:
-          rep_id = query_url["rep"][0]
-          split_id = rep_id.split("_")[1]
-          return split_id
-
-path_download = os.environ.get("USERPROFILE").__add__(r"\Downloads")
-immigration_file = f"immigration_report_{immigration_id()}.XML"
-
-# print(os.path.join(path_download, immigration_file))
-print(immigration_id())
+pyautogui.press("tab", presses=1000, interval=.01)

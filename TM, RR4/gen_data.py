@@ -58,7 +58,7 @@ time.sleep(1)
 pyautogui.press("tab", presses=2, interval=.01)
 pyautogui.press("space", presses=2, interval=.01)
 pyautogui.press("tab", presses=2, interval=.01)
-time.sleep(.5)
+time.sleep(.25)
 pyautogui.press("enter", interval=.01)
 time.sleep(5)
 # Immigration Report: Download
@@ -95,7 +95,7 @@ path_data_excel = os.path.join(data_path, data_excel)
 
 xml_file = os.path.join(path_download, immigration_file)
 
-time.sleep(2.5)
+time.sleep(1.5)
 
 if not os.path.exists(xml_file):
      sys.exit()

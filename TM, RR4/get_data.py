@@ -1,9 +1,4 @@
-import pygetwindow
-import pyautogui
-import pyperclip
-import time
-import openpyxl
-import os
+import pygetwindow, pyautogui, pyperclip, time, openpyxl, os, sys
 from datetime import date
 
 td = date.today()
@@ -12,6 +7,9 @@ td_date = td.strftime("%d.%m.%y")
 data_path = r"\\LMPC202507256L\Keeper\OTH"
 new_data_excel = f"get_{td_date}.xlsx"
 path_new_data_excel = os.path.join(data_path, new_data_excel)
+
+if not os.path.exists(path_new_data_excel):
+    sys.exit()
 
 target_title = "Guest information panel"
 
