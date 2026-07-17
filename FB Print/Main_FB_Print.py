@@ -67,6 +67,8 @@ def format1_today():
     today = date.today()
     return today.strftime("%d%m")
 
+pyautogui.FAILSAFE = True
+
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
 

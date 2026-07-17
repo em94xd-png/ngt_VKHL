@@ -4,6 +4,10 @@ import calendar
 import os
 import subprocess
 import time
+import pygetwindow
+import pyperclip
+from urllib.parse import urlparse, parse_qs
+
 
 site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
 
@@ -95,3 +99,9 @@ def file_remove(path):
         to_file = os.path.join(path, _)
         if os.path.isfile(to_file):
             os.remove(to_file)
+
+
+open = subprocess.run(["cmd", "/c", "start", "chrome", "www.google.com"])
+pyautogui.FAILSAFE = True
+time.sleep(1)
+pyautogui.press("tab", presses=1000, interval=.01)

@@ -69,6 +69,8 @@ def file_remove(path):
         if os.path.isfile(to_file):
             os.remove(to_file)
 
+pyautogui.FAILSAFE = True
+
 # Delete files
 file_remove(report_path())
 
@@ -153,10 +155,10 @@ pyautogui.press("delete", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("space", interval=0.01) # Zero Rates Only
-time.sleep(.25)
+time.sleep(.5)
 pyautogui.press("tab", presses=2, interval=0.01)
 pyautogui.press("space", interval=0.01) # Departures
-time.sleep(.25)
+time.sleep(.5)
 pyautogui.press("tab", presses=33, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(10)
@@ -204,7 +206,7 @@ time.sleep(.75)
 pyautogui.write(Room_Type, interval=.01)
 pyautogui.press("tab", presses=10, interval=.01)
 pyautogui.press("space", interval=.01) # Pseudo Rooms
-time.sleep(.25)
+time.sleep(.5)
 pyautogui.press("tab", presses=12, interval=.01)
 pyautogui.press("space", interval=.01) # Membership Type
 time.sleep(.75)
@@ -258,7 +260,7 @@ time.sleep(.75)
 pyautogui.write(Room_Type, interval=.01)
 pyautogui.press("tab", presses=14, interval=.01)
 pyautogui.press("space", interval=.01) # Include Internal Notes
-time.sleep(.25)
+time.sleep(.5)
 pyautogui.press("tab", interval=.01)
 pyautogui.write("Resv. - GEN", interval=.01)
 time.sleep(.5)
@@ -404,7 +406,7 @@ time.sleep(.1)
 # History and Forecast (AVC): Config
 tab_reserve(14)
 pyautogui.press("space", interval=.01) # Pseudo Rooms
-time.sleep(.25)
+time.sleep(.5)
 pyautogui.press("tab", presses=14, interval=.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(8.5)

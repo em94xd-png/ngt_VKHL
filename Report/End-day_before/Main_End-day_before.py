@@ -38,6 +38,8 @@ def file_remove(path):
         if os.path.isfile(to_file):
             os.remove(to_file)
 
+pyautogui.FAILSAFE = True
+
 # Create folder
 os.makedirs(report_path().__add__(r"\Before Closeday"), exist_ok=True)
 
@@ -153,7 +155,7 @@ pyautogui.hotkey("ctrl", "a", interval=.01)
 pyautogui.write(format2_yesterday(), interval=.01)
 pyautogui.press("tab", presses=7, interval=.01)
 pyautogui.press("space", interval=.01) # Pseudo Rooms
-time.sleep(.25)
+time.sleep(.5)
 pyautogui.press("tab", presses=10, interval=.01)
 pyautogui.press("space", interval=.01) # Notes
 time.sleep(1)
@@ -252,10 +254,10 @@ pyautogui.write(
 )
 pyautogui.press("tab", presses=2, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(.25)
+time.sleep(.5)
 pyautogui.press("tab", interval=0.01)
 pyautogui.press("down", interval=0.01)
-time.sleep(.25)
+time.sleep(.5)
 pyautogui.press("tab", presses=5, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(8.5)
@@ -332,10 +334,10 @@ time.sleep(3.5)
 # Report: Credit Limit: Config
 pyautogui.press("tab", presses=4, interval=0.01)
 pyautogui.press("space", interval=0.01) # Pseudo Rooms
-time.sleep(.25)
+time.sleep(.5)
 pyautogui.press("tab", presses=12, interval=0.01)
 pyautogui.press("space", interval=0.01) # Include Internal Notes
-time.sleep(.25)
+time.sleep(.5)
 pyautogui.press("tab", interval=0.01)
 pyautogui.write("Resv. - GEN", interval=0.01)
 time.sleep(0.5)
@@ -388,7 +390,7 @@ time.sleep(1)
 pyautogui.write(format2_yesterday(), interval=.01)
 pyautogui.press("tab", presses=5, interval=0.01)
 pyautogui.press("space", interval=0.01)
-time.sleep(.25)
+time.sleep(.5)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(8.5)

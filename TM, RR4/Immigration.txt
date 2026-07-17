@@ -1,0 +1,3 @@
+Link: https://tm30.immigration.go.th/tm30api/loginExternal.jsp?value=EXT&id=e7690d92acea9a050d4be95afbcb3e74
+User: dutymanager.vkhl@avanihotels.com
+Password: Khaolak@2026
