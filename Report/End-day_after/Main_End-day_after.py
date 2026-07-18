@@ -79,32 +79,78 @@ subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
 
 pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
 
-# In Opera  
-time.sleep(2.5)
-pyautogui.hotkey("ctrl", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",)
-pyautogui.hotkey("ctrl", "=", "=", "=",)
-time.sleep(5)
+time.sleep(.5)
+
+def first_OPERA_open():
+    while True:
+        if pyautogui.pixelMatchesColor(7, 391, (244, 243, 239), tolerance=0):
+            break
+
+first_OPERA_open()
+
+# In Opera
+def zoom_out(_):
+    pyautogui.PAUSE = .01
+    for _ in range(_):
+        pyautogui.hotkey("ctrl", "-")
+
+zoom_out(10)
+
+def zoom_in(_):
+    pyautogui.PAUSE = .01
+    for _ in range(_):
+        pyautogui.hotkey("ctrl", "=")
+
+zoom_in(3)
+
+def main_OPERA_menu():
+    while True:
+        if pyautogui.pixelMatchesColor(139, 129, ( 70,  70,  68), tolerance=0):
+            break
+
+main_OPERA_menu()
 
 # To report search
 pyautogui.press("tab", presses=5, interval=0.01)
 pyautogui.press("right", presses=6, interval=0.01)
 pyautogui.press("down", interval=0.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(5)
+
+def search_reports():
+    while True:
+        if pyautogui.pixelMatchesColor(252, 245, (88, 88, 86), tolerance=0):
+            break
+    
+search_reports()
+time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
 # VKHL Arrivals
 pyautogui.write("Arrivals: Detailed FO", interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(3)
+
+def after_search():
+    while True:
+        if pyautogui.pixelMatchesColor(267, 452, (244, 243, 239), tolerance=0):
+            break
+
+after_search()
+time.sleep(1)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("tab", presses=14, interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(3.5)
 # VKHL Arrivals: Config
+
+def config_report():
+    while True:
+        if pyautogui.pixelMatchesColor(214, 244, (255, 255, 255), tolerance=0):
+            break
+
+config_report()
+time.sleep(1)
 pyautogui.hotkey("ctrl", "a", interval=.01)
 pyautogui.write(format1_today(), interval=.01)
 pyautogui.press("tab", presses=2, interval=.01)
@@ -118,12 +164,18 @@ pyautogui.press("delete", interval=.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=11, interval=.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(14.5)
 # VKHL Arrivals: Save
+
+def wait_report():
+    while True:
+        if pyautogui.pixelMatchesColor(1866, 975, (213, 163, 160), tolerance=10):
+            break
+
+wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 time.sleep(0.1)
@@ -161,12 +213,12 @@ pyautogui.press("space", interval=0.01) # Departures
 time.sleep(.5)
 pyautogui.press("tab", presses=33, interval=0.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(10)
 # VKHL Guests INH (Comp): Save
+wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 time.sleep(0.1)
@@ -186,21 +238,23 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(0.5)
 tab_reserve(3)
 pyautogui.press("enter", interval=0.01)
-time.sleep(5)
+search_reports()
+time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
 # VKHL Departures
 pyautogui.write("departure_all", interval=.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(3)
+time.sleep(2)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
 time.sleep(1.5)
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=3, interval=0.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(3.5)
 # VKHL Departures: Config
+config_report()
+time.sleep(1)
 pyautogui.press("tab", presses=3, interval=0.01)
 time.sleep(.75)
 pyautogui.write(Room_Type, interval=.01)
@@ -215,12 +269,12 @@ pyautogui.press("space", interval=.01) # Membership Level
 time.sleep(.75)
 pyautogui.press("tab", presses=13, interval=.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(8.5)
 # VKHL Departures: Save
+wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 time.sleep(0.1)
@@ -240,21 +294,23 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(0.5)
 tab_reserve(3)
 pyautogui.press("enter", interval=0.01)
-time.sleep(5)
+search_reports()
+time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
 # VKHL Guests INH
 pyautogui.write("gibyroom", interval=.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(3)
+time.sleep(2)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
 time.sleep(1.5)
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=3, interval=0.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(3.5)
 # VKHL Guests INH: Config
+config_report()
+time.sleep(1)
 pyautogui.press("tab", interval=.01)
 time.sleep(.75)
 pyautogui.write(Room_Type, interval=.01)
@@ -266,12 +322,12 @@ pyautogui.write("Resv. - GEN", interval=.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=8, interval=.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(12.5)
 # VKHL Guests INH: Save
+wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 time.sleep(0.1)
@@ -331,12 +387,12 @@ pyautogui.press("space", interval=.01) # VIP Only
 time.sleep(1)
 pyautogui.press("tab", presses=20, interval=.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(8.5)
 # VKHL VIP Guests INH: Save
+wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 time.sleep(0.1)
@@ -356,21 +412,23 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(0.5)
 tab_reserve(3)
 pyautogui.press("enter", interval=0.01)
-time.sleep(5)
+search_reports()
+time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
 # History and Forecast
 pyautogui.write("History and Forecast FO", interval=.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(3)
+time.sleep(2)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
 time.sleep(1.5)
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=3, interval=0.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(3.5)
 # History and Forecast: Config
+config_report()
+time.sleep(1)
 pyautogui.hotkey("ctrl", "a", interval=.01)
 pyautogui.write(date_first(), interval=.01)
 pyautogui.press("tab", interval=.01)
@@ -378,12 +436,12 @@ time.sleep(1)
 pyautogui.write(date_end(), interval=.01)
 pyautogui.press("tab", presses=20, interval=0.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(8.5)
 # History and Forecast: Save
+wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 time.sleep(0.1)
@@ -400,21 +458,21 @@ pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(0.5)
 pyautogui.hotkey("ctrl", "w")
+time.sleep(.5)
 
 # History and Forecast (AVC)
-time.sleep(.1)
 # History and Forecast (AVC): Config
 tab_reserve(14)
 pyautogui.press("space", interval=.01) # Pseudo Rooms
 time.sleep(.5)
 pyautogui.press("tab", presses=14, interval=.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(8.5)
 # History and Forecast (AVC): Save
+wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 time.sleep(0.1)
@@ -434,32 +492,34 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(0.5)
 tab_reserve(3)
 pyautogui.press("enter", interval=0.01)
-time.sleep(5)
+search_reports()
+time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
 # Market Segment Statistics
 pyautogui.write("stat_dmy_seg", interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(3)
+time.sleep(2)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
 time.sleep(1.5)
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(3.5)
 # Market Segment Statistics: Config
+config_report()
+time.sleep(1)
 pyautogui.press("tab", interval=.01)
 time.sleep(1)
 pyautogui.write(format2_yesterday(), interval=.01)
 pyautogui.press("tab", presses=17, interval=.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(8.5)
 # Market Segment Statistics: Save
+wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 time.sleep(0.1)
@@ -479,25 +539,26 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(0.5)
 tab_reserve(3)
 pyautogui.press("enter", interval=0.01)
-time.sleep(5)
+search_reports()
+time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
 # AR Credit Limit
 pyautogui.write("ar_balance", interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(3)
+time.sleep(2)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
 time.sleep(1.5)
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=4, interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(8.5)
 # AR Credit Limit: Save
+wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 time.sleep(0.1)
@@ -515,32 +576,40 @@ pyautogui.press("enter", interval=0.01)
 time.sleep(0.5)
 pyautogui.hotkey("ctrl", "w")
 time.sleep(.5)
-# pyautogui.press("tab", presses=29, interval=.01)
 tab_reserve(13)
 
 # Vacant Rooms
 pyautogui.write("Vacant Rooms", interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(3)
+
+def re_search_report():
+    while True:
+        if pyautogui.pixelMatchesColor(289, 479, (255, 255, 255), tolerance=0):
+            break
+
+re_search_report()
+time.sleep(1)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.press("right", interval=.01)
+time.sleep(.5)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(3.5)
 # Vacant Rooms: Config
+config_report()
+time.sleep(1)
 pyautogui.press("tab", interval=.01)
 time.sleep(.75)
 pyautogui.write("1H4XK,1H4XT,2U2XKT,2U3XKT", interval=.01)
 pyautogui.press("tab", presses=15, interval=.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(8.5)
 # Vacant Rooms: Save
+wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 time.sleep(0.1)
@@ -560,7 +629,8 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(0.5)
 tab_reserve(3)
 pyautogui.press("enter", interval=0.01)
-time.sleep(5)
+search_reports()
+time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
 # # Package Forecast
@@ -617,15 +687,16 @@ pyautogui.press("tab", interval=0.01)
 # Reservation Cancellations
 pyautogui.write("rescancel", interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(3)
+time.sleep(2)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
 time.sleep(1.5)
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(3.5)
 # Reservation Cancellations: Config
+config_report()
+time.sleep(1)
 pyautogui.hotkey("ctrl", "a", interval=.01)
 pyautogui.write(format2_yesterday(), interval=.01)
 pyautogui.press("tab", presses=2, interval=.01)
@@ -634,12 +705,12 @@ pyautogui.hotkey("ctrl", "a", interval=.01)
 pyautogui.write(format2_yesterday(), interval=.01)
 pyautogui.press("tab", presses=18, interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(10.5)
 # Reservation Cancellations: Save
+wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 time.sleep(0.1)
@@ -659,7 +730,8 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(0.5)
 tab_reserve(3)
 pyautogui.press("enter", interval=0.01)
-time.sleep(5)
+search_reports()
+time.sleep(1)
 
 # To End of Day Reports
 tab_reserve(7)

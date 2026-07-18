@@ -51,16 +51,16 @@ file_remove(path_report)
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
 
-web_page = pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
+pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
 
 time.sleep(.5)
 
-def first_open():
+def first_OPERA_open():
     while True:
         if pyautogui.pixelMatchesColor(7, 391, (244, 243, 239), tolerance=0):
             break
 
-first_open()
+first_OPERA_open()
 
 # In Opera
 def zoom_out(_):
@@ -77,12 +77,12 @@ def zoom_in(_):
 
 zoom_in(3)
 
-def after_open():
+def main_OPERA_menu():
     while True:
         if pyautogui.pixelMatchesColor(139, 129, ( 70,  70,  68), tolerance=0):
             break
 
-after_open()
+main_OPERA_menu()
 
 # To report search
 pyautogui.press("tab", presses=5, interval=0.01)
@@ -90,25 +90,25 @@ pyautogui.press("right", presses=6, interval=0.01)
 pyautogui.press("down", interval=0.01)
 pyautogui.press("enter", interval=0.01)
 
-def manage_reports():
+def search_reports():
     while True:
         if pyautogui.pixelMatchesColor(252, 245, (88, 88, 86), tolerance=0):
             break
     
-manage_reports()
+search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
-# Report: Room Discrepancy
+# Room Discrepancy
 pyautogui.write("hkroomdiscrepancy", interval=.01)
 pyautogui.press("enter", interval=.01)
 
-def search_report():
+def after_search():
     while True:
         if pyautogui.pixelMatchesColor(267, 452, (244, 243, 239), tolerance=0):
             break
 
-search_report()
+after_search()
 time.sleep(1)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
@@ -116,14 +116,14 @@ time.sleep(1)
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=14, interval=.01)
 pyautogui.press("enter", interval=.01)
-# Report: Room Discrepancy: Save
+# Room Discrepancy: Save
 
-def pdf_report():
+def wait_report():
     while True:
         if pyautogui.pixelMatchesColor(1866, 975, (213, 163, 160), tolerance=10):
             break
 
-pdf_report()
+wait_report()
 pyautogui.click(600,84, interval=.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
@@ -134,7 +134,7 @@ time.sleep(0.1)
 pyautogui.press("enter", interval=.01)
 pyautogui.write(report_path().__add__(r"\Before Closeday"))
 pyautogui.press("enter", interval=.01)
-time.sleep(1)
+time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
 
 Room_Discrepancy = "Room Discrepancy"
@@ -147,7 +147,7 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(.5)
 tab_reserve(13)
 
-# Report: Guests INH Complimentary and Houseuse
+# Guests INH Complimentary and Houseuse
 pyautogui.write("gi_c_h", interval=.01)
 pyautogui.press("enter", interval=.01)
 
@@ -165,8 +165,8 @@ pyautogui.press("right", interval=.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=4, interval=.01)
 pyautogui.press("enter", interval=.01)
-# Report: Guests INH Complimentary and Houseuse: Save
-pdf_report()
+# Guests INH Complimentary and Houseuse: Save
+wait_report()
 pyautogui.click(600,84, interval=.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
@@ -190,7 +190,7 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(.5)
 tab_reserve(13)
 
-# Report: Guests in house Pseudo room Rate Check
+# Guests in house Pseudo room Rate Check
 pyautogui.write("giratecheck", interval=.01)
 pyautogui.press("enter", interval=.01)
 re_search_report()
@@ -202,7 +202,7 @@ pyautogui.press("right", interval=.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
-# Report: Guests in house Pseudo room Rate Check: Config
+# Guests in house Pseudo room Rate Check: Config
 
 def config_report():
     while True:
@@ -221,8 +221,8 @@ pyautogui.press("space", interval=.01) # Notes
 time.sleep(1)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("enter", interval=.01)
-# Report: Guests in house Pseudo room Rate Check: Save
-pdf_report()
+# Guests in house Pseudo room Rate Check: Save
+wait_report()
 pyautogui.click(600,84, interval=.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
@@ -246,21 +246,21 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(.5)
 tab_reserve(3)
 pyautogui.press("enter", interval=.01)
-manage_reports()
+search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=.01)
 
-# Report: Expected Arrival
+# Expected Arrival
 pyautogui.write("Arrivals: Detailed FO", interval=0.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(3)
+time.sleep(2)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
 time.sleep(1.5)
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=3, interval=0.01)
 pyautogui.press("enter", interval=0.01)
-# Report: Expected Arrival: Config
+# Expected Arrival: Config
 config_report()
 time.sleep(1)
 pyautogui.hotkey("ctrl", "a", interval=.01)
@@ -270,8 +270,8 @@ time.sleep(1)
 pyautogui.write(format2_yesterday(), interval=.01)
 pyautogui.press("tab", presses=53, interval=0.01)
 pyautogui.press("enter", interval=0.01)
-# Report: Expected Arrival: Save
-pdf_report()
+# Expected Arrival: Save
+wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
@@ -295,14 +295,14 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(0.5)
 tab_reserve(3)
 pyautogui.press("enter", interval=0.01)
-manage_reports()
+search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
 # Report: Out of Service by Reason
 pyautogui.write("ooo", interval=0.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(3)
+time.sleep(2)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
 time.sleep(1.5)
@@ -325,7 +325,7 @@ time.sleep(.5)
 pyautogui.press("tab", presses=5, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Report: Out of Service by Reason: Save
-pdf_report()
+wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
@@ -357,11 +357,11 @@ time.sleep(0.5)
 pyautogui.press("tab", presses=6, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Report: Out of Order by Reason: Save
-pdf_report()
+wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=0.01)
 tab_reserve(2)
 time.sleep(.01)
@@ -381,14 +381,14 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(0.5)
 tab_reserve(3)
 pyautogui.press("enter", interval=0.01)
-manage_reports()
+search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
 # Report: Credit Limit
 pyautogui.write("gi_authlimit", interval=0.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(3)
+time.sleep(2)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
 time.sleep(1.5)
@@ -410,11 +410,11 @@ time.sleep(0.5)
 pyautogui.press("tab", presses=8, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Report: Credit Limit: Save
-pdf_report()
+wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 time.sleep(0.1)
@@ -434,14 +434,14 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(0.5)
 tab_reserve(3)
 pyautogui.press("enter", interval=0.01)
-manage_reports()
+search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
 # Report: Rebate and Correction Transactions
 pyautogui.write("Journal by Cashier and Transaction Code", interval=0.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(3)
+time.sleep(2)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
 time.sleep(1.5)
@@ -462,11 +462,11 @@ time.sleep(.5)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Report: Rebate and Correction Transactions: Save
-pdf_report()
+wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
 tab_reserve(2)
 time.sleep(0.1)
