@@ -257,6 +257,7 @@ pyautogui.press("right", interval=.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
+# Report: Guests in house Pseudo room Rate Check: Config
 
 def config_report():
     while True:
@@ -265,7 +266,6 @@ def config_report():
 
 config_report()
 time.sleep(1)
-# Report: Guests in house Pseudo room Rate Check: Config
 pyautogui.hotkey("ctrl", "a", interval=.01)
 pyautogui.write(format2_yesterday(), interval=.01)
 pyautogui.press("tab", presses=7, interval=.01)
