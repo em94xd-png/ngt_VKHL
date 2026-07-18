@@ -135,7 +135,7 @@ pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
 time.sleep(1)
 pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=14, interval=0.01)
+pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Package Forecast: Config
 

@@ -1,6 +1,6 @@
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
-import openpyxl, json, os, shutil, pyautogui, subprocess, pygetwindow, time, pyperclip, sys
+import openpyxl, json, os, shutil, pyautogui, subprocess, pygetwindow, time, pyperclip, sys, win32gui, win32con
 import xml.etree.ElementTree
 from datetime import datetime, timedelta, date
 from urllib.parse import urlparse, parse_qs
@@ -19,32 +19,78 @@ subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
 
 pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
 
-# In Opera  
-time.sleep(2.5)
-pyautogui.hotkey("ctrl", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",)
-pyautogui.hotkey("ctrl", "=", "=", "=",)
-time.sleep(5)
+time.sleep(.5)
+
+def first_OPERA_open():
+    while True:
+        if pyautogui.pixelMatchesColor(7, 391, (244, 243, 239), tolerance=0):
+            break
+
+first_OPERA_open()
+
+# In Opera
+def zoom_out(_):
+    pyautogui.PAUSE = .01
+    for _ in range(_):
+        pyautogui.hotkey("ctrl", "-")
+
+zoom_out(10)
+
+def zoom_in(_):
+    pyautogui.PAUSE = .01
+    for _ in range(_):
+        pyautogui.hotkey("ctrl", "=")
+
+zoom_in(3)
+
+def main_OPERA_menu():
+    while True:
+        if pyautogui.pixelMatchesColor(139, 129, ( 70,  70,  68), tolerance=0):
+            break
+
+main_OPERA_menu()
 
 # To report search
 pyautogui.press("tab", presses=5, interval=0.01)
 pyautogui.press("right", presses=6, interval=0.01)
 pyautogui.press("down", interval=0.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(5)
+
+def search_reports():
+    while True:
+        if pyautogui.pixelMatchesColor(252, 245, (88, 88, 86), tolerance=0):
+            break
+    
+search_reports()
+time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
 # Immigration Report
 pyautogui.write("immigration_report", interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(3)
+
+def after_search():
+    while True:
+        if pyautogui.pixelMatchesColor(267, 452, (244, 243, 239), tolerance=0):
+            break
+
+after_search()
+time.sleep(1)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("tab", presses=13, interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(3.5)
 # Immigration Report: Config
+
+def config_report():
+    while True:
+        if pyautogui.pixelMatchesColor(214, 244, (255, 255, 255), tolerance=0):
+            break
+
+config_report()
+time.sleep(1)
 pyautogui.hotkey("ctrl", "a", interval=.01)
 pyautogui.write(format2_yesterday(), interval=.01)
 pyautogui.press("tab", interval=.01)
@@ -55,17 +101,30 @@ pyautogui.press("space", interval=.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=2, interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(1)
 # Immigration Report: Save
+
+def show_save_immigration():
+     while True:
+          if pyautogui.pixelMatchesColor(982, 514, (88, 88, 86), tolerance=10):
+               break
+
+show_save_immigration()
+time.sleep(.5)
 pyautogui.press("tab", presses=2, interval=.01)
 pyautogui.press("space", presses=2, interval=.01)
 pyautogui.press("tab", presses=2, interval=.01)
 time.sleep(.25)
 pyautogui.press("enter", interval=.01)
-time.sleep(5)
 # Immigration Report: Download
+
+def download_immigration():
+     while True:
+          if pyautogui.pixelMatchesColor(1508, 53, (39, 35, 32), tolerance=10):
+               break
+
+download_immigration()
 pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.5)
+time.sleep(.25)
 pyautogui.hotkey("ctrl", "l", interval=.01)
 pyautogui.hotkey("ctrl", "c", interval=.01)
 
@@ -83,8 +142,8 @@ def immigration_id():
 path_download = os.environ.get("USERPROFILE").__add__(r"\Downloads")
 immigration_file = f"immigration_report_{immigration_id()}.XML"
 
-time.sleep(1)
 pyautogui.hotkey("ctrl", "j", interval=.01)
+time.sleep(.25)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 
@@ -404,3 +463,12 @@ for _ in range(new_data_ws3.max_row, 1, -1):
 
 new_data_wb.active = new_data_ws3
 new_data_wb.save(path_new_data_excel)
+
+os.startfile(path_tm_excel)
+os.startfile(path_rr_excel)
+
+subprocess.run(["cmd", "/c", "start", "chrome", "https://tm30.immigration.go.th/tm30api/loginExternal.jsp?value=EXT&id=e7690d92acea9a050d4be95afbcb3e74"])
+subprocess.run(["cmd", "/c", "start", "chrome", "https://iservice.dopa.go.th/login/"])
+
+download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
