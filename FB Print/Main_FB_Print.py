@@ -176,6 +176,13 @@ pyautogui.press("tab", interval=0.01)
 # VKHL Guests INH (Full)
 pyautogui.write("gibyroom", interval=.01)
 pyautogui.press("enter", interval=0.01)
+
+def out_config():
+    while True:
+        if pyautogui.pixelMatchesColor(1854, 337, (204, 204, 204), tolerance=10):
+            break
+
+out_config()
 time.sleep(2)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)

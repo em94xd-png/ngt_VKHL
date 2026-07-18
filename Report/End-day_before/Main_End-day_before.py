@@ -139,6 +139,7 @@ pyautogui.press("tab", presses=6, interval=.01)
 
 Room_Discrepancy = "Room Discrepancy"
 
+time.sleep(.5)
 pyautogui.write(Room_Discrepancy, interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
@@ -253,6 +254,13 @@ pyautogui.press("tab", interval=.01)
 # Expected Arrival
 pyautogui.write("Arrivals: Detailed FO", interval=0.01)
 pyautogui.press("enter", interval=0.01)
+
+def out_config():
+    while True:
+        if pyautogui.pixelMatchesColor(1854, 337, (204, 204, 204), tolerance=10):
+            break
+
+out_config()
 time.sleep(2)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
@@ -302,6 +310,7 @@ pyautogui.press("tab", interval=0.01)
 # Out of Service by Reason
 pyautogui.write("ooo", interval=0.01)
 pyautogui.press("enter", interval=0.01)
+out_config()
 time.sleep(2)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
@@ -388,6 +397,7 @@ pyautogui.press("tab", interval=0.01)
 # Credit Limit
 pyautogui.write("gi_authlimit", interval=0.01)
 pyautogui.press("enter", interval=0.01)
+out_config()
 time.sleep(2)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
@@ -441,6 +451,7 @@ pyautogui.press("tab", interval=0.01)
 # Rebate and Correction Transactions
 pyautogui.write("Journal by Cashier and Transaction Code", interval=0.01)
 pyautogui.press("enter", interval=0.01)
+out_config()
 time.sleep(2)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)

@@ -11,7 +11,7 @@ import json
 window_main = customtkinter.CTk()
 window_main.title("ngt")
 # window_main.overrideredirect(True)
-window_main.geometry("1700+30")
+window_main.geometry("1650+30")
 
 # customtkinter.set_widget_scaling(.9)
 # customtkinter.set_window_scaling(.9)
