@@ -299,7 +299,7 @@ search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
-# Report: Out of Service by Reason
+# Out of Service by Reason
 pyautogui.write("ooo", interval=0.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(2)
@@ -309,7 +309,7 @@ time.sleep(1.5)
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=3, interval=0.01)
 pyautogui.press("enter", interval=0.01)
-# Report: Out of Service by Reason: Config
+# Out of Service by Reason: Config
 config_report()
 time.sleep(1)
 pyautogui.press("tab", presses=2, interval=0.01)
@@ -324,7 +324,7 @@ pyautogui.press("down", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=5, interval=0.01)
 pyautogui.press("enter", interval=0.01)
-# Report: Out of Service by Reason: Save
+# Out of Service by Reason: Save
 wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
@@ -347,16 +347,16 @@ pyautogui.press("enter", interval=0.01)
 time.sleep(0.5)
 pyautogui.hotkey("ctrl", "w")
 
-# Report: Out of Order by Reason
+# Out of Order by Reason
 time.sleep(0.1)
 tab_reserve(6)
 time.sleep(0.5)
-# Report: Out of Order by Reason: Config
+# Out of Order by Reason: Config
 pyautogui.press("up", interval=0.01)
 time.sleep(0.5)
 pyautogui.press("tab", presses=6, interval=0.01)
 pyautogui.press("enter", interval=0.01)
-# Report: Out of Order by Reason: Save
+# Out of Order by Reason: Save
 wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
@@ -385,7 +385,7 @@ search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
-# Report: Credit Limit
+# Credit Limit
 pyautogui.write("gi_authlimit", interval=0.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(2)
@@ -395,7 +395,7 @@ time.sleep(1.5)
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=3, interval=0.01)
 pyautogui.press("enter", interval=0.01)
-# Report: Credit Limit: Config
+# Credit Limit: Config
 config_report()
 time.sleep(1)
 pyautogui.press("tab", presses=4, interval=0.01)
@@ -409,7 +409,7 @@ pyautogui.write("Resv. - GEN", interval=0.01)
 time.sleep(0.5)
 pyautogui.press("tab", presses=8, interval=0.01)
 pyautogui.press("enter", interval=0.01)
-# Report: Credit Limit: Save
+# Credit Limit: Save
 wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
@@ -438,7 +438,7 @@ search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
-# Report: Rebate and Correction Transactions
+# Rebate and Correction Transactions
 pyautogui.write("Journal by Cashier and Transaction Code", interval=0.01)
 pyautogui.press("enter", interval=0.01)
 time.sleep(2)
@@ -448,7 +448,7 @@ time.sleep(1.5)
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=3, interval=0.01)
 pyautogui.press("enter", interval=0.01)
-# Report: Rebate and Correction Transactions: Config
+# Rebate and Correction Transactions: Config
 config_report()
 time.sleep(1)
 pyautogui.hotkey("ctrl", "a", interval=.01)
@@ -461,7 +461,7 @@ pyautogui.press("space", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
-# Report: Rebate and Correction Transactions: Save
+# Rebate and Correction Transactions: Save
 wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
