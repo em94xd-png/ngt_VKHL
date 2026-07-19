@@ -74,7 +74,7 @@ def run_script(path, key):
     if put_data[key] and put_data[key].poll() is None:
         return
     turn_button(state="disabled")
-    run_file = subprocess.Popen(["python", path])
+    run_file = subprocess.Popen(["pythonw", path])
     put_data[key] = run_file
     threading.Thread(target=monitor_it, args=(run_file,), daemon=True).start()
 
