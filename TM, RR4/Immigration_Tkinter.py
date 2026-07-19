@@ -1,4 +1,4 @@
-import tkinter, subprocess, threading, sys, os
+import tkinter, subprocess, threading
 from pystray import Icon, MenuItem, Menu
 from PIL import Image, ImageDraw
 
