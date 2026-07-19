@@ -11,7 +11,7 @@ path_new_data_excel = os.path.join(data_path, new_data_excel)
 target_title = "Guest information panel"
 
 def get_it(times):
-    pyautogui.PAUSE = 0.001
+    pyautogui.PAUSE = 0.01
     for _ in range(times):
         pyautogui.press("tab")
     pyautogui.hotkey("ctrl", "c")
@@ -23,14 +23,14 @@ while True:
         if not find_title.isMinimized:
             find_title.activate()
             time.sleep(.5)
-            last_name = get_it(3)
-            first_name = get_it(4)
-            birth_day = get_it(9)
-            country = get_it(5)
-            passport_number = get_it(6)
+            ln = get_it(3)
+            fn = get_it(4)
+            bd = get_it(9)
+            ct = get_it(5)
+            pn = get_it(6)
             wb = openpyxl.load_workbook(path_new_data_excel)
             ws3 = wb["Sheet3"]
-            ws3.append([last_name, first_name, birth_day, country, passport_number])
+            ws3.append([ln, fn, bd, ct, pn])
             wb.save(path_new_data_excel)
             time.sleep(15)
     except Exception as error:

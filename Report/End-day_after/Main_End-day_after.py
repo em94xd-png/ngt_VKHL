@@ -182,7 +182,7 @@ time.sleep(0.1)
 pyautogui.press("enter", interval=0.01)
 pyautogui.write(report_path())
 pyautogui.press("enter", interval=0.01)
-time.sleep(1)
+time.sleep(.5)
 pyautogui.hotkey("ctrl", "f", interval=.01)
 pyautogui.press("tab", presses=5, interval=.01)
 

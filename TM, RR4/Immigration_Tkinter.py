@@ -1,4 +1,4 @@
-import tkinter, subprocess, threading
+import tkinter, subprocess, threading, sys, os
 from pystray import Icon, MenuItem, Menu
 from PIL import Image, ImageDraw
 
@@ -42,8 +42,8 @@ def hide_window():
     global tray_icon, is_tray_running
     wd.withdraw()
     menu = Menu(
-        MenuItem("Open (Show)", show_window, default=True),
-        MenuItem("Close (Exit)", exit_it)
+        MenuItem("Open", show_window, default=True),
+        MenuItem("Close", exit_it)
     )
     tray_icon = Icon("", create_image(), "", menu)
     is_tray_running = True
@@ -67,7 +67,7 @@ wd.bind("<Unmap>", on_minimize)
 wd.protocol("WM_DELETE_WINDOW", exit_it)
 
 def path_get_data():
-    run_script(r"TM, RR4\get_data.py", "get_data")
+    run_script(r"get_data.py", "get_data")
 
 def run_script(path, key):
     global put_data

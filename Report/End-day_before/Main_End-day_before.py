@@ -135,11 +135,11 @@ pyautogui.press("enter", interval=.01)
 pyautogui.write(report_path().__add__(r"\Before Closeday"))
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
-pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.hotkey("ctrl", "f", interval=.01)
+pyautogui.press("tab", presses=5, interval=.01)
 
 Room_Discrepancy = "Room Discrepancy"
 
-time.sleep(.5)
 pyautogui.write(Room_Discrepancy, interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("enter", interval=.01)
