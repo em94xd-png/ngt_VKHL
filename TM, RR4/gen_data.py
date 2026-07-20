@@ -167,7 +167,7 @@ root = tree.getroot()
 ws1 = "Sheet1"
 ws2 = "Sheet2"
 
-wb = load_workbook(os.path.join(path_data_excel))
+wb = load_workbook(path_data_excel)
 
 ws1 = wb[ws1]
 ws2 = wb[ws2]

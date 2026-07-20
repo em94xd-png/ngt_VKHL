@@ -103,13 +103,19 @@ pyautogui.press("tab", interval=0.01)
 pyautogui.write("hkroomdiscrepancy", interval=.01)
 pyautogui.press("enter", interval=.01)
 
-def after_search():
+def search_enter_step1():
     while True:
-        if pyautogui.pixelMatchesColor(267, 452, (244, 243, 239), tolerance=0):
+        if pyautogui.pixelMatchesColor(1854, 337, (204, 204, 204), tolerance=10):
             break
 
-after_search()
-time.sleep(1)
+def search_enter_step2():
+    while True:
+        if pyautogui.pixelMatchesColor(1854, 337, (6, 108, 122), tolerance=0):
+            break
+
+search_enter_step1()
+search_enter_step2()
+time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
 time.sleep(1)
@@ -151,20 +157,14 @@ tab_reserve(13)
 # Guests INH Complimentary and Houseuse
 pyautogui.write("gi_c_h", interval=.01)
 pyautogui.press("enter", interval=.01)
-
-def re_search_report():
-    while True:
-        if pyautogui.pixelMatchesColor(289, 479, (255, 255, 255), tolerance=0):
-            break
-
-re_search_report()
-time.sleep(1)
+search_enter_step1()
+search_enter_step2()
+time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
 time.sleep(1)
 pyautogui.press("right", interval=.01)
-time.sleep(.5)
-pyautogui.press("tab", presses=4, interval=.01)
+pyautogui.press("tab", presses=14, interval=.01)
 pyautogui.press("enter", interval=.01)
 # Guests INH Complimentary and Houseuse: Save
 wait_report()
@@ -194,14 +194,14 @@ tab_reserve(13)
 # Guests in house Pseudo room Rate Check
 pyautogui.write("giratecheck", interval=.01)
 pyautogui.press("enter", interval=.01)
-re_search_report()
-time.sleep(1)
+search_enter_step1()
+search_enter_step2()
+time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
 time.sleep(1)
 pyautogui.press("right", interval=.01)
-time.sleep(.5)
-pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("tab", presses=13, interval=.01)
 pyautogui.press("enter", interval=.01)
 # Guests in house Pseudo room Rate Check: Config
 
@@ -254,19 +254,14 @@ pyautogui.press("tab", interval=.01)
 # Expected Arrival
 pyautogui.write("Arrivals: Detailed FO", interval=0.01)
 pyautogui.press("enter", interval=0.01)
-
-def out_config():
-    while True:
-        if pyautogui.pixelMatchesColor(1854, 337, (204, 204, 204), tolerance=10):
-            break
-
-out_config()
-time.sleep(2)
+search_enter_step1()
+search_enter_step2()
+time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=3, interval=0.01)
+pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Expected Arrival: Config
 config_report()
@@ -310,13 +305,14 @@ pyautogui.press("tab", interval=0.01)
 # Out of Service by Reason
 pyautogui.write("ooo", interval=0.01)
 pyautogui.press("enter", interval=0.01)
-out_config()
-time.sleep(2)
+search_enter_step1()
+search_enter_step2()
+time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=3, interval=0.01)
+pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Out of Service by Reason: Config
 config_report()
@@ -397,13 +393,14 @@ pyautogui.press("tab", interval=0.01)
 # Credit Limit
 pyautogui.write("gi_authlimit", interval=0.01)
 pyautogui.press("enter", interval=0.01)
-out_config()
-time.sleep(2)
+search_enter_step1()
+search_enter_step2()
+time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=3, interval=0.01)
+pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Credit Limit: Config
 config_report()
@@ -451,13 +448,14 @@ pyautogui.press("tab", interval=0.01)
 # Rebate and Correction Transactions
 pyautogui.write("Journal by Cashier and Transaction Code", interval=0.01)
 pyautogui.press("enter", interval=0.01)
-out_config()
-time.sleep(2)
+search_enter_step1()
+search_enter_step2()
+time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(1.5)
+time.sleep(1)
 pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=3, interval=0.01)
+pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Rebate and Correction Transactions: Config
 config_report()
