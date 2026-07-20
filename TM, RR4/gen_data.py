@@ -157,6 +157,10 @@ ytd = date.today() - timedelta(days=1)
 ytd_date = ytd.strftime("%d.%m.%y")
 
 data_path = r"\\LMPC202507256L\Keeper\OTH"
+
+if not os.path.exists(data_path):
+     sys.exit()
+
 data_excel = f"get_{ytd_date}.xlsx"
 path_data_excel = os.path.join(data_path, data_excel)
 
