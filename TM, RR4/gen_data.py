@@ -69,13 +69,19 @@ pyautogui.press("tab", interval=0.01)
 pyautogui.write("immigration_report", interval=.01)
 pyautogui.press("enter", interval=.01)
 
-def after_search():
+def search_enter_step1():
     while True:
-        if pyautogui.pixelMatchesColor(267, 452, (244, 243, 239), tolerance=0):
+        if pyautogui.pixelMatchesColor(1854, 337, (204, 204, 204), tolerance=10):
             break
 
-after_search()
-time.sleep(1)
+def search_enter_step2():
+    while True:
+        if pyautogui.pixelMatchesColor(1854, 337, (6, 108, 122), tolerance=10):
+            break
+
+search_enter_step1()
+search_enter_step2()
+time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
 time.sleep(1)
