@@ -136,7 +136,7 @@ def search_enter_step1():
 
 def search_enter_step2():
     while True:
-        if pyautogui.pixelMatchesColor(1854, 337, (6, 108, 122), tolerance=0):
+        if pyautogui.pixelMatchesColor(1854, 337, (6, 108, 122), tolerance=10):
             break
 
 search_enter_step1()
