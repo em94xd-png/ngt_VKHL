@@ -1,4 +1,4 @@
-import tkinter, subprocess, threading
+import tkinter, subprocess, threading, os, sys
 from pystray import Icon, MenuItem, Menu
 from PIL import Image, ImageDraw
 
@@ -42,7 +42,7 @@ def hide_window():
     global tray_icon, is_tray_running
     wd.withdraw()
     menu = Menu(
-        MenuItem("Open", show_window, default=True),
+        MenuItem("Open", show_window, default=True, visible=False),
         MenuItem("Close", exit_it)
     )
     tray_icon = Icon("", create_image(), "", menu)
@@ -54,10 +54,7 @@ def on_minimize(event):
         hide_window()
 
 def exit_it(icon=None, item=None):
-    global put_data
-    for _ in put_data.values():
-        if _ and _.poll() is None:
-            _.terminate()
+    stop_it()
     global tray_icon
     if tray_icon:
         tray_icon.stop()
@@ -67,14 +64,14 @@ wd.bind("<Unmap>", on_minimize)
 wd.protocol("WM_DELETE_WINDOW", exit_it)
 
 def path_get_data():
-    run_script(r"get_data.py", "get_data")
+    run_script("get_data.py", "get_data")
 
 def run_script(path, key):
     global put_data
     if put_data[key] and put_data[key].poll() is None:
         return
     turn_button(state="disabled")
-    run_file = subprocess.Popen(["pythonw", path])
+    run_file = subprocess.Popen(["pythonw", os.path.join(sys._MEIPASS, path)])
     put_data[key] = run_file
     threading.Thread(target=monitor_it, args=(run_file,), daemon=True).start()
 
