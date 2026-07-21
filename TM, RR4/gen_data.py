@@ -164,6 +164,9 @@ if not os.path.exists(data_path):
 data_excel = f"get_{ytd_date}.xlsx"
 path_data_excel = os.path.join(data_path, data_excel)
 
+if not os.path.exists(path_data_excel):
+     shutil.copy(os.path.join(data_path, "get_data.xlsx"), path_data_excel)
+
 xml_file = os.path.join(path_download, immigration_file)
 
 time.sleep(1.5)
@@ -448,11 +451,10 @@ td = date.today()
 td_date = td.strftime("%d.%m.%y")
 
 data_path = r"\\LMPC202507256L\Keeper\OTH"
-os.makedirs(data_path, exist_ok=True)
 
 new_data_excel = f"get_{td_date}.xlsx"
 path_new_data_excel = os.path.join(data_path, new_data_excel)
-shutil.copy(path_data_excel, path_new_data_excel)
+shutil.copy(os.path.join(data_path, "get_data.xlsx"), path_new_data_excel)
 
 new_data_wb = load_workbook(path_new_data_excel)
 
