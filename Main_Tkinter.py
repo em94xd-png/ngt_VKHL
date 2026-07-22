@@ -85,13 +85,13 @@ def script_run(script_path, process_var):
     threading.Thread(target=monitor_process, args=(file_run,), daemon=True).start()
 
 def report_endday_before():
-    script_run(r"report\end-day_before\Main_End-day_before.py", "running_endday_before")
+    script_run(r"report\end-day_before\main_end-day_before.py", "running_endday_before")
 
 def report_endday_after():
-    script_run(r"report\end-day_after\Main_End-day_after.py", "running_endday_after")
+    script_run(r"report\end-day_after\main_end-day_after.py", "running_endday_after")
 
 def FB_print():
-    script_run(r"fb print\Main_FB_Print.py", "running_FB_print")
+    script_run(r"fb print\main_FB_print.py", "running_FB_print")
 
 def stop_all():
     global running_endday_before, running_endday_after, running_FB_print

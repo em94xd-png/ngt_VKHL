@@ -9,6 +9,9 @@ import script_config
 
 pyautogui.FAILSAFE = True
 
+if not os.path.exists(fr"\\{script_config.device_path}"):
+     sys.exit()
+
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", f"{script_config.site_OPERA}"])
 pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
@@ -79,8 +82,8 @@ time.sleep(.25)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 
-if not os.path.exists(fr"\\{script_config.device_path}"):
-     sys.exit()
+download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
 
 os.makedirs(script_config.snf_path, exist_ok=True)
 
@@ -343,6 +346,3 @@ os.startfile(path_rr_excel)
 
 subprocess.run(["cmd", "/c", "start", "chrome", "https://tm30.immigration.go.th/tm30api/loginExternal.jsp?value=EXT&id=e7690d92acea9a050d4be95afbcb3e74"])
 subprocess.run(["cmd", "/c", "start", "chrome", "https://iservice.dopa.go.th/login/"])
-
-download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
-win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)

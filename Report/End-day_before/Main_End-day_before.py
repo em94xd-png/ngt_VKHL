@@ -1,120 +1,45 @@
-import pyautogui
-import time
-from datetime import date, timedelta
-import os
-import subprocess
-import pygetwindow
+import pyautogui, time, os, subprocess, pygetwindow, sys
 
-site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-def report_path():
-    yesterday = date.today() - timedelta(days=1)
-    ytd_date = yesterday.strftime("%#d")
-    ytd_month_number = yesterday.strftime("%#m")
-    ytd_month_short = yesterday.strftime("%b")
-    ytd_month_full = yesterday.strftime("%B")
-    ytd_year_full = yesterday.strftime("%Y")
-
-    return fr"\\LMPC202507256L\Keeper\Daily's Report\Report {ytd_year_full}\{ytd_month_number} - {ytd_month_short} {ytd_year_full}\{ytd_date} {ytd_month_full}"
-
-def tab_reserve(times):
-    pyautogui.PAUSE = 0.01
-    for _ in range(times):
-        pyautogui.hotkey("shift", "tab")
-
-def format1_yesterday():
-    today = date.today()
-    yesterday = today - timedelta(days=1)
-    return yesterday.strftime("%d.%m")
-
-def format2_yesterday():
-    today = date.today()
-    yesterday = today - timedelta(days=1)
-    return yesterday.strftime("%d%m")
-
-def file_remove(path):
-    for _ in os.listdir(path):
-        to_file = os.path.join(path, _)
-        if os.path.isfile(to_file):
-            os.remove(to_file)
+import script_config
 
 pyautogui.FAILSAFE = True
 
+if not os.path.exists(fr"\\{script_config.device_path}"):
+     sys.exit()
+
 # Create folder
-os.makedirs(report_path().__add__(r"\Before Closeday"), exist_ok=True)
+os.makedirs(script_config.daily_report_path.__add__(r"\Before Closeday"), exist_ok=True)
 
 # Delete files
-path_report = report_path() + r"\Before Closeday"
-
-file_remove(path_report)
+daily_report_before = script_config.daily_report_path + r"\Before Closeday"
+script_config.remove_file(daily_report_before)
 
 # Open Opera
-subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
-
+subprocess.run(["cmd", "/c", "start", "msedge", script_config.site_OPERA])
 pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
 
-time.sleep(.5)
-
-def first_OPERA_open():
-    while True:
-        if pyautogui.pixelMatchesColor(7, 391, (244, 243, 239), tolerance=0):
-            break
-
-first_OPERA_open()
-
 # In Opera
-def zoom_out(_):
-    pyautogui.PAUSE = .01
-    for _ in range(_):
-        pyautogui.hotkey("ctrl", "-")
-
-zoom_out(10)
-
-def zoom_in(_):
-    pyautogui.PAUSE = .01
-    for _ in range(_):
-        pyautogui.hotkey("ctrl", "=")
-
-zoom_in(3)
-
-def main_OPERA_menu():
-    while True:
-        if pyautogui.pixelMatchesColor(139, 129, ( 70,  70,  68), tolerance=0):
-            break
-
-main_OPERA_menu()
+script_config.first_OPERA_open()
+script_config.zoom_out(10)
+script_config.zoom_in(3)
+script_config.main_OPERA_menu()
 
 # To report search
 pyautogui.press("tab", presses=5, interval=0.01)
 pyautogui.press("right", presses=6, interval=0.01)
 pyautogui.press("down", interval=0.01)
 pyautogui.press("enter", interval=0.01)
-
-def search_reports():
-    while True:
-        if pyautogui.pixelMatchesColor(252, 245, (88, 88, 86), tolerance=0):
-            break
-    
-search_reports()
+script_config.search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
 # Room Discrepancy
 pyautogui.write("hkroomdiscrepancy", interval=.01)
 pyautogui.press("enter", interval=.01)
-
-def search_enter_step1():
-    while True:
-        if pyautogui.pixelMatchesColor(1854, 337, (204, 204, 204), tolerance=10):
-            break
-
-def search_enter_step2():
-    while True:
-        if pyautogui.pixelMatchesColor(1854, 337, (6, 108, 122), tolerance=10):
-            break
-
-search_enter_step1()
-search_enter_step2()
+script_config.search_enter_step1()
+script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
@@ -123,22 +48,16 @@ pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=14, interval=.01)
 pyautogui.press("enter", interval=.01)
 # Room Discrepancy: Save
-
-def wait_report():
-    while True:
-        if pyautogui.pixelMatchesColor(1866, 975, (213, 163, 160), tolerance=10):
-            break
-
-wait_report()
+script_config.wait_report()
 pyautogui.click(600,84, interval=.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
 time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
-tab_reserve(2)
+script_config.tab_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=.01)
-pyautogui.write(report_path().__add__(r"\Before Closeday"))
+pyautogui.write(script_config.daily_report_path.__add__(r"\Before Closeday"))
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "f", interval=.01)
@@ -152,13 +71,13 @@ pyautogui.press("enter", interval=.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "w")
 time.sleep(.5)
-tab_reserve(13)
+script_config.tab_reserve(13)
 
 # Guests INH Complimentary and Houseuse
 pyautogui.write("gi_c_h", interval=.01)
 pyautogui.press("enter", interval=.01)
-search_enter_step1()
-search_enter_step2()
+script_config.search_enter_step1()
+script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
@@ -167,16 +86,16 @@ pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=14, interval=.01)
 pyautogui.press("enter", interval=.01)
 # Guests INH Complimentary and Houseuse: Save
-wait_report()
+script_config.wait_report()
 pyautogui.click(600,84, interval=.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
 time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
-tab_reserve(2)
+script_config.tab_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=.01)
-pyautogui.write(report_path().__add__(r"\Before Closeday"))
+pyautogui.write(script_config.daily_report_path.__add__(r"\Before Closeday"))
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -189,13 +108,13 @@ pyautogui.press("enter", interval=.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "w")
 time.sleep(.5)
-tab_reserve(13)
+script_config.tab_reserve(13)
 
 # Guests in house Pseudo room Rate Check
 pyautogui.write("giratecheck", interval=.01)
 pyautogui.press("enter", interval=.01)
-search_enter_step1()
-search_enter_step2()
+script_config.search_enter_step1()
+script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
@@ -204,16 +123,10 @@ pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=.01)
 pyautogui.press("enter", interval=.01)
 # Guests in house Pseudo room Rate Check: Config
-
-def config_report():
-    while True:
-        if pyautogui.pixelMatchesColor(214, 244, (255, 255, 255), tolerance=0):
-            break
-
-config_report()
+script_config.config_report()
 time.sleep(1)
 pyautogui.hotkey("ctrl", "a", interval=.01)
-pyautogui.write(format2_yesterday(), interval=.01)
+pyautogui.write(script_config.ytd_dd_mm, interval=.01)
 pyautogui.press("tab", presses=7, interval=.01)
 pyautogui.press("space", interval=.01) # Pseudo Rooms
 time.sleep(.5)
@@ -223,16 +136,16 @@ time.sleep(1)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("enter", interval=.01)
 # Guests in house Pseudo room Rate Check: Save
-wait_report()
+script_config.wait_report()
 pyautogui.click(600,84, interval=.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
 time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
-tab_reserve(2)
+script_config.tab_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=.01)
-pyautogui.write(report_path().__add__(r"\Before Closeday"))
+pyautogui.write(script_config.daily_report_path.__add__(r"\Before Closeday"))
 pyautogui.press("enter", interval=.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -245,17 +158,17 @@ pyautogui.press("enter", interval=.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "w")
 time.sleep(.5)
-tab_reserve(3)
+script_config.tab_reserve(3)
 pyautogui.press("enter", interval=.01)
-search_reports()
+script_config.search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=.01)
 
 # Expected Arrival
 pyautogui.write("Arrivals: Detailed FO", interval=0.01)
 pyautogui.press("enter", interval=0.01)
-search_enter_step1()
-search_enter_step2()
+script_config.search_enter_step1()
+script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
@@ -264,31 +177,31 @@ pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Expected Arrival: Config
-config_report()
+script_config.config_report()
 time.sleep(1)
 pyautogui.hotkey("ctrl", "a", interval=.01)
-pyautogui.write(format2_yesterday(), interval=.01)
+pyautogui.write(script_config.ytd_dd_mm, interval=.01)
 pyautogui.press("tab", presses=2, interval=0.01)
 time.sleep(1)
-pyautogui.write(format2_yesterday(), interval=.01)
+pyautogui.write(script_config.ytd_dd_mm, interval=.01)
 pyautogui.press("tab", presses=53, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Expected Arrival: Save
-wait_report()
+script_config.wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
 time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
-tab_reserve(2)
+script_config.tab_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=0.01)
-pyautogui.write(report_path().__add__(r"\Before Closeday"))
+pyautogui.write(script_config.daily_report_path.__add__(r"\Before Closeday"))
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
 
-Expected_Arrival = f"Expected Arrival {format1_yesterday()}"
+Expected_Arrival = f"Expected Arrival {script_config.ytd_dot_dd_mm}"
 
 pyautogui.write(Expected_Arrival, interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
@@ -296,17 +209,17 @@ pyautogui.press("enter", interval=0.01)
 time.sleep(0.5)
 pyautogui.hotkey("ctrl", "w")
 time.sleep(0.5)
-tab_reserve(3)
+script_config.tab_reserve(3)
 pyautogui.press("enter", interval=0.01)
-search_reports()
+script_config.search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
 # Out of Service by Reason
 pyautogui.write("ooo", interval=0.01)
 pyautogui.press("enter", interval=0.01)
-search_enter_step1()
-search_enter_step2()
+script_config.search_enter_step1()
+script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
@@ -315,7 +228,7 @@ pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Out of Service by Reason: Config
-config_report()
+script_config.config_report()
 time.sleep(1)
 pyautogui.press("tab", presses=2, interval=0.01)
 pyautogui.write(
@@ -330,21 +243,21 @@ time.sleep(.5)
 pyautogui.press("tab", presses=5, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Out of Service by Reason: Save
-wait_report()
+script_config.wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
 time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=0.01)
-tab_reserve(2)
+script_config.tab_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=0.01)
-pyautogui.write(report_path().__add__(r"\Before Closeday"))
+pyautogui.write(script_config.daily_report_path.__add__(r"\Before Closeday"))
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
 
-Out_of_Service_by_Reason = f"17. Out of Service by Reason {format1_yesterday()}"
+Out_of_Service_by_Reason = f"17. Out of Service by Reason {script_config.ytd_dot_dd_mm}"
 
 pyautogui.write(Out_of_Service_by_Reason, interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
@@ -354,7 +267,7 @@ pyautogui.hotkey("ctrl", "w")
 
 # Out of Order by Reason
 time.sleep(0.1)
-tab_reserve(6)
+script_config.tab_reserve(6)
 time.sleep(0.5)
 # Out of Order by Reason: Config
 pyautogui.press("up", interval=0.01)
@@ -362,21 +275,21 @@ time.sleep(0.5)
 pyautogui.press("tab", presses=6, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Out of Order by Reason: Save
-wait_report()
+script_config.wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
 time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=0.01)
-tab_reserve(2)
+script_config.tab_reserve(2)
 time.sleep(.01)
 pyautogui.press("enter", interval=0.01)
-pyautogui.write(report_path().__add__(r"\Before Closeday"))
+pyautogui.write(script_config.daily_report_path.__add__(r"\Before Closeday"))
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
 
-Out_of_Order_by_Reason = f"17. Out of Order by Reason {format1_yesterday()}"
+Out_of_Order_by_Reason = f"17. Out of Order by Reason {script_config.ytd_dot_dd_mm}"
 
 pyautogui.write(Out_of_Order_by_Reason, interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
@@ -384,17 +297,17 @@ pyautogui.press("enter", interval=.01)
 time.sleep(0.5)
 pyautogui.hotkey("ctrl", "w")
 time.sleep(0.5)
-tab_reserve(3)
+script_config.tab_reserve(3)
 pyautogui.press("enter", interval=0.01)
-search_reports()
+script_config.search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
 # Credit Limit
 pyautogui.write("gi_authlimit", interval=0.01)
 pyautogui.press("enter", interval=0.01)
-search_enter_step1()
-search_enter_step2()
+script_config.search_enter_step1()
+script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
@@ -403,7 +316,7 @@ pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Credit Limit: Config
-config_report()
+script_config.config_report()
 time.sleep(1)
 pyautogui.press("tab", presses=4, interval=0.01)
 pyautogui.press("space", interval=0.01) # Pseudo Rooms
@@ -417,21 +330,21 @@ time.sleep(0.5)
 pyautogui.press("tab", presses=8, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Credit Limit: Save
-wait_report()
+script_config.wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
 time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
-tab_reserve(2)
+script_config.tab_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=0.01)
-pyautogui.write(report_path().__add__(r"\Before Closeday"))
+pyautogui.write(script_config.daily_report_path.__add__(r"\Before Closeday"))
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
 
-Credit_Limit = f"15. Credit Limit {format1_yesterday()}"
+Credit_Limit = f"15. Credit Limit {script_config.ytd_dot_dd_mm}"
 
 pyautogui.write(Credit_Limit, interval=.01)
 pyautogui.press("tab", presses=3, interval=.01)
@@ -439,17 +352,17 @@ pyautogui.press("enter", interval=.01)
 time.sleep(0.5)
 pyautogui.hotkey("ctrl", "w")
 time.sleep(0.5)
-tab_reserve(3)
+script_config.tab_reserve(3)
 pyautogui.press("enter", interval=0.01)
-search_reports()
+script_config.search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
 # Rebate and Correction Transactions
 pyautogui.write("Journal by Cashier and Transaction Code", interval=0.01)
 pyautogui.press("enter", interval=0.01)
-search_enter_step1()
-search_enter_step2()
+script_config.search_enter_step1()
+script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
@@ -458,29 +371,29 @@ pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Rebate and Correction Transactions: Config
-config_report()
+script_config.config_report()
 time.sleep(1)
 pyautogui.hotkey("ctrl", "a", interval=.01)
-pyautogui.write(format2_yesterday(), interval=.01)
+pyautogui.write(script_config.ytd_dd_mm, interval=.01)
 pyautogui.press("tab", interval=0.01)
 time.sleep(1)
-pyautogui.write(format2_yesterday(), interval=.01)
+pyautogui.write(script_config.ytd_dd_mm, interval=.01)
 pyautogui.press("tab", presses=5, interval=0.01)
 pyautogui.press("space", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Rebate and Correction Transactions: Save
-wait_report()
+script_config.wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 pyautogui.hotkey("ctrl", "s", interval=.01)
 time.sleep(1)
 pyautogui.hotkey("ctrl", "f", interval=.01)
-tab_reserve(2)
+script_config.tab_reserve(2)
 time.sleep(0.1)
 pyautogui.press("enter", interval=0.01)
-pyautogui.write(report_path().__add__(r"\Before Closeday"))
+pyautogui.write(script_config.daily_report_path.__add__(r"\Before Closeday"))
 pyautogui.press("enter", interval=0.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -495,72 +408,33 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(1)
 
 # Print
-def report_print(report_name):                                  
-
-    Endday_before_folder = report_path().__add__(r"\Before Closeday")
-
-    folder_report = os.path.join(Endday_before_folder, report_name).__add__(".PDF")
-
-    print_url_add = "file:" + folder_report.replace("\\", "/")
-
-    subprocess.run(["cmd", "/c", "start", "msedge", print_url_add])
-
-def page_print(set_copy, set_both, set_page):
-    pyautogui.hotkey("ctrl", "p", interval=.01)
-    time.sleep(1)
-    pyautogui.press("tab", presses=(set_copy), interval=.01)
-
-    if set_copy == 1:
-        pyautogui.press("tab", presses=5, interval=.01)
-    elif set_copy == 2:
-        pyautogui.press("tab", interval=.01)
-        pyautogui.write("2", interval=.01)
-        pyautogui.press("tab", presses=4, interval=.01)
-
-    pyautogui.press("up", presses=2, interval=.01)
-    pyautogui.press("down", presses=(set_both), interval=.01)
-    pyautogui.press("tab", interval=.01)
-    pyautogui.press("enter", interval=.01)
-    time.sleep(.01)
-    pyautogui.press("tab", presses=3, interval=.01)
-    pyautogui.press("up", presses=2, interval=.01)
-    pyautogui.press("down", presses=(set_page), interval=.01)
-    pyautogui.press("tab", presses=3, interval=.01)
-    time.sleep(.5)
-    pyautogui.press("enter", interval=.01)
-    pyautogui.hotkey("ctrl", "w", interval=.01)
-
-report_print(Room_Discrepancy)
+script_config.print_report_before(Room_Discrepancy)
 time.sleep(.5)
-page_print(1, 1, 0)
+script_config.print_page_config(1, 1, 0)
 
-report_print(Guests_INH_Complimentary_and_Houseuse)
+script_config.print_report_before(Guests_INH_Complimentary_and_Houseuse)
 time.sleep(.5)
-page_print(1, 1, 1)
+script_config.print_page_config(1, 1, 1)
 
-report_print(Guests_in_house_Pseudo_room_Rate_Check)
+script_config.print_report_before(Guests_in_house_Pseudo_room_Rate_Check)
 time.sleep(.5)
-page_print(1, 1, 1)
+script_config.print_page_config(1, 1, 1)
 
-# report_print(Expected_Arrival)
-# time.sleep(.5)
-# page_print(1, 1, 1)
-
-report_print(Out_of_Service_by_Reason)
+script_config.print_report_before(Out_of_Service_by_Reason)
 time.sleep(.5)
-page_print(1, 1, 1)
+script_config.print_page_config(1, 1, 1)
 
-report_print(Out_of_Order_by_Reason)
+script_config.print_report_before(Out_of_Order_by_Reason)
 time.sleep(.5)
-page_print(1, 1, 1)
+script_config.print_page_config(1, 1, 1)
 
-report_print(Credit_Limit)
+script_config.print_report_before(Credit_Limit)
 time.sleep(.5)
-page_print(1, 1, 1)
+script_config.print_page_config(1, 1, 1)
 
-report_print(Rebate_and_Correction_Transactions)
+script_config.print_report_before(Rebate_and_Correction_Transactions)
 time.sleep(.5)
-page_print(1, 1, 1)
+script_config.print_page_config(1, 1, 1)
 
 # Open Room Discrepancy
-report_print(Room_Discrepancy)
+script_config.print_report_before(Room_Discrepancy)

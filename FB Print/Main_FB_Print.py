@@ -1,141 +1,38 @@
-import subprocess
-import pyautogui
-import time
-from datetime import date, timedelta
-import os
-import pygetwindow
+import subprocess, pyautogui, time, os, pygetwindow, sys
 
-site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-Room_Type = "1H2XK,1H2XT,1H3XK,1H4XK,1H4XT,2U1XKT,2U2XKT,2U3XKT,1V1XK,1V2XK,3U1CKT,2V1C2K,1H1VK,1U1VK,1U2VK,2U1VKT,2U2VKT,2U3VKT,3U2VKT,1H2VK,2U4XKT,3U1C2K"
-
-def report_path():
-    yesterday = date.today() - timedelta(days=1)
-    ytd_date = yesterday.strftime("%#d")
-    ytd_month_number = yesterday.strftime("%#m")
-    ytd_month_short = yesterday.strftime("%b")
-    ytd_month_full = yesterday.strftime("%B")
-    ytd_year_full = yesterday.strftime("%Y")
-
-    return fr"\\LMPC202507256L\Keeper\Daily's Report\Report {ytd_year_full}\{ytd_month_number} - {ytd_month_short} {ytd_year_full}\{ytd_date} {ytd_month_full}"
-
-def format1_today():
-    today = date.today()
-    return today.strftime("%d%m")
-
-def report_print(report_name):                                  
-
-    Endday_before_folder = report_path()
-
-    folder_report = os.path.join(Endday_before_folder, report_name).__add__(".PDF")
-
-    print_url_add = "file:" + folder_report.replace("\\", "/")
-
-    subprocess.run(["cmd", "/c", "start", "msedge", print_url_add])
-
-def page_print(set_copy, set_both, set_page):
-    pyautogui.hotkey("ctrl", "p", interval=.01)
-    time.sleep(1)
-    pyautogui.press("tab", presses=(set_copy), interval=.01)
-
-    if set_copy == 1:
-        pyautogui.press("tab", presses=5, interval=.01)
-    elif set_copy == 2:
-        pyautogui.press("tab", interval=.01)
-        pyautogui.write("2", interval=.01)
-        pyautogui.press("tab", presses=4, interval=.01)
-
-    pyautogui.press("up", presses=2, interval=.01)
-    pyautogui.press("down", presses=(set_both), interval=.01)
-    pyautogui.press("tab", interval=.01)
-    pyautogui.press("enter", interval=.01)
-    time.sleep(.01)
-    pyautogui.press("tab", presses=3, interval=.01)
-    pyautogui.press("up", presses=2, interval=.01)
-    pyautogui.press("down", presses=(set_page), interval=.01)
-    pyautogui.press("tab", presses=3, interval=.01)
-    time.sleep(.5)
-    pyautogui.press("enter", interval=.01)
-    pyautogui.hotkey("ctrl", "w", interval=.01)
-
-def tab_reserve(times):
-    pyautogui.PAUSE = 0.01
-    for _ in range(times):
-        pyautogui.hotkey("shift", "tab")
-
-def format1_today():
-    today = date.today()
-    return today.strftime("%d%m")
+import script_config
 
 pyautogui.FAILSAFE = True
 
-# Open Opera
-subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
+if not os.path.exists(fr"\\{script_config.device_path}"):
+     sys.exit()
 
+# Open Opera
+subprocess.run(["cmd", "/c", "start", "msedge", f"{script_config.site_OPERA}"])
 pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
 
-time.sleep(.5)
-
-def first_OPERA_open():
-    while True:
-        if pyautogui.pixelMatchesColor(7, 391, (244, 243, 239), tolerance=0):
-            break
-
-first_OPERA_open()
-
 # In Opera
-def zoom_out(_):
-    pyautogui.PAUSE = .01
-    for _ in range(_):
-        pyautogui.hotkey("ctrl", "-")
-
-zoom_out(10)
-
-def zoom_in(_):
-    pyautogui.PAUSE = .01
-    for _ in range(_):
-        pyautogui.hotkey("ctrl", "=")
-
-zoom_in(3)
-
-def main_OPERA_menu():
-    while True:
-        if pyautogui.pixelMatchesColor(139, 129, ( 70,  70,  68), tolerance=0):
-            break
-
-main_OPERA_menu()
+script_config.first_OPERA_open()
+script_config.zoom_out(10)
+script_config.zoom_in(3)
+script_config.main_OPERA_menu()
 
 # To report search
 pyautogui.press("tab", presses=5, interval=0.01)
 pyautogui.press("right", presses=6, interval=0.01)
 pyautogui.press("down", interval=0.01)
 pyautogui.press("enter", interval=0.01)
-
-def search_reports():
-    while True:
-        if pyautogui.pixelMatchesColor(252, 245, (88, 88, 86), tolerance=0):
-            break
-    
-search_reports()
+script_config.search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
 # Package Forecast
 pyautogui.write("Package Forecast - Detailed", interval=.01)
 pyautogui.press("enter", interval=0.01)
-
-def search_enter_step1():
-    while True:
-        if pyautogui.pixelMatchesColor(1854, 337, (204, 204, 204), tolerance=10):
-            break
-
-def search_enter_step2():
-    while True:
-        if pyautogui.pixelMatchesColor(1854, 337, (6, 108, 122), tolerance=10):
-            break
-
-search_enter_step1()
-search_enter_step2()
+script_config.search_enter_step1()
+script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
@@ -144,46 +41,34 @@ pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Package Forecast: Config
-
-def config_report():
-    while True:
-        if pyautogui.pixelMatchesColor(214, 244, (255, 255, 255), tolerance=0):
-            break
-
-config_report()
+script_config.config_report()
 time.sleep(1)
 pyautogui.press("tab", presses=2, interval=0.01)
-pyautogui.write(format1_today(), interval=.01)
+pyautogui.write(script_config.td_dd_mm, interval=.01)
 pyautogui.press("tab", interval=0.01)
 time.sleep(1)
-pyautogui.write(format1_today(), interval=.01)
+pyautogui.write(script_config.td_dd_mm, interval=.01)
 pyautogui.press("tab", presses=3, interval=0.01)
 time.sleep(.75)
 pyautogui.write("BFB01E,BFB01I,BFB02E,BFB02I,BFB03I,BFB04I", interval=.01)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Package Forecast: Print
-
-def wait_report():
-    while True:
-        if pyautogui.pixelMatchesColor(1866, 975, (213, 163, 160), tolerance=10):
-            break
-
-wait_report()
+script_config.wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
-page_print(1, 1, 1)
-tab_reserve(3)
+script_config.print_page_config(1, 1, 1)
+script_config.tab_reserve(3)
 pyautogui.press("enter", interval=0.01)
-search_reports()
+script_config.search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
 # VKHL Guests INH (Full)
 pyautogui.write("gibyroom", interval=.01)
 pyautogui.press("enter", interval=0.01)
-search_enter_step1()
-search_enter_step2()
+script_config.search_enter_step1()
+script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
@@ -192,36 +77,36 @@ pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # VKHL Guests INH (Full): Config
-config_report()
+script_config.config_report()
 time.sleep(1)
 pyautogui.press("tab", interval=.01)
 time.sleep(.75)
-pyautogui.write(Room_Type, interval=.01)
+pyautogui.write(script_config.Room_Type, interval=.01)
 pyautogui.press("tab", presses=15, interval=.01)
 pyautogui.press("delete", interval=.01)
 time.sleep(.5)
 pyautogui.press("tab", presses=8, interval=.01)
 pyautogui.press("enter", interval=0.01)
 # VKHL Guests INH (Full): Print
-wait_report()
+script_config.wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
-page_print(2, 1, 1)
+script_config.print_page_config(2, 1, 1)
 
 VKHL_Arrivals = "4. VKHL Arrivals"
 
-report_print(VKHL_Arrivals)
+script_config.print_report_after(VKHL_Arrivals)
 time.sleep(.5)
-page_print(1, 1, 1)
+script_config.print_page_config(1, 1, 1)
 
 VKHL_Departures = "5. VKHL Departures"
 
-report_print(VKHL_Departures)
+script_config.print_report_after(VKHL_Departures)
 time.sleep(.5)
-page_print(1, 1, 1)
+script_config.print_page_config(1, 1, 1)
 
 VKHL_Guests_INH = "6. VKHL Guests INH"
 
-report_print(VKHL_Guests_INH)
+script_config.print_report_after(VKHL_Guests_INH)
 time.sleep(.5)
-page_print(1, 1, 1)
+script_config.print_page_config(1, 1, 1)
