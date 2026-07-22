@@ -1,46 +1,49 @@
-import pygetwindow, pyautogui, pyperclip, time, openpyxl, os
-from datetime import date
+import pygetwindow, pyautogui, pyperclip, time, openpyxl, os, shutil, sys
 
-td = date.today()
-td_date = td.strftime("%d.%m.%y")
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-data_path = r"\\LMPC202507256L\Keeper\OTH"
-new_data_excel = f"get_{td_date}.xlsx"
-path_new_data_excel = os.path.join(data_path, new_data_excel)
+import script_config
+
+td_snf_excel = f"get_{script_config.td_dot_dd_mm_yy}.xlsx"
+path_td_snf_excel = os.path.join(script_config.snf_path, td_snf_excel)
 
 main_panel = "Guest information panel"
 sub_panel = "Scanning manager"
 
-def get_it(times):
+def step_copy(times):
     pyautogui.PAUSE = 0.01
     for _ in range(times):
         pyautogui.press("tab")
     pyautogui.hotkey("ctrl", "c")
     return pyperclip.paste().strip()
 
-while True:
-    try:
-        if not os.path.exists(path_new_data_excel):
-            while not os.path.exists(path_new_data_excel):
-                continue
+def get_data():
+    while True:
         main_title = pygetwindow.getWindowsWithTitle(main_panel)[0]
         if not main_title.isMinimized:
             main_title.activate()
             time.sleep(.5)
-            ln = get_it(3)
-            fn = get_it(4)
-            bd = get_it(9)
-            ct = get_it(5)
-            pn = get_it(6)
-            wb = openpyxl.load_workbook(path_new_data_excel)
+            ln = step_copy(3)
+            fn = step_copy(4)
+            bd = step_copy(9)
+            ct = step_copy(5)
+            pn = step_copy(6)
+            wb = openpyxl.load_workbook(path_td_snf_excel)
             ws3 = wb["Sheet3"]
             ws3.append([ln, fn, bd, ct, pn])
-            wb.save(path_new_data_excel)
+            wb.save(path_td_snf_excel)
             while True:
                 main_title = pygetwindow.getWindowsWithTitle(main_panel)[0]
                 if not main_title:
                     sub_title = pygetwindow.getWindowsWithTitle(sub_panel)[0]
                     if not sub_title:
                         break
-    except Exception as error:
-        pass
+
+while True:
+    if os.path.exists(path_td_snf_excel):
+        get_data()
+    if not os.path.exists(path_td_snf_excel):
+        if not os.path.exists(fr"\\{script_config.snf_path}"):
+            sys.exit()
+        shutil.copy(os.path.join(script_config.snf_path, "get_data.xlsx"), path_td_snf_excel)
+        break

@@ -2,85 +2,37 @@ from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
 import openpyxl, json, os, shutil, pyautogui, subprocess, pygetwindow, time, pyperclip, sys, win32gui, win32con
 import xml.etree.ElementTree
-from datetime import datetime, timedelta, date
-from urllib.parse import urlparse, parse_qs
 
-site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-def format2_yesterday():
-    today = date.today()
-    yesterday = today - timedelta(days=1)
-    return yesterday.strftime("%d%m")
+import script_config
 
 pyautogui.FAILSAFE = True
 
 # Open Opera
-subprocess.run(["cmd", "/c", "start", "msedge", site_OPERA])
-
+subprocess.run(["cmd", "/c", "start", "msedge", f"{script_config.site_OPERA}"])
 pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
 
-time.sleep(.5)
-
-def first_OPERA_open():
-    while True:
-        if pyautogui.pixelMatchesColor(7, 391, (244, 243, 239), tolerance=0):
-            break
-
-first_OPERA_open()
-
 # In Opera
-def zoom_out(_):
-    pyautogui.PAUSE = .01
-    for _ in range(_):
-        pyautogui.hotkey("ctrl", "-")
-
-zoom_out(10)
-
-def zoom_in(_):
-    pyautogui.PAUSE = .01
-    for _ in range(_):
-        pyautogui.hotkey("ctrl", "=")
-
-zoom_in(3)
-
-def main_OPERA_menu():
-    while True:
-        if pyautogui.pixelMatchesColor(139, 129, ( 70,  70,  68), tolerance=0):
-            break
-
-main_OPERA_menu()
+script_config.first_OPERA_open()
+script_config.zoom_out(10)
+script_config.zoom_in(3)
+script_config.main_OPERA_menu()
 
 # To report search
 pyautogui.press("tab", presses=5, interval=0.01)
 pyautogui.press("right", presses=6, interval=0.01)
 pyautogui.press("down", interval=0.01)
 pyautogui.press("enter", interval=0.01)
-
-def search_reports():
-    while True:
-        if pyautogui.pixelMatchesColor(252, 245, (88, 88, 86), tolerance=0):
-            break
-    
-search_reports()
+script_config.search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
 # Immigration Report
 pyautogui.write("immigration_report", interval=.01)
 pyautogui.press("enter", interval=.01)
-
-def search_enter_step1():
-    while True:
-        if pyautogui.pixelMatchesColor(1854, 337, (204, 204, 204), tolerance=10):
-            break
-
-def search_enter_step2():
-    while True:
-        if pyautogui.pixelMatchesColor(1854, 337, (6, 108, 122), tolerance=10):
-            break
-
-search_enter_step1()
-search_enter_step2()
+script_config.search_enter_step1()
+script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
@@ -89,16 +41,10 @@ pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=.01)
 pyautogui.press("enter", interval=.01)
 # Immigration Report: Config
-
-def config_report():
-    while True:
-        if pyautogui.pixelMatchesColor(214, 244, (255, 255, 255), tolerance=0):
-            break
-
-config_report()
+script_config.config_report()
 time.sleep(1)
 pyautogui.hotkey("ctrl", "a", interval=.01)
-pyautogui.write(format2_yesterday(), interval=.01)
+pyautogui.write(script_config.ytd_dd_mm, interval=.01)
 pyautogui.press("tab", interval=.01)
 time.sleep(1)
 pyautogui.write("ARRIVAL", interval=.01)
@@ -108,82 +54,71 @@ time.sleep(.5)
 pyautogui.press("tab", presses=2, interval=.01)
 pyautogui.press("enter", interval=.01)
 # Immigration Report: Save
-
-def show_save_immigration():
-     while True:
-          if pyautogui.pixelMatchesColor(982, 514, (88, 88, 86), tolerance=10):
-               break
-
-show_save_immigration()
+script_config.save_immigration()
 time.sleep(.5)
 pyautogui.press("tab", presses=2, interval=.01)
 pyautogui.press("space", presses=2, interval=.01)
 pyautogui.press("tab", presses=2, interval=.01)
-time.sleep(.25)
 pyautogui.press("enter", interval=.01)
 # Immigration Report: Download
-
-def download_immigration():
-     while True:
-          if pyautogui.pixelMatchesColor(1508, 53, (39, 35, 32), tolerance=10):
-               break
-
-download_immigration()
+script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
 time.sleep(.25)
 pyautogui.hotkey("ctrl", "l", interval=.01)
 pyautogui.hotkey("ctrl", "c", interval=.01)
-
 immigration_url = pyperclip.paste()
 
-parse_url = urlparse(immigration_url)
-query_url = parse_qs(parse_url.query)
+immigration_file = f"immigration_report_{script_config.download_id(immigration_url)}.XML"
+xml_file = os.path.join(script_config.download_path, immigration_file)
 
-def immigration_id():
-     if "rep" in query_url:
-          rep_id = query_url["rep"][0]
-          split_id = rep_id.split("_")[1]
-          return split_id
-
-path_download = os.environ.get("USERPROFILE").__add__(r"\Downloads")
-immigration_file = f"immigration_report_{immigration_id()}.XML"
+if not os.path.exists(xml_file):
+     sys.exit()
 
 pyautogui.hotkey("ctrl", "j", interval=.01)
 time.sleep(.25)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 
-ytd = date.today() - timedelta(days=1)
-ytd_date = ytd.strftime("%d.%m.%y")
-
-data_path = r"\\LMPC202507256L\Keeper\OTH"
-
-if not os.path.exists(data_path):
+if not os.path.exists(fr"\\{script_config.device_path}"):
      sys.exit()
 
-data_excel = f"get_{ytd_date}.xlsx"
-path_data_excel = os.path.join(data_path, data_excel)
+os.makedirs(script_config.snf_path, exist_ok=True)
 
-if not os.path.exists(path_data_excel):
-     shutil.copy(os.path.join(data_path, "get_data.xlsx"), path_data_excel)
+ytd_snf_excel = f"get_{script_config.ytd_dot_dd_mm_yy}.xlsx"
+path_ytd_snf_excel = os.path.join(script_config.snf_path, ytd_snf_excel)
 
-xml_file = os.path.join(path_download, immigration_file)
+if not os.path.exists(path_ytd_snf_excel):
+     if not os.path.join(script_config.snf_path, "get_data.xlsx"):
+          sys.exit()
+     shutil.copy(os.path.join(script_config.snf_path, "get_data.xlsx"), path_ytd_snf_excel)
 
-time.sleep(1.5)
-
-if not os.path.exists(xml_file):
-     sys.exit()
-
-tree = xml.etree.ElementTree.parse(xml_file)
-root = tree.getroot()
+wb = load_workbook(path_ytd_snf_excel)
 
 ws1 = "Sheet1"
 ws2 = "Sheet2"
 
-wb = load_workbook(path_data_excel)
-
 ws1 = wb[ws1]
 ws2 = wb[ws2]
+
+tree = xml.etree.ElementTree.parse(xml_file)
+root = tree.getroot()
+
+for _ in root.findall(".//G_IMMIGRATION"):
+        fn = _.find("FIRST_NAME").text
+        ln = _.find("LAST_NAME").text
+        gd = _.find("SEX").text
+        pn = _.find("PASSPORT").text
+        nt = _.find("NATIONALITY").text
+        bd = _.find("DATE_OF_BIRTH").text
+        bd_ad = script_config.sw_date_format(bd, None, None)
+        dep = _.find("DEPARTURE_DATE").text
+        dep_ad = script_config.sw_date_format(dep, None, None)
+        dep_be = script_config.sw_date_format(None, dep, None)
+        rn = _.find("ROOM").text
+        tm_data = [fn, None, ln, gd, pn, nt, bd_ad, dep_ad]
+        rr_data = [None, None, None, rn, None, None, None, None, gd, fn, None, ln, nt, None, pn, None, None, None, None, nt, nt, None, None, dep_be, None, None]
+        ws1.append(tm_data)
+        ws2.append(rr_data)
 
 current_path = os.path.dirname(os.path.abspath(__file__))
 
@@ -194,46 +129,7 @@ with open((os.path.join(current_path, "rr_nt.json")), "r", encoding="utf-8") as 
 with open((os.path.join(current_path, "rr_ct.json")), "r", encoding="utf-8") as file:
      rr_ct_json = json.load(file)
 
-def sw_date_format(ad, be, sc):
-     if ad and ad.strip() != "":
-          try:
-               ad = datetime.strptime(ad.strip(), "%m/%d/%Y")
-               return ad.strftime("%d/%m/%Y")
-          except ValueError:
-               return ad
-     if be and be.strip() != "":
-          try:
-               be = datetime.strptime(be.strip(), "%m/%d/%Y")
-               cvt_be = be.year + 543
-               return be.strftime(f"%d/%m/{cvt_be}")
-          except ValueError:
-               return be
-     if sc and str(sc).strip() != "":
-          try:
-               sc = datetime.strptime(sc, "%d-%m-%Y")
-               return sc.strftime("%d/%m/%Y")
-          except ValueError:
-               return sc
-
-for _ in root.findall(".//G_IMMIGRATION"):
-        fn = _.find("FIRST_NAME").text
-        ln = _.find("LAST_NAME").text
-        gd = _.find("SEX").text
-        pn = _.find("PASSPORT").text
-        nt = _.find("NATIONALITY").text
-        bd = _.find("DATE_OF_BIRTH").text
-        bd_ad = sw_date_format(bd, None, None)
-        dep = _.find("DEPARTURE_DATE").text
-        dep_ad = sw_date_format(dep, None, None)
-        dep_be = sw_date_format(None, dep, None)
-        rn = _.find("ROOM").text
-        tm_data = [fn, None, ln, gd, pn, nt, bd_ad, dep_ad]
-        rr_data = [None, None, None, rn, None, None, None, None, gd, fn, None, ln, nt, None, pn, None, None, None, None, nt, nt, None, None, dep_be, None, None]
-        ws1.append(tm_data)
-        ws2.append(rr_data)
-
 ws3 = wb["Sheet3"]
-# wb.active = ws3
 
 ws3_fn_ln_pn = {}
 ws3_fn_ln_ct = {}
@@ -272,7 +168,7 @@ for _ in range(ws1.max_row, 1, -1):
           ws1_key = f"{str(ws1_fn).strip().lower()}_{str(ws1_ln).strip().lower()}"
           if ws1_key in ws3_fn_ln_bd:
                for_empty_birthday = ws3_fn_ln_bd[ws1_key]
-               ws1.cell(row=_, column=7, value=sw_date_format(None, None, for_empty_birthday))
+               ws1.cell(row=_, column=7, value=script_config.sw_date_format(None, None, for_empty_birthday))
 
 for _ in range(ws2.max_row, 4, -1):
      ws2_fn = ws2.cell(row=_, column=10).value
@@ -391,9 +287,7 @@ for _ in range(5, ws2.max_row + 1):
      run_num += 1
 
 for _ in range(ws2.max_row, 4, -1):
-     ytd = date.today() - timedelta(days=1)
-     full_ytd = ytd.strftime("%m/%d/%Y")
-     ws2.cell(row=_, column=2, value=sw_date_format(None, full_ytd, None))
+     ws2.cell(row=_, column=2, value=script_config.sw_date_format(None, script_config.ytd_to_mm_dd_yyyy, None))
      ws2.cell(row=_, column=3, value="15.00")
      ws2.cell(row=_, column=17, value="Phang-nga")
      ws2.cell(row=_, column=18, value="99")
@@ -403,24 +297,15 @@ for _ in range(ws2.max_row, 4, -1):
      ws2.cell(row=_, column=25, value="12.00")
      ws2.cell(row=_, column=26, value="1")
 
-ytd = date.today() - timedelta(days=1)
-full_ytd = ytd.strftime("%m/%d/%Y")
-ws2.cell(row=2, column=14, value=sw_date_format(None, full_ytd, None))
+ws2.cell(row=2, column=14, value=script_config.sw_date_format(None, script_config.ytd_to_mm_dd_yyyy, None))
 
-ytd = date.today() - timedelta(days=1)
-ytd_y = ytd.strftime("%Y")
-ytd_y_be = ytd.year + 543
-ytd_m = ytd.strftime("%B")
-tm_date = ytd.strftime("%d.%m.%Y")
-rr_date = ytd.strftime(f"%d%m{ytd_y_be}")
-
-tm_path = fr"\\LMPC202507256L\Keeper\TM\{ytd_y}\{ytd_m}"
-rr_path = fr"\\LMPC202507256L\Keeper\RR.4\{ytd_y}\{ytd_m}"
+tm_path = fr"\\LMPC202507256L\Keeper\TM\{script_config.ytd_yyyy}\{script_config.ytd_full_m}"
+rr_path = fr"\\LMPC202507256L\Keeper\RR.4\{script_config.ytd_yyyy}\{script_config.ytd_full_m}"
 os.makedirs(tm_path, exist_ok=True)
 os.makedirs(rr_path, exist_ok=True)
 
-tm_excel = f"{tm_date}.xlsx"
-rr_excel = f"{rr_date}.xlsx"
+tm_excel = f"{script_config.ytd_dot_dd_mm_yyyy}.xlsx"
+rr_excel = f"{script_config.ytd_dd_mm_yyyy_be}.xlsx"
 path_tm_excel = os.path.join(tm_path, tm_excel)
 path_rr_excel = os.path.join(rr_path, rr_excel)
 
@@ -447,34 +332,11 @@ rr_ws = rr_wb[rr_ws]
 rr_ws.title = "Sheet1"
 rr_wb.save(path_rr_excel)
 
-td = date.today()
-td_date = td.strftime("%d.%m.%y")
+td_snf_excel = f"get_{script_config.td_dot_dd_mm_yy}.xlsx"
 
-data_path = r"\\LMPC202507256L\Keeper\OTH"
-
-new_data_excel = f"get_{td_date}.xlsx"
-path_new_data_excel = os.path.join(data_path, new_data_excel)
-shutil.copy(os.path.join(data_path, "get_data.xlsx"), path_new_data_excel)
-
-new_data_wb = load_workbook(path_new_data_excel)
-
-new_data_ws1 = "Sheet1"
-new_data_ws2 = "Sheet2"
-new_data_ws3 = "Sheet3"
-
-new_data_ws1 = new_data_wb[new_data_ws1]
-new_data_ws2 = new_data_wb[new_data_ws2]
-new_data_ws3 = new_data_wb[new_data_ws3]
-
-for _ in range(new_data_ws1.max_row, 1, -1):
-     new_data_ws1.delete_rows(_, amount=1)
-for _ in range(new_data_ws2.max_row, 4, -1):
-     new_data_ws2.delete_rows(_, amount=1)
-for _ in range(new_data_ws3.max_row, 1, -1):
-     new_data_ws3.delete_rows(_, amount=1)
-
-new_data_wb.active = new_data_ws3
-new_data_wb.save(path_new_data_excel)
+if not os.path.exists(os.path.join(script_config.snf_path, td_snf_excel)):
+     path_td_snf_excel = os.path.join(script_config.snf_path, td_snf_excel)
+     shutil.copy(os.path.join(script_config.snf_path, "get_data.xlsx"), path_td_snf_excel)
 
 os.startfile(path_tm_excel)
 os.startfile(path_rr_excel)
