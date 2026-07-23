@@ -6,7 +6,7 @@ import script_config
 
 pyautogui.FAILSAFE = True
 
-if not os.path.exists(fr"\\{script_config.device_path}"):
+if not os.path.exists(f"{script_config.path_share}"):
      sys.exit()
 
 # Create folder

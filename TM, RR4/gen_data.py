@@ -8,7 +8,7 @@ import script_config
 
 pyautogui.FAILSAFE = True
 
-if not os.path.exists(fr"\\{script_config.device_path}"):
+if not os.path.exists(f"{script_config.path_share}"):
      sys.exit()
 
 # Open Opera
@@ -87,12 +87,14 @@ win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
 os.makedirs(script_config.snf_path, exist_ok=True)
 
 ytd_snf_excel = f"get_{script_config.ytd_dot_dd_mm_yy}.xlsx"
-path_ytd_snf_excel = os.path.join(script_config.snf_path, ytd_snf_excel)
+path_ytd_snf_excel = os.path.join(fr"{script_config.path_share}\OTH", ytd_snf_excel)
+
+current_path = os.path.dirname(os.path.abspath(__file__))
 
 if not os.path.exists(path_ytd_snf_excel):
-     if not os.path.join(script_config.snf_path, "get_data.xlsx"):
+     if not os.path.join(current_path, "get_data.xlsx"):
           sys.exit()
-     shutil.copy(os.path.join(script_config.snf_path, "get_data.xlsx"), path_ytd_snf_excel)
+     shutil.copy(os.path.join(current_path, "get_data.xlsx"), path_ytd_snf_excel)
 
 wb = load_workbook(path_ytd_snf_excel)
 
@@ -121,8 +123,6 @@ for _ in root.findall(".//G_IMMIGRATION"):
      rr_data = [None, None, None, rn, None, None, None, None, gd, fn, None, ln, nt, None, pn, None, None, None, None, nt, nt, None, None, dep_be, None, None]
      ws1.append(tm_data)
      ws2.append(rr_data)
-
-current_path = os.path.dirname(os.path.abspath(__file__))
 
 with open((os.path.join(current_path, "tm_nt.json")), "r", encoding="utf-8") as file:
      tm_nt_json = json.load(file)

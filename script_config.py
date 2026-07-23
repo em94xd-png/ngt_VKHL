@@ -3,7 +3,7 @@ from datetime import date, timedelta, datetime
 from urllib.parse import urlparse, parse_qs
 
 device_path = "LMPC202507256L"
-snf_path = fr"\\{device_path}\Keeper\OTH"
+path_share = fr"\\{device_path}\Storage"
 download_path = os.environ.get("USERPROFILE").__add__(r"\Downloads")
 
 site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
@@ -44,7 +44,7 @@ def date_end():
     date_end = td.replace(day=last_day)
     return date_end.strftime("%d%m")
 
-daily_report_path = fr"\\LMPC202507256L\Keeper\Daily's Report\Report {ytd_yyyy}\{ytd_order_m} - {ytd_short_m} {ytd_yyyy}\{ytd_short_date} {ytd_full_m}"
+daily_report_path = fr"{path_share}\Daily's Report\Report {ytd_yyyy}\{ytd_order_m} - {ytd_short_m} {ytd_yyyy}\{ytd_short_date} {ytd_full_m}"
 
 def first_OPERA_open():
     while True:
@@ -157,7 +157,7 @@ def print_page_config(set_copy, set_both, set_segment):
         pyautogui.press("tab", interval=.01)
         pyautogui.write("2", interval=.01)
         pyautogui.press("tab", presses=4, interval=.01)
-        pyautogui.press("up", presses=2, interval=.01)
+    pyautogui.press("up", presses=2, interval=.01)
     pyautogui.press("down", presses=(set_both), interval=.01)
     pyautogui.press("tab", interval=.01)
     pyautogui.press("enter", interval=.01)
