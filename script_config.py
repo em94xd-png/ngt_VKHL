@@ -28,6 +28,7 @@ ytd_dot_dd_mm = ytd.strftime("%d.%m")
 ytd_dot_dd_mm_yy = ytd.strftime("%d.%m.%y")
 ytd_dot_dd_mm_yyyy = ytd.strftime("%d.%m.%Y")
 ytd_to_mm_dd_yyyy = ytd.strftime("%m/%d/%Y")
+ytd_hp_dd_mm_yy = ytd.strftime("%d-%b-%y")
 ytd_dd_mm_yyyy_be = ytd.strftime(f"%d%m{ytd_y_to_be}")
 
 def date_begin():

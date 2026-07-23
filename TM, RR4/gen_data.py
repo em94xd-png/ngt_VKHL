@@ -1,7 +1,6 @@
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
-import openpyxl, json, os, shutil, pyautogui, subprocess, pygetwindow, time, pyperclip, sys, win32gui, win32con
-import xml.etree.ElementTree
+import openpyxl, json, os, shutil, pyautogui, subprocess, pygetwindow, time, pyperclip, sys, win32gui, win32con, xml.etree.ElementTree
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -107,21 +106,21 @@ tree = xml.etree.ElementTree.parse(xml_file)
 root = tree.getroot()
 
 for _ in root.findall(".//G_IMMIGRATION"):
-        fn = _.find("FIRST_NAME").text
-        ln = _.find("LAST_NAME").text
-        gd = _.find("SEX").text
-        pn = _.find("PASSPORT").text
-        nt = _.find("NATIONALITY").text
-        bd = _.find("DATE_OF_BIRTH").text
-        bd_ad = script_config.sw_date_format(bd, None, None)
-        dep = _.find("DEPARTURE_DATE").text
-        dep_ad = script_config.sw_date_format(dep, None, None)
-        dep_be = script_config.sw_date_format(None, dep, None)
-        rn = _.find("ROOM").text
-        tm_data = [fn, None, ln, gd, pn, nt, bd_ad, dep_ad]
-        rr_data = [None, None, None, rn, None, None, None, None, gd, fn, None, ln, nt, None, pn, None, None, None, None, nt, nt, None, None, dep_be, None, None]
-        ws1.append(tm_data)
-        ws2.append(rr_data)
+     fn = _.find("FIRST_NAME").text
+     ln = _.find("LAST_NAME").text
+     gd = _.find("SEX").text
+     pn = _.find("PASSPORT").text
+     nt = _.find("NATIONALITY").text
+     bd = _.find("DATE_OF_BIRTH").text
+     bd_ad = script_config.sw_date_format(bd, None, None)
+     dep = _.find("DEPARTURE_DATE").text
+     dep_ad = script_config.sw_date_format(dep, None, None)
+     dep_be = script_config.sw_date_format(None, dep, None)
+     rn = _.find("ROOM").text
+     tm_data = [fn, None, ln, gd, pn, nt, bd_ad, dep_ad]
+     rr_data = [None, None, None, rn, None, None, None, None, gd, fn, None, ln, nt, None, pn, None, None, None, None, nt, nt, None, None, dep_be, None, None]
+     ws1.append(tm_data)
+     ws2.append(rr_data)
 
 current_path = os.path.dirname(os.path.abspath(__file__))
 
