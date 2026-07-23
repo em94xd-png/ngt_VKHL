@@ -76,7 +76,7 @@ def run_script(path, key):
     if put_data[key] and put_data[key].poll() is None:
         return
     block_button(state="disabled")
-    run_file = subprocess.Popen(["pythonw", path_to_file(path)])
+    run_file = subprocess.Popen(["python", path_to_file(path)])
     put_data[key] = run_file
     threading.Thread(target=monitor_it, args=(run_file,), daemon=True).start()
 

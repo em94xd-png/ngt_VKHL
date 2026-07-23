@@ -5,7 +5,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import script_config
 
 td_snf_excel = f"get_{script_config.td_dot_dd_mm_yy}.xlsx"
-path_td_snf_excel = os.path.join(f"{script_config.path_share}\OTH", td_snf_excel)
+path_td_snf_excel = os.path.join(fr"{script_config.path_share}\OTH", td_snf_excel)
 
 main_panel = "Guest information panel"
 sub_panel = "Scanning manager"
@@ -45,7 +45,7 @@ while True:
                         if not pygetwindow.getWindowsWithTitle(sub_panel):
                             break
         if not os.path.exists(path_td_snf_excel):
-            if not os.path.exists(f"{script_config.path_share}\OTH"):
+            if not os.path.exists(fr"{script_config.path_share}\OTH"):
                 sys.exit()
             shutil.copy(path_to_file("get_data.xlsx"), path_td_snf_excel)
             if os.path.exists(path_td_snf_excel):
