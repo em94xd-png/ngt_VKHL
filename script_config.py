@@ -14,7 +14,9 @@ Room_Class = "HRA,HRB,HRC,HRD,HSA,HSB,HSC,HSD,HSE,HVA,HVB,HVC"
 
 td = date.today()
 td_dd_mm = td.strftime("%d%m")
+td_hp_dd_mm = td.strftime("%d-%b")
 td_dot_dd_mm_yy = td.strftime("%d.%m.%y")
+td_hp_dd_mm_yy = td.strftime("%d-%b-%y")
 
 ytd = date.today() - timedelta(days=1)
 ytd_y_to_be = ytd.year + 543
