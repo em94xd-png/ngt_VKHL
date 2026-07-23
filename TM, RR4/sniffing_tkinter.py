@@ -63,23 +63,28 @@ def exit_it(icon=None, item=None):
 wd.bind("<Unmap>", on_minimize)
 wd.protocol("WM_DELETE_WINDOW", exit_it)
 
-def path_get_data():
+def get_data():
     run_script("get_data.py", "get_data")
+
+def path_to_file(_):
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, _)
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), _)
 
 def run_script(path, key):
     global put_data
     if put_data[key] and put_data[key].poll() is None:
         return
-    turn_button(state="disabled")
-    run_file = subprocess.Popen(["pythonw", os.path.join(sys._MEIPASS, path)])
+    block_button(state="disabled")
+    run_file = subprocess.Popen(["pythonw", path_to_file(path)])
     put_data[key] = run_file
     threading.Thread(target=monitor_it, args=(run_file,), daemon=True).start()
 
 def monitor_it(_):
     _.wait()
-    wd.after(0, lambda: turn_button(state="normal"))
+    wd.after(0, lambda: block_button(state="normal"))
 
-def turn_button(state):
+def block_button(state):
     for _ in [btn1]:
         _.configure(state=state)
 
@@ -88,9 +93,9 @@ def stop_it():
     for _ in put_data.values():
         if _ and _.poll() is None:
             _.terminate()
-    turn_button(state="normal")
+    block_button(state="normal")
 
-btn1 = tkinter.Button(master=wd, text="run_it", width=15, command=path_get_data)
+btn1 = tkinter.Button(master=wd, text="run_it", width=15, command=get_data)
 btn1.pack(pady=30)
 
 btn2 = tkinter.Button(master=wd, text="stop_it", width=15, command=stop_it)

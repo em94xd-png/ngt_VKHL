@@ -5,7 +5,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import script_config
 
 td_snf_excel = f"get_{script_config.td_dot_dd_mm_yy}.xlsx"
-path_td_snf_excel = os.path.join(script_config.snf_path, td_snf_excel)
+path_td_snf_excel = os.path.join(f"{script_config.path_share}\OTH", td_snf_excel)
 
 main_panel = "Guest information panel"
 sub_panel = "Scanning manager"
@@ -17,13 +17,17 @@ def step_copy(times):
     pyautogui.hotkey("ctrl", "c")
     return pyperclip.paste().strip()
 
+def path_to_file(_):
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, _)
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), _)
+
 while True:
-    main_title = pygetwindow.getWindowsWithTitle(main_panel)
-    sniffer = main_title[0]
-    if sniffer:
+    if pygetwindow.getWindowsWithTitle(main_panel):
+        main_title = pygetwindow.getWindowsWithTitle(main_panel)[0]
         if os.path.exists(path_td_snf_excel):
-            if not sniffer.isMinimized:
-                sniffer.activate()
+            if not main_title.isMinimized:
+                main_title.activate()
                 time.sleep(.5)
                 ln = step_copy(3)
                 fn = step_copy(4)
@@ -35,14 +39,14 @@ while True:
                 ws3.append([ln, fn, bd, ct, pn])
                 wb.save(path_td_snf_excel)
                 while True:
-                    sniffer
-                    if not sniffer:
-                        sub_title = pygetwindow.getWindowsWithTitle(sub_panel)
-                        if not sub_title:
+                    pygetwindow.getWindowsWithTitle(main_panel)
+                    if not pygetwindow.getWindowsWithTitle(main_panel):
+                        pygetwindow.getWindowsWithTitle(sub_panel)
+                        if not pygetwindow.getWindowsWithTitle(sub_panel):
                             break
         if not os.path.exists(path_td_snf_excel):
-            if not os.path.exists(f"{script_config.snf_path}"):
+            if not os.path.exists(f"{script_config.path_share}\OTH"):
                 sys.exit()
-            shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), "get_data.xlsx"), path_td_snf_excel)
+            shutil.copy(path_to_file("get_data.xlsx"), path_td_snf_excel)
             if os.path.exists(path_td_snf_excel):
                 continue
