@@ -71,20 +71,21 @@ pyautogui.hotkey("ctrl", "c", interval=.01)
 immigration_url = pyperclip.paste()
 
 immigration_file = f"immigration_report_{script_config.download_id(immigration_url)}.XML"
-xml_file = os.path.join(script_config.download_path, immigration_file)
-
-if not os.path.exists(xml_file):
-     sys.exit()
 
 pyautogui.hotkey("ctrl", "j", interval=.01)
 time.sleep(.25)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 
+xml_file = os.path.join(script_config.download_path, immigration_file)
+
+if not os.path.exists(xml_file):
+     sys.exit()
+
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
 
-os.makedirs(script_config.snf_path, exist_ok=True)
+os.makedirs(f"{script_config.path_share}\OTH", exist_ok=True)
 
 ytd_snf_excel = f"get_{script_config.ytd_dot_dd_mm_yy}.xlsx"
 path_ytd_snf_excel = os.path.join(fr"{script_config.path_share}\OTH", ytd_snf_excel)
@@ -301,8 +302,8 @@ for _ in range(ws2.max_row, 4, -1):
 
 ws2.cell(row=2, column=14, value=script_config.sw_date_format(None, script_config.ytd_to_mm_dd_yyyy, None))
 
-tm_path = fr"\\LMPC202507256L\Keeper\TM\{script_config.ytd_yyyy}\{script_config.ytd_full_m}"
-rr_path = fr"\\LMPC202507256L\Keeper\RR.4\{script_config.ytd_yyyy}\{script_config.ytd_full_m}"
+tm_path = fr"{script_config.path_share}\TM\{script_config.ytd_yyyy}\{script_config.ytd_full_m}"
+rr_path = fr"{script_config.path_share}\RR.4\{script_config.ytd_yyyy}\{script_config.ytd_full_m}"
 os.makedirs(tm_path, exist_ok=True)
 os.makedirs(rr_path, exist_ok=True)
 
@@ -336,9 +337,9 @@ rr_wb.save(path_rr_excel)
 
 td_snf_excel = f"get_{script_config.td_dot_dd_mm_yy}.xlsx"
 
-if not os.path.exists(os.path.join(script_config.snf_path, td_snf_excel)):
-     path_td_snf_excel = os.path.join(script_config.snf_path, td_snf_excel)
-     shutil.copy(os.path.join(script_config.snf_path, "get_data.xlsx"), path_td_snf_excel)
+if not os.path.exists(os.path.join(f"{script_config.path_share}\OTH", td_snf_excel)):
+     path_td_snf_excel = os.path.join(f"{script_config.path_share}\OTH", td_snf_excel)
+     shutil.copy(os.path.join(f"{script_config.path_share}\OTH", "get_data.xlsx"), path_td_snf_excel)
 
 os.startfile(path_tm_excel)
 os.startfile(path_rr_excel)
