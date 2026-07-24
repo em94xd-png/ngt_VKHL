@@ -225,7 +225,13 @@ for _ in ["M6", "M8", "O6", "O8", "Q6", "Q8", "S6", "S8", "U6", "U8"]:
     if ws[_] == "0":
         ws[_] = "-"
 
-ws["E11"] = 
+cmp = ws["B5"].value
+hu = ws["B7"].value
+rm = ws["E9"].value
+
+ws["E11"] = int(rm - (cmp - hu) / 327 * 100)
+ws["E11"].number_format = "#.##\"%\""
+
 ws["F12"] = "=E12+E13"
 
 wb.save(path_excel)
