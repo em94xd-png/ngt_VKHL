@@ -54,17 +54,14 @@ tree = xml.etree.ElementTree.parse(path_history_forecast_AVC)
 root = tree.getroot()
 
 for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED_DATE/G_CONSIDERED_DATE"):
-    cmp = _.find("COMPLIMENTARY_ROOMS").text if _.find("COMPLIMENTARY_ROOMS").text is not None else "N/A"
-    if cmp == "0":
-        cmp = "N/A"
-    hu = _.find("HOUSE_USE_ROOMS").text if _.find("HOUSE_USE_ROOMS").text is not None else "N/A"
+    cmp = int(_.find("COMPLIMENTARY_ROOMS").text) if _.find("COMPLIMENTARY_ROOMS").text is not None else "N/A"
+    hu = int(_.find("HOUSE_USE_ROOMS").text) if _.find("HOUSE_USE_ROOMS").text is not None else "N/A"
     if hu == "0":
         hu = "N/A"
     ns = _.find("NO_SHOW_ROOMS").text if _.find("NO_SHOW_ROOMS").text is not None else "N/A"
     if ns == "0":
         ns = "N/A"
     adr = round(float(_.find("CF_AVERAGE_ROOM_RATE").text), 2) if _.find("CF_AVERAGE_ROOM_RATE").text is not None else "N/A"
-    oc = round(float(_.find("CF_OCCUPANCY").text), 2) if _.find("CF_OCCUPANCY").text is not None else "N/A"
     arr = _.find("ARRIVAL_ROOMS").text if _.find("ARRIVAL_ROOMS").text is not None else "-"
     dep = _.find("DEPARTURE_ROOMS").text if _.find("DEPARTURE_ROOMS").text is not None else "-"
     rm = _.find("NO_ROOMS").text if _.find("NO_ROOMS").text is not None else "-"
@@ -82,8 +79,6 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
         ws["F5"] = arr
         ws["F7"] = dep
         ws["E9"] = rm
-        ws["E11"] = oc
-        ws["E11"].number_format = "#.##\"%\""
         ws["G12"] = ppl
     if _.find("CONSIDERED_DATE").text == "25-JUL-26":
         ws["N5"] = arr
@@ -134,11 +129,85 @@ for _ in root.findall(".//G_RESV_TYPE"):
         ws["E12"] = adl
         ws["E13"] = chd
 
+room_upgrade = "finjrnlbytrans_142785205.XML"
+path_room_upgrade = os.path.join(current_path, room_upgrade)
 
+tree = xml.etree.ElementTree.parse(path_room_upgrade)
+root = tree.getroot()
+
+for _ in root:
+    if _.tag == "R_DEBIT":
+        val = float(_.text)
+        if _.text == "0":
+            ws["I5"] = "-"
+        else:
+            if val.is_integer():
+                ws["I5"] = int(val)
+                ws["I5"].number_format = "#,##0"
+            else:
+                ws["I5"] = round(val, 2)
+                ws["I5"].number_format = "#,##0.00"
+
+late_checkout = "finjrnlbytrans_142784328.XML"
+path_late_checkout = os.path.join(current_path, late_checkout)
+
+tree = xml.etree.ElementTree.parse(path_late_checkout)
+root = tree.getroot()
+
+for _ in root:
+    if _.tag == "R_DEBIT":
+        val = float(_.text)
+        if _.text == "0":
+            ws["I7"] = "-"
+        else:
+            if val.is_integer():
+                ws["I7"] = int(val)
+                ws["I7"].number_format = "#,##0"
+            else:
+                ws["I7"] = round(val, 2)
+                ws["I7"].number_format = "#,##0.00"
+
+tour_commission = "finjrnlbytrans_142785024.XML"
+path_tour_commission = os.path.join(current_path, tour_commission)
+
+tree = xml.etree.ElementTree.parse(path_tour_commission)
+root = tree.getroot()
+
+for _ in root:
+    if _.tag == "R_DEBIT":
+        val = float(_.text)
+        if _.text == "0":
+            ws["I9"] = "-"
+        else:
+            if val.is_integer():
+                ws["I9"] = int(val)
+                ws["I9"].number_format = "#,##0"
+            else:
+                ws["I9"] = round(val, 2)
+                ws["I9"].number_format = "#,##0.00"
+
+gift_shop = "finjrnlbytrans_142784366.XML"
+path_gift_shop = os.path.join(current_path, gift_shop)
+
+tree = xml.etree.ElementTree.parse(path_gift_shop)
+root = tree.getroot()
+
+for _ in root:
+    if _.tag == "R_DEBIT":
+        val = float(_.text)
+        if _.text == "0":
+            ws["I12"] = "-"
+        else:
+            if val.is_integer():
+                ws["I12"] = int(val)
+                ws["I12"].number_format = "#,##0"
+            else:
+                ws["I12"] = round(val, 2)
+                ws["I12"].number_format = "#,##0.00"
 
 ws["E6"] = "=F5-E5"
 ws["E8"] = "=F7-E7"
-for _ in ws["E6", "E8"]:
+for _ in ["E6", "E8"]:
     if ws[_] == "0":
         ws[_] = "-"
 
@@ -155,7 +224,8 @@ ws["U8"] = "=V7-U7"
 for _ in ["M6", "M8", "O6", "O8", "Q6", "Q8", "S6", "S8", "U6", "U8"]:
     if ws[_] == "0":
         ws[_] = "-"
-        
+
+ws["E11"] = 
 ws["F12"] = "=E12+E13"
 
 wb.save(path_excel)
