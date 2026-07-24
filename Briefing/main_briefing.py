@@ -56,16 +56,16 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
     cmp = _.find("COMPLIMENTARY_ROOMS").text if _.find("COMPLIMENTARY_ROOMS").text is not None else "-"
     if cmp == "0":
         cmp = "-"
-    hu = _.find("HOUSE_USE_ROOMS").text if _.find("HOUSE_USE_ROOMS").text is not None else "-"
+    hu = int(_.find("HOUSE_USE_ROOMS").text if str(_.find("HOUSE_USE_ROOMS").text) else 0)
     if hu == "0":
         hu = "-"
-    ns = _.find("NO_SHOW_ROOMS").text if _.find("NO_SHOW_ROOMS").text is not None else "-"
+    ns = _.find("NO_SHOW_ROOMS").text if _.find("NO_SHOW_ROOMS").text else "-"
     if ns == "0":
         ns = "-"
     adr = round(float(_.find("CF_AVERAGE_ROOM_RATE").text), 2) if _.find("CF_AVERAGE_ROOM_RATE").text is not None else "-"
     arr = _.find("ARRIVAL_ROOMS").text if _.find("ARRIVAL_ROOMS").text is not None else "-"
     dep = _.find("DEPARTURE_ROOMS").text if _.find("DEPARTURE_ROOMS").text is not None else "-"
-    rm = _.find("NO_ROOMS").text if _.find("NO_ROOMS").text is not None else "-"
+    rm = int(_.find("NO_ROOMS").text if str(_.find("NO_ROOMS").text) else 0)
     ppl = _.find("NO_PERSONS").text if _.find("NO_PERSONS").text is not None else "-"
     if _.find("CONSIDERED_DATE").text == "24-JUL-26":
         ws["B5"] = cmp
@@ -76,7 +76,7 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
         ws["B12"] = oc
         ws["B12"].number_format = "#.##\"%\""
     if _.find("CONSIDERED_DATE").text == "25-JUL-26":
-        ws["D4"] = "24-Jul"
+        ws["D4"] = "25-Jul"
         ws["F5"] = arr
         ws["F7"] = dep
         ws["E9"] = rm
@@ -85,26 +85,31 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
         ws["N5"] = arr
         ws["N7"] = dep
         ws["M9"] = rm
+        ws["M11"] = (rm - hu) / (327 - hu) * 100
         ws["M12"] = ppl
     if _.find("CONSIDERED_DATE").text == "27-JUL-26":
         ws["P5"] = arr
         ws["P7"] = dep
         ws["O9"] = rm
+        ws["O11"] = (rm - hu) / (327 - hu) * 100
         ws["O12"] = ppl
     if _.find("CONSIDERED_DATE").text == "28-JUL-26":
         ws["R5"] = arr
         ws["R7"] = dep
         ws["Q9"] = rm
+        ws["Q11"] = (rm - hu) / (327 - hu) * 100
         ws["Q12"] = ppl
     if _.find("CONSIDERED_DATE").text == "29-JUL-26":
         ws["T5"] = arr
         ws["T7"] = dep
         ws["S9"] = rm
+        ws["S11"] = (rm - hu) / (327 - hu) * 100
         ws["S12"] = ppl
     if _.find("CONSIDERED_DATE").text == "30-JUL-26":
         ws["V5"] = arr
         ws["V7"] = dep
         ws["U9"] = rm
+        ws["U11"] = (rm - hu) / (327 - hu) * 100
         ws["U12"] = ppl
 
 split_adult_child = "resfutureoccupancy_142949802.XML"
@@ -279,19 +284,19 @@ rm = int(ws["E9"].value if str(ws["E9"].value) else 0)
 ws["E11"] = round(float((rm - (cmp + hu)) / 327 * 100), 2)
 ws["E11"].number_format = "#.##\"%\""
 
-rm_next_1 = int(ws["M9"].value if str(ws["M9"].value) else 0)
-ws["M11"] = (rm_next_1 - 2) / (327 - 2) * 100
+# rm_next_1 = int(ws["M9"].value if str(ws["M9"].value) else 0)
+# ws["M11"] = (rm_next_1 - 2) / (327 - 2) * 100
 
-rm_next_2 = int(ws["O9"].value if str(ws["O9"].value) else 0)
-ws["O11"] = (rm_next_2 - 2) / (327 - 2) * 100
+# rm_next_2 = int(ws["O9"].value if str(ws["O9"].value) else 0)
+# ws["O11"] = (rm_next_2 - 2) / (327 - 2) * 100
 
-rm_next_3 = int(ws["Q9"].value if str(ws["Q9"].value) else 0)
-ws["Q11"] = (rm_next_3 - 2) / (327 - 2) * 100
+# rm_next_3 = int(ws["Q9"].value if str(ws["Q9"].value) else 0)
+# ws["Q11"] = (rm_next_3 - 2) / (327 - 2) * 100
 
-rm_next_4 = int(ws["S9"].value if str(ws["S9"].value) else 0)
-ws["S11"] = (rm_next_4 - 2) / (327 - 2) * 100
+# rm_next_4 = int(ws["S9"].value if str(ws["S9"].value) else 0)
+# ws["S11"] = (rm_next_4 - 2) / (327 - 2) * 100
 
-rm_next_5 = int(ws["U9"].value if str(ws["U9"].value) else 0)
-ws["U11"] = (rm_next_5 - 2) / (327 - 2) * 100
+# rm_next_5 = int(ws["U9"].value if str(ws["U9"].value) else 0)
+# ws["U11"] = (rm_next_5 - 2) / (327 - 2) * 100
 
 wb.save(path_excel)
