@@ -54,14 +54,16 @@ tree = xml.etree.ElementTree.parse(path_history_forecast_AVC)
 root = tree.getroot()
 
 for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED_DATE/G_CONSIDERED_DATE"):
-    cmp = int(_.find("COMPLIMENTARY_ROOMS").text) if _.find("COMPLIMENTARY_ROOMS").text is not None else "N/A"
-    hu = int(_.find("HOUSE_USE_ROOMS").text) if _.find("HOUSE_USE_ROOMS").text is not None else "N/A"
+    cmp = _.find("COMPLIMENTARY_ROOMS").text if _.find("COMPLIMENTARY_ROOMS").text is not None else "-"
+    if cmp == "0":
+        cmp = "-"
+    hu = _.find("HOUSE_USE_ROOMS").text if _.find("HOUSE_USE_ROOMS").text is not None else "-"
     if hu == "0":
-        hu = "N/A"
-    ns = _.find("NO_SHOW_ROOMS").text if _.find("NO_SHOW_ROOMS").text is not None else "N/A"
+        hu = "-"
+    ns = _.find("NO_SHOW_ROOMS").text if _.find("NO_SHOW_ROOMS").text is not None else "-"
     if ns == "0":
-        ns = "N/A"
-    adr = round(float(_.find("CF_AVERAGE_ROOM_RATE").text), 2) if _.find("CF_AVERAGE_ROOM_RATE").text is not None else "N/A"
+        ns = "-"
+    adr = round(float(_.find("CF_AVERAGE_ROOM_RATE").text), 2) if _.find("CF_AVERAGE_ROOM_RATE").text is not None else "-"
     arr = _.find("ARRIVAL_ROOMS").text if _.find("ARRIVAL_ROOMS").text is not None else "-"
     dep = _.find("DEPARTURE_ROOMS").text if _.find("DEPARTURE_ROOMS").text is not None else "-"
     rm = _.find("NO_ROOMS").text if _.find("NO_ROOMS").text is not None else "-"
@@ -225,11 +227,11 @@ for _ in ["M6", "M8", "O6", "O8", "Q6", "Q8", "S6", "S8", "U6", "U8"]:
     if ws[_] == "0":
         ws[_] = "-"
 
-cmp = ws["B5"].value
-hu = ws["B7"].value
-rm = ws["E9"].value
+cmp = int(float((ws["B5"].value)) if ws["B5"].value and str(ws["B5"].value) not in ["-"] else 0)
+hu = int(float((ws["B7"].value)) if ws["B7"].value and str(ws["B7"].value) not in ["-"] else 0)
+rm = int(float((ws["E9"].value)) if ws["E9"].value and str(ws["E9"].value) not in ["-"] else 0)
 
-ws["E11"] = int(rm - (cmp - hu) / 327 * 100)
+ws["E11"] = round(float((rm - (cmp + hu)) / 327 * 100), 2)
 ws["E11"].number_format = "#.##\"%\""
 
 ws["F12"] = "=E12+E13"
