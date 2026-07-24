@@ -15,7 +15,7 @@ wb = load_workbook(path_excel)
 ws = "Ori Format"
 ws = wb[ws]
 
-history_forecast = "history_forecast_142784233.XML"
+history_forecast = "history_forecast_142950236.XML"
 path_history_forecast = os.path.join(current_path, history_forecast)
 
 tree = xml.etree.ElementTree.parse(path_history_forecast)
@@ -27,27 +27,26 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
     arr = _.find("ARRIVAL_ROOMS").text if _.find("ARRIVAL_ROOMS").text is not None else "-"
     dep = _.find("DEPARTURE_ROOMS").text if _.find("DEPARTURE_ROOMS").text is not None else "-"
     ppl = _.find("NO_PERSONS").text if _.find("NO_PERSONS").text is not None else "-"
-    if _.find("CONSIDERED_DATE").text == "24-JUL-26":
+    if _.find("CONSIDERED_DATE").text == "25-JUL-26":
         ws["E5"] = arr
         ws["E7"] = dep
-        ws["F12"] = ppl
-    if _.find("CONSIDERED_DATE").text == "25-JUL-26":
+    if _.find("CONSIDERED_DATE").text == "26-JUL-26":
         ws["M5"] = arr
         ws["M7"] = dep
-    if _.find("CONSIDERED_DATE").text == "26-JUL-26":
+    if _.find("CONSIDERED_DATE").text == "27-JUL-26":
         ws["O5"] = arr
         ws["O7"] = dep
-    if _.find("CONSIDERED_DATE").text == "27-JUL-26":
+    if _.find("CONSIDERED_DATE").text == "28-JUL-26":
         ws["Q5"] = arr
         ws["Q7"] = dep
-    if _.find("CONSIDERED_DATE").text == "28-JUL-26":
+    if _.find("CONSIDERED_DATE").text == "29-JUL-26":
         ws["S5"] = arr
         ws["S7"] = dep
-    if _.find("CONSIDERED_DATE").text == "29-JUL-26":
+    if _.find("CONSIDERED_DATE").text == "30-JUL-26":
         ws["U5"] = arr
         ws["U7"] = dep
 
-history_forecast_AVC = "history_forecast_142784728.XML"
+history_forecast_AVC = "history_forecast_142950252.XML"
 path_history_forecast_AVC = os.path.join(current_path, history_forecast_AVC)
 
 tree = xml.etree.ElementTree.parse(path_history_forecast_AVC)
@@ -68,7 +67,7 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
     dep = _.find("DEPARTURE_ROOMS").text if _.find("DEPARTURE_ROOMS").text is not None else "-"
     rm = _.find("NO_ROOMS").text if _.find("NO_ROOMS").text is not None else "-"
     ppl = _.find("NO_PERSONS").text if _.find("NO_PERSONS").text is not None else "-"
-    if _.find("CONSIDERED_DATE").text == "23-JUL-26":
+    if _.find("CONSIDERED_DATE").text == "24-JUL-26":
         ws["B5"] = cmp
         ws["B7"] = hu
         ws["B9"] = ns
@@ -76,49 +75,39 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
         ws["B11"].number_format = "#,###.##"
         ws["B12"] = oc
         ws["B12"].number_format = "#.##\"%\""
-    if _.find("CONSIDERED_DATE").text == "24-JUL-26":
-        ws["D4"] = script_config.td_hp_dd_mm
+    if _.find("CONSIDERED_DATE").text == "25-JUL-26":
+        ws["D4"] = "24-Jul"
         ws["F5"] = arr
         ws["F7"] = dep
         ws["E9"] = rm
         ws["G12"] = ppl
-    if _.find("CONSIDERED_DATE").text == "25-JUL-26":
+    if _.find("CONSIDERED_DATE").text == "26-JUL-26":
         ws["N5"] = arr
         ws["N7"] = dep
         ws["M9"] = rm
-        ws["M11"] = oc
-        ws["M11"].number_format = "#.##\"%\""
         ws["M12"] = ppl
-    if _.find("CONSIDERED_DATE").text == "26-JUL-26":
+    if _.find("CONSIDERED_DATE").text == "27-JUL-26":
         ws["P5"] = arr
         ws["P7"] = dep
         ws["O9"] = rm
-        ws["O11"] = oc
-        ws["O11"].number_format = "#.##\"%\""
         ws["O12"] = ppl
-    if _.find("CONSIDERED_DATE").text == "27-JUL-26":
+    if _.find("CONSIDERED_DATE").text == "28-JUL-26":
         ws["R5"] = arr
         ws["R7"] = dep
         ws["Q9"] = rm
-        ws["Q11"] = oc
-        ws["Q11"].number_format = "#.##\"%\""
         ws["Q12"] = ppl
-    if _.find("CONSIDERED_DATE").text == "28-JUL-26":
+    if _.find("CONSIDERED_DATE").text == "29-JUL-26":
         ws["T5"] = arr
         ws["T7"] = dep
         ws["S9"] = rm
-        ws["S11"] = oc
-        ws["S11"].number_format = "#.##\"%\""
         ws["S12"] = ppl
-    if _.find("CONSIDERED_DATE").text == "29-JUL-26":
+    if _.find("CONSIDERED_DATE").text == "30-JUL-26":
         ws["V5"] = arr
         ws["V7"] = dep
         ws["U9"] = rm
-        ws["U11"] = oc
-        ws["U11"].number_format = "#.##\"%\""
         ws["U12"] = ppl
 
-split_adult_child = "resfutureoccupancy_142784766.XML"
+split_adult_child = "resfutureoccupancy_142949802.XML"
 path_split_adult_child = os.path.join(current_path, split_adult_child)
 
 tree = xml.etree.ElementTree.parse(path_split_adult_child)
@@ -131,7 +120,7 @@ for _ in root.findall(".//G_RESV_TYPE"):
         ws["E12"] = adl
         ws["E13"] = chd
 
-room_upgrade = "finjrnlbytrans_142785205.XML"
+room_upgrade = "finjrnlbytrans_142949822.XML"
 path_room_upgrade = os.path.join(current_path, room_upgrade)
 
 tree = xml.etree.ElementTree.parse(path_room_upgrade)
@@ -150,7 +139,26 @@ for _ in root:
                 ws["I5"] = round(val, 2)
                 ws["I5"].number_format = "#,##0.00"
 
-late_checkout = "finjrnlbytrans_142784328.XML"
+room_upgrade_mtd = "finjrnlbytrans_142950555.XML"
+path_room_upgrade_mtd = os.path.join(current_path, room_upgrade_mtd)
+
+tree = xml.etree.ElementTree.parse(path_room_upgrade_mtd)
+root = tree.getroot()
+
+for _ in root:
+    if _.tag == "R_DEBIT":
+        val = float(_.text)
+        if _.text == "0":
+            ws["J5"] = "-"
+        else:
+            if val.is_integer():
+                ws["J5"] = int(val)
+                ws["J5"].number_format = "#,##0"
+            else:
+                ws["J5"] = round(val, 2)
+                ws["J5"].number_format = "#,##0.00"
+
+late_checkout = "finjrnlbytrans_142950099.XML"
 path_late_checkout = os.path.join(current_path, late_checkout)
 
 tree = xml.etree.ElementTree.parse(path_late_checkout)
@@ -169,7 +177,26 @@ for _ in root:
                 ws["I7"] = round(val, 2)
                 ws["I7"].number_format = "#,##0.00"
 
-tour_commission = "finjrnlbytrans_142785024.XML"
+late_checkout_mtd = "finjrnlbytrans_142950190.XML"
+path_late_checkout_mtd = os.path.join(current_path, late_checkout_mtd)
+
+tree = xml.etree.ElementTree.parse(path_late_checkout_mtd)
+root = tree.getroot()
+
+for _ in root:
+    if _.tag == "R_DEBIT":
+        val = float(_.text)
+        if _.text == "0":
+            ws["J7"] = "-"
+        else:
+            if val.is_integer():
+                ws["J7"] = int(val)
+                ws["J7"].number_format = "#,##0"
+            else:
+                ws["J7"] = round(val, 2)
+                ws["J7"].number_format = "#,##0.00"
+
+tour_commission = "finjrnlbytrans_142950122.XML"
 path_tour_commission = os.path.join(current_path, tour_commission)
 
 tree = xml.etree.ElementTree.parse(path_tour_commission)
@@ -188,7 +215,26 @@ for _ in root:
                 ws["I9"] = round(val, 2)
                 ws["I9"].number_format = "#,##0.00"
 
-gift_shop = "finjrnlbytrans_142784366.XML"
+tour_commission_mtd = "finjrnlbytrans_142950546.XML"
+path_tour_commission_mtd = os.path.join(current_path, tour_commission_mtd)
+
+tree = xml.etree.ElementTree.parse(path_tour_commission_mtd)
+root = tree.getroot()
+
+for _ in root:
+    if _.tag == "R_DEBIT":
+        val = float(_.text)
+        if _.text == "0":
+            ws["J9"] = "-"
+        else:
+            if val.is_integer():
+                ws["J9"] = int(val)
+                ws["J9"].number_format = "#,##0"
+            else:
+                ws["J9"] = round(val, 2)
+                ws["J9"].number_format = "#,##0.00"
+
+gift_shop = "finjrnlbytrans_142950142.XML"
 path_gift_shop = os.path.join(current_path, gift_shop)
 
 tree = xml.etree.ElementTree.parse(path_gift_shop)
@@ -207,33 +253,45 @@ for _ in root:
                 ws["I12"] = round(val, 2)
                 ws["I12"].number_format = "#,##0.00"
 
-ws["E6"] = "=F5-E5"
-ws["E8"] = "=F7-E7"
-for _ in ["E6", "E8"]:
-    if ws[_] == "0":
-        ws[_] = "-"
+gift_shop_mtd = "finjrnlbytrans_142949873.XML"
+path_gift_shop_mtd = os.path.join(current_path, gift_shop_mtd)
 
-ws["M6"] = "=N5-M5"
-ws["M8"] = "=N7-M7"
-ws["O6"] = "=P5-O5"
-ws["O8"] = "=P7-O7"
-ws["Q6"] = "=R5-Q5"
-ws["Q8"] = "=R7-Q7"
-ws["S6"] = "=T5-S5"
-ws["S8"] = "=T7-S7"
-ws["U6"] = "=V5-U5"
-ws["U8"] = "=V7-U7"
-for _ in ["M6", "M8", "O6", "O8", "Q6", "Q8", "S6", "S8", "U6", "U8"]:
-    if ws[_] == "0":
-        ws[_] = "-"
+tree = xml.etree.ElementTree.parse(path_gift_shop_mtd)
+root = tree.getroot()
 
-cmp = int(float((ws["B5"].value)) if ws["B5"].value and str(ws["B5"].value) not in ["-"] else 0)
-hu = int(float((ws["B7"].value)) if ws["B7"].value and str(ws["B7"].value) not in ["-"] else 0)
-rm = int(float((ws["E9"].value)) if ws["E9"].value and str(ws["E9"].value) not in ["-"] else 0)
+for _ in root:
+    if _.tag == "R_DEBIT":
+        val = float(_.text)
+        if _.text == "0":
+            ws["J12"] = "-"
+        else:
+            if val.is_integer():
+                ws["J12"] = int(val)
+                ws["J12"].number_format = "#,##0"
+            else:
+                ws["J12"] = round(val, 2)
+                ws["J12"].number_format = "#,##0.00"
+
+cmp = int(ws["B5"].value if str(ws["B5"].value) else 0)
+hu = int(ws["B7"].value if str(ws["B7"].value) else 0)
+rm = int(ws["E9"].value if str(ws["E9"].value) else 0)
 
 ws["E11"] = round(float((rm - (cmp + hu)) / 327 * 100), 2)
 ws["E11"].number_format = "#.##\"%\""
 
-ws["F12"] = "=E12+E13"
+rm_next_1 = int(ws["M9"].value if str(ws["M9"].value) else 0)
+ws["M11"] = (rm_next_1 - 2) / (327 - 2) * 100
+
+rm_next_2 = int(ws["O9"].value if str(ws["O9"].value) else 0)
+ws["O11"] = (rm_next_2 - 2) / (327 - 2) * 100
+
+rm_next_3 = int(ws["Q9"].value if str(ws["Q9"].value) else 0)
+ws["Q11"] = (rm_next_3 - 2) / (327 - 2) * 100
+
+rm_next_4 = int(ws["S9"].value if str(ws["S9"].value) else 0)
+ws["S11"] = (rm_next_4 - 2) / (327 - 2) * 100
+
+rm_next_5 = int(ws["U9"].value if str(ws["U9"].value) else 0)
+ws["U11"] = (rm_next_5 - 2) / (327 - 2) * 100
 
 wb.save(path_excel)
