@@ -79,13 +79,10 @@ pyautogui.press("space", interval=.01)
 
 xml_file = os.path.join(script_config.download_path, immigration_file)
 
-if not os.path.exists(xml_file):
-     sys.exit()
-
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
 
-os.makedirs(f"{script_config.path_share}\OTH", exist_ok=True)
+os.makedirs(fr"{script_config.path_share}\OTH", exist_ok=True)
 
 ytd_snf_excel = f"get_{script_config.ytd_dot_dd_mm_yy}.xlsx"
 path_ytd_snf_excel = os.path.join(fr"{script_config.path_share}\OTH", ytd_snf_excel)
@@ -105,6 +102,9 @@ ws2 = "Sheet2"
 ws1 = wb[ws1]
 ws2 = wb[ws2]
 
+if not os.path.exists(xml_file):
+     sys.exit()
+     
 tree = xml.etree.ElementTree.parse(xml_file)
 root = tree.getroot()
 
@@ -337,9 +337,9 @@ rr_wb.save(path_rr_excel)
 
 td_snf_excel = f"get_{script_config.td_dot_dd_mm_yy}.xlsx"
 
-if not os.path.exists(os.path.join(f"{script_config.path_share}\OTH", td_snf_excel)):
-     path_td_snf_excel = os.path.join(f"{script_config.path_share}\OTH", td_snf_excel)
-     shutil.copy(os.path.join(f"{script_config.path_share}\OTH", "get_data.xlsx"), path_td_snf_excel)
+if not os.path.exists(os.path.join(fr"{script_config.path_share}\OTH", td_snf_excel)):
+     path_td_snf_excel = os.path.join(fr"{script_config.path_share}\OTH", td_snf_excel)
+     shutil.copy(os.path.join(fr"{script_config.path_share}\OTH", "get_data.xlsx"), path_td_snf_excel)
 
 os.startfile(path_tm_excel)
 os.startfile(path_rr_excel)
