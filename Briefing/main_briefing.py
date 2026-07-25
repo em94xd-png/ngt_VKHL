@@ -290,6 +290,8 @@ path_arrival = os.path.join(current_path, arrival)
 tree = xml.etree.ElementTree.parse(path_arrival)
 root = tree.getroot()
 
+num = 16
+
 for _ in root.findall(".//G_RESERVATION"):
     name = _.find("FULL_NAME_NO_SHR_IND").text if _.find("FULL_NAME_NO_SHR_IND") is not None else "-"
     rm = _.find("DISP_ROOM_NO").text if _.find("DISP_ROOM_NO") is not None else "-"
@@ -299,11 +301,20 @@ for _ in root.findall(".//G_RESERVATION"):
     arr = _.find("TRUNC_BEGIN").text if _.find("TRUNC_BEGIN") is not None else "-"
     dep = _.find("TRUNC_END").text if _.find("TRUNC_END") is not None else "-"
     eta = _.find("ARRIVAL_TIME").text if _.find("ARRIVAL_TIME") is not None else "-"
-    cmt = _.find("RES_COMMENT").text if _.find("RES_COMMENT") is not None else "-"
+    cmt = _.find(".//G_COMMENT_RESV_NAME_ID/RES_COMMENT_DESCRIPTION").text if _.find(".//G_COMMENT_RESV_NAME_ID/RES_COMMENT_DESCRIPTION") is not None else "-"
+    if cmt == "RESERVATION":
+        cmt = _.find(".//RES_COMMENT").text if _.find(".//RES_COMMENT").text is not None else "-"
 
-num = 1
-for _ in range(16, ws.max_row + 1):
-    ws.cell(row=num, column=1, value="-")
+    ws[f"A{num}"] = name
+    ws[f"D{num}"] = rm
+    ws[f"F{num}"] = vip
+    ws[f"H{num}"] = adl
+    ws[f"I{num}"] = arr
+    ws[f"J{num}"] = dep
+    ws[f"J{num}"] = dep
+    ws[f"L{num}"] = eta
+    ws[f"P{num}"] = cmt
+
     num += 1
-        
+
 wb.save(path_excel)
