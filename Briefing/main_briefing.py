@@ -284,19 +284,23 @@ rm = int(ws["E9"].value if str(ws["E9"].value) else 0)
 ws["E11"] = round(float((rm - (cmp + hu)) / 327 * 100), 2)
 ws["E11"].number_format = "#.##\"%\""
 
-# rm_next_1 = int(ws["M9"].value if str(ws["M9"].value) else 0)
-# ws["M11"] = (rm_next_1 - 2) / (327 - 2) * 100
+arrival = "res_detail_142956722.XML"
+path_arrival = os.path.join(current_path, arrival)
 
-# rm_next_2 = int(ws["O9"].value if str(ws["O9"].value) else 0)
-# ws["O11"] = (rm_next_2 - 2) / (327 - 2) * 100
+tree = xml.etree.ElementTree.parse(path_arrival)
+root = tree.getroot()
 
-# rm_next_3 = int(ws["Q9"].value if str(ws["Q9"].value) else 0)
-# ws["Q11"] = (rm_next_3 - 2) / (327 - 2) * 100
+for _ in root.findall(".//G_RESERVATION"):
+    name = _.find("FULL_NAME_NO_SHR_IND").text if _.find("FULL_NAME_NO_SHR_IND") is not None else "-"
+    rm = _.find("DISP_ROOM_NO").text if _.find("DISP_ROOM_NO") is not None else "-"
+    vip = _.find("VIP").text if _.find("VIP") is not None else "-"
+    adl = _.find("ADULTS").text if _.find("ADULTS") is not None else "-"
+    chd = _.find("CHILDREN").text if _.find("CHILDREN") is not None else "-"
+    arr = _.find("TRUNC_BEGIN").text if _.find("TRUNC_BEGIN") is not None else "-"
+    dep = _.find("TRUNC_END").text if _.find("TRUNC_END") is not None else "-"
+    eta = _.find("ARRIVAL_TIME").text if _.find("ARRIVAL_TIME") is not None else "-"
+    cmt = _.find("RES_COMMENT").text if _.find("RES_COMMENT") is not None else "-"
 
-# rm_next_4 = int(ws["S9"].value if str(ws["S9"].value) else 0)
-# ws["S11"] = (rm_next_4 - 2) / (327 - 2) * 100
 
-# rm_next_5 = int(ws["U9"].value if str(ws["U9"].value) else 0)
-# ws["U11"] = (rm_next_5 - 2) / (327 - 2) * 100
 
 wb.save(path_excel)
