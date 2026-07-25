@@ -301,6 +301,9 @@ for _ in root.findall(".//G_RESERVATION"):
     eta = _.find("ARRIVAL_TIME").text if _.find("ARRIVAL_TIME") is not None else "-"
     cmt = _.find("RES_COMMENT").text if _.find("RES_COMMENT") is not None else "-"
 
-
-
+num = 1
+for _ in range(16, ws.max_row + 1):
+    ws.cell(row=num, column=1, value="-")
+    num += 1
+        
 wb.save(path_excel)
