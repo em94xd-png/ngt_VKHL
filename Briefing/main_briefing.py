@@ -1,5 +1,7 @@
 from openpyxl import *
 import os, xml.etree.ElementTree, sys
+from datetime import *
+from openpyxl.styles import PatternFill
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -296,6 +298,9 @@ for _ in root.findall(".//G_RESERVATION"):
     name = _.find("FULL_NAME_NO_SHR_IND").text if _.find("FULL_NAME_NO_SHR_IND") is not None else "-"
     rm = _.find("DISP_ROOM_NO").text if _.find("DISP_ROOM_NO") is not None else "-"
     vip = _.find("VIP").text if _.find("VIP") is not None else "-"
+    memb = None
+    for mb in _.findall(".//G_MEM_TYPE_LEVEL"):
+        memb = mb.find("MEMBERSHIP_LEVEL").text
     adl = _.find("ADULTS").text if _.find("ADULTS") is not None else "-"
     chd = _.find("CHILDREN").text if _.find("CHILDREN") is not None else "-"
     arr = _.find("TRUNC_BEGIN").text if _.find("TRUNC_BEGIN") is not None else "-"
@@ -313,14 +318,50 @@ for _ in root.findall(".//G_RESERVATION"):
                         if _.strip().lower() in str(in_cmt).strip().lower():
                             cmt = in_cmt
 
-    ws[f"A{num}"] = name
+    set_name = [ _.strip() for _ in name.split(",")]
+    ln, fn, tt = set_name[0], set_name[1], set_name[2]
+    if (ln, fn, tt):
+        ws[f"A{num}"] = f"{tt}. {fn} {ln}"
+        ws[f"A{num}"].fill = PatternFill(fill_type=None)
+    if tt is None:
+        ws[f"A{num}"] = f"{tt}. {fn} {ln}"
+        red_color = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
+        ws[f"A{num}"].fill = red_color
+    
+    ws[f"C{num}"] = "-"
+
     ws[f"D{num}"] = rm
-    ws[f"F{num}"] = vip
-    ws[f"H{num}"] = adl
-    ws[f"I{num}"] = arr
-    ws[f"J{num}"] = dep
-    ws[f"J{num}"] = dep
-    ws[f"L{num}"] = eta
+
+    if vip is not None:
+        ws[f"F{num}"] = vip
+        if memb:
+            ws[f"F{num}"] = f"{vip}\n{memb}"
+    if vip is None:
+        ws[f"F{num}"] = "-"
+        if memb:
+            ws[f"F{num}"] = f"VIPG\n{memb}"
+
+    if chd is not None:
+        ws[f"H{num}"] = f"{adl}+{chd}"
+    if chd is None or chd == "0":
+        ws[f"H{num}"] = f"{adl}"
+
+    arr = datetime.strptime(arr.upper(), "%d-%b-%y")
+    ws[f"I{num}"] = arr.strftime("%d/%m/%y")
+
+    dep = datetime.strptime(dep.upper(), "%d-%b-%y")
+    ws[f"J{num}"] = dep.strftime("%d/%m/%y")
+
+    ws[f"K{num}"] = "-"
+
+    if eta is not None:
+        ws[f"L{num}"] = eta
+        ws[f"L{num}"].value = eta.replace(":", ".")
+    if eta is None:
+        ws[f"L{num}"] = "15.00"
+
+    ws[f"N{num}"] = "-"
+
     ws[f"P{num}"] = cmt
 
     num += 1
