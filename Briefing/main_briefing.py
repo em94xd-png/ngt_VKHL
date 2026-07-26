@@ -366,4 +366,21 @@ for _ in root.findall(".//G_RESERVATION"):
 
     num += 1
 
-wb.save(path_excel)
+departure = "departure_all_142956320.XML"
+path_departure = os.path.join(current_path, departure)
+
+tree = xml.etree.ElementTree.parse(path_departure)
+root = tree.getroot()
+
+for _ in root.findall(".//G_ROOM"):
+    name = _.find("GUEST_NAME").text if _.find("GUEST_NAME") is not None else "-"
+    rm = _.find("ROOM").text if _.find("ROOM") is not None else "-"
+    vip = _.find("VIP").text if _.find("VIP") is not None else "-"
+    adl = _.find("ADULTS").text if _.find("ADULTS") is not None else "-"
+    chd = _.find("CHILDREN").text if _.find("CHILDREN") is not None else "-"
+    arr = _.find("CHAR_ARRIVAL").text if _.find("CHAR_ARRIVAL") is not None else "-"
+    dep = _.find("CHAR_DEPART").text if _.find("CHAR_DEPART") is not None else "-"
+
+        
+
+# wb.save(path_excel)
