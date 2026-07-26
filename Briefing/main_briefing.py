@@ -301,9 +301,17 @@ for _ in root.findall(".//G_RESERVATION"):
     arr = _.find("TRUNC_BEGIN").text if _.find("TRUNC_BEGIN") is not None else "-"
     dep = _.find("TRUNC_END").text if _.find("TRUNC_END") is not None else "-"
     eta = _.find("ARRIVAL_TIME").text if _.find("ARRIVAL_TIME") is not None else "-"
-    cmt = _.find(".//G_COMMENT_RESV_NAME_ID/RES_COMMENT_DESCRIPTION").text if _.find(".//G_COMMENT_RESV_NAME_ID/RES_COMMENT_DESCRIPTION") is not None else "-"
-    if cmt == "RESERVATION":
-        cmt = _.find(".//RES_COMMENT").text if _.find(".//RES_COMMENT").text is not None else "-"
+    pf = ("PAID", "CTC", "POA", "COA", "POD")
+    cmt = None
+    for cmt_res in _.findall(".//G_COMMENT_RESV_NAME_ID"):
+        in_cmt = cmt_res.find("RES_COMMENT").text
+        if in_cmt and in_cmt.startswith(pf):
+            cmt = in_cmt
+        if cmt is None:
+            for _ in str(pf).strip().lower():
+                    if cmt_res.find("RES_COMMENT_DESCRIPTION").text == "RESERVATION":
+                        if _.strip().lower() in str(in_cmt).strip().lower():
+                            cmt = in_cmt
 
     ws[f"A{num}"] = name
     ws[f"D{num}"] = rm
