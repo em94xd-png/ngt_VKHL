@@ -380,6 +380,8 @@ for _ in root.findall(".//G_ROOM"):
     chd = _.find("CHILDREN").text if _.find("CHILDREN") is not None else "-"
     arr = _.find("CHAR_ARRIVAL").text if _.find("CHAR_ARRIVAL") is not None else "-"
     dep = _.find("CHAR_DEPART").text if _.find("CHAR_DEPART") is not None else "-"
+    etd = _.find("DEPARTURE_TIME").text if _.find("DEPARTURE_TIME") is not None else "-"
+    # cmt = _.find("RES_COMMENT").text if _.find("RES_COMMENT") is not None else "-"
 
         
 
