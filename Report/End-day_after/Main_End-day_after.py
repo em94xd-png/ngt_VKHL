@@ -551,15 +551,43 @@ time.sleep(.5)
 pyautogui.press("down", presses=2, interval=.01)
 pyautogui.press("right", presses=1, interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(2)                             
+
+def search_enter_step3():
+    while True:
+        if pyautogui.pixelMatchesColor(104, 351, (16, 16, 16), tolerance=10):
+            break
+
+search_enter_step3()
+time.sleep(.5)                             
 pyautogui.press("tab", presses=2, interval=.01)
 
 # Guest Ledger Detail
 pyautogui.write("gl_led_de", interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(1.75)
+
+def search_enter_step4():
+    while True:
+        if pyautogui.pixelMatchesColor(1852, 411, (204, 204, 204), tolerance=10):
+            break
+
+def search_enter_step5():
+    while True:
+        if pyautogui.pixelMatchesColor(1852, 411, (6, 108, 122), tolerance=10):
+            break
+
+search_enter_step4()
+search_enter_step5()
+time.sleep(.5)
 pyautogui.press("tab", presses=8, interval=.01)
 pyautogui.press("down", interval=.01)
+
+def search_enter_step6():
+    while True:
+        if pyautogui.pixelMatchesColor(349, 517, (235, 245, 247), tolerance=10):
+            break
+
+search_enter_step6()
+time.sleep(.15)
 pyautogui.press("enter", presses=3, interval=1)
 # Guest Ledger Detail: Save
 script_config.wait_report()
@@ -586,15 +614,26 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(0.5)
 script_config.tab_reserve(1)
 pyautogui.press("enter", interval=0.01)
-time.sleep(1)
+
+def search_enter_step7():
+    while True:
+        if pyautogui.pixelMatchesColor(349, 517, (244, 243, 239), tolerance=10):
+            break
+        
+search_enter_step7()
+time.sleep(.5)
 script_config.tab_reserve(9)
 
 # Manager Flash
 pyautogui.write("manager", interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(1.75)
+search_enter_step4()
+search_enter_step5()
+time.sleep(.5)
 pyautogui.press("tab", presses=8, interval=.01)
 pyautogui.press("down", interval=.01)
+search_enter_step6()
+time.sleep(.15)
 pyautogui.press("enter", presses=3, interval=1)
 # Manager Flash: Save
 script_config.wait_report()
@@ -621,16 +660,20 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(0.5)
 script_config.tab_reserve(1)
 pyautogui.press("enter", interval=0.01)
-time.sleep(1)
+search_enter_step7()
+time.sleep(.5)
 script_config.tab_reserve(9)
 
 # Trial Balance
 pyautogui.write("tb", interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(1.75)
+search_enter_step4()
+search_enter_step5()
+time.sleep(.5)
 pyautogui.press("tab", presses=8, interval=.01)
 pyautogui.press("down", interval=.01)
-time.sleep(.1)
+search_enter_step6()
+time.sleep(.15)
 pyautogui.press("enter", presses=3, interval=1)
 # Trial Balance: Save
 script_config.wait_report()
@@ -657,15 +700,20 @@ pyautogui.hotkey("ctrl", "w")
 time.sleep(0.5)
 script_config.tab_reserve(1)
 pyautogui.press("enter", interval=0.01)
-time.sleep(1)
+search_enter_step7()
+time.sleep(.5)
 script_config.tab_reserve(9)
 
 # No Show
 pyautogui.write("noshow", interval=.01)
 pyautogui.press("enter", interval=.01)
-time.sleep(1.75)
+search_enter_step4()
+search_enter_step5()
+time.sleep(.5)
 pyautogui.press("tab", presses=8, interval=.01)
 pyautogui.press("down", interval=.01)
+search_enter_step6()
+time.sleep(.15)
 pyautogui.press("enter", presses=3, interval=1)
 # No Show: Save
 script_config.wait_report()
