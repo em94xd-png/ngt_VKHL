@@ -288,6 +288,8 @@ ws["E11"].number_format = "#.##\"%\""
 
 pf = ("PAID", "CTC", "POA", "COA", "POD", "COMP", "MASTER")
 
+red_color = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
+
 arrival = "res_detail_142956722.XML"
 path_arrival = os.path.join(current_path, arrival)
 
@@ -299,14 +301,15 @@ arr_start = 16
 for _ in root.findall(".//G_RESERVATION"):
     name = _.find("FULL_NAME_NO_SHR_IND").text if _.find("FULL_NAME_NO_SHR_IND") is not None else "-"
     rm = _.find("DISP_ROOM_NO").text if _.find("DISP_ROOM_NO") is not None else "-"
+    ta = _.find("COMPANY_NAME").text if _.find("COMPANY_NAME") is not None else "-"
     vip = _.find("VIP").text if _.find("VIP") is not None else "-"
     memb = None
     for mb in _.findall(".//G_MEM_TYPE_LEVEL"):
         memb = mb.find("MEMBERSHIP_LEVEL").text
     adl = _.find("ADULTS").text if _.find("ADULTS") is not None else "-"
     chd = _.find("CHILDREN").text if _.find("CHILDREN") is not None else "-"
-    arr = _.find("TRUNC_BEGIN").text if _.find("TRUNC_BEGIN") is not None else "-"
-    dep = _.find("TRUNC_END").text if _.find("TRUNC_END") is not None else "-"
+    arr = _.find("ARRIVAL").text if _.find("ARRIVAL") is not None else "-"
+    dep = _.find("DEPARTURE").text if _.find("DEPARTURE") is not None else "-"
     eta = _.find("ARRIVAL_TIME").text if _.find("ARRIVAL_TIME") is not None else "-"
     cmt = None
     for cmt_res in _.findall(".//G_COMMENT_RESV_NAME_ID"):
@@ -326,12 +329,40 @@ for _ in root.findall(".//G_RESERVATION"):
         ws[f"A{arr_start}"].fill = PatternFill(fill_type=None)
     if tt is None:
         ws[f"A{arr_start}"] = f"{tt}. {fn} {ln}"
-        red_color = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
         ws[f"A{arr_start}"].fill = red_color
-    
+
+    if "Maintenance".strip().lower() in str(name).strip().lower():
+        for _ in ws[f"A{arr_start}:P{arr_start}"][0]:
+            _.fill = red_color
+
     ws[f"C{arr_start}"] = "-"
 
     ws[f"D{arr_start}"] = rm
+
+    if "MI Squared".strip().lower() in str(cmt).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nMI Squared"
+    if "Booking.com".strip().lower() in str(ta).strip().lower():
+            ws[f"D{arr_start}"] = f"{rm}\nBooking.com"
+    if "BG Asia".strip().lower() in str(ta).strip().lower():
+            ws[f"D{arr_start}"] = f"{rm}\nBG Asia"
+    if "Siam Tours".strip().lower() in str(ta).strip().lower():
+            ws[f"D{arr_start}"] = f"{rm}\nSiam Tours"
+    if "Travelbullz".strip().lower() in str(ta).strip().lower():
+            ws[f"D{arr_start}"] = f"{rm}\nTravelbullz"
+    if "BTC".strip().lower() in str(ta).strip().lower():
+            ws[f"D{arr_start}"] = f"{rm}\nBTC"
+    if "DERTOUR".strip().lower() in str(ta).strip().lower():
+            ws[f"D{arr_start}"] = f"{rm}\nGo Vacation"
+    if "Expedia".strip().lower() in str(ta).strip().lower():
+            ws[f"D{arr_start}"] = f"{rm}\nExpedia"
+    if "DNATA".strip().lower() in str(ta).strip().lower():
+            ws[f"D{arr_start}"] = f"{rm}\nDNATA"
+    if "Miki".strip().lower() in str(ta).strip().lower():
+            ws[f"D{arr_start}"] = f"{rm}\nMiki Travel"
+    if "Rak".strip().lower() in str(ta).strip().lower():
+            ws[f"D{arr_start}"] = f"{rm}\nRak Journeys"
+    if "Hotelbeds".strip().lower() in str(ta).strip().lower():
+            ws[f"D{arr_start}"] = f"{rm}\nHotelbeds"
 
     if vip is not None:
         ws[f"F{arr_start}"] = vip
@@ -339,19 +370,62 @@ for _ in root.findall(".//G_RESERVATION"):
             ws[f"F{arr_start}"] = f"{vip}\n{memb}"
     if vip is None:
         ws[f"F{arr_start}"] = "-"
-        if memb:
-            ws[f"F{arr_start}"] = f"VIPG\n{memb}"
+        if memb in ["SILVER", "GOLD"]:
+            if diff_date.days < 7:
+                if vip not in ["VIP1", "VIP2", "VIPS"]:
+                    ws[f"F{arr_start}"] = f"VIPG\n{memb}"
+        if memb in ["PLATINUM"]:
+            if vip not in ["VIP1", "VIP2"]:
+                ws[f"F{arr_start}"] = f"VIPS\n{memb}"
+        if memb in ["TITANIUM", "RED"]:
+            if vip not in ["VIP1"]:
+                ws[f"F{arr_start}"] = f"VIP2\n{memb}"
+
+    arr_date = datetime.strptime(arr, "%d/%m/%y")
+    dep_date = datetime.strptime(dep, "%d/%m/%y")
+    diff_date = dep_date - arr_date
+
+    if diff_date.days >= 7:
+        if vip not in ["VIP1", "VIP2"]:
+            if memb:
+                ws[f"F{arr_start}"] = f"VIPS\n{memb}"
+            if not memb:
+                ws[f"F{arr_start}"] = f"VIPS"
+
+    if memb in ["SILVER", "GOLD"]:
+        if diff_date.days < 7:
+            if vip not in ["VIP1", "VIP2", "VIPS"]:
+                ws[f"F{arr_start}"] = f"VIPG\n{memb}"
+    if memb in ["PLATINUM"]:
+        if vip not in ["VIP1", "VIP2"]:
+            ws[f"F{arr_start}"] = f"VIPS\n{memb}"
+    if memb in ["TITANIUM", "RED"]:
+        if vip not in ["VIP1"]:
+            ws[f"F{arr_start}"] = f"VIP2\n{memb}"
+
+    if not "MI Squared".strip().lower() in str(cmt).strip().lower():
+        if "JADE/RUBY".strip().lower() in str(cmt).strip().lower():
+            ws[f"F{arr_start}"] = f"VIPO\nJADE"
+        if "DIAMOND".strip().lower() in str(cmt).strip().lower():
+            ws[f"F{arr_start}"] = f"VIPO\nDIAMOND"
+        if "PLATINUM".strip().lower() in str(cmt).strip().lower():
+            ws[f"F{arr_start}"] = f"VIPO\nPLATINUM"
+        if "ROYAL".strip().lower() in str(cmt).strip().lower():
+            ws[f"F{arr_start}"] = f"VIPO\nROYAL"
+    if "MI Squared".strip().lower() in str(cmt).strip().lower():
+        if diff_date.days < 7:
+            ws[f"F{arr_start}"] = "-"
+        if diff_date.days >= 7:
+            ws[f"F{arr_start}"] = "VIPS"
 
     if chd is not None:
         ws[f"H{arr_start}"] = f"{adl}+{chd}"
     if chd is None or chd == "0":
         ws[f"H{arr_start}"] = f"{adl}"
 
-    arr = datetime.strptime(arr.upper(), "%d-%b-%y")
-    ws[f"I{arr_start}"] = arr.strftime("%d/%m/%y")
+    ws[f"I{arr_start}"] = arr
 
-    dep = datetime.strptime(dep.upper(), "%d-%b-%y")
-    ws[f"J{arr_start}"] = dep.strftime("%d/%m/%y")
+    ws[f"J{arr_start}"] = dep
 
     ws[f"K{arr_start}"] = "-"
 
@@ -361,7 +435,7 @@ for _ in root.findall(".//G_RESERVATION"):
     if eta is None:
         ws[f"L{arr_start}"] = "15.00"
 
-    ws[f"N{arr_start}"] = "-"
+    ws[f"N{arr_start}"] = "OWN"
 
     ws[f"P{arr_start}"] = cmt
 
@@ -378,6 +452,7 @@ dep_start = 133
 for _ in root.findall(".//G_ROOM"):
     name = _.find("GUEST_NAME").text if _.find("GUEST_NAME") is not None else "-"
     rm = _.find("ROOM").text if _.find("ROOM") is not None else "-"
+    ta = _.find("TRAVEL_AGENT_NAME").text if _.find("TRAVEL_AGENT_NAME") is not None else "-"
     vip = _.find("VIP").text if _.find("VIP") is not None else "-"
     memb = None
     for mb in _.findall(".//LIST_G_MEMBERSHIP/G_MEMBERSHIP"):
@@ -397,7 +472,7 @@ for _ in root.findall(".//G_ROOM"):
                 for _ in str(pf).strip().lower():
                     if _ in str(in_cmt).strip().lower():
                         cmt = in_cmt
-    
+
     set_name = [ _.strip() for _ in name.split(",")]
     ln, fn, tt = set_name[0], set_name[1], set_name[2]
     if (ln, fn, tt):
@@ -405,12 +480,40 @@ for _ in root.findall(".//G_ROOM"):
         ws[f"A{dep_start}"].fill = PatternFill(fill_type=None)
     if tt is None:
         ws[f"A{dep_start}"] = f"{tt}. {fn} {ln}"
-        red_color = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
         ws[f"A{dep_start}"].fill = red_color
+
+    if "Maintenance".strip().lower() in str(name).strip().lower():
+        for _ in ws[f"A{dep_start}:P{arr_start}"][0]:
+            _.fill = red_color
 
     ws[f"C{dep_start}"] = "-"
 
     ws[f"D{dep_start}"] = rm
+
+    if "MI Squared".strip().lower() in str(cmt).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nMI Squared"
+    if "Booking.com".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nBooking.com"
+    if "BG Asia".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nBG Asia"
+    if "Siam Tours".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nSiam Tours"
+    if "Travelbullz".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nTravelbullz"
+    if "BTC".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nBTC"
+    if "DERTOUR".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nGo Vacation"
+    if "Expedia".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nExpedia"
+    if "DNATA".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nDNATA"
+    if "Miki".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nMiki Travel"
+    if "Rak".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nRak Journeys"
+    if "Hotelbeds".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nHotelbeds"
 
     if vip is not None:
         ws[f"F{dep_start}"] = vip
@@ -419,11 +522,15 @@ for _ in root.findall(".//G_ROOM"):
     if vip is None:
         ws[f"F{dep_start}"] = "-"
         if memb in ["SILVER", "GOLD"]:
-            ws[f"F{dep_start}"] = f"VIPG\n{memb}"
+            if diff_date.days < 7:
+                if vip not in ["VIP1", "VIP2", "VIPS"]:
+                    ws[f"F{dep_start}"] = f"VIPG\n{memb}"
         if memb in ["PLATINUM"]:
-            ws[f"F{dep_start}"] = f"VIPS\n{memb}"
+            if vip not in ["VIP1", "VIP2"]:
+                ws[f"F{dep_start}"] = f"VIPS\n{memb}"
         if memb in ["TITANIUM", "RED"]:
-            ws[f"F{dep_start}"] = f"VIP2\n{memb}"
+            if vip not in ["VIP1"]:
+                ws[f"F{dep_start}"] = f"VIP2\n{memb}"
 
     arr_date = datetime.strptime(arr, "%d/%m/%y")
     dep_date = datetime.strptime(dep, "%d/%m/%y")
@@ -437,8 +544,9 @@ for _ in root.findall(".//G_ROOM"):
                 ws[f"F{dep_start}"] = f"VIPS"
 
     if memb in ["SILVER", "GOLD"]:
-        if vip not in ["VIP1", "VIP2", "VIPS"]:
-            ws[f"F{dep_start}"] = f"VIPG\n{memb}"
+        if diff_date.days < 7:
+            if vip not in ["VIP1", "VIP2", "VIPS"]:
+                ws[f"F{dep_start}"] = f"VIPG\n{memb}"
     if memb in ["PLATINUM"]:
         if vip not in ["VIP1", "VIP2"]:
             ws[f"F{dep_start}"] = f"VIPS\n{memb}"
@@ -446,16 +554,20 @@ for _ in root.findall(".//G_ROOM"):
         if vip not in ["VIP1"]:
             ws[f"F{dep_start}"] = f"VIP2\n{memb}"
 
-    if int(rm) in range(62, 80):
-        if not "MI Squared" in str(cmt).strip().lower():
-                if "JADE/RUBY".strip().lower() in str(cmt).strip().lower():
-                    ws[f"F{dep_start}"] = f"VIPO\nJADE"
-                if "DIAMOND".strip().lower() in str(cmt).strip().lower():
-                    ws[f"F{dep_start}"] = f"VIPO\nDIAMOND"
-                if "PLATINUM".strip().lower() in str(cmt).strip().lower():
-                    ws[f"F{dep_start}"] = f"VIPO\nPLATINUM"
-                if "ROYAL".strip().lower() in str(cmt).strip().lower():
-                    ws[f"F{dep_start}"] = f"VIPO\nROYAL"
+    if not "MI Squared".strip().lower() in str(cmt).strip().lower():
+        if "JADE/RUBY".strip().lower() in str(cmt).strip().lower():
+            ws[f"F{dep_start}"] = f"VIPO\nJADE"
+        if "DIAMOND".strip().lower() in str(cmt).strip().lower():
+            ws[f"F{dep_start}"] = f"VIPO\nDIAMOND"
+        if "PLATINUM".strip().lower() in str(cmt).strip().lower():
+            ws[f"F{dep_start}"] = f"VIPO\nPLATINUM"
+        if "ROYAL".strip().lower() in str(cmt).strip().lower():
+            ws[f"F{dep_start}"] = f"VIPO\nROYAL"
+    if "MI Squared".strip().lower() in str(cmt).strip().lower():
+        if diff_date.days < 7:
+            ws[f"F{dep_start}"] = "-"
+        if diff_date.days >= 7:
+            ws[f"F{dep_start}"] = "VIPS"
 
     if chd is not None:
         ws[f"H{dep_start}"] = f"{adl}+{chd}"
@@ -472,9 +584,9 @@ for _ in root.findall(".//G_ROOM"):
         ws[f"L{dep_start}"] = etd
         ws[f"L{dep_start}"].value = etd.replace(":", ".")
     if etd is None:
-        ws[f"L{dep_start}"] = "15.00"
+        ws[f"L{dep_start}"] = "12.00"
 
-    ws[f"N{dep_start}"] = "-"
+    ws[f"N{dep_start}"] = "OWN"
 
     ws[f"P{dep_start}"] = cmt
 
