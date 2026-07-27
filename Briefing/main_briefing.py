@@ -286,13 +286,15 @@ rm = int(ws["E9"].value if str(ws["E9"].value) else 0)
 ws["E11"] = round(float((rm - (cmp + hu)) / 327 * 100), 2)
 ws["E11"].number_format = "#.##\"%\""
 
+pf = ("PAID", "CTC", "POA", "COA", "POD", "COMP", "MASTER")
+
 arrival = "res_detail_142956722.XML"
 path_arrival = os.path.join(current_path, arrival)
 
 tree = xml.etree.ElementTree.parse(path_arrival)
 root = tree.getroot()
 
-num = 16
+arr_start = 16
 
 for _ in root.findall(".//G_RESERVATION"):
     name = _.find("FULL_NAME_NO_SHR_IND").text if _.find("FULL_NAME_NO_SHR_IND") is not None else "-"
@@ -306,65 +308,64 @@ for _ in root.findall(".//G_RESERVATION"):
     arr = _.find("TRUNC_BEGIN").text if _.find("TRUNC_BEGIN") is not None else "-"
     dep = _.find("TRUNC_END").text if _.find("TRUNC_END") is not None else "-"
     eta = _.find("ARRIVAL_TIME").text if _.find("ARRIVAL_TIME") is not None else "-"
-    pf = ("PAID", "CTC", "POA", "COA", "POD")
     cmt = None
     for cmt_res in _.findall(".//G_COMMENT_RESV_NAME_ID"):
         in_cmt = cmt_res.find("RES_COMMENT").text
         if in_cmt and in_cmt.startswith(pf):
             cmt = in_cmt
         if cmt is None:
-            for _ in str(pf).strip().lower():
-                    if cmt_res.find("RES_COMMENT_DESCRIPTION").text == "RESERVATION":
-                        if _.strip().lower() in str(in_cmt).strip().lower():
+            if cmt_res.find("RES_COMMENT_DESCRIPTION").text == "RESERVATION":
+                for _ in str(pf).strip().lower():
+                        if _ in str(in_cmt).strip().lower():
                             cmt = in_cmt
 
     set_name = [ _.strip() for _ in name.split(",")]
     ln, fn, tt = set_name[0], set_name[1], set_name[2]
     if (ln, fn, tt):
-        ws[f"A{num}"] = f"{tt}. {fn} {ln}"
-        ws[f"A{num}"].fill = PatternFill(fill_type=None)
+        ws[f"A{arr_start}"] = f"{tt}. {fn} {ln}"
+        ws[f"A{arr_start}"].fill = PatternFill(fill_type=None)
     if tt is None:
-        ws[f"A{num}"] = f"{tt}. {fn} {ln}"
+        ws[f"A{arr_start}"] = f"{tt}. {fn} {ln}"
         red_color = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
-        ws[f"A{num}"].fill = red_color
+        ws[f"A{arr_start}"].fill = red_color
     
-    ws[f"C{num}"] = "-"
+    ws[f"C{arr_start}"] = "-"
 
-    ws[f"D{num}"] = rm
+    ws[f"D{arr_start}"] = rm
 
     if vip is not None:
-        ws[f"F{num}"] = vip
+        ws[f"F{arr_start}"] = vip
         if memb:
-            ws[f"F{num}"] = f"{vip}\n{memb}"
+            ws[f"F{arr_start}"] = f"{vip}\n{memb}"
     if vip is None:
-        ws[f"F{num}"] = "-"
+        ws[f"F{arr_start}"] = "-"
         if memb:
-            ws[f"F{num}"] = f"VIPG\n{memb}"
+            ws[f"F{arr_start}"] = f"VIPG\n{memb}"
 
     if chd is not None:
-        ws[f"H{num}"] = f"{adl}+{chd}"
+        ws[f"H{arr_start}"] = f"{adl}+{chd}"
     if chd is None or chd == "0":
-        ws[f"H{num}"] = f"{adl}"
+        ws[f"H{arr_start}"] = f"{adl}"
 
     arr = datetime.strptime(arr.upper(), "%d-%b-%y")
-    ws[f"I{num}"] = arr.strftime("%d/%m/%y")
+    ws[f"I{arr_start}"] = arr.strftime("%d/%m/%y")
 
     dep = datetime.strptime(dep.upper(), "%d-%b-%y")
-    ws[f"J{num}"] = dep.strftime("%d/%m/%y")
+    ws[f"J{arr_start}"] = dep.strftime("%d/%m/%y")
 
-    ws[f"K{num}"] = "-"
+    ws[f"K{arr_start}"] = "-"
 
     if eta is not None:
-        ws[f"L{num}"] = eta
-        ws[f"L{num}"].value = eta.replace(":", ".")
+        ws[f"L{arr_start}"] = eta
+        ws[f"L{arr_start}"].value = eta.replace(":", ".")
     if eta is None:
-        ws[f"L{num}"] = "15.00"
+        ws[f"L{arr_start}"] = "15.00"
 
-    ws[f"N{num}"] = "-"
+    ws[f"N{arr_start}"] = "-"
 
-    ws[f"P{num}"] = cmt
+    ws[f"P{arr_start}"] = cmt
 
-    num += 1
+    arr_start += 1
 
 departure = "departure_all_142956320.XML"
 path_departure = os.path.join(current_path, departure)
@@ -372,17 +373,111 @@ path_departure = os.path.join(current_path, departure)
 tree = xml.etree.ElementTree.parse(path_departure)
 root = tree.getroot()
 
+dep_start = 133
+
 for _ in root.findall(".//G_ROOM"):
     name = _.find("GUEST_NAME").text if _.find("GUEST_NAME") is not None else "-"
     rm = _.find("ROOM").text if _.find("ROOM") is not None else "-"
     vip = _.find("VIP").text if _.find("VIP") is not None else "-"
+    memb = None
+    for mb in _.findall(".//LIST_G_MEMBERSHIP/G_MEMBERSHIP"):
+        memb = mb.find("MEMBERSHIP_LEVEL").text
     adl = _.find("ADULTS").text if _.find("ADULTS") is not None else "-"
     chd = _.find("CHILDREN").text if _.find("CHILDREN") is not None else "-"
     arr = _.find("CHAR_ARRIVAL").text if _.find("CHAR_ARRIVAL") is not None else "-"
     dep = _.find("CHAR_DEPART").text if _.find("CHAR_DEPART") is not None else "-"
     etd = _.find("DEPARTURE_TIME").text if _.find("DEPARTURE_TIME") is not None else "-"
-    # cmt = _.find("RES_COMMENT").text if _.find("RES_COMMENT") is not None else "-"
+    cmt = None
+    for cmt_res in _.findall("LIST_G_COMMENT_RESV_NAME_ID/G_COMMENT_RESV_NAME_ID"):
+        in_cmt = cmt_res.find("RES_COMMENT").text
+        if in_cmt and in_cmt.startswith(pf):
+            cmt = in_cmt
+        if cmt is None:
+            if cmt_res.find("RES_COMMENT_DESCRIPTION").text == "Reservation":
+                for _ in str(pf).strip().lower():
+                    if _ in str(in_cmt).strip().lower():
+                        cmt = in_cmt
+    
+    set_name = [ _.strip() for _ in name.split(",")]
+    ln, fn, tt = set_name[0], set_name[1], set_name[2]
+    if (ln, fn, tt):
+        ws[f"A{dep_start}"] = f"{tt}. {fn} {ln}"
+        ws[f"A{dep_start}"].fill = PatternFill(fill_type=None)
+    if tt is None:
+        ws[f"A{dep_start}"] = f"{tt}. {fn} {ln}"
+        red_color = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
+        ws[f"A{dep_start}"].fill = red_color
 
-        
+    ws[f"C{dep_start}"] = "-"
 
-# wb.save(path_excel)
+    ws[f"D{dep_start}"] = rm
+
+    if vip is not None:
+        ws[f"F{dep_start}"] = vip
+        if memb:
+            ws[f"F{dep_start}"] = f"{vip}\n{memb}"
+    if vip is None:
+        ws[f"F{dep_start}"] = "-"
+        if memb in ["SILVER", "GOLD"]:
+            ws[f"F{dep_start}"] = f"VIPG\n{memb}"
+        if memb in ["PLATINUM"]:
+            ws[f"F{dep_start}"] = f"VIPS\n{memb}"
+        if memb in ["TITANIUM", "RED"]:
+            ws[f"F{dep_start}"] = f"VIP2\n{memb}"
+
+    arr_date = datetime.strptime(arr, "%d/%m/%y")
+    dep_date = datetime.strptime(dep, "%d/%m/%y")
+    diff_date = dep_date - arr_date
+
+    if diff_date.days >= 7:
+        if vip not in ["VIP1", "VIP2"]:
+            if memb:
+                ws[f"F{dep_start}"] = f"VIPS\n{memb}"
+            if not memb:
+                ws[f"F{dep_start}"] = f"VIPS"
+
+    if memb in ["SILVER", "GOLD"]:
+        if vip not in ["VIP1", "VIP2", "VIPS"]:
+            ws[f"F{dep_start}"] = f"VIPG\n{memb}"
+    if memb in ["PLATINUM"]:
+        if vip not in ["VIP1", "VIP2"]:
+            ws[f"F{dep_start}"] = f"VIPS\n{memb}"
+    if memb in ["TITANIUM", "RED"]:
+        if vip not in ["VIP1"]:
+            ws[f"F{dep_start}"] = f"VIP2\n{memb}"
+
+    if int(rm) in range(62, 80):
+        if not "MI Squared" in str(cmt).strip().lower():
+                if "JADE/RUBY".strip().lower() in str(cmt).strip().lower():
+                    ws[f"F{dep_start}"] = f"VIPO\nJADE"
+                if "DIAMOND".strip().lower() in str(cmt).strip().lower():
+                    ws[f"F{dep_start}"] = f"VIPO\nDIAMOND"
+                if "PLATINUM".strip().lower() in str(cmt).strip().lower():
+                    ws[f"F{dep_start}"] = f"VIPO\nPLATINUM"
+                if "ROYAL".strip().lower() in str(cmt).strip().lower():
+                    ws[f"F{dep_start}"] = f"VIPO\nROYAL"
+
+    if chd is not None:
+        ws[f"H{dep_start}"] = f"{adl}+{chd}"
+    if chd is None or chd == "0":
+        ws[f"H{dep_start}"] = f"{adl}"
+
+    ws[f"I{dep_start}"] = arr
+
+    ws[f"J{dep_start}"] = dep
+
+    ws[f"K{dep_start}"] = "-"
+
+    if etd is not None:
+        ws[f"L{dep_start}"] = etd
+        ws[f"L{dep_start}"].value = etd.replace(":", ".")
+    if etd is None:
+        ws[f"L{dep_start}"] = "15.00"
+
+    ws[f"N{dep_start}"] = "-"
+
+    ws[f"P{dep_start}"] = cmt
+
+    dep_start += 1
+
+wb.save(path_excel)
