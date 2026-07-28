@@ -13,6 +13,10 @@ Room_Type = "1H2XK,1H2XT,1H3XK,1H4XK,1H4XT,2U1XKT,2U2XKT,2U3XKT,1V1XK,1V2XK,3U1C
 Room_Class = "HRA,HRB,HRC,HRD,HSA,HSB,HSC,HSD,HSE,HVA,HVB,HVC"
 
 td = date.today()
+td_short_date = td.strftime("%#d")
+td_full_d = td.strftime("%A")
+td_full_m = td.strftime("%B")
+td_yyyy = td.strftime("%Y")
 td_dd_mm = td.strftime("%d%m")
 td_hp_dd_mm = td.strftime("%d-%b")
 td_dot_dd_mm_yy = td.strftime("%d.%m.%y")
