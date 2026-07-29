@@ -343,6 +343,22 @@ for _ in root:
                 ws["J12"] = round(val, 2)
                 ws["J12"].number_format = "#,##0.00"
 
+arr_immigration = "immigration_report_142956091.XML"
+path_arr_immigration = os.path.join(current_path, arr_immigration)
+
+tree = xml.etree.ElementTree.parse(path_arr_immigration)
+root = tree.getroot()
+
+arr_country = {}
+
+for _ in root.findall(".//G_IMMIGRATION"):
+    fn = _.find("FIRST_NAME").text if _.find("FIRST_NAME") is not None else "-"
+    ln = _.find("LAST_NAME").text if _.find("LAST_NAME") is not None else "-"
+    nt = _.find("NATIONALITY").text if _.find("NATIONALITY") is not None else "-"
+
+    set_name = f"{fn} {ln}"
+    arr_country[set_name] = nt
+
 pf = ("PAID", "CTC", "POA", "COA", "POD", "COMP", "MASTER", "COD")
 
 red_color = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
@@ -392,7 +408,10 @@ for _ in root.findall(".//G_RESERVATION"):
         for _ in ws[f"A{arr_start}:P{arr_start}"][0]:
             _.fill = red_color
 
-    ws[f"C{arr_start}"] = "-"
+    if f"{fn} {ln}" in arr_country:
+        ws[f"C{arr_start}"] = arr_country[f"{fn} {ln}"]
+    if ws[f"C{arr_start}"].value is None:
+        ws[f"C{arr_start}"] = "-"
 
     ws[f"D{arr_start}"] = rm
 
@@ -498,6 +517,22 @@ for _ in root.findall(".//G_RESERVATION"):
 
     arr_start += 1
 
+dep_immigration = "immigration_report_142956307.XML"
+path_dep_immigration = os.path.join(current_path, dep_immigration)
+
+tree = xml.etree.ElementTree.parse(path_dep_immigration)
+root = tree.getroot()
+
+dep_country = {}
+
+for _ in root.findall(".//G_IMMIGRATION"):
+    fn = _.find("FIRST_NAME").text if _.find("FIRST_NAME") is not None else "-"
+    ln = _.find("LAST_NAME").text if _.find("LAST_NAME") is not None else "-"
+    nt = _.find("NATIONALITY").text if _.find("NATIONALITY") is not None else "-"
+
+    set_name = f"{fn} {ln}"
+    dep_country[set_name] = nt
+
 departure = "departure_all_142956320.XML"
 path_departure = os.path.join(current_path, departure)
 
@@ -543,7 +578,10 @@ for _ in root.findall(".//G_ROOM"):
         for _ in ws[f"A{dep_start}:P{arr_start}"][0]:
             _.fill = red_color
 
-    ws[f"C{dep_start}"] = "-"
+    if f"{fn} {ln}" in dep_country:
+        ws[f"C{dep_start}"] = dep_country[f"{fn} {ln}"]
+    if ws[f"C{dep_start}"].value is None:
+        ws[f"C{dep_start}"] = "-"
 
     ws[f"D{dep_start}"] = rm
 
