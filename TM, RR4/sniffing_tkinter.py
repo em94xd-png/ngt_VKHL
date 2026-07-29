@@ -1,6 +1,23 @@
-import tkinter, subprocess, threading, os, sys
+import tkinter, threading, os, sys, pygetwindow, pyautogui, pyperclip, time, openpyxl, shutil
 from pystray import Icon, MenuItem, Menu
 from PIL import Image, ImageDraw
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+import script_config
+
+td_snf_excel = f"get_{script_config.td_dot_dd_mm_yy}.xlsx"
+path_td_snf_excel = os.path.join(fr"{script_config.path_share}\OTH", td_snf_excel)
+
+main_panel = "Guest information panel"
+sub_panel = "Scanning manager"
+
+def step_copy(times):
+    pyautogui.PAUSE = 0.01
+    for _ in range(times):
+        pyautogui.press("tab")
+    pyautogui.hotkey("ctrl", "c")
+    return pyperclip.paste().strip()
 
 wd = tkinter.Tk()
 wd.title("")
@@ -18,8 +35,6 @@ center_x = int(screen_width / 2 - wd_width / 2)
 center_y = int(screen_height / 2 - wd_height / 2)
 
 wd.geometry(f"{wd_width}x{wd_height}+{center_x}+{center_y}")
-
-put_data = {"get_data": None}
 
 tray_icon = None
 is_tray_running = False
@@ -63,37 +78,57 @@ def exit_it(icon=None, item=None):
 wd.bind("<Unmap>", on_minimize)
 wd.protocol("WM_DELETE_WINDOW", exit_it)
 
+snf = False
+
 def get_data():
-    run_script("get_data.py", "get_data")
+    global snf
+    if not snf:
+        snf = True
+        block_button(state="disabled")
+        threading.Thread(target=run_script, daemon=True).start()
 
-def path_to_file(_):
-    if hasattr(sys, "_MEIPASS"):
-        return os.path.join(sys._MEIPASS, _)
-    return os.path.join(os.path.dirname(os.path.abspath(__file__)), _)
+def stop_it():
+    global snf
+    if snf:
+        snf = False
+        block_button(state="normal")
 
-def run_script(path, key):
-    global put_data
-    if put_data[key] and put_data[key].poll() is None:
-        return
-    block_button(state="disabled")
-    run_file = subprocess.Popen(["python", path_to_file(path)])
-    put_data[key] = run_file
-    threading.Thread(target=monitor_it, args=(run_file,), daemon=True).start()
-
-def monitor_it(_):
-    _.wait()
-    wd.after(0, lambda: block_button(state="normal"))
+def run_script():
+    global snf
+    while snf:
+        if pygetwindow.getWindowsWithTitle(main_panel):
+            main_title = pygetwindow.getWindowsWithTitle(main_panel)[0]
+            if os.path.exists(path_td_snf_excel):
+                if not main_title.isMinimized:
+                    main_title.activate()
+                    time.sleep(.5)
+                    ln = step_copy(3)
+                    fn = step_copy(4)
+                    bd = step_copy(9)
+                    ct = step_copy(5)
+                    pn = step_copy(6)
+                    wb = openpyxl.load_workbook(path_td_snf_excel)
+                    ws3 = wb["Sheet3"]
+                    ws3.append([ln, fn, bd, ct, pn])
+                    wb.save(path_td_snf_excel)
+                    wb.close()
+                    while True:
+                        pygetwindow.getWindowsWithTitle(main_panel)
+                        if not pygetwindow.getWindowsWithTitle(main_panel):
+                            pygetwindow.getWindowsWithTitle(sub_panel)
+                            if not pygetwindow.getWindowsWithTitle(sub_panel):
+                                break
+            if not os.path.exists(path_td_snf_excel):
+                if not os.path.exists(fr"{script_config.path_share}\OTH"):
+                    sys.exit()
+                shutil.copy(os.path.join(os.path.dirname(os.path.abspath("get_data.xlsx"))), path_td_snf_excel)
+                if os.path.exists(path_td_snf_excel):
+                    continue
+        time.sleep(1)
 
 def block_button(state):
     for _ in [btn1]:
         _.configure(state=state)
-
-def stop_it():
-    global put_data
-    for _ in put_data.values():
-        if _ and _.poll() is None:
-            _.terminate()
-    block_button(state="normal")
 
 btn1 = tkinter.Button(master=wd, text="run_it", width=15, command=get_data)
 btn1.pack(pady=30)

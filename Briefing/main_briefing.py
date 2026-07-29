@@ -1,8 +1,7 @@
 from openpyxl import *
-import os, xml.etree.ElementTree, sys, pyautogui
 from datetime import *
 from openpyxl.styles import PatternFill
-import time
+import time, os, xml.etree.ElementTree, sys, pyautogui
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
