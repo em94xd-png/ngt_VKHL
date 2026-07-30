@@ -56,7 +56,7 @@ time.sleep(.5)
 pyautogui.press("tab", presses=2, interval=.01)
 pyautogui.press("enter", interval=.01)
 # Immigration Report: Save
-script_config.save_immigration()
+script_config.download_as()
 time.sleep(.5)
 pyautogui.press("tab", presses=2, interval=.01)
 pyautogui.press("space", presses=2, interval=.01)

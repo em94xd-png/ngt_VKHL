@@ -100,7 +100,7 @@ def tab_reserve(times):
     for _ in range(times):
         pyautogui.hotkey("shift", "tab")
 
-def save_immigration():
+def download_as():
      while True:
           if pyautogui.pixelMatchesColor(982, 514, (88, 88, 86), tolerance=10):
                break
