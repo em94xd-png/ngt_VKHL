@@ -1,7 +1,7 @@
 from openpyxl import *
 from datetime import *
 from openpyxl.styles import PatternFill
-import time, os, xml.etree.ElementTree, sys, pyautogui
+import time, os, xml.etree.ElementTree, sys, pyautogui, pydirectinput
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -32,10 +32,11 @@ pyautogui.write("a16")
 pyautogui.press("enter")
 pyautogui.hotkey("shift", "space")
 time.sleep(.15)
-for _ in range(arr_row - 2):
-    pyautogui.PAUSE = 0.001
-    pyautogui.hotkey("ctrl", "c")
-    pyautogui.hotkey("ctrl", "+")
+with pyautogui.hold("ctrl"):
+    for _ in range(arr_row - 2):
+        pyautogui.PAUSE = 0
+        pyautogui.press("c")
+        pyautogui.press("+")
 
 departure = "departure_all_142956320.XML"
 path_departure = os.path.join(current_path, departure)
@@ -53,10 +54,11 @@ pyautogui.write(f"a{arr_row + 17}")
 pyautogui.press("enter")
 pyautogui.hotkey("shift", "space")
 time.sleep(.15)
-for _ in range((dep_row - arr_row) - 1):
-    pyautogui.PAUSE = 0.001
-    pyautogui.hotkey("ctrl", "c")
-    pyautogui.hotkey("ctrl", "+")
+with pyautogui.hold("ctrl"):
+    for _ in range((dep_row - arr_row) - 1):
+        pyautogui.PAUSE = 0
+        pyautogui.press("c")
+        pyautogui.press("+")
 pyautogui.hotkey("ctrl", "home")
 pyautogui.press("down", presses=2)
 pyautogui.hotkey("ctrl", "s")
