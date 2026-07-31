@@ -33,128 +33,128 @@ script_config.search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
-# Arrivals
-pyautogui.write("Arrivals: Detailed FO", interval=.01)
-pyautogui.press("enter", interval=.01)
-script_config.search_enter_step1()
-script_config.search_enter_step2()
-time.sleep(.5)
-pyautogui.press("tab", presses=9, interval=.01)
-pyautogui.press("down", presses=2, interval=.01)
-time.sleep(1)
-pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=13, interval=.01)
-pyautogui.press("enter", interval=.01)
-# Arrivals: Config
-script_config.config_report()
-time.sleep(1)
-pyautogui.hotkey("ctrl", "a", interval=.01)
-pyautogui.write(script_config.td_dd_mm, interval=.01)
-pyautogui.press("tab", presses=2, interval=.01)
-time.sleep(1)
-pyautogui.write(script_config.td_dd_mm, interval=.01)
-pyautogui.press("tab", presses=4, interval=.01)
-time.sleep(.75)
-pyautogui.write(script_config.Room_Type, interval=.01)
-pyautogui.press("tab", presses=38, interval=.01)
-pyautogui.press("delete", interval=.01)
-time.sleep(.5)
-pyautogui.press("tab", presses=9, interval=.01)
-pyautogui.press("enter", interval=0.01)
-# Arrivals: Save
-script_config.download_as()
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
-pyautogui.press("tab", presses=4, interval=.01)
-pyautogui.press("enter", interval=.01)
-# Arrivals: Download
-script_config.download_page()
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.hotkey("ctrl", "l", interval=.01)
-pyautogui.hotkey("ctrl", "c", interval=.01)
-arrival_url = pyperclip.paste()
+# # Arrivals
+# pyautogui.write("Arrivals: Detailed FO", interval=.01)
+# pyautogui.press("enter", interval=.01)
+# script_config.search_enter_step1()
+# script_config.search_enter_step2()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=9, interval=.01)
+# pyautogui.press("down", presses=2, interval=.01)
+# time.sleep(1)
+# pyautogui.press("right", interval=.01)
+# pyautogui.press("tab", presses=13, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Arrivals: Config
+# script_config.config_report()
+# time.sleep(1)
+# pyautogui.hotkey("ctrl", "a", interval=.01)
+# pyautogui.write(script_config.td_dd_mm, interval=.01)
+# pyautogui.press("tab", presses=2, interval=.01)
+# time.sleep(1)
+# pyautogui.write(script_config.td_dd_mm, interval=.01)
+# pyautogui.press("tab", presses=4, interval=.01)
+# time.sleep(.75)
+# pyautogui.write(script_config.Room_Type, interval=.01)
+# pyautogui.press("tab", presses=38, interval=.01)
+# pyautogui.press("delete", interval=.01)
+# time.sleep(.5)
+# pyautogui.press("tab", presses=9, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # Arrivals: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Arrivals: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# arrival_url = pyperclip.paste()
 
-arrival_file = f"res_detail_{script_config.download_id}.XML"
+# arrival_file = f"res_detail_{script_config.download_id}.XML"
 
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
 
-arrival = os.path.join(script_config.path_.__add__(r"\Downloads"), arrival_file)
+# arrival = os.path.join(script_config.path_.__add__(r"\Downloads"), arrival_file)
 
-download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
-win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
 
-script_config.tab_reserve(1)
-pyautogui.press("enter", interval=0.01)
-script_config.search_reports()
-time.sleep(1)
-pyautogui.press("tab", interval=0.01)
+# script_config.tab_reserve(1)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_reports()
+# time.sleep(1)
+# pyautogui.press("tab", interval=0.01)
 
 # Departures
-pyautogui.write("departure_all", interval=.01)
-pyautogui.press("enter", interval=0.01)
-script_config.search_enter_step1()
-script_config.search_enter_step2()
-time.sleep(.5)
-pyautogui.press("tab", presses=9, interval=0.01)
-pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(1)
-pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=13, interval=0.01)
-pyautogui.press("enter", interval=0.01)
-# Departures: Config
-script_config.config_report()
-time.sleep(1)
-pyautogui.press("tab", presses=3, interval=0.01)
-time.sleep(.75)
-pyautogui.write(script_config.Room_Type, interval=.01)
-pyautogui.press("tab", presses=10, interval=.01)
-pyautogui.press("space", interval=.01) # Pseudo Rooms
-time.sleep(.5)
-pyautogui.press("tab", presses=12, interval=.01)
-pyautogui.press("space", interval=.01) # Membership Type
-time.sleep(.75)
-pyautogui.press("tab", interval=.01)
-pyautogui.press("space", interval=.01) # Membership Level
-time.sleep(.75)
-pyautogui.press("tab", presses=11, interval=.01)
-pyautogui.press("enter", interval=0.01)
-# Departures: Save
-script_config.download_as()
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
-pyautogui.press("tab", presses=4, interval=.01)
-pyautogui.press("enter", interval=.01)
-# Departures: Download
-script_config.download_page()
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.hotkey("ctrl", "l", interval=.01)
-pyautogui.hotkey("ctrl", "c", interval=.01)
-departure_url = pyperclip.paste()
+# pyautogui.write("departure_all", interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_enter_step1()
+# script_config.search_enter_step2()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=9, interval=0.01)
+# pyautogui.press("down", presses=2, interval=0.01)
+# time.sleep(1)
+# pyautogui.press("right", interval=.01)
+# pyautogui.press("tab", presses=13, interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# # Departures: Config
+# script_config.config_report()
+# time.sleep(1)
+# pyautogui.press("tab", presses=3, interval=0.01)
+# time.sleep(.75)
+# pyautogui.write(script_config.Room_Type, interval=.01)
+# pyautogui.press("tab", presses=10, interval=.01)
+# pyautogui.press("space", interval=.01) # Pseudo Rooms
+# time.sleep(.5)
+# pyautogui.press("tab", presses=12, interval=.01)
+# pyautogui.press("space", interval=.01) # Membership Type
+# time.sleep(.75)
+# pyautogui.press("tab", interval=.01)
+# pyautogui.press("space", interval=.01) # Membership Level
+# time.sleep(.75)
+# pyautogui.press("tab", presses=11, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # Departures: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Departures: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# departure_url = pyperclip.paste()
 
-departure_file = f"departure_all_{script_config.download_id}.XML"
+# departure_file = f"departure_all_{script_config.download_id}.XML"
 
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
 
-departure = os.path.join(script_config.path_.__add__(r"\Downloads"), departure_file)
+# departure = os.path.join(script_config.path_.__add__(r"\Downloads"), departure_file)
 
-download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
-win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
 
-script_config.tab_reserve(1)
-pyautogui.press("enter", interval=0.01)
-script_config.search_reports()
-time.sleep(1)
-pyautogui.press("tab", interval=0.01)
+# script_config.tab_reserve(1)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_reports()
+# time.sleep(1)
+# pyautogui.press("tab", interval=0.01)
 
 # History and Forecast
 pyautogui.write("History and Forecast FO", interval=.01)
@@ -234,689 +234,1109 @@ time.sleep(.25)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 
-history_forecast_AVC = os.path.join(script_config.path_.__add__(r"\Downloads"), history_forecast_file)
+history_forecast_AVC = os.path.join(script_config.path_.__add__(r"\Downloads"), history_forecast_AVC_file)
 
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
 
-script_config.tab_reserve(1)
-pyautogui.press("enter", interval=0.01)
-script_config.search_reports()
-time.sleep(1)
-pyautogui.press("tab", interval=0.01)
-
-path_documents = script_config.path_.__add__(r"\Documents")
-
-ori_excel_file = "Briefing.xlsx"
-path_ori_excel = os.path.join(path_documents, ori_excel_file)
-
-path_td_excel = os.path.join(path_documents, f"{script_config.td_dot_dd_mm_yy}.xlsx")
-
-wb = load_workbook(path_ori_excel)
-wb.save(path_td_excel)
-
-tree = xml.etree.ElementTree.parse(arrival)
-root = tree.getroot()
-
-arr_row = 1
-
-for _ in root.findall(".//G_RESERVATION"):
-    arr_row += 1
-
-pyautogui.FAILSAFE = True
-
-os.startfile(path_td_excel)
-time.sleep(1.5)
-pyautogui.hotkey("ctrl", "g")
-pyautogui.write("a16")
-pyautogui.press("enter")
-pyautogui.hotkey("shift", "space")
-time.sleep(.15)
-with pyautogui.hold("ctrl"):
-    for _ in range(arr_row - 2):
-        pyautogui.PAUSE = 0
-        pyautogui.press("c")
-        pyautogui.press("+")
-
-tree = xml.etree.ElementTree.parse(departure)
-root = tree.getroot()
-
-dep_row = arr_row
-
-for _ in root.findall(".//G_ROOM"):
-    dep_row += 1
-
-pyautogui.hotkey("ctrl", "g")
-pyautogui.write(f"a{arr_row + 17}")
-pyautogui.press("enter")
-pyautogui.hotkey("shift", "space")
-time.sleep(.15)
-with pyautogui.hold("ctrl"):
-    for _ in range((dep_row - arr_row) - 1):
-        pyautogui.PAUSE = 0
-        pyautogui.press("c")
-        pyautogui.press("+")
-pyautogui.hotkey("ctrl", "home")
-pyautogui.press("down", presses=2)
-pyautogui.hotkey("ctrl", "s")
-pyautogui.hotkey("alt", "f4")
-
-while True:
-    if pyautogui.pixelMatchesColor(710, 523, (12, 12, 12)):
-        break
-
-wb = load_workbook(path_td_excel)
-
-ws = wb.active
-ws.title = f"{script_config.td_dot_dd_mm_yy}"
-
-ws["A2"] = f"Daily Briefing\n{script_config.td_full_d} {script_config.td_full_m} {script_config.td_short_date}, {script_config.td_yyyy}"
-
-tree = xml.etree.ElementTree.parse(history_forecast)
-root = tree.getroot()
-
-for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED_DATE/G_CONSIDERED_DATE"):
-    hu = _.find("HOUSE_USE_ROOMS").text if _.find("HOUSE_USE_ROOMS").text is not None else "N/A"
-    oc = round(float(_.find("CF_OCCUPANCY").text), 2) if _.find("CF_OCCUPANCY").text is not None else "N/A"
-    arr = _.find("ARRIVAL_ROOMS").text if _.find("ARRIVAL_ROOMS").text is not None else "-"
-    dep = _.find("DEPARTURE_ROOMS").text if _.find("DEPARTURE_ROOMS").text is not None else "-"
-    ppl = _.find("NO_PERSONS").text if _.find("NO_PERSONS").text is not None else "-"
-    if _.find("CONSIDERED_DATE").text == "25-JUL-26":
-        ws["E5"] = arr
-        ws["E7"] = dep
-    if _.find("CONSIDERED_DATE").text == "26-JUL-26":
-        ws["M5"] = arr
-        ws["M7"] = dep
-    if _.find("CONSIDERED_DATE").text == "27-JUL-26":
-        ws["O5"] = arr
-        ws["O7"] = dep
-    if _.find("CONSIDERED_DATE").text == "28-JUL-26":
-        ws["Q5"] = arr
-        ws["Q7"] = dep
-    if _.find("CONSIDERED_DATE").text == "29-JUL-26":
-        ws["S5"] = arr
-        ws["S7"] = dep
-    if _.find("CONSIDERED_DATE").text == "30-JUL-26":
-        ws["U5"] = arr
-        ws["U7"] = dep
-
-tree = xml.etree.ElementTree.parse(history_forecast_AVC)
-root = tree.getroot()
-
-for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED_DATE/G_CONSIDERED_DATE"):
-    cmp = _.find("COMPLIMENTARY_ROOMS").text if _.find("COMPLIMENTARY_ROOMS").text is not None else "-"
-    if cmp == "0":
-        cmp = "-"
-    hu = int(_.find("HOUSE_USE_ROOMS").text if str(_.find("HOUSE_USE_ROOMS").text) else 0)
-    if hu == "0":
-        hu = "-"
-    ns = _.find("NO_SHOW_ROOMS").text if _.find("NO_SHOW_ROOMS").text else "-"
-    if ns == "0":
-        ns = "-"
-    adr = round(float(_.find("CF_AVERAGE_ROOM_RATE").text), 2) if _.find("CF_AVERAGE_ROOM_RATE").text is not None else "-"
-    arr = _.find("ARRIVAL_ROOMS").text if _.find("ARRIVAL_ROOMS").text is not None else "-"
-    dep = _.find("DEPARTURE_ROOMS").text if _.find("DEPARTURE_ROOMS").text is not None else "-"
-    rm = int(_.find("NO_ROOMS").text if str(_.find("NO_ROOMS").text) else 0)
-    ppl = _.find("NO_PERSONS").text if _.find("NO_PERSONS").text is not None else "-"
-    if _.find("CONSIDERED_DATE").text == "24-JUL-26":
-        ws["B5"] = cmp
-        ws["B7"] = hu
-        ws["B9"] = ns
-        ws["B11"] = adr
-        ws["B11"].number_format = "#,###.##"
-        ws["B12"] = oc
-        ws["B12"].number_format = "#.##\"%\""
-    if _.find("CONSIDERED_DATE").text == "25-JUL-26":
-        ws["D4"] = "25-Jul"
-        ws["F5"] = arr
-        ws["F7"] = dep
-        ws["E9"] = rm
-        ws["G12"] = ppl
-    if _.find("CONSIDERED_DATE").text == "26-JUL-26":
-        ws["N5"] = arr
-        ws["N7"] = dep
-        ws["M9"] = rm
-        ws["M11"] = (rm - hu) / (327 - hu) * 100
-        ws["M12"] = ppl
-    if _.find("CONSIDERED_DATE").text == "27-JUL-26":
-        ws["P5"] = arr
-        ws["P7"] = dep
-        ws["O9"] = rm
-        ws["O11"] = (rm - hu) / (327 - hu) * 100
-        ws["O12"] = ppl
-    if _.find("CONSIDERED_DATE").text == "28-JUL-26":
-        ws["R5"] = arr
-        ws["R7"] = dep
-        ws["Q9"] = rm
-        ws["Q11"] = (rm - hu) / (327 - hu) * 100
-        ws["Q12"] = ppl
-    if _.find("CONSIDERED_DATE").text == "29-JUL-26":
-        ws["T5"] = arr
-        ws["T7"] = dep
-        ws["S9"] = rm
-        ws["S11"] = (rm - hu) / (327 - hu) * 100
-        ws["S12"] = ppl
-    if _.find("CONSIDERED_DATE").text == "30-JUL-26":
-        ws["V5"] = arr
-        ws["V7"] = dep
-        ws["U9"] = rm
-        ws["U11"] = (rm - hu) / (327 - hu) * 100
-        ws["U12"] = ppl
-
-cmp = int(ws["B5"].value if str(ws["B5"].value) else 0)
-hu = int(ws["B7"].value if str(ws["B7"].value) else 0)
-rm = int(ws["E9"].value if str(ws["E9"].value) else 0)
-
-ws["E11"] = round(float((rm - (cmp + hu)) / 327 * 100), 2)
-ws["E11"].number_format = "#.##\"%\""
-
-split_adult_child = "resfutureoccupancy_142949802.XML"
-path_split_adult_child = os.path.join(script_config.download_path, split_adult_child)
-
-tree = xml.etree.ElementTree.parse(path_split_adult_child)
-root = tree.getroot()
-
-for _ in root.findall(".//G_RESV_TYPE"):
-    adl = _.find("SUMADULTS").text if _.find("SUMADULTS").text is not None else "-"
-    chd = _.find("SUMCHILDREN").text if _.find("SUMCHILDREN").text is not None else "-"
-    if _.find(".//D_DATE").text == "25-JUL-26":
-        ws["E12"] = adl
-        ws["E13"] = chd
-
-room_upgrade = "finjrnlbytrans_142949822.XML"
-path_room_upgrade = os.path.join(script_config.download_path, room_upgrade)
-
-tree = xml.etree.ElementTree.parse(path_room_upgrade)
-root = tree.getroot()
-
-for _ in root:
-    if _.tag == "R_DEBIT":
-        val = float(_.text)
-        if _.text == "0":
-            ws["I5"] = "-"
-        else:
-            if val.is_integer():
-                ws["I5"] = int(val)
-                ws["I5"].number_format = "#,##0"
-            else:
-                ws["I5"] = round(val, 2)
-                ws["I5"].number_format = "#,##0.00"
-
-room_upgrade_mtd = "finjrnlbytrans_142950555.XML"
-path_room_upgrade_mtd = os.path.join(script_config.download_path, room_upgrade_mtd)
-
-tree = xml.etree.ElementTree.parse(path_room_upgrade_mtd)
-root = tree.getroot()
-
-for _ in root:
-    if _.tag == "R_DEBIT":
-        val = float(_.text)
-        if _.text == "0":
-            ws["J5"] = "-"
-        else:
-            if val.is_integer():
-                ws["J5"] = int(val)
-                ws["J5"].number_format = "#,##0"
-            else:
-                ws["J5"] = round(val, 2)
-                ws["J5"].number_format = "#,##0.00"
-
-late_checkout = "finjrnlbytrans_142950099.XML"
-path_late_checkout = os.path.join(script_config.download_path, late_checkout)
-
-tree = xml.etree.ElementTree.parse(path_late_checkout)
-root = tree.getroot()
-
-for _ in root:
-    if _.tag == "R_DEBIT":
-        val = float(_.text)
-        if _.text == "0":
-            ws["I7"] = "-"
-        else:
-            if val.is_integer():
-                ws["I7"] = int(val)
-                ws["I7"].number_format = "#,##0"
-            else:
-                ws["I7"] = round(val, 2)
-                ws["I7"].number_format = "#,##0.00"
-
-late_checkout_mtd = "finjrnlbytrans_142950190.XML"
-path_late_checkout_mtd = os.path.join(script_config.download_path, late_checkout_mtd)
-
-tree = xml.etree.ElementTree.parse(path_late_checkout_mtd)
-root = tree.getroot()
-
-for _ in root:
-    if _.tag == "R_DEBIT":
-        val = float(_.text)
-        if _.text == "0":
-            ws["J7"] = "-"
-        else:
-            if val.is_integer():
-                ws["J7"] = int(val)
-                ws["J7"].number_format = "#,##0"
-            else:
-                ws["J7"] = round(val, 2)
-                ws["J7"].number_format = "#,##0.00"
-
-tour_commission = "finjrnlbytrans_142950122.XML"
-path_tour_commission = os.path.join(script_config.download_path, tour_commission)
-
-tree = xml.etree.ElementTree.parse(path_tour_commission)
-root = tree.getroot()
-
-for _ in root:
-    if _.tag == "R_DEBIT":
-        val = float(_.text)
-        if _.text == "0":
-            ws["I9"] = "-"
-        else:
-            if val.is_integer():
-                ws["I9"] = int(val)
-                ws["I9"].number_format = "#,##0"
-            else:
-                ws["I9"] = round(val, 2)
-                ws["I9"].number_format = "#,##0.00"
-
-tour_commission_mtd = "finjrnlbytrans_142950546.XML"
-path_tour_commission_mtd = os.path.join(script_config.download_path, tour_commission_mtd)
-
-tree = xml.etree.ElementTree.parse(path_tour_commission_mtd)
-root = tree.getroot()
-
-for _ in root:
-    if _.tag == "R_DEBIT":
-        val = float(_.text)
-        if _.text == "0":
-            ws["J9"] = "-"
-        else:
-            if val.is_integer():
-                ws["J9"] = int(val)
-                ws["J9"].number_format = "#,##0"
-            else:
-                ws["J9"] = round(val, 2)
-                ws["J9"].number_format = "#,##0.00"
-
-gift_shop = "finjrnlbytrans_142950142.XML"
-path_gift_shop = os.path.join(script_config.download_path, gift_shop)
-
-tree = xml.etree.ElementTree.parse(path_gift_shop)
-root = tree.getroot()
-
-for _ in root:
-    if _.tag == "R_DEBIT":
-        val = float(_.text)
-        if _.text == "0":
-            ws["I12"] = "-"
-        else:
-            if val.is_integer():
-                ws["I12"] = int(val)
-                ws["I12"].number_format = "#,##0"
-            else:
-                ws["I12"] = round(val, 2)
-                ws["I12"].number_format = "#,##0.00"
-
-gift_shop_mtd = "finjrnlbytrans_142949873.XML"
-path_gift_shop_mtd = os.path.join(script_config.download_path, gift_shop_mtd)
-
-tree = xml.etree.ElementTree.parse(path_gift_shop_mtd)
-root = tree.getroot()
-
-for _ in root:
-    if _.tag == "R_DEBIT":
-        val = float(_.text)
-        if _.text == "0":
-            ws["J12"] = "-"
-        else:
-            if val.is_integer():
-                ws["J12"] = int(val)
-                ws["J12"].number_format = "#,##0"
-            else:
-                ws["J12"] = round(val, 2)
-                ws["J12"].number_format = "#,##0.00"
-
-arr_immigration = "immigration_report_142956091.XML"
-path_arr_immigration = os.path.join(script_config.download_path, arr_immigration)
-
-tree = xml.etree.ElementTree.parse(path_arr_immigration)
-root = tree.getroot()
-
-arr_country = {}
-
-for _ in root.findall(".//G_IMMIGRATION"):
-    fn = _.find("FIRST_NAME").text if _.find("FIRST_NAME") is not None else "-"
-    ln = _.find("LAST_NAME").text if _.find("LAST_NAME") is not None else "-"
-    nt = _.find("NATIONALITY").text if _.find("NATIONALITY") is not None else "-"
-
-    set_name = f"{fn} {ln}"
-    arr_country[set_name] = nt
-
-pf = ("PAID", "CTC", "POA", "COA", "POD", "COMP", "MASTER", "COD")
-
-red_color = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
-
-arrival = "res_detail_142956722.XML"
-path_arrival = os.path.join(script_config.download_path, arrival)
-
-tree = xml.etree.ElementTree.parse(path_arrival)
-root = tree.getroot()
-
-arr_start = 16
-
-for _ in root.findall(".//G_RESERVATION"):
-    name = _.find("FULL_NAME_NO_SHR_IND").text if _.find("FULL_NAME_NO_SHR_IND") is not None else "-"
-    rm = _.find("DISP_ROOM_NO").text if _.find("DISP_ROOM_NO") is not None else "-"
-    ta = _.find("COMPANY_NAME").text if _.find("COMPANY_NAME") is not None else "-"
-    vip = _.find("VIP").text if _.find("VIP") is not None else "-"
-    memb = None
-    for mb in _.findall(".//G_MEM_TYPE_LEVEL"):
-        memb = mb.find("MEMBERSHIP_LEVEL").text
-    adl = _.find("ADULTS").text if _.find("ADULTS") is not None else "-"
-    chd = _.find("CHILDREN").text if _.find("CHILDREN") is not None else "-"
-    arr = _.find("ARRIVAL").text if _.find("ARRIVAL") is not None else "-"
-    dep = _.find("DEPARTURE").text if _.find("DEPARTURE") is not None else "-"
-    eta = _.find("ARRIVAL_TIME").text if _.find("ARRIVAL_TIME") is not None else "-"
-    cmt = None
-    for cmt_res in _.findall(".//G_COMMENT_RESV_NAME_ID"):
-        in_cmt = cmt_res.find("RES_COMMENT").text
-        if in_cmt and in_cmt.startswith(pf):
-            cmt = in_cmt
-        if cmt is None:
-            if cmt_res.find("RES_COMMENT_DESCRIPTION").text == "RESERVATION":
-                for _ in str(pf).strip().lower():
-                        if _ in str(in_cmt).strip().lower():
-                            cmt = in_cmt
-
-    set_name = [ _.strip() for _ in name.split(",")]
-    ln, fn, tt = set_name[0], set_name[1], set_name[2]
-    if (ln, fn, tt):
-        ws[f"A{arr_start}"] = f"{tt}. {fn} {ln}"
-        ws[f"A{arr_start}"].fill = PatternFill(fill_type=None)
-    if tt is None:
-        ws[f"A{arr_start}"] = f"{tt}. {fn} {ln}"
-        ws[f"A{arr_start}"].fill = red_color
-
-    if "Maintenance".strip().lower() in str(name).strip().lower():
-        for _ in ws[f"A{arr_start}:P{arr_start}"][0]:
-            _.fill = red_color
-
-    if f"{fn} {ln}" in arr_country:
-        ws[f"C{arr_start}"] = arr_country[f"{fn} {ln}"]
-    if ws[f"C{arr_start}"].value is None:
-        ws[f"C{arr_start}"] = "-"
-
-    ws[f"D{arr_start}"] = rm
-
-    if "MI Squared".strip().lower() in str(cmt).strip().lower():
-        ws[f"D{arr_start}"] = f"{rm}\nMI Squared"
-    if "Booking.com".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nBooking.com"
-    if "BG Asia".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nBG Asia"
-    if "Siam Tours".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nSiam Tours"
-    if "Travelbullz".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nTravelbullz"
-    if "BTC".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nBTC"
-    if "DERTOUR".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nGo Vacation"
-    if "Expedia".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nExpedia"
-    if "DNATA".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nDNATA"
-    if "Miki".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nMiki Travel"
-    if "Rak".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nRak Journeys"
-    if "Hotelbeds".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nHotelbeds"
-
-    if vip is not None:
-        ws[f"F{arr_start}"] = vip
-        if memb:
-            ws[f"F{arr_start}"] = f"{vip}\n{memb}"
-    if vip is None:
-        ws[f"F{arr_start}"] = "-"
-        if memb in ["SILVER", "GOLD"]:
-            if diff_date.days < 7:
-                if vip not in ["VIP1", "VIP2", "VIPS"]:
-                    ws[f"F{arr_start}"] = f"VIPG\n{memb}"
-        if memb in ["PLATINUM"]:
-            if vip not in ["VIP1", "VIP2"]:
-                ws[f"F{arr_start}"] = f"VIPS\n{memb}"
-        if memb in ["TITANIUM", "RED"]:
-            if vip not in ["VIP1"]:
-                ws[f"F{arr_start}"] = f"VIP2\n{memb}"
-
-    arr_date = datetime.strptime(arr, "%d/%m/%y")
-    dep_date = datetime.strptime(dep, "%d/%m/%y")
-    diff_date = dep_date - arr_date
-
-    if diff_date.days >= 7:
-        if vip not in ["VIP1", "VIP2"]:
-            if memb:
-                ws[f"F{arr_start}"] = f"VIPS\n{memb}"
-            if not memb:
-                ws[f"F{arr_start}"] = f"VIPS"
-
-    if memb in ["SILVER", "GOLD"]:
-        if diff_date.days < 7:
-            if vip not in ["VIP1", "VIP2", "VIPS"]:
-                ws[f"F{arr_start}"] = f"VIPG\n{memb}"
-    if memb in ["PLATINUM"]:
-        if vip not in ["VIP1", "VIP2"]:
-            ws[f"F{arr_start}"] = f"VIPS\n{memb}"
-    if memb in ["TITANIUM", "RED"]:
-        if vip not in ["VIP1"]:
-            ws[f"F{arr_start}"] = f"VIP2\n{memb}"
-
-    if not "MI Squared".strip().lower() in str(cmt).strip().lower():
-        if "JADE/RUBY".strip().lower() in str(cmt).strip().lower():
-            ws[f"F{arr_start}"] = f"VIPO\nJADE"
-        if "DIAMOND".strip().lower() in str(cmt).strip().lower():
-            ws[f"F{arr_start}"] = f"VIPO\nDIAMOND"
-        if "PLATINUM".strip().lower() in str(cmt).strip().lower():
-            ws[f"F{arr_start}"] = f"VIPO\nPLATINUM"
-        if "ROYAL".strip().lower() in str(cmt).strip().lower():
-            ws[f"F{arr_start}"] = f"VIPO\nROYAL"
-    if "MI Squared".strip().lower() in str(cmt).strip().lower():
-        if diff_date.days < 7:
-            ws[f"F{arr_start}"] = "-"
-        if diff_date.days >= 7:
-            ws[f"F{arr_start}"] = "VIPS"
-
-    if chd is not None:
-        ws[f"H{arr_start}"] = f"{adl}+{chd}"
-    if chd is None or chd == "0":
-        ws[f"H{arr_start}"] = f"{adl}"
-
-    ws[f"I{arr_start}"] = arr
-
-    ws[f"J{arr_start}"] = dep
-
-    ws[f"K{arr_start}"] = "-"
-
-    if eta is not None:
-        ws[f"L{arr_start}"] = eta
-        ws[f"L{arr_start}"].value = eta.replace(":", ".")
-    if eta is None:
-        ws[f"L{arr_start}"] = "15.00"
-
-    ws[f"N{arr_start}"] = "OWN"
-
-    ws[f"P{arr_start}"] = cmt
-
-    arr_start += 1
-
-dep_immigration = "immigration_report_142956307.XML"
-path_dep_immigration = os.path.join(script_config.download_path, dep_immigration)
-
-tree = xml.etree.ElementTree.parse(path_dep_immigration)
-root = tree.getroot()
-
-dep_country = {}
-
-for _ in root.findall(".//G_IMMIGRATION"):
-    fn = _.find("FIRST_NAME").text if _.find("FIRST_NAME") is not None else "-"
-    ln = _.find("LAST_NAME").text if _.find("LAST_NAME") is not None else "-"
-    nt = _.find("NATIONALITY").text if _.find("NATIONALITY") is not None else "-"
-
-    set_name = f"{fn} {ln}"
-    dep_country[set_name] = nt
-
-departure = "departure_all_142956320.XML"
-path_departure = os.path.join(script_config.download_path, departure)
-
-tree = xml.etree.ElementTree.parse(path_departure)
-root = tree.getroot()
-
-dep_start = arr_start + 2
-
-for _ in root.findall(".//G_ROOM"):
-    name = _.find("GUEST_NAME").text if _.find("GUEST_NAME") is not None else "-"
-    rm = _.find("ROOM").text if _.find("ROOM") is not None else "-"
-    ta = _.find("TRAVEL_AGENT_NAME").text if _.find("TRAVEL_AGENT_NAME") is not None else "-"
-    vip = _.find("VIP").text if _.find("VIP") is not None else "-"
-    memb = None
-    for mb in _.findall(".//LIST_G_MEMBERSHIP/G_MEMBERSHIP"):
-        memb = mb.find("MEMBERSHIP_LEVEL").text
-    adl = _.find("ADULTS").text if _.find("ADULTS") is not None else "-"
-    chd = _.find("CHILDREN").text if _.find("CHILDREN") is not None else "-"
-    arr = _.find("CHAR_ARRIVAL").text if _.find("CHAR_ARRIVAL") is not None else "-"
-    dep = _.find("CHAR_DEPART").text if _.find("CHAR_DEPART") is not None else "-"
-    etd = _.find("DEPARTURE_TIME").text if _.find("DEPARTURE_TIME") is not None else "-"
-    cmt = None
-    for cmt_res in _.findall("LIST_G_COMMENT_RESV_NAME_ID/G_COMMENT_RESV_NAME_ID"):
-        in_cmt = cmt_res.find("RES_COMMENT").text
-        if in_cmt and in_cmt.startswith(pf):
-            cmt = in_cmt
-        if cmt is None:
-            if cmt_res.find("RES_COMMENT_DESCRIPTION").text == "Reservation":
-                for _ in str(pf).strip().lower():
-                    if _ in str(in_cmt).strip().lower():
-                        cmt = in_cmt
-
-    set_name = [ _.strip() for _ in name.split(",")]
-    ln, fn, tt = set_name[0], set_name[1], set_name[2]
-    if (ln, fn, tt):
-        ws[f"A{dep_start}"] = f"{tt}. {fn} {ln}"
-        ws[f"A{dep_start}"].fill = PatternFill(fill_type=None)
-    if tt is None:
-        ws[f"A{dep_start}"] = f"{tt}. {fn} {ln}"
-        ws[f"A{dep_start}"].fill = red_color
-
-    if "Maintenance".strip().lower() in str(name).strip().lower():
-        for _ in ws[f"A{dep_start}:P{arr_start}"][0]:
-            _.fill = red_color
-
-    if f"{fn} {ln}" in dep_country:
-        ws[f"C{dep_start}"] = dep_country[f"{fn} {ln}"]
-    if ws[f"C{dep_start}"].value is None:
-        ws[f"C{dep_start}"] = "-"
-
-    ws[f"D{dep_start}"] = rm
-
-    if "MI Squared".strip().lower() in str(cmt).strip().lower():
-        ws[f"D{dep_start}"] = f"{rm}\nMI Squared"
-    if "Booking.com".strip().lower() in str(ta).strip().lower():
-        ws[f"D{dep_start}"] = f"{rm}\nBooking.com"
-    if "BG Asia".strip().lower() in str(ta).strip().lower():
-        ws[f"D{dep_start}"] = f"{rm}\nBG Asia"
-    if "Siam Tours".strip().lower() in str(ta).strip().lower():
-        ws[f"D{dep_start}"] = f"{rm}\nSiam Tours"
-    if "Travelbullz".strip().lower() in str(ta).strip().lower():
-        ws[f"D{dep_start}"] = f"{rm}\nTravelbullz"
-    if "BTC".strip().lower() in str(ta).strip().lower():
-        ws[f"D{dep_start}"] = f"{rm}\nBTC"
-    if "DERTOUR".strip().lower() in str(ta).strip().lower():
-        ws[f"D{dep_start}"] = f"{rm}\nGo Vacation"
-    if "Expedia".strip().lower() in str(ta).strip().lower():
-        ws[f"D{dep_start}"] = f"{rm}\nExpedia"
-    if "DNATA".strip().lower() in str(ta).strip().lower():
-        ws[f"D{dep_start}"] = f"{rm}\nDNATA"
-    if "Miki".strip().lower() in str(ta).strip().lower():
-        ws[f"D{dep_start}"] = f"{rm}\nMiki Travel"
-    if "Rak".strip().lower() in str(ta).strip().lower():
-        ws[f"D{dep_start}"] = f"{rm}\nRak Journeys"
-    if "Hotelbeds".strip().lower() in str(ta).strip().lower():
-        ws[f"D{dep_start}"] = f"{rm}\nHotelbeds"
-
-    if vip is not None:
-        ws[f"F{dep_start}"] = vip
-        if memb:
-            ws[f"F{dep_start}"] = f"{vip}\n{memb}"
-    if vip is None:
-        ws[f"F{dep_start}"] = "-"
-        if memb in ["SILVER", "GOLD"]:
-            if diff_date.days < 7:
-                if vip not in ["VIP1", "VIP2", "VIPS"]:
-                    ws[f"F{dep_start}"] = f"VIPG\n{memb}"
-        if memb in ["PLATINUM"]:
-            if vip not in ["VIP1", "VIP2"]:
-                ws[f"F{dep_start}"] = f"VIPS\n{memb}"
-        if memb in ["TITANIUM", "RED"]:
-            if vip not in ["VIP1"]:
-                ws[f"F{dep_start}"] = f"VIP2\n{memb}"
-
-    arr_date = datetime.strptime(arr, "%d/%m/%y")
-    dep_date = datetime.strptime(dep, "%d/%m/%y")
-    diff_date = dep_date - arr_date
-
-    if diff_date.days >= 7:
-        if vip not in ["VIP1", "VIP2"]:
-            if memb:
-                ws[f"F{dep_start}"] = f"VIPS\n{memb}"
-            if not memb:
-                ws[f"F{dep_start}"] = f"VIPS"
-
-    if memb in ["SILVER", "GOLD"]:
-        if diff_date.days < 7:
-            if vip not in ["VIP1", "VIP2", "VIPS"]:
-                ws[f"F{dep_start}"] = f"VIPG\n{memb}"
-    if memb in ["PLATINUM"]:
-        if vip not in ["VIP1", "VIP2"]:
-            ws[f"F{dep_start}"] = f"VIPS\n{memb}"
-    if memb in ["TITANIUM", "RED"]:
-        if vip not in ["VIP1"]:
-            ws[f"F{dep_start}"] = f"VIP2\n{memb}"
-
-    if not "MI Squared".strip().lower() in str(cmt).strip().lower():
-        if "JADE/RUBY".strip().lower() in str(cmt).strip().lower():
-            ws[f"F{dep_start}"] = f"VIPO\nJADE"
-        if "DIAMOND".strip().lower() in str(cmt).strip().lower():
-            ws[f"F{dep_start}"] = f"VIPO\nDIAMOND"
-        if "PLATINUM".strip().lower() in str(cmt).strip().lower():
-            ws[f"F{dep_start}"] = f"VIPO\nPLATINUM"
-        if "ROYAL".strip().lower() in str(cmt).strip().lower():
-            ws[f"F{dep_start}"] = f"VIPO\nROYAL"
-    if "MI Squared".strip().lower() in str(cmt).strip().lower():
-        if diff_date.days < 7:
-            ws[f"F{dep_start}"] = "-"
-        if diff_date.days >= 7:
-            ws[f"F{dep_start}"] = "VIPS"
-
-    if chd is not None:
-        ws[f"H{dep_start}"] = f"{adl}+{chd}"
-    if chd is None or chd == "0":
-        ws[f"H{dep_start}"] = f"{adl}"
-
-    ws[f"I{dep_start}"] = arr
-
-    ws[f"J{dep_start}"] = dep
-
-    ws[f"K{dep_start}"] = "-"
-
-    if etd is not None:
-        ws[f"L{dep_start}"] = etd
-        ws[f"L{dep_start}"].value = etd.replace(":", ".")
-    if etd is None:
-        ws[f"L{dep_start}"] = "12.00"
-
-    ws[f"N{dep_start}"] = "OWN"
-
-    ws[f"P{dep_start}"] = cmt
-
-    dep_start += 1
-
-wb.save(path_td_excel)
+# script_config.tab_reserve(1)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_reports()
+# time.sleep(1)
+# pyautogui.press("tab", interval=0.01)
+
+# # Forecast
+# pyautogui.write("resfutureoccupancy", interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_enter_step1()
+# script_config.search_enter_step2()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=9, interval=0.01)
+# pyautogui.press("down", presses=2, interval=0.01)
+# time.sleep(1)
+# pyautogui.press("right", interval=.01)
+# pyautogui.press("tab", presses=13, interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# # Forecast: Config
+# script_config.config_report()
+# time.sleep(1)
+# pyautogui.hotkey("ctrl", "a", interval=.01)
+# pyautogui.write(script_config.td_dd_mm, interval=.01)
+# pyautogui.press("tab", interval=.01)
+# time.sleep(1)
+# pyautogui.write(script_config.td_dd_mm, interval=.01)
+# pyautogui.press("tab", presses=5, interval=.01)
+# # Forecast: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Forecast: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# resfutureoccupancy_url = pyperclip.paste()
+
+# resfutureoccupancy_file = f"resfutureoccupancy_{script_config.download_id}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# resfutureoccupancy = os.path.join(script_config.path_.__add__(r"\Downloads"), resfutureoccupancy_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# script_config.tab_reserve(1)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_reports()
+# time.sleep(1)
+# pyautogui.press("tab", interval=0.01)
+
+# # Room Upgrade
+# pyautogui.write("Journal by Cashier and Transaction Code", interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_enter_step1()
+# script_config.search_enter_step2()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=9, interval=0.01)
+# pyautogui.press("down", presses=2, interval=0.01)
+# time.sleep(1)
+# pyautogui.press("right", interval=.01)
+# pyautogui.press("tab", presses=13, interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# # Room Upgrade: Config
+# script_config.config_report()
+# time.sleep(1)
+# pyautogui.hotkey("ctrl", "a", interval=.01)
+# pyautogui.write(script_config.ytd_dd_mm, interval=.01)
+# pyautogui.press("tab", interval=0.01)
+# time.sleep(1)
+# pyautogui.write(script_config.ytd_dd_mm, interval=.01)
+# pyautogui.press("tab", presses=4, interval=0.01)
+# pyautogui.write("10203", interval=.01)
+# pyautogui.press("tab", presses=12, interval=0.01)
+# pyautogui.press("enter", interval=.01)
+# # Room Upgrade: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Room Upgrade: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# room_upgrade_url = pyperclip.paste()
+
+# room_upgrade_file = f"finjrnlbytrans_{script_config.download_id}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# room_upgrade = os.path.join(script_config.path_.__add__(r"\Downloads"), room_upgrade_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# # Late Checkout: Config
+# script_config.tab_reserve(13)
+# pyautogui.write("10200,10400", interval=.01)
+# pyautogui.press("tab", presses=13, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # Late Checkout: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Late Checkout: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# late_checkout_url = pyperclip.paste()
+
+# late_checkout_file = f"finjrnlbytrans_{script_config.download_id}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# late_checkout = os.path.join(script_config.path_.__add__(r"\Downloads"), late_checkout_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# # Tour Commission: Config
+# script_config.tab_reserve(13)
+# pyautogui.write("62710", interval=.01)
+# pyautogui.press("tab", presses=13, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # Tour Commission: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Tour Commission: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# tour_commission_url = pyperclip.paste()
+
+# tour_commission_file = f"finjrnlbytrans_{script_config.download_id}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# tour_commission = os.path.join(script_config.path_.__add__(r"\Downloads"), tour_commission_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# # Gift Shop: Config
+# script_config.tab_reserve(13)
+# pyautogui.write("60600,60601,60630,60631", interval=.01)
+# pyautogui.press("tab", presses=13, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # Gift Shop: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Gift Shop: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# gift_shop_url = pyperclip.paste()
+
+# gift_shop_file = f"finjrnlbytrans_{script_config.download_id}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# gift_shop = os.path.join(script_config.path_.__add__(r"\Downloads"), gift_shop_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# # Room Upgrade MTD: Config
+# script_config.tab_reserve(18)
+# pyautogui.write(script_config.ytd.replace(day=1).strftime("%d%m"), interval=.01)
+# pyautogui.press("tab", interval=.01)
+# time.sleep(1)
+# pyautogui.write(script_config.ytd_dd_mm, interval=.01)
+# pyautogui.press("tab", presses=4, interval=0.01)
+# pyautogui.write("10203", interval=.01)
+# pyautogui.press("tab", presses=13, interval=0.01)
+# pyautogui.press("enter", interval=.01)
+# # Room Upgrade MTD: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Room Upgrade MTD: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# room_upgrade_mtd_url = pyperclip.paste()
+
+# room_upgrade_mtd_file = f"finjrnlbytrans_{script_config.download_id}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# room_upgrade_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), room_upgrade_mtd_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# # Late Checkout MTD: Config
+# script_config.tab_reserve(13)
+# pyautogui.write("10200,10400", interval=.01)
+# pyautogui.press("tab", presses=13, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # Late Checkout MTD: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Late Checkout MTD: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# late_checkout_mtd_url = pyperclip.paste()
+
+# late_checkout_mtd_file = f"finjrnlbytrans_{script_config.download_id}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# late_checkout_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), late_checkout_mtd_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# # Tour Commission MTD: Config
+# script_config.tab_reserve(13)
+# pyautogui.write("62710", interval=.01)
+# pyautogui.press("tab", presses=13, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # Tour Commission MTD: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Tour Commission MTD: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# tour_commission_mtd_url = pyperclip.paste()
+
+# tour_commission_mtd_file = f"finjrnlbytrans_{script_config.download_id}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# tour_commission_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), tour_commission_mtd_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# # Gift Shop MTD: Config
+# script_config.tab_reserve(13)
+# pyautogui.write("60600,60601,60630,60631", interval=.01)
+# pyautogui.press("tab", presses=13, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # Gift Shop MTD: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Gift Shop MTD: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# gift_shop_mtd_url = pyperclip.paste()
+
+# gift_shop_mtd_file = f"finjrnlbytrans_{script_config.download_id}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# gift_shop_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), gift_shop_mtd_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# script_config.tab_reserve(1)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_reports()
+# time.sleep(1)
+# pyautogui.press("tab", interval=0.01)
+
+# # ARR Immigration
+# pyautogui.write("departure_all", interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_enter_step1()
+# script_config.search_enter_step2()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=9, interval=0.01)
+# pyautogui.press("down", presses=2, interval=0.01)
+# time.sleep(1)
+# pyautogui.press("right", interval=.01)
+# pyautogui.press("tab", presses=13, interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# # ARR Immigration: Config
+# script_config.config_report()
+# time.sleep(1)
+# pyautogui.press("tab", presses=3, interval=0.01)
+# pyautogui.press("space", interval=.01)
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # ARR Immigration: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", presses=2, interval=.01)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # ARR Immigration: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# arr_immigration_url = pyperclip.paste()
+
+# arr_immigration_file = f"immigration_report_{script_config.download_id(arr_immigration_url)}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# arr_immigration = os.path.join(script_config.path_.__add__(r"\Downloads"), arr_immigration_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# # DEP Immigration: Config
+# script_config.tab_reserve(4)
+# pyautogui.write("CHECKED OUT,DEPARTURE", interval=.01)
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # DEP Immigration: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # DEP Immigration: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# dep_immigration_url = pyperclip.paste()
+
+# dep_immigration_file = f"finjrnlbytrans_{script_config.download_id}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# dep_immigration = os.path.join(script_config.path_.__add__(r"\Downloads"), dep_immigration_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+
+# path_documents = script_config.path_.__add__(r"\Documents")
+
+# ori_excel_file = "Briefing.xlsx"
+# path_ori_excel = os.path.join(path_documents, ori_excel_file)
+
+# path_td_excel = os.path.join(path_documents, f"{script_config.td_dot_dd_mm_yy}.xlsx")
+
+# wb = load_workbook(path_ori_excel)
+# wb.save(path_td_excel)
+
+# tree = xml.etree.ElementTree.parse(arrival)
+# root = tree.getroot()
+
+# arr_row = 1
+
+# for _ in root.findall(".//G_RESERVATION"):
+#     arr_row += 1
+
+# pyautogui.FAILSAFE = True
+
+# os.startfile(path_td_excel)
+# time.sleep(1.5)
+# pyautogui.hotkey("ctrl", "g")
+# pyautogui.write("a16")
+# pyautogui.press("enter")
+# pyautogui.hotkey("shift", "space")
+# time.sleep(.15)
+# with pyautogui.hold("ctrl"):
+#     for _ in range(arr_row - 2):
+#         pyautogui.PAUSE = 0
+#         pyautogui.press("c")
+#         pyautogui.press("+")
+
+# tree = xml.etree.ElementTree.parse(departure)
+# root = tree.getroot()
+
+# dep_row = arr_row
+
+# for _ in root.findall(".//G_ROOM"):
+#     dep_row += 1
+
+# pyautogui.hotkey("ctrl", "g")
+# pyautogui.write(f"a{arr_row + 17}")
+# pyautogui.press("enter")
+# pyautogui.hotkey("shift", "space")
+# time.sleep(.15)
+# with pyautogui.hold("ctrl"):
+#     for _ in range((dep_row - arr_row) - 1):
+#         pyautogui.PAUSE = 0
+#         pyautogui.press("c")
+#         pyautogui.press("+")
+# pyautogui.hotkey("ctrl", "home")
+# pyautogui.press("down", presses=2)
+# pyautogui.hotkey("ctrl", "s")
+# pyautogui.hotkey("alt", "f4")
+
+# while True:
+#     if pyautogui.pixelMatchesColor(710, 523, (12, 12, 12)):
+#         break
+
+# wb = load_workbook(path_td_excel)
+
+# ws = wb.active
+# ws.title = f"{script_config.td_dot_dd_mm_yy}"
+
+# ws["A2"] = f"Daily Briefing\n{script_config.td_full_d} {script_config.td_full_m} {script_config.td_short_date}, {script_config.td_yyyy}"
+
+# tree = xml.etree.ElementTree.parse(history_forecast)
+# root = tree.getroot()
+
+# for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED_DATE/G_CONSIDERED_DATE"):
+#     hu = _.find("HOUSE_USE_ROOMS").text if _.find("HOUSE_USE_ROOMS").text is not None else "N/A"
+#     oc = round(float(_.find("CF_OCCUPANCY").text), 2) if _.find("CF_OCCUPANCY").text is not None else "N/A"
+#     arr = _.find("ARRIVAL_ROOMS").text if _.find("ARRIVAL_ROOMS").text is not None else "-"
+#     dep = _.find("DEPARTURE_ROOMS").text if _.find("DEPARTURE_ROOMS").text is not None else "-"
+#     ppl = _.find("NO_PERSONS").text if _.find("NO_PERSONS").text is not None else "-"
+#     if _.find("CONSIDERED_DATE").text == "25-JUL-26":
+#         ws["E5"] = arr
+#         ws["E7"] = dep
+#     if _.find("CONSIDERED_DATE").text == "26-JUL-26":
+#         ws["M5"] = arr
+#         ws["M7"] = dep
+#     if _.find("CONSIDERED_DATE").text == "27-JUL-26":
+#         ws["O5"] = arr
+#         ws["O7"] = dep
+#     if _.find("CONSIDERED_DATE").text == "28-JUL-26":
+#         ws["Q5"] = arr
+#         ws["Q7"] = dep
+#     if _.find("CONSIDERED_DATE").text == "29-JUL-26":
+#         ws["S5"] = arr
+#         ws["S7"] = dep
+#     if _.find("CONSIDERED_DATE").text == "30-JUL-26":
+#         ws["U5"] = arr
+#         ws["U7"] = dep
+
+# tree = xml.etree.ElementTree.parse(history_forecast_AVC)
+# root = tree.getroot()
+
+# for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED_DATE/G_CONSIDERED_DATE"):
+#     cmp = _.find("COMPLIMENTARY_ROOMS").text if _.find("COMPLIMENTARY_ROOMS").text is not None else "-"
+#     if cmp == "0":
+#         cmp = "-"
+#     hu = int(_.find("HOUSE_USE_ROOMS").text if str(_.find("HOUSE_USE_ROOMS").text) else 0)
+#     if hu == "0":
+#         hu = "-"
+#     ns = _.find("NO_SHOW_ROOMS").text if _.find("NO_SHOW_ROOMS").text else "-"
+#     if ns == "0":
+#         ns = "-"
+#     adr = round(float(_.find("CF_AVERAGE_ROOM_RATE").text), 2) if _.find("CF_AVERAGE_ROOM_RATE").text is not None else "-"
+#     arr = _.find("ARRIVAL_ROOMS").text if _.find("ARRIVAL_ROOMS").text is not None else "-"
+#     dep = _.find("DEPARTURE_ROOMS").text if _.find("DEPARTURE_ROOMS").text is not None else "-"
+#     rm = int(_.find("NO_ROOMS").text if str(_.find("NO_ROOMS").text) else 0)
+#     ppl = _.find("NO_PERSONS").text if _.find("NO_PERSONS").text is not None else "-"
+#     if _.find("CONSIDERED_DATE").text == "24-JUL-26":
+#         ws["B5"] = cmp
+#         ws["B7"] = hu
+#         ws["B9"] = ns
+#         ws["B11"] = adr
+#         ws["B11"].number_format = "#,###.##"
+#         ws["B12"] = oc
+#         ws["B12"].number_format = "#.##\"%\""
+#     if _.find("CONSIDERED_DATE").text == "25-JUL-26":
+#         ws["D4"] = "25-Jul"
+#         ws["F5"] = arr
+#         ws["F7"] = dep
+#         ws["E9"] = rm
+#         ws["G12"] = ppl
+#     if _.find("CONSIDERED_DATE").text == "26-JUL-26":
+#         ws["N5"] = arr
+#         ws["N7"] = dep
+#         ws["M9"] = rm
+#         ws["M11"] = (rm - hu) / (327 - hu) * 100
+#         ws["M12"] = ppl
+#     if _.find("CONSIDERED_DATE").text == "27-JUL-26":
+#         ws["P5"] = arr
+#         ws["P7"] = dep
+#         ws["O9"] = rm
+#         ws["O11"] = (rm - hu) / (327 - hu) * 100
+#         ws["O12"] = ppl
+#     if _.find("CONSIDERED_DATE").text == "28-JUL-26":
+#         ws["R5"] = arr
+#         ws["R7"] = dep
+#         ws["Q9"] = rm
+#         ws["Q11"] = (rm - hu) / (327 - hu) * 100
+#         ws["Q12"] = ppl
+#     if _.find("CONSIDERED_DATE").text == "29-JUL-26":
+#         ws["T5"] = arr
+#         ws["T7"] = dep
+#         ws["S9"] = rm
+#         ws["S11"] = (rm - hu) / (327 - hu) * 100
+#         ws["S12"] = ppl
+#     if _.find("CONSIDERED_DATE").text == "30-JUL-26":
+#         ws["V5"] = arr
+#         ws["V7"] = dep
+#         ws["U9"] = rm
+#         ws["U11"] = (rm - hu) / (327 - hu) * 100
+#         ws["U12"] = ppl
+
+# cmp = int(ws["B5"].value if str(ws["B5"].value) else 0)
+# hu = int(ws["B7"].value if str(ws["B7"].value) else 0)
+# rm = int(ws["E9"].value if str(ws["E9"].value) else 0)
+
+# ws["E11"] = round(float((rm - (cmp + hu)) / 327 * 100), 2)
+# ws["E11"].number_format = "#.##\"%\""
+
+# split_adult_child = "resfutureoccupancy_142949802.XML"
+# path_split_adult_child = os.path.join(script_config.download_path, split_adult_child)
+
+# tree = xml.etree.ElementTree.parse(path_split_adult_child)
+# root = tree.getroot()
+
+# for _ in root.findall(".//G_RESV_TYPE"):
+#     adl = _.find("SUMADULTS").text if _.find("SUMADULTS").text is not None else "-"
+#     chd = _.find("SUMCHILDREN").text if _.find("SUMCHILDREN").text is not None else "-"
+#     if _.find(".//D_DATE").text == "25-JUL-26":
+#         ws["E12"] = adl
+#         ws["E13"] = chd
+
+# room_upgrade = "finjrnlbytrans_142949822.XML"
+# path_room_upgrade = os.path.join(script_config.download_path, room_upgrade)
+
+# tree = xml.etree.ElementTree.parse(path_room_upgrade)
+# root = tree.getroot()
+
+# for _ in root:
+#     if _.tag == "R_DEBIT":
+#         val = float(_.text)
+#         if _.text == "0":
+#             ws["I5"] = "-"
+#         else:
+#             if val.is_integer():
+#                 ws["I5"] = int(val)
+#                 ws["I5"].number_format = "#,##0"
+#             else:
+#                 ws["I5"] = round(val, 2)
+#                 ws["I5"].number_format = "#,##0.00"
+
+# room_upgrade_mtd = "finjrnlbytrans_142950555.XML"
+# path_room_upgrade_mtd = os.path.join(script_config.download_path, room_upgrade_mtd)
+
+# tree = xml.etree.ElementTree.parse(path_room_upgrade_mtd)
+# root = tree.getroot()
+
+# for _ in root:
+#     if _.tag == "R_DEBIT":
+#         val = float(_.text)
+#         if _.text == "0":
+#             ws["J5"] = "-"
+#         else:
+#             if val.is_integer():
+#                 ws["J5"] = int(val)
+#                 ws["J5"].number_format = "#,##0"
+#             else:
+#                 ws["J5"] = round(val, 2)
+#                 ws["J5"].number_format = "#,##0.00"
+
+# late_checkout = "finjrnlbytrans_142950099.XML"
+# path_late_checkout = os.path.join(script_config.download_path, late_checkout)
+
+# tree = xml.etree.ElementTree.parse(path_late_checkout)
+# root = tree.getroot()
+
+# for _ in root:
+#     if _.tag == "R_DEBIT":
+#         val = float(_.text)
+#         if _.text == "0":
+#             ws["I7"] = "-"
+#         else:
+#             if val.is_integer():
+#                 ws["I7"] = int(val)
+#                 ws["I7"].number_format = "#,##0"
+#             else:
+#                 ws["I7"] = round(val, 2)
+#                 ws["I7"].number_format = "#,##0.00"
+
+# late_checkout_mtd = "finjrnlbytrans_142950190.XML"
+# path_late_checkout_mtd = os.path.join(script_config.download_path, late_checkout_mtd)
+
+# tree = xml.etree.ElementTree.parse(path_late_checkout_mtd)
+# root = tree.getroot()
+
+# for _ in root:
+#     if _.tag == "R_DEBIT":
+#         val = float(_.text)
+#         if _.text == "0":
+#             ws["J7"] = "-"
+#         else:
+#             if val.is_integer():
+#                 ws["J7"] = int(val)
+#                 ws["J7"].number_format = "#,##0"
+#             else:
+#                 ws["J7"] = round(val, 2)
+#                 ws["J7"].number_format = "#,##0.00"
+
+# tour_commission = "finjrnlbytrans_142950122.XML"
+# path_tour_commission = os.path.join(script_config.download_path, tour_commission)
+
+# tree = xml.etree.ElementTree.parse(path_tour_commission)
+# root = tree.getroot()
+
+# for _ in root:
+#     if _.tag == "R_DEBIT":
+#         val = float(_.text)
+#         if _.text == "0":
+#             ws["I9"] = "-"
+#         else:
+#             if val.is_integer():
+#                 ws["I9"] = int(val)
+#                 ws["I9"].number_format = "#,##0"
+#             else:
+#                 ws["I9"] = round(val, 2)
+#                 ws["I9"].number_format = "#,##0.00"
+
+# tour_commission_mtd = "finjrnlbytrans_142950546.XML"
+# path_tour_commission_mtd = os.path.join(script_config.download_path, tour_commission_mtd)
+
+# tree = xml.etree.ElementTree.parse(path_tour_commission_mtd)
+# root = tree.getroot()
+
+# for _ in root:
+#     if _.tag == "R_DEBIT":
+#         val = float(_.text)
+#         if _.text == "0":
+#             ws["J9"] = "-"
+#         else:
+#             if val.is_integer():
+#                 ws["J9"] = int(val)
+#                 ws["J9"].number_format = "#,##0"
+#             else:
+#                 ws["J9"] = round(val, 2)
+#                 ws["J9"].number_format = "#,##0.00"
+
+# gift_shop = "finjrnlbytrans_142950142.XML"
+# path_gift_shop = os.path.join(script_config.download_path, gift_shop)
+
+# tree = xml.etree.ElementTree.parse(path_gift_shop)
+# root = tree.getroot()
+
+# for _ in root:
+#     if _.tag == "R_DEBIT":
+#         val = float(_.text)
+#         if _.text == "0":
+#             ws["I12"] = "-"
+#         else:
+#             if val.is_integer():
+#                 ws["I12"] = int(val)
+#                 ws["I12"].number_format = "#,##0"
+#             else:
+#                 ws["I12"] = round(val, 2)
+#                 ws["I12"].number_format = "#,##0.00"
+
+# gift_shop_mtd = "finjrnlbytrans_142949873.XML"
+# path_gift_shop_mtd = os.path.join(script_config.download_path, gift_shop_mtd)
+
+# tree = xml.etree.ElementTree.parse(path_gift_shop_mtd)
+# root = tree.getroot()
+
+# for _ in root:
+#     if _.tag == "R_DEBIT":
+#         val = float(_.text)
+#         if _.text == "0":
+#             ws["J12"] = "-"
+#         else:
+#             if val.is_integer():
+#                 ws["J12"] = int(val)
+#                 ws["J12"].number_format = "#,##0"
+#             else:
+#                 ws["J12"] = round(val, 2)
+#                 ws["J12"].number_format = "#,##0.00"
+
+# arr_immigration = "immigration_report_142956091.XML"
+# path_arr_immigration = os.path.join(script_config.download_path, arr_immigration)
+
+# tree = xml.etree.ElementTree.parse(path_arr_immigration)
+# root = tree.getroot()
+
+# arr_country = {}
+
+# for _ in root.findall(".//G_IMMIGRATION"):
+#     fn = _.find("FIRST_NAME").text if _.find("FIRST_NAME") is not None else "-"
+#     ln = _.find("LAST_NAME").text if _.find("LAST_NAME") is not None else "-"
+#     nt = _.find("NATIONALITY").text if _.find("NATIONALITY") is not None else "-"
+
+#     set_name = f"{fn} {ln}"
+#     arr_country[set_name] = nt
+
+# pf = ("PAID", "CTC", "POA", "COA", "POD", "COMP", "MASTER", "COD")
+
+# red_color = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
+
+# arrival = "res_detail_142956722.XML"
+# path_arrival = os.path.join(script_config.download_path, arrival)
+
+# tree = xml.etree.ElementTree.parse(path_arrival)
+# root = tree.getroot()
+
+# arr_start = 16
+
+# for _ in root.findall(".//G_RESERVATION"):
+#     name = _.find("FULL_NAME_NO_SHR_IND").text if _.find("FULL_NAME_NO_SHR_IND") is not None else "-"
+#     rm = _.find("DISP_ROOM_NO").text if _.find("DISP_ROOM_NO") is not None else "-"
+#     ta = _.find("COMPANY_NAME").text if _.find("COMPANY_NAME") is not None else "-"
+#     vip = _.find("VIP").text if _.find("VIP") is not None else "-"
+#     memb = None
+#     for mb in _.findall(".//G_MEM_TYPE_LEVEL"):
+#         memb = mb.find("MEMBERSHIP_LEVEL").text
+#     adl = _.find("ADULTS").text if _.find("ADULTS") is not None else "-"
+#     chd = _.find("CHILDREN").text if _.find("CHILDREN") is not None else "-"
+#     arr = _.find("ARRIVAL").text if _.find("ARRIVAL") is not None else "-"
+#     dep = _.find("DEPARTURE").text if _.find("DEPARTURE") is not None else "-"
+#     eta = _.find("ARRIVAL_TIME").text if _.find("ARRIVAL_TIME") is not None else "-"
+#     cmt = None
+#     for cmt_res in _.findall(".//G_COMMENT_RESV_NAME_ID"):
+#         in_cmt = cmt_res.find("RES_COMMENT").text
+#         if in_cmt and in_cmt.startswith(pf):
+#             cmt = in_cmt
+#         if cmt is None:
+#             if cmt_res.find("RES_COMMENT_DESCRIPTION").text == "RESERVATION":
+#                 for _ in str(pf).strip().lower():
+#                         if _ in str(in_cmt).strip().lower():
+#                             cmt = in_cmt
+
+#     set_name = [ _.strip() for _ in name.split(",")]
+#     ln, fn, tt = set_name[0], set_name[1], set_name[2]
+#     if (ln, fn, tt):
+#         ws[f"A{arr_start}"] = f"{tt}. {fn} {ln}"
+#         ws[f"A{arr_start}"].fill = PatternFill(fill_type=None)
+#     if tt is None:
+#         ws[f"A{arr_start}"] = f"{tt}. {fn} {ln}"
+#         ws[f"A{arr_start}"].fill = red_color
+
+#     if "Maintenance".strip().lower() in str(name).strip().lower():
+#         for _ in ws[f"A{arr_start}:P{arr_start}"][0]:
+#             _.fill = red_color
+
+#     if f"{fn} {ln}" in arr_country:
+#         ws[f"C{arr_start}"] = arr_country[f"{fn} {ln}"]
+#     if ws[f"C{arr_start}"].value is None:
+#         ws[f"C{arr_start}"] = "-"
+
+#     ws[f"D{arr_start}"] = rm
+
+#     if "MI Squared".strip().lower() in str(cmt).strip().lower():
+#         ws[f"D{arr_start}"] = f"{rm}\nMI Squared"
+#     if "Booking.com".strip().lower() in str(ta).strip().lower():
+#             ws[f"D{arr_start}"] = f"{rm}\nBooking.com"
+#     if "BG Asia".strip().lower() in str(ta).strip().lower():
+#             ws[f"D{arr_start}"] = f"{rm}\nBG Asia"
+#     if "Siam Tours".strip().lower() in str(ta).strip().lower():
+#             ws[f"D{arr_start}"] = f"{rm}\nSiam Tours"
+#     if "Travelbullz".strip().lower() in str(ta).strip().lower():
+#             ws[f"D{arr_start}"] = f"{rm}\nTravelbullz"
+#     if "BTC".strip().lower() in str(ta).strip().lower():
+#             ws[f"D{arr_start}"] = f"{rm}\nBTC"
+#     if "DERTOUR".strip().lower() in str(ta).strip().lower():
+#             ws[f"D{arr_start}"] = f"{rm}\nGo Vacation"
+#     if "Expedia".strip().lower() in str(ta).strip().lower():
+#             ws[f"D{arr_start}"] = f"{rm}\nExpedia"
+#     if "DNATA".strip().lower() in str(ta).strip().lower():
+#             ws[f"D{arr_start}"] = f"{rm}\nDNATA"
+#     if "Miki".strip().lower() in str(ta).strip().lower():
+#             ws[f"D{arr_start}"] = f"{rm}\nMiki Travel"
+#     if "Rak".strip().lower() in str(ta).strip().lower():
+#             ws[f"D{arr_start}"] = f"{rm}\nRak Journeys"
+#     if "Hotelbeds".strip().lower() in str(ta).strip().lower():
+#             ws[f"D{arr_start}"] = f"{rm}\nHotelbeds"
+
+#     if vip is not None:
+#         ws[f"F{arr_start}"] = vip
+#         if memb:
+#             ws[f"F{arr_start}"] = f"{vip}\n{memb}"
+#     if vip is None:
+#         ws[f"F{arr_start}"] = "-"
+#         if memb in ["SILVER", "GOLD"]:
+#             if diff_date.days < 7:
+#                 if vip not in ["VIP1", "VIP2", "VIPS"]:
+#                     ws[f"F{arr_start}"] = f"VIPG\n{memb}"
+#         if memb in ["PLATINUM"]:
+#             if vip not in ["VIP1", "VIP2"]:
+#                 ws[f"F{arr_start}"] = f"VIPS\n{memb}"
+#         if memb in ["TITANIUM", "RED"]:
+#             if vip not in ["VIP1"]:
+#                 ws[f"F{arr_start}"] = f"VIP2\n{memb}"
+
+#     arr_date = datetime.strptime(arr, "%d/%m/%y")
+#     dep_date = datetime.strptime(dep, "%d/%m/%y")
+#     diff_date = dep_date - arr_date
+
+#     if diff_date.days >= 7:
+#         if vip not in ["VIP1", "VIP2"]:
+#             if memb:
+#                 ws[f"F{arr_start}"] = f"VIPS\n{memb}"
+#             if not memb:
+#                 ws[f"F{arr_start}"] = f"VIPS"
+
+#     if memb in ["SILVER", "GOLD"]:
+#         if diff_date.days < 7:
+#             if vip not in ["VIP1", "VIP2", "VIPS"]:
+#                 ws[f"F{arr_start}"] = f"VIPG\n{memb}"
+#     if memb in ["PLATINUM"]:
+#         if vip not in ["VIP1", "VIP2"]:
+#             ws[f"F{arr_start}"] = f"VIPS\n{memb}"
+#     if memb in ["TITANIUM", "RED"]:
+#         if vip not in ["VIP1"]:
+#             ws[f"F{arr_start}"] = f"VIP2\n{memb}"
+
+#     if not "MI Squared".strip().lower() in str(cmt).strip().lower():
+#         if "JADE/RUBY".strip().lower() in str(cmt).strip().lower():
+#             ws[f"F{arr_start}"] = f"VIPO\nJADE"
+#         if "DIAMOND".strip().lower() in str(cmt).strip().lower():
+#             ws[f"F{arr_start}"] = f"VIPO\nDIAMOND"
+#         if "PLATINUM".strip().lower() in str(cmt).strip().lower():
+#             ws[f"F{arr_start}"] = f"VIPO\nPLATINUM"
+#         if "ROYAL".strip().lower() in str(cmt).strip().lower():
+#             ws[f"F{arr_start}"] = f"VIPO\nROYAL"
+#     if "MI Squared".strip().lower() in str(cmt).strip().lower():
+#         if diff_date.days < 7:
+#             ws[f"F{arr_start}"] = "-"
+#         if diff_date.days >= 7:
+#             ws[f"F{arr_start}"] = "VIPS"
+
+#     if chd is not None:
+#         ws[f"H{arr_start}"] = f"{adl}+{chd}"
+#     if chd is None or chd == "0":
+#         ws[f"H{arr_start}"] = f"{adl}"
+
+#     ws[f"I{arr_start}"] = arr
+
+#     ws[f"J{arr_start}"] = dep
+
+#     ws[f"K{arr_start}"] = "-"
+
+#     if eta is not None:
+#         ws[f"L{arr_start}"] = eta
+#         ws[f"L{arr_start}"].value = eta.replace(":", ".")
+#     if eta is None:
+#         ws[f"L{arr_start}"] = "15.00"
+
+#     ws[f"N{arr_start}"] = "OWN"
+
+#     ws[f"P{arr_start}"] = cmt
+
+#     arr_start += 1
+
+# dep_immigration = "immigration_report_142956307.XML"
+# path_dep_immigration = os.path.join(script_config.download_path, dep_immigration)
+
+# tree = xml.etree.ElementTree.parse(path_dep_immigration)
+# root = tree.getroot()
+
+# dep_country = {}
+
+# for _ in root.findall(".//G_IMMIGRATION"):
+#     fn = _.find("FIRST_NAME").text if _.find("FIRST_NAME") is not None else "-"
+#     ln = _.find("LAST_NAME").text if _.find("LAST_NAME") is not None else "-"
+#     nt = _.find("NATIONALITY").text if _.find("NATIONALITY") is not None else "-"
+
+#     set_name = f"{fn} {ln}"
+#     dep_country[set_name] = nt
+
+# departure = "departure_all_142956320.XML"
+# path_departure = os.path.join(script_config.download_path, departure)
+
+# tree = xml.etree.ElementTree.parse(path_departure)
+# root = tree.getroot()
+
+# dep_start = arr_start + 2
+
+# for _ in root.findall(".//G_ROOM"):
+#     name = _.find("GUEST_NAME").text if _.find("GUEST_NAME") is not None else "-"
+#     rm = _.find("ROOM").text if _.find("ROOM") is not None else "-"
+#     ta = _.find("TRAVEL_AGENT_NAME").text if _.find("TRAVEL_AGENT_NAME") is not None else "-"
+#     vip = _.find("VIP").text if _.find("VIP") is not None else "-"
+#     memb = None
+#     for mb in _.findall(".//LIST_G_MEMBERSHIP/G_MEMBERSHIP"):
+#         memb = mb.find("MEMBERSHIP_LEVEL").text
+#     adl = _.find("ADULTS").text if _.find("ADULTS") is not None else "-"
+#     chd = _.find("CHILDREN").text if _.find("CHILDREN") is not None else "-"
+#     arr = _.find("CHAR_ARRIVAL").text if _.find("CHAR_ARRIVAL") is not None else "-"
+#     dep = _.find("CHAR_DEPART").text if _.find("CHAR_DEPART") is not None else "-"
+#     etd = _.find("DEPARTURE_TIME").text if _.find("DEPARTURE_TIME") is not None else "-"
+#     cmt = None
+#     for cmt_res in _.findall("LIST_G_COMMENT_RESV_NAME_ID/G_COMMENT_RESV_NAME_ID"):
+#         in_cmt = cmt_res.find("RES_COMMENT").text
+#         if in_cmt and in_cmt.startswith(pf):
+#             cmt = in_cmt
+#         if cmt is None:
+#             if cmt_res.find("RES_COMMENT_DESCRIPTION").text == "Reservation":
+#                 for _ in str(pf).strip().lower():
+#                     if _ in str(in_cmt).strip().lower():
+#                         cmt = in_cmt
+
+#     set_name = [ _.strip() for _ in name.split(",")]
+#     ln, fn, tt = set_name[0], set_name[1], set_name[2]
+#     if (ln, fn, tt):
+#         ws[f"A{dep_start}"] = f"{tt}. {fn} {ln}"
+#         ws[f"A{dep_start}"].fill = PatternFill(fill_type=None)
+#     if tt is None:
+#         ws[f"A{dep_start}"] = f"{tt}. {fn} {ln}"
+#         ws[f"A{dep_start}"].fill = red_color
+
+#     if "Maintenance".strip().lower() in str(name).strip().lower():
+#         for _ in ws[f"A{dep_start}:P{arr_start}"][0]:
+#             _.fill = red_color
+
+#     if f"{fn} {ln}" in dep_country:
+#         ws[f"C{dep_start}"] = dep_country[f"{fn} {ln}"]
+#     if ws[f"C{dep_start}"].value is None:
+#         ws[f"C{dep_start}"] = "-"
+
+#     ws[f"D{dep_start}"] = rm
+
+#     if "MI Squared".strip().lower() in str(cmt).strip().lower():
+#         ws[f"D{dep_start}"] = f"{rm}\nMI Squared"
+#     if "Booking.com".strip().lower() in str(ta).strip().lower():
+#         ws[f"D{dep_start}"] = f"{rm}\nBooking.com"
+#     if "BG Asia".strip().lower() in str(ta).strip().lower():
+#         ws[f"D{dep_start}"] = f"{rm}\nBG Asia"
+#     if "Siam Tours".strip().lower() in str(ta).strip().lower():
+#         ws[f"D{dep_start}"] = f"{rm}\nSiam Tours"
+#     if "Travelbullz".strip().lower() in str(ta).strip().lower():
+#         ws[f"D{dep_start}"] = f"{rm}\nTravelbullz"
+#     if "BTC".strip().lower() in str(ta).strip().lower():
+#         ws[f"D{dep_start}"] = f"{rm}\nBTC"
+#     if "DERTOUR".strip().lower() in str(ta).strip().lower():
+#         ws[f"D{dep_start}"] = f"{rm}\nGo Vacation"
+#     if "Expedia".strip().lower() in str(ta).strip().lower():
+#         ws[f"D{dep_start}"] = f"{rm}\nExpedia"
+#     if "DNATA".strip().lower() in str(ta).strip().lower():
+#         ws[f"D{dep_start}"] = f"{rm}\nDNATA"
+#     if "Miki".strip().lower() in str(ta).strip().lower():
+#         ws[f"D{dep_start}"] = f"{rm}\nMiki Travel"
+#     if "Rak".strip().lower() in str(ta).strip().lower():
+#         ws[f"D{dep_start}"] = f"{rm}\nRak Journeys"
+#     if "Hotelbeds".strip().lower() in str(ta).strip().lower():
+#         ws[f"D{dep_start}"] = f"{rm}\nHotelbeds"
+
+#     if vip is not None:
+#         ws[f"F{dep_start}"] = vip
+#         if memb:
+#             ws[f"F{dep_start}"] = f"{vip}\n{memb}"
+#     if vip is None:
+#         ws[f"F{dep_start}"] = "-"
+#         if memb in ["SILVER", "GOLD"]:
+#             if diff_date.days < 7:
+#                 if vip not in ["VIP1", "VIP2", "VIPS"]:
+#                     ws[f"F{dep_start}"] = f"VIPG\n{memb}"
+#         if memb in ["PLATINUM"]:
+#             if vip not in ["VIP1", "VIP2"]:
+#                 ws[f"F{dep_start}"] = f"VIPS\n{memb}"
+#         if memb in ["TITANIUM", "RED"]:
+#             if vip not in ["VIP1"]:
+#                 ws[f"F{dep_start}"] = f"VIP2\n{memb}"
+
+#     arr_date = datetime.strptime(arr, "%d/%m/%y")
+#     dep_date = datetime.strptime(dep, "%d/%m/%y")
+#     diff_date = dep_date - arr_date
+
+#     if diff_date.days >= 7:
+#         if vip not in ["VIP1", "VIP2"]:
+#             if memb:
+#                 ws[f"F{dep_start}"] = f"VIPS\n{memb}"
+#             if not memb:
+#                 ws[f"F{dep_start}"] = f"VIPS"
+
+#     if memb in ["SILVER", "GOLD"]:
+#         if diff_date.days < 7:
+#             if vip not in ["VIP1", "VIP2", "VIPS"]:
+#                 ws[f"F{dep_start}"] = f"VIPG\n{memb}"
+#     if memb in ["PLATINUM"]:
+#         if vip not in ["VIP1", "VIP2"]:
+#             ws[f"F{dep_start}"] = f"VIPS\n{memb}"
+#     if memb in ["TITANIUM", "RED"]:
+#         if vip not in ["VIP1"]:
+#             ws[f"F{dep_start}"] = f"VIP2\n{memb}"
+
+#     if not "MI Squared".strip().lower() in str(cmt).strip().lower():
+#         if "JADE/RUBY".strip().lower() in str(cmt).strip().lower():
+#             ws[f"F{dep_start}"] = f"VIPO\nJADE"
+#         if "DIAMOND".strip().lower() in str(cmt).strip().lower():
+#             ws[f"F{dep_start}"] = f"VIPO\nDIAMOND"
+#         if "PLATINUM".strip().lower() in str(cmt).strip().lower():
+#             ws[f"F{dep_start}"] = f"VIPO\nPLATINUM"
+#         if "ROYAL".strip().lower() in str(cmt).strip().lower():
+#             ws[f"F{dep_start}"] = f"VIPO\nROYAL"
+#     if "MI Squared".strip().lower() in str(cmt).strip().lower():
+#         if diff_date.days < 7:
+#             ws[f"F{dep_start}"] = "-"
+#         if diff_date.days >= 7:
+#             ws[f"F{dep_start}"] = "VIPS"
+
+#     if chd is not None:
+#         ws[f"H{dep_start}"] = f"{adl}+{chd}"
+#     if chd is None or chd == "0":
+#         ws[f"H{dep_start}"] = f"{adl}"
+
+#     ws[f"I{dep_start}"] = arr
+
+#     ws[f"J{dep_start}"] = dep
+
+#     ws[f"K{dep_start}"] = "-"
+
+#     if etd is not None:
+#         ws[f"L{dep_start}"] = etd
+#         ws[f"L{dep_start}"].value = etd.replace(":", ".")
+#     if etd is None:
+#         ws[f"L{dep_start}"] = "12.00"
+
+#     ws[f"N{dep_start}"] = "OWN"
+
+#     ws[f"P{dep_start}"] = cmt
+
+#     dep_start += 1
+
+# wb.save(path_td_excel)
