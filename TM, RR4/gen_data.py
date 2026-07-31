@@ -13,7 +13,9 @@ if not os.path.exists(f"{script_config.path_share}"):
 
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", f"{script_config.site_OPERA}"])
+pygetwindow.getWindowsWithTitle("Opera Cloud")[0].activate()
 pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
+time.sleep(.5)
 
 # In Opera
 script_config.first_OPERA_open()
@@ -77,7 +79,7 @@ time.sleep(.25)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 
-xml_file = os.path.join(script_config.download_path, immigration_file)
+immigration = os.path.join(script_config.path_.__add__(r"\Downloads"), immigration_file)
 
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
@@ -102,10 +104,10 @@ ws2 = "Sheet2"
 ws1 = wb[ws1]
 ws2 = wb[ws2]
 
-if not os.path.exists(xml_file):
+if not os.path.exists(immigration):
      sys.exit()
      
-tree = xml.etree.ElementTree.parse(xml_file)
+tree = xml.etree.ElementTree.parse(immigration)
 root = tree.getroot()
 
 for _ in root.findall(".//G_IMMIGRATION"):

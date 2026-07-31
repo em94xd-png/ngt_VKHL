@@ -2,9 +2,9 @@ import pyautogui, os, subprocess, time, calendar
 from datetime import date, timedelta, datetime
 from urllib.parse import urlparse, parse_qs
 
-device_path = "LMPC202507256L"
-path_share = fr"\\{device_path}\Storage"
-download_path = os.environ.get("USERPROFILE").__add__(r"\Downloads")
+path_device = "LMPC202507256L"
+path_share = fr"\\{path_device}\Storage"
+path_ = os.environ.get("USERPROFILE")
 
 site_OPERA = "https://mtca2.oraclehospitality.ap-singapore-1.ocs.oraclecloud.com/MINOR/operacloud/faces/opera-cloud-index/OperaCloud"
 
