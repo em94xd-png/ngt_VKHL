@@ -16,6 +16,8 @@ os.makedirs(script_config.daily_report_path.__add__(r"\Before Closeday"), exist_
 daily_report_before = script_config.daily_report_path + r"\Before Closeday"
 script_config.remove_file(daily_report_before)
 
+pyautogui.hotkey("win", "d", interval=.01)
+
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", script_config.site_OPERA])
 if pygetwindow.getWindowsWithTitle("Opera Cloud"):
@@ -438,6 +440,8 @@ script_config.print_page_config(1, 1, 1)
 script_config.print_report_before(Rebate_and_Correction_Transactions)
 time.sleep(.5)
 script_config.print_page_config(1, 1, 1)
+
+script_config.return_print_default()
 
 # Open Room Discrepancy
 script_config.print_report_before(Room_Discrepancy)

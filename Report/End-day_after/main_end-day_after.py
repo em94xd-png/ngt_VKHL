@@ -12,6 +12,8 @@ if not os.path.exists(f"{script_config.path_share}"):
 # Delete files
 script_config.remove_file(script_config.daily_report_path)
 
+pyautogui.hotkey("win", "d", interval=.01)
+
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", f"{script_config.site_OPERA}"])
 if pygetwindow.getWindowsWithTitle("Opera Cloud"):

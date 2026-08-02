@@ -1,4 +1,4 @@
-import pyautogui, os, subprocess, time, calendar
+import pyautogui, os, subprocess, time, calendar, pygetwindow
 from datetime import date, timedelta, datetime
 from urllib.parse import urlparse, parse_qs
 
@@ -172,30 +172,61 @@ def print_report_before(report_name):
     subprocess.run(["cmd", "/c", "start", "msedge", report_PDF_to_URL])
 
 def print_page_config(set_copy, set_both, set_segment):
-    pyautogui.hotkey("ctrl", "p", interval=.01)
-    time.sleep(1)
-    pyautogui.press("tab", presses=(set_copy), interval=.01)
-    if set_copy == 1:
-        pyautogui.press("tab", presses=5, interval=.01)
-    elif set_copy == 2:
-        pyautogui.press("tab", interval=.01)
-        pyautogui.write("2", interval=.01)
-        pyautogui.press("tab", presses=4, interval=.01)
-    pyautogui.press("up", presses=2, interval=.01)
-    pyautogui.press("down", presses=(set_both), interval=.01)
+    pyautogui.hotkey("ctrl", "shift", "p", interval=.01)
+    while True:
+        if pyautogui.pixelMatchesColor(562, 575, (111, 145, 192), tolerance=10):
+            break
+    time.sleep(.25)
+    pyautogui.press("tab", presses=3, interval=.01)
+    pyautogui.write(f"{set_copy}", interval=.01)
+    pyautogui.press("tab", presses=2, interval=.01)
+    pyautogui.press("enter", interval=.01)
+    while True:
+        if pyautogui.pixelMatchesColor(771, 707, (47, 55, 248), tolerance=10):
+            break
+    time.sleep(.25)
+    pyautogui.press("tab", presses=18, interval=.01)
+    pyautogui.press("up", presses=3, interval=.01)
+    pyautogui.press("down", presses=(set_segment), interval=.01)
+    if set_segment == 0:
+        pyautogui.press("tab", presses=2, interval=.01)
+        pyautogui.press("up", presses=3, interval=.01)
+        pyautogui.press("down", presses=(set_both), interval=.01)
+    if set_segment == 1:
+        pyautogui.press("tab", presses=3, interval=.01)
+        pyautogui.press("up", presses=3, interval=.01)
+        pyautogui.press("down", presses=(set_both), interval=.01)
+    pyautogui.press("tab", presses=3, interval=.01)
+    pyautogui.press("enter", interval=.01)
+    while True:
+        if not pyautogui.pixelMatchesColor(771, 707, (47, 55, 248), tolerance=10):
+            break
+    time.sleep(.25)
     pyautogui.press("tab", interval=.01)
     pyautogui.press("enter", interval=.01)
-    time.sleep(.01)
-    pyautogui.press("tab", presses=3, interval=.01)
-    pyautogui.press("up", presses=2, interval=.01)
-    pyautogui.press("down", presses=(set_segment), interval=.01)
-    pyautogui.press("tab", presses=3, interval=.01)
-    time.sleep(.5)
-    pyautogui.press("enter", interval=.01)
+    while True:
+        if not pyautogui.pixelMatchesColor(1362, 150, (31, 121, 199), tolerance=10):
+            break
+    time.sleep(.25)
     pyautogui.hotkey("ctrl", "w", interval=.01)
+    time.sleep(.5)
 
 def remove_file(path):
     for _ in os.listdir(path):
         to_file = os.path.join(path, _)
         if os.path.isfile(to_file):
             os.remove(to_file)
+
+def return_print_default():
+    printer = "VKHL_RICOHP502_GSA02"
+    command = f'rundll32.exe printui.dll,PrintUIEntry /e /n "{printer}"'
+    subprocess.Popen(command, shell=True)
+    if pygetwindow.getWindowsWithTitle("Printing Preferences"):
+        pygetwindow.getWindowsWithTitle("Printing Preferences")[0].activate()
+    time.sleep(.5)
+    pyautogui.press("tab", presses=18, interval=.01)
+    pyautogui.press("up", presses=3, interval=.01)
+    pyautogui.press("tab", presses=2, interval=.01)
+    pyautogui.press("up", presses=3, interval=.01)
+    pyautogui.press("tab", presses=3, interval=.01)
+    pyautogui.press("enter", interval=.01)

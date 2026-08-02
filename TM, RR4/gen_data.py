@@ -11,6 +11,8 @@ pyautogui.FAILSAFE = True
 if not os.path.exists(f"{script_config.path_share}"):
      sys.exit()
 
+pyautogui.hotkey("win", "d", interval=.01)
+
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", f"{script_config.site_OPERA}"])
 if pygetwindow.getWindowsWithTitle("Opera Cloud"):
@@ -284,6 +286,9 @@ for _ in range(ws2.max_row, 4, -1):
           ws2.cell(row=_, column=13).fill = red_color
           ws2.cell(row=_, column=21).fill = red_color
      if str(nt).strip().isalpha() or str(ct).strip().isalpha():
+          ws2.cell(row=_, column=13).fill = red_color
+          ws2.cell(row=_, column=21).fill = red_color
+     if len(str(nt)) > 3 or len(str(ct)) > 3:
           ws2.cell(row=_, column=13).fill = red_color
           ws2.cell(row=_, column=21).fill = red_color
 

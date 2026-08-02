@@ -9,6 +9,8 @@ pyautogui.FAILSAFE = True
 if not os.path.exists(f"{script_config.path_share}"):
      sys.exit()
 
+pyautogui.hotkey("win", "d", interval=.01)
+
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", f"{script_config.site_OPERA}"])
 if pygetwindow.getWindowsWithTitle("Opera Cloud"):
@@ -113,3 +115,5 @@ VKHL_Guests_INH = "6. VKHL Guests INH"
 script_config.print_report_after(VKHL_Guests_INH)
 time.sleep(.5)
 script_config.print_page_config(1, 1, 1)
+
+script_config.return_print_default()
