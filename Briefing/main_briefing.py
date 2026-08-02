@@ -775,22 +775,22 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
     arr = _.find("ARRIVAL_ROOMS").text if _.find("ARRIVAL_ROOMS").text is not None else "-"
     dep = _.find("DEPARTURE_ROOMS").text if _.find("DEPARTURE_ROOMS").text is not None else "-"
     ppl = _.find("NO_PERSONS").text if _.find("NO_PERSONS").text is not None else "-"
-    if _.find("CONSIDERED_DATE").text == f"{script_config.td_hp_dd_mm_yy}":
+    if _.find("CONSIDERED_DATE").text == f"{script_config.td_hp_dd_mm_yy.upper()}":
         ws["E5"] = arr
         ws["E7"] = dep
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=1)).strftime("%d-%b-%y")}":
+    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=1)).strftime("%d-%b-%y").upper()}":
         ws["M5"] = arr
         ws["M7"] = dep
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=2)).strftime("%d-%b-%y")}":
+    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=2)).strftime("%d-%b-%y").upper()}":
         ws["O5"] = arr
         ws["O7"] = dep
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=3)).strftime("%d-%b-%y")}":
+    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=3)).strftime("%d-%b-%y").upper()}":
         ws["Q5"] = arr
         ws["Q7"] = dep
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=4)).strftime("%d-%b-%y")}":
+    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=4)).strftime("%d-%b-%y").upper()}":
         ws["S5"] = arr
         ws["S7"] = dep
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=5)).strftime("%d-%b-%y")}":
+    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=5)).strftime("%d-%b-%y").upper()}":
         ws["U5"] = arr
         ws["U7"] = dep
 
@@ -812,7 +812,7 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
     dep = _.find("DEPARTURE_ROOMS").text if _.find("DEPARTURE_ROOMS").text is not None else "-"
     rm = int(_.find("NO_ROOMS").text if str(_.find("NO_ROOMS").text) else 0)
     ppl = _.find("NO_PERSONS").text if _.find("NO_PERSONS").text is not None else "-"
-    if _.find("CONSIDERED_DATE").text == f"{script_config.ytd_hp_dd_mm_yy}":
+    if _.find("CONSIDERED_DATE").text == f"{script_config.ytd_hp_dd_mm_yy.upper()}":
         ws["B5"] = cmp
         ws["B7"] = hu
         ws["B9"] = ns
@@ -820,37 +820,37 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
         ws["B11"].number_format = "#,###.##"
         ws["B12"] = oc
         ws["B12"].number_format = "#.##\"%\""
-    if _.find("CONSIDERED_DATE").text == f"{script_config.td_hp_dd_mm_yy}":
+    if _.find("CONSIDERED_DATE").text == f"{script_config.td_hp_dd_mm_yy.upper()}":
         ws["D4"] = f"{script_config.td.strftime("%#d-%b")}"
         ws["F5"] = arr
         ws["F7"] = dep
         ws["E9"] = rm
         ws["G12"] = ppl
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=1)).strftime("%d-%b-%y")}":
+    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=1)).strftime("%d-%b-%y").upper()}":
         ws["N5"] = arr
         ws["N7"] = dep
         ws["M9"] = rm
         ws["M11"] = (rm - hu) / (327 - hu) * 100
         ws["M12"] = ppl
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=2)).strftime("%d-%b-%y")}":
+    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=2)).strftime("%d-%b-%y").upper()}":
         ws["P5"] = arr
         ws["P7"] = dep
         ws["O9"] = rm
         ws["O11"] = (rm - hu) / (327 - hu) * 100
         ws["O12"] = ppl
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=3)).strftime("%d-%b-%y")}":
+    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=3)).strftime("%d-%b-%y").upper()}":
         ws["R5"] = arr
         ws["R7"] = dep
         ws["Q9"] = rm
         ws["Q11"] = (rm - hu) / (327 - hu) * 100
         ws["Q12"] = ppl
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=4)).strftime("%d-%b-%y")}":
+    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=4)).strftime("%d-%b-%y").upper()}":
         ws["T5"] = arr
         ws["T7"] = dep
         ws["S9"] = rm
         ws["S11"] = (rm - hu) / (327 - hu) * 100
         ws["S12"] = ppl
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=5)).strftime("%d-%b-%y")}":
+    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=5)).strftime("%d-%b-%y").upper()}":
         ws["V5"] = arr
         ws["V7"] = dep
         ws["U9"] = rm
