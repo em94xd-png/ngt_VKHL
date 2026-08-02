@@ -12,6 +12,8 @@ pyautogui.FAILSAFE = True
 if not os.path.exists(f"{script_config.path_share}"):
      sys.exit()
 
+pyautogui.hotkey("win", "d", interval=.01)
+
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", f"{script_config.site_OPERA}"])
 if pygetwindow.getWindowsWithTitle("Opera Cloud"):
@@ -771,7 +773,6 @@ root = tree.getroot()
 
 for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED_DATE/G_CONSIDERED_DATE"):
     hu = _.find("HOUSE_USE_ROOMS").text if _.find("HOUSE_USE_ROOMS").text is not None else "N/A"
-    oc = round(float(_.find("CF_OCCUPANCY").text), 2) if _.find("CF_OCCUPANCY").text is not None else "N/A"
     arr = _.find("ARRIVAL_ROOMS").text if _.find("ARRIVAL_ROOMS").text is not None else "-"
     dep = _.find("DEPARTURE_ROOMS").text if _.find("DEPARTURE_ROOMS").text is not None else "-"
     ppl = _.find("NO_PERSONS").text if _.find("NO_PERSONS").text is not None else "-"
@@ -812,6 +813,7 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
     dep = _.find("DEPARTURE_ROOMS").text if _.find("DEPARTURE_ROOMS").text is not None else "-"
     rm = int(_.find("NO_ROOMS").text if str(_.find("NO_ROOMS").text) else 0)
     ppl = _.find("NO_PERSONS").text if _.find("NO_PERSONS").text is not None else "-"
+    oc = round(float(_.find("CF_OCCUPANCY").text), 2) if _.find("CF_OCCUPANCY").text is not None else "-"
     if _.find("CONSIDERED_DATE").text == f"{script_config.ytd_hp_dd_mm_yy.upper()}":
         ws["B5"] = cmp
         ws["B7"] = hu
@@ -857,9 +859,9 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
         ws["U11"] = (rm - hu) / (327 - hu) * 100
         ws["U12"] = ppl
 
-cmp = int(ws["B5"].value or 0)
-hu = int(ws["B7"].value or 0)
-rm = int(ws["E9"].value or 0)
+cmp = int(ws["B5"].value or 0 if ws["B5"].value != "-" else 0)
+hu = int(ws["B7"].value or 0 if ws["B7"].value != "-" else 0)
+rm = int(ws["E9"].value or 0 if ws["E9"].value != "-" else 0)
 
 ws["E11"] = round(float((rm - (cmp + hu)) / 327 * 100), 2)
 ws["E11"].number_format = "#.##\"%\""
@@ -870,7 +872,7 @@ root = tree.getroot()
 for _ in root.findall(".//G_RESV_TYPE"):
     adl = _.find("SUMADULTS").text if _.find("SUMADULTS").text is not None else "-"
     chd = _.find("SUMCHILDREN").text if _.find("SUMCHILDREN").text is not None else "-"
-    if _.find(".//D_DATE").text == f"{script_config.td_hp_dd_mm_yy}":
+    if _.find(".//D_DATE").text == f"{script_config.td_hp_dd_mm_yy.upper()}":
         ws["E12"] = adl
         ws["E13"] = chd
 
@@ -1103,6 +1105,11 @@ for _ in root.findall(".//G_RESERVATION"):
         ws[f"F{arr_start}"] = vip
         if memb:
             ws[f"F{arr_start}"] = f"{vip}\n{memb}"
+
+    arr_date = datetime.strptime(arr, "%d/%m/%y")
+    dep_date = datetime.strptime(dep, "%d/%m/%y")
+    diff_date = dep_date - arr_date
+
     if vip is None:
         ws[f"F{arr_start}"] = "-"
         if memb in ["SILVER", "GOLD"]:
@@ -1115,10 +1122,6 @@ for _ in root.findall(".//G_RESERVATION"):
         if memb in ["TITANIUM", "RED"]:
             if vip not in ["VIP1"]:
                 ws[f"F{arr_start}"] = f"VIP2\n{memb}"
-
-    arr_date = datetime.strptime(arr, "%d/%m/%y")
-    dep_date = datetime.strptime(dep, "%d/%m/%y")
-    diff_date = dep_date - arr_date
 
     if diff_date.days >= 7:
         if vip not in ["VIP1", "VIP2"]:
@@ -1273,6 +1276,11 @@ for _ in root.findall(".//G_ROOM"):
         ws[f"F{dep_start}"] = vip
         if memb:
             ws[f"F{dep_start}"] = f"{vip}\n{memb}"
+
+    arr_date = datetime.strptime(arr, "%d/%m/%y")
+    dep_date = datetime.strptime(dep, "%d/%m/%y")
+    diff_date = dep_date - arr_date
+
     if vip is None:
         ws[f"F{dep_start}"] = "-"
         if memb in ["SILVER", "GOLD"]:
@@ -1285,10 +1293,6 @@ for _ in root.findall(".//G_ROOM"):
         if memb in ["TITANIUM", "RED"]:
             if vip not in ["VIP1"]:
                 ws[f"F{dep_start}"] = f"VIP2\n{memb}"
-
-    arr_date = datetime.strptime(arr, "%d/%m/%y")
-    dep_date = datetime.strptime(dep, "%d/%m/%y")
-    diff_date = dep_date - arr_date
 
     if diff_date.days >= 7:
         if vip not in ["VIP1", "VIP2"]:
