@@ -9,998 +9,1000 @@ import script_config
 
 pyautogui.FAILSAFE = True
 
-if not os.path.exists(f"{script_config.path_share}"):
-     sys.exit()
-
-# Open Opera
-subprocess.run(["cmd", "/c", "start", "msedge", f"{script_config.site_OPERA}"])
-if pygetwindow.getWindowsWithTitle("Opera Cloud"):
-     pygetwindow.getWindowsWithTitle("Opera Cloud")[0].activate()
-     pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
-time.sleep(.5)
-
-# In Opera
-script_config.first_OPERA_open()
-script_config.zoom_out(10)
-script_config.zoom_in(3)
-script_config.main_OPERA_menu()
-
-# To report search
-pyautogui.press("tab", presses=5, interval=0.01)
-pyautogui.press("right", presses=6, interval=0.01)
-pyautogui.press("down", interval=0.01)
-pyautogui.press("enter", interval=0.01)
-script_config.search_reports()
-time.sleep(1)
-pyautogui.press("tab", interval=0.01)
-
-# Arrivals
-pyautogui.write("Arrivals: Detailed FO", interval=.01)
-pyautogui.press("enter", interval=.01)
-script_config.search_enter_step1()
-script_config.search_enter_step2()
-time.sleep(.5)
-pyautogui.press("tab", presses=9, interval=.01)
-pyautogui.press("down", presses=2, interval=.01)
-time.sleep(1)
-pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=13, interval=.01)
-pyautogui.press("enter", interval=.01)
-# Arrivals: Config
-script_config.config_report()
-time.sleep(1)
-pyautogui.hotkey("ctrl", "a", interval=.01)
-pyautogui.write(script_config.td_dd_mm, interval=.01)
-pyautogui.press("tab", presses=2, interval=.01)
-time.sleep(1)
-pyautogui.write(script_config.td_dd_mm, interval=.01)
-pyautogui.press("tab", presses=4, interval=.01)
-time.sleep(.75)
-pyautogui.write(script_config.Room_Type, interval=.01)
-pyautogui.press("tab", presses=38, interval=.01)
-pyautogui.press("delete", interval=.01)
-time.sleep(.5)
-pyautogui.press("tab", presses=9, interval=.01)
-pyautogui.press("enter", interval=0.01)
-# Arrivals: Save
-script_config.download_as()
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
-script_config.download_as_download()
-pyautogui.press("tab", presses=4, interval=.01)
-pyautogui.press("enter", interval=.01)
-# Arrivals: Download
-script_config.download_page()
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.hotkey("ctrl", "l", interval=.01)
-pyautogui.hotkey("ctrl", "c", interval=.01)
-arrival_url = pyperclip.paste()
-
-arrival_file = f"res_detail_{script_config.download_id(arrival_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-arrival = os.path.join(script_config.path_.__add__(r"\Downloads"), arrival_file)
-
-download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
-win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
-
-script_config.tab_reserve(1)
-pyautogui.press("enter", interval=0.01)
-script_config.search_reports()
-time.sleep(1)
-pyautogui.press("tab", interval=0.01)
-
-# Departures
-pyautogui.write("departure_all", interval=.01)
-pyautogui.press("enter", interval=0.01)
-script_config.search_enter_step1()
-script_config.search_enter_step2()
-time.sleep(.5)
-pyautogui.press("tab", presses=9, interval=0.01)
-pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(1)
-pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=13, interval=0.01)
-pyautogui.press("enter", interval=0.01)
-# Departures: Config
-script_config.config_report()
-time.sleep(1)
-pyautogui.press("tab", presses=3, interval=0.01)
-time.sleep(.75)
-pyautogui.write(script_config.Room_Type, interval=.01)
-pyautogui.press("tab", presses=10, interval=.01)
-pyautogui.press("space", interval=.01) # Pseudo Rooms
-time.sleep(.5)
-pyautogui.press("tab", presses=12, interval=.01)
-pyautogui.press("space", interval=.01) # Membership Type
-time.sleep(.75)
-pyautogui.press("tab", interval=.01)
-pyautogui.press("space", interval=.01) # Membership Level
-time.sleep(.75)
-pyautogui.press("tab", presses=11, interval=.01)
-pyautogui.press("enter", interval=0.01)
-# Departures: Save
-script_config.download_as()
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
-script_config.download_as_download()
-pyautogui.press("tab", presses=4, interval=.01)
-pyautogui.press("enter", interval=.01)
-# Departures: Download
-script_config.download_page()
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.hotkey("ctrl", "l", interval=.01)
-pyautogui.hotkey("ctrl", "c", interval=.01)
-departure_url = pyperclip.paste()
-
-departure_file = f"departure_all_{script_config.download_id(departure_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-departure = os.path.join(script_config.path_.__add__(r"\Downloads"), departure_file)
-
-download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
-win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
-
-script_config.tab_reserve(1)
-pyautogui.press("enter", interval=0.01)
-script_config.search_reports()
-time.sleep(1)
-pyautogui.press("tab", interval=0.01)
-
-# History and Forecast
-pyautogui.write("History and Forecast FO", interval=.01)
-pyautogui.press("enter", interval=0.01)
-script_config.search_enter_step1()
-script_config.search_enter_step2()
-time.sleep(.5)
-pyautogui.press("tab", presses=9, interval=0.01)
-pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(1)
-pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=13, interval=0.01)
-pyautogui.press("enter", interval=0.01)
-# History and Forecast: Config
-script_config.config_report()
-time.sleep(1)
-pyautogui.hotkey("ctrl", "a", interval=.01)
-pyautogui.write(script_config.ytd_dd_mm, interval=.01)
-pyautogui.press("tab", interval=.01)
-time.sleep(1)
-pyautogui.write("+5", interval=.01)
-pyautogui.press("tab", presses=18, interval=0.01)
-pyautogui.press("enter", interval=0.01)
-# History and Forecast: Save
-script_config.download_as()
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
-script_config.download_as_download()
-pyautogui.press("tab", presses=4, interval=.01)
-pyautogui.press("enter", interval=.01)
-# History and Forecast: Download
-script_config.download_page()
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.hotkey("ctrl", "l", interval=.01)
-pyautogui.hotkey("ctrl", "c", interval=.01)
-history_forecast_url = pyperclip.paste()
-
-history_forecast_file = f"history_forecast_{script_config.download_id(history_forecast_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-history_forecast = os.path.join(script_config.path_.__add__(r"\Downloads"), history_forecast_file)
-
-download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
-win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
-
-# History and Forecast (AVC)
-# History and Forecast (AVC): Config
-script_config.tab_reserve(12)
-pyautogui.press("space", interval=.01) # Pseudo Rooms
-time.sleep(.5)
-pyautogui.press("tab", presses=12, interval=.01)
-pyautogui.press("enter", interval=0.01)
-# History and Forecast (AVC): Save
-script_config.download_as()
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
-script_config.download_as_download()
-pyautogui.press("tab", presses=4, interval=.01)
-pyautogui.press("enter", interval=.01)
-# History and Forecast (AVC): Download
-script_config.download_page()
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.hotkey("ctrl", "l", interval=.01)
-pyautogui.hotkey("ctrl", "c", interval=.01)
-history_forecast_AVC_url = pyperclip.paste()
-
-history_forecast_AVC_file = f"history_forecast_{script_config.download_id(history_forecast_AVC_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-history_forecast_AVC = os.path.join(script_config.path_.__add__(r"\Downloads"), history_forecast_AVC_file)
-
-download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
-win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
-
-script_config.tab_reserve(1)
-pyautogui.press("enter", interval=0.01)
-script_config.search_reports()
-time.sleep(1)
-pyautogui.press("tab", interval=0.01)
-
-# Forecast
-pyautogui.write("resfutureoccupancy", interval=.01)
-pyautogui.press("enter", interval=0.01)
-script_config.search_enter_step1()
-script_config.search_enter_step2()
-time.sleep(.5)
-pyautogui.press("tab", presses=9, interval=0.01)
-pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(1)
-pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=13, interval=0.01)
-pyautogui.press("enter", interval=0.01)
-# Forecast: Config
-script_config.config_report()
-time.sleep(1)
-pyautogui.hotkey("ctrl", "a", interval=.01)
-pyautogui.write(script_config.td_dd_mm, interval=.01)
-pyautogui.press("tab", interval=.01)
-time.sleep(1)
-pyautogui.write(script_config.td_dd_mm, interval=.01)
-pyautogui.press("tab", presses=5, interval=.01)
-pyautogui.press("enter", interval=0.01)
-# Forecast: Save
-script_config.download_as()
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
-script_config.download_as_download()
-pyautogui.press("tab", presses=4, interval=.01)
-pyautogui.press("enter", interval=.01)
-# Forecast: Download
-script_config.download_page()
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.hotkey("ctrl", "l", interval=.01)
-pyautogui.hotkey("ctrl", "c", interval=.01)
-resfutureoccupancy_url = pyperclip.paste()
-
-resfutureoccupancy_file = f"resfutureoccupancy_{script_config.download_id(resfutureoccupancy_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-resfutureoccupancy = os.path.join(script_config.path_.__add__(r"\Downloads"), resfutureoccupancy_file)
-
-download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
-win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
-
-script_config.tab_reserve(1)
-pyautogui.press("enter", interval=0.01)
-script_config.search_reports()
-time.sleep(1)
-pyautogui.press("tab", interval=0.01)
-
-# Room Upgrade
-pyautogui.write("Journal by Cashier and Transaction Code", interval=.01)
-pyautogui.press("enter", interval=0.01)
-script_config.search_enter_step1()
-script_config.search_enter_step2()
-time.sleep(.5)
-pyautogui.press("tab", presses=9, interval=0.01)
-pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(1)
-pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=13, interval=0.01)
-pyautogui.press("enter", interval=0.01)
-# Room Upgrade: Config
-script_config.config_report()
-time.sleep(1)
-pyautogui.hotkey("ctrl", "a", interval=.01)
-pyautogui.write(script_config.ytd_dd_mm, interval=.01)
-pyautogui.press("tab", interval=0.01)
-time.sleep(1)
-pyautogui.write(script_config.ytd_dd_mm, interval=.01)
-pyautogui.press("tab", presses=4, interval=0.01)
-time.sleep(1)
-pyautogui.write("10203", interval=.01)
-pyautogui.press("tab", presses=12, interval=0.01)
-pyautogui.press("enter", interval=.01)
-# Room Upgrade: Save
-script_config.download_as()
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
-script_config.download_as_download()
-pyautogui.press("tab", presses=4, interval=.01)
-pyautogui.press("enter", interval=.01)
-# Room Upgrade: Download
-script_config.download_page()
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.hotkey("ctrl", "l", interval=.01)
-pyautogui.hotkey("ctrl", "c", interval=.01)
-room_upgrade_url = pyperclip.paste()
-
-room_upgrade_file = f"finjrnlbytrans_{script_config.download_id(room_upgrade_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-room_upgrade = os.path.join(script_config.path_.__add__(r"\Downloads"), room_upgrade_file)
-
-download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
-win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
-
-# Late Checkout: Config
-script_config.tab_reserve(13)
-time.sleep(1)
-pyautogui.write("10200,10400", interval=.01)
-pyautogui.press("tab", presses=13, interval=.01)
-pyautogui.press("enter", interval=0.01)
-# Late Checkout: Save
-script_config.download_as()
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
-script_config.download_as_download()
-pyautogui.press("tab", presses=4, interval=.01)
-pyautogui.press("enter", interval=.01)
-# Late Checkout: Download
-script_config.download_page()
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.hotkey("ctrl", "l", interval=.01)
-pyautogui.hotkey("ctrl", "c", interval=.01)
-late_checkout_url = pyperclip.paste()
-
-late_checkout_file = f"finjrnlbytrans_{script_config.download_id(late_checkout_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-late_checkout = os.path.join(script_config.path_.__add__(r"\Downloads"), late_checkout_file)
-
-download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
-win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
-
-# Tour Commission: Config
-script_config.tab_reserve(13)
-time.sleep(1)
-pyautogui.write("62710", interval=.01)
-pyautogui.press("tab", presses=13, interval=.01)
-pyautogui.press("enter", interval=0.01)
-# Tour Commission: Save
-script_config.download_as()
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
-script_config.download_as_download()
-pyautogui.press("tab", presses=4, interval=.01)
-pyautogui.press("enter", interval=.01)
-# Tour Commission: Download
-script_config.download_page()
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.hotkey("ctrl", "l", interval=.01)
-pyautogui.hotkey("ctrl", "c", interval=.01)
-tour_commission_url = pyperclip.paste()
-
-tour_commission_file = f"finjrnlbytrans_{script_config.download_id(tour_commission_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-tour_commission = os.path.join(script_config.path_.__add__(r"\Downloads"), tour_commission_file)
-
-download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
-win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
-
-# Gift Shop: Config
-script_config.tab_reserve(13)
-time.sleep(1)
-pyautogui.write("60600,60601,60630,60631", interval=.01)
-pyautogui.press("tab", presses=13, interval=.01)
-pyautogui.press("enter", interval=0.01)
-# Gift Shop: Save
-script_config.download_as()
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
-script_config.download_as_download()
-pyautogui.press("tab", presses=4, interval=.01)
-pyautogui.press("enter", interval=.01)
-# Gift Shop: Download
-script_config.download_page()
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.hotkey("ctrl", "l", interval=.01)
-pyautogui.hotkey("ctrl", "c", interval=.01)
-gift_shop_url = pyperclip.paste()
-
-gift_shop_file = f"finjrnlbytrans_{script_config.download_id(gift_shop_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-gift_shop = os.path.join(script_config.path_.__add__(r"\Downloads"), gift_shop_file)
-
-download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
-win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
-
-# Room Upgrade MTD: Config
-script_config.tab_reserve(18)
-time.sleep(1)
-pyautogui.write(f"{script_config.ytd.replace(day=1).strftime("%d%m")}", interval=.01)
-pyautogui.press("tab", interval=.01)
-time.sleep(1)
-pyautogui.write(f"{script_config.ytd_dd_mm}", interval=.01)
-pyautogui.press("tab", presses=4, interval=0.01)
-time.sleep(1)
-pyautogui.write("10203", interval=.01)
-pyautogui.press("tab", presses=13, interval=0.01)
-pyautogui.press("enter", interval=.01)
-# Room Upgrade MTD: Save
-script_config.download_as()
-time.sleep(.5)
-pyautogui.press("esc", interval=.01)
-time.sleep(.15)
-pyautogui.press("enter", interval=.01)
-script_config.download_as()
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
-script_config.download_as_download()
-pyautogui.press("tab", presses=4, interval=.01)
-pyautogui.press("enter", interval=.01)
-# Room Upgrade MTD: Download
-script_config.download_page()
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.hotkey("ctrl", "l", interval=.01)
-pyautogui.hotkey("ctrl", "c", interval=.01)
-room_upgrade_mtd_url = pyperclip.paste()
-
-room_upgrade_mtd_file = f"finjrnlbytrans_{script_config.download_id(room_upgrade_mtd_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-room_upgrade_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), room_upgrade_mtd_file)
-
-download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
-win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
-
-# Late Checkout MTD: Config
-script_config.tab_reserve(13)
-time.sleep(1)
-pyautogui.write("10200,10400", interval=.01)
-pyautogui.press("tab", presses=13, interval=.01)
-pyautogui.press("enter", interval=0.01)
-# Late Checkout MTD: Save
-script_config.download_as()
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
-script_config.download_as_download()
-pyautogui.press("tab", presses=4, interval=.01)
-pyautogui.press("enter", interval=.01)
-# Late Checkout MTD: Download
-script_config.download_page()
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.hotkey("ctrl", "l", interval=.01)
-pyautogui.hotkey("ctrl", "c", interval=.01)
-late_checkout_mtd_url = pyperclip.paste()
-
-late_checkout_mtd_file = f"finjrnlbytrans_{script_config.download_id(late_checkout_mtd_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-late_checkout_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), late_checkout_mtd_file)
-
-download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
-win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
-
-# Tour Commission MTD: Config
-script_config.tab_reserve(13)
-time.sleep(1)
-pyautogui.write("62710", interval=.01)
-pyautogui.press("tab", presses=13, interval=.01)
-pyautogui.press("enter", interval=0.01)
-# Tour Commission MTD: Save
-script_config.download_as()
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
-script_config.download_as_download()
-pyautogui.press("tab", presses=4, interval=.01)
-pyautogui.press("enter", interval=.01)
-# Tour Commission MTD: Download
-script_config.download_page()
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.hotkey("ctrl", "l", interval=.01)
-pyautogui.hotkey("ctrl", "c", interval=.01)
-tour_commission_mtd_url = pyperclip.paste()
-
-tour_commission_mtd_file = f"finjrnlbytrans_{script_config.download_id(tour_commission_mtd_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-tour_commission_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), tour_commission_mtd_file)
-
-download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
-win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
-
-# Gift Shop MTD: Config
-script_config.tab_reserve(13)
-time.sleep(1)
-pyautogui.write("60600,60601,60630,60631", interval=.01)
-pyautogui.press("tab", presses=13, interval=.01)
-pyautogui.press("enter", interval=0.01)
-# Gift Shop MTD: Save
-script_config.download_as()
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
-script_config.download_as_download()
-pyautogui.press("tab", presses=4, interval=.01)
-pyautogui.press("enter", interval=.01)
-# Gift Shop MTD: Download
-script_config.download_page()
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.hotkey("ctrl", "l", interval=.01)
-pyautogui.hotkey("ctrl", "c", interval=.01)
-gift_shop_mtd_url = pyperclip.paste()
-
-gift_shop_mtd_file = f"finjrnlbytrans_{script_config.download_id(gift_shop_mtd_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-gift_shop_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), gift_shop_mtd_file)
-
-download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
-win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
-
-script_config.tab_reserve(1)
-pyautogui.press("enter", interval=0.01)
-script_config.search_reports()
-time.sleep(1)
-pyautogui.press("tab", interval=0.01)
-
-# ARR Immigration
-pyautogui.write("immigration_report", interval=.01)
-pyautogui.press("enter", interval=0.01)
-script_config.search_enter_step1()
-script_config.search_enter_step2()
-time.sleep(.5)
-pyautogui.press("tab", presses=9, interval=0.01)
-pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(1)
-pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=13, interval=0.01)
-pyautogui.press("enter", interval=0.01)
-# ARR Immigration: Config
-script_config.config_report()
-time.sleep(1)
-pyautogui.press("tab", presses=3, interval=0.01)
-pyautogui.press("space", interval=.01)
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("enter", interval=.01)
-# ARR Immigration: Save
-script_config.download_as()
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", presses=2, interval=.01)
-script_config.download_as_download_s()
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("enter", interval=.01)
-# ARR Immigration: Download
-script_config.download_page()
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.hotkey("ctrl", "l", interval=.01)
-pyautogui.hotkey("ctrl", "c", interval=.01)
-arr_immigration_url = pyperclip.paste()
-
-arr_immigration_file = f"immigration_report_{script_config.download_id(arr_immigration_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-arr_immigration = os.path.join(script_config.path_.__add__(r"\Downloads"), arr_immigration_file)
-
-download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
-win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
-
-# DEP Immigration: Config
-script_config.tab_reserve(4)
-time.sleep(1)
-pyautogui.write("CHECKED OUT,DEPARTURE", interval=.01)
-pyautogui.press("tab", presses=4, interval=.01)
-pyautogui.press("enter", interval=.01)
-# DEP Immigration: Save
-script_config.download_as()
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
-script_config.download_as_download_s()
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("enter", interval=.01)
-# DEP Immigration: Download
-script_config.download_page()
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.hotkey("ctrl", "l", interval=.01)
-pyautogui.hotkey("ctrl", "c", interval=.01)
-dep_immigration_url = pyperclip.paste()
-
-dep_immigration_file = f"immigration_report_{script_config.download_id(dep_immigration_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-dep_immigration = os.path.join(script_config.path_.__add__(r"\Downloads"), dep_immigration_file)
-
-download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
-win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
-
-path_OTH = script_config.path_share.__add__(r"\OTH")
-
-ori_excel_file = "Briefing.xlsx"
-path_ori_excel = os.path.join(path_OTH, ori_excel_file)
-
-path_td_excel = os.path.join(path_OTH, f"{script_config.td_dot_dd_mm_yy}.xlsx")
-
-wb = load_workbook(path_ori_excel)
-wb.save(path_td_excel)
-
-tree = xml.etree.ElementTree.parse(arrival)
-root = tree.getroot()
-
-arr_row = 1
-
-for _ in root.findall(".//G_RESERVATION"):
-    arr_row += 1
-
-os.startfile(path_td_excel)
-time.sleep(1.5)
-if pygetwindow.getWindowsWithTitle("Excel"):
-    pygetwindow.getWindowsWithTitle("Excel")[0].activate()
-    pygetwindow.getWindowsWithTitle("Excel")[0].maximize()
-if not pygetwindow.getWindowsWithTitle("Excel"):
-     sys.exit()
-time.sleep(.5)
-pyautogui.hotkey("ctrl", "g")
-pyautogui.write("a16")
-pyautogui.press("enter")
-pyautogui.hotkey("shift", "space")
-time.sleep(.15)
-with pyautogui.hold("ctrl"):
-    for _ in range(arr_row - 2):
-        pyautogui.PAUSE = 0
-        pyautogui.press("c")
-        pyautogui.press("+")
-
-tree = xml.etree.ElementTree.parse(departure)
-root = tree.getroot()
-
-dep_row = arr_row
-
-for _ in root.findall(".//G_ROOM"):
-    dep_row += 1
-
-pyautogui.hotkey("ctrl", "g")
-pyautogui.write(f"a{arr_row + 17}")
-pyautogui.press("enter")
-pyautogui.hotkey("shift", "space")
-time.sleep(.15)
-with pyautogui.hold("ctrl"):
-    for _ in range((dep_row - arr_row) - 1):
-        pyautogui.PAUSE = 0
-        pyautogui.press("c")
-        pyautogui.press("+")
-pyautogui.hotkey("ctrl", "home")
-pyautogui.press("down", presses=2)
-pyautogui.hotkey("ctrl", "s")
-pyautogui.hotkey("alt", "f4")
-
-script_config.stay_excel()
-
-wb = load_workbook(path_td_excel)
-
-ws = "Ori Format"
-ws = wb[ws]
-ws.title = f"{script_config.td_dot_dd_mm_yy}"
-
-ws["A2"] = f"Daily Briefing\n{script_config.td_full_d} {script_config.td_full_m} {script_config.td_short_date}, {script_config.td_yyyy}"
-
-tree = xml.etree.ElementTree.parse(history_forecast)
-root = tree.getroot()
-
-for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED_DATE/G_CONSIDERED_DATE"):
-    hu = _.find("HOUSE_USE_ROOMS").text if _.find("HOUSE_USE_ROOMS").text is not None else "N/A"
-    oc = round(float(_.find("CF_OCCUPANCY").text), 2) if _.find("CF_OCCUPANCY").text is not None else "N/A"
-    arr = _.find("ARRIVAL_ROOMS").text if _.find("ARRIVAL_ROOMS").text is not None else "-"
-    dep = _.find("DEPARTURE_ROOMS").text if _.find("DEPARTURE_ROOMS").text is not None else "-"
-    ppl = _.find("NO_PERSONS").text if _.find("NO_PERSONS").text is not None else "-"
-    if _.find("CONSIDERED_DATE").text == f"{script_config.td_hp_dd_mm_yy}":
-        ws["E5"] = arr
-        ws["E7"] = dep
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=1)).strftime("%d-%b-%y")}":
-        ws["M5"] = arr
-        ws["M7"] = dep
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=2)).strftime("%d-%b-%y")}":
-        ws["O5"] = arr
-        ws["O7"] = dep
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=3)).strftime("%d-%b-%y")}":
-        ws["Q5"] = arr
-        ws["Q7"] = dep
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=4)).strftime("%d-%b-%y")}":
-        ws["S5"] = arr
-        ws["S7"] = dep
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=5)).strftime("%d-%b-%y")}":
-        ws["U5"] = arr
-        ws["U7"] = dep
-
-tree = xml.etree.ElementTree.parse(history_forecast_AVC)
-root = tree.getroot()
-
-for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED_DATE/G_CONSIDERED_DATE"):
-    cmp = _.find("COMPLIMENTARY_ROOMS").text if _.find("COMPLIMENTARY_ROOMS").text is not None else "-"
-    if cmp == "0":
-        cmp = "-"
-    hu = int(_.find("HOUSE_USE_ROOMS").text if str(_.find("HOUSE_USE_ROOMS").text) else 0)
-    if hu == "0":
-        hu = "-"
-    ns = _.find("NO_SHOW_ROOMS").text if _.find("NO_SHOW_ROOMS").text else "-"
-    if ns == "0":
-        ns = "-"
-    adr = round(float(_.find("CF_AVERAGE_ROOM_RATE").text), 2) if _.find("CF_AVERAGE_ROOM_RATE").text is not None else "-"
-    arr = _.find("ARRIVAL_ROOMS").text if _.find("ARRIVAL_ROOMS").text is not None else "-"
-    dep = _.find("DEPARTURE_ROOMS").text if _.find("DEPARTURE_ROOMS").text is not None else "-"
-    rm = int(_.find("NO_ROOMS").text if str(_.find("NO_ROOMS").text) else 0)
-    ppl = _.find("NO_PERSONS").text if _.find("NO_PERSONS").text is not None else "-"
-    if _.find("CONSIDERED_DATE").text == f"{script_config.ytd_hp_dd_mm_yy}":
-        ws["B5"] = cmp
-        ws["B7"] = hu
-        ws["B9"] = ns
-        ws["B11"] = adr
-        ws["B11"].number_format = "#,###.##"
-        ws["B12"] = oc
-        ws["B12"].number_format = "#.##\"%\""
-    if _.find("CONSIDERED_DATE").text == f"{script_config.td_hp_dd_mm_yy}":
-        ws["D4"] = "25-Jul"
-        ws["F5"] = arr
-        ws["F7"] = dep
-        ws["E9"] = rm
-        ws["G12"] = ppl
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=1)).strftime("%d-%b-%y")}":
-        ws["N5"] = arr
-        ws["N7"] = dep
-        ws["M9"] = rm
-        ws["M11"] = (rm - hu) / (327 - hu) * 100
-        ws["M12"] = ppl
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=2)).strftime("%d-%b-%y")}":
-        ws["P5"] = arr
-        ws["P7"] = dep
-        ws["O9"] = rm
-        ws["O11"] = (rm - hu) / (327 - hu) * 100
-        ws["O12"] = ppl
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=3)).strftime("%d-%b-%y")}":
-        ws["R5"] = arr
-        ws["R7"] = dep
-        ws["Q9"] = rm
-        ws["Q11"] = (rm - hu) / (327 - hu) * 100
-        ws["Q12"] = ppl
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=4)).strftime("%d-%b-%y")}":
-        ws["T5"] = arr
-        ws["T7"] = dep
-        ws["S9"] = rm
-        ws["S11"] = (rm - hu) / (327 - hu) * 100
-        ws["S12"] = ppl
-    if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=5)).strftime("%d-%b-%y")}":
-        ws["V5"] = arr
-        ws["V7"] = dep
-        ws["U9"] = rm
-        ws["U11"] = (rm - hu) / (327 - hu) * 100
-        ws["U12"] = ppl
-
-cmp = int(ws["B5"].value or 0)
-hu = int(ws["B7"].value or 0)
-rm = int(ws["E9"].value or 0)
-
-ws["E11"] = round(float((rm - (cmp + hu)) / 327 * 100), 2)
-ws["E11"].number_format = "#.##\"%\""
-
-tree = xml.etree.ElementTree.parse(resfutureoccupancy)
-root = tree.getroot()
-
-for _ in root.findall(".//G_RESV_TYPE"):
-    adl = _.find("SUMADULTS").text if _.find("SUMADULTS").text is not None else "-"
-    chd = _.find("SUMCHILDREN").text if _.find("SUMCHILDREN").text is not None else "-"
-    if _.find(".//D_DATE").text == f"{script_config.td_hp_dd_mm_yy}":
-        ws["E12"] = adl
-        ws["E13"] = chd
-
-tree = xml.etree.ElementTree.parse(room_upgrade)
-root = tree.getroot()
-
-for _ in root:
-    if _.tag == "R_DEBIT":
-        val = float(_.text)
-        if _.text == "0":
-            ws["I5"] = "-"
-        else:
-            if val.is_integer():
-                ws["I5"] = int(val)
-                ws["I5"].number_format = "#,##0"
-            else:
-                ws["I5"] = round(val, 2)
-                ws["I5"].number_format = "#,##0.00"
-
-tree = xml.etree.ElementTree.parse(room_upgrade_mtd)
-root = tree.getroot()
-
-for _ in root:
-    if _.tag == "R_DEBIT":
-        val = float(_.text)
-        if _.text == "0":
-            ws["J5"] = "-"
-        else:
-            if val.is_integer():
-                ws["J5"] = int(val)
-                ws["J5"].number_format = "#,##0"
-            else:
-                ws["J5"] = round(val, 2)
-                ws["J5"].number_format = "#,##0.00"
-
-tree = xml.etree.ElementTree.parse(late_checkout)
-root = tree.getroot()
-
-for _ in root:
-    if _.tag == "R_DEBIT":
-        val = float(_.text)
-        if _.text == "0":
-            ws["I7"] = "-"
-        else:
-            if val.is_integer():
-                ws["I7"] = int(val)
-                ws["I7"].number_format = "#,##0"
-            else:
-                ws["I7"] = round(val, 2)
-                ws["I7"].number_format = "#,##0.00"
-
-tree = xml.etree.ElementTree.parse(late_checkout_mtd)
-root = tree.getroot()
-
-for _ in root:
-    if _.tag == "R_DEBIT":
-        val = float(_.text)
-        if _.text == "0":
-            ws["J7"] = "-"
-        else:
-            if val.is_integer():
-                ws["J7"] = int(val)
-                ws["J7"].number_format = "#,##0"
-            else:
-                ws["J7"] = round(val, 2)
-                ws["J7"].number_format = "#,##0.00"
-
-tree = xml.etree.ElementTree.parse(tour_commission)
-root = tree.getroot()
-
-for _ in root:
-    if _.tag == "R_DEBIT":
-        val = float(_.text)
-        if _.text == "0":
-            ws["I9"] = "-"
-        else:
-            if val.is_integer():
-                ws["I9"] = int(val)
-                ws["I9"].number_format = "#,##0"
-            else:
-                ws["I9"] = round(val, 2)
-                ws["I9"].number_format = "#,##0.00"
-
-tree = xml.etree.ElementTree.parse(tour_commission_mtd)
-root = tree.getroot()
-
-for _ in root:
-    if _.tag == "R_DEBIT":
-        val = float(_.text)
-        if _.text == "0":
-            ws["J9"] = "-"
-        else:
-            if val.is_integer():
-                ws["J9"] = int(val)
-                ws["J9"].number_format = "#,##0"
-            else:
-                ws["J9"] = round(val, 2)
-                ws["J9"].number_format = "#,##0.00"
-
-tree = xml.etree.ElementTree.parse(gift_shop)
-root = tree.getroot()
-
-for _ in root:
-    if _.tag == "R_DEBIT":
-        val = float(_.text)
-        if _.text == "0":
-            ws["I12"] = "-"
-        else:
-            if val.is_integer():
-                ws["I12"] = int(val)
-                ws["I12"].number_format = "#,##0"
-            else:
-                ws["I12"] = round(val, 2)
-                ws["I12"].number_format = "#,##0.00"
-
-tree = xml.etree.ElementTree.parse(gift_shop_mtd)
-root = tree.getroot()
-
-for _ in root:
-    if _.tag == "R_DEBIT":
-        val = float(_.text)
-        if _.text == "0":
-            ws["J12"] = "-"
-        else:
-            if val.is_integer():
-                ws["J12"] = int(val)
-                ws["J12"].number_format = "#,##0"
-            else:
-                ws["J12"] = round(val, 2)
-                ws["J12"].number_format = "#,##0.00"
+# if not os.path.exists(f"{script_config.path_share}"):
+#      sys.exit()
+
+# # Open Opera
+# subprocess.run(["cmd", "/c", "start", "msedge", f"{script_config.site_OPERA}"])
+# if pygetwindow.getWindowsWithTitle("Opera Cloud"):
+#      pygetwindow.getWindowsWithTitle("Opera Cloud")[0].activate()
+#      pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
+# time.sleep(.5)
+
+# # In Opera
+# script_config.first_OPERA_open()
+# script_config.zoom_out(10)
+# script_config.zoom_in(3)
+# script_config.main_OPERA_menu()
+
+# # To report search
+# pyautogui.press("tab", presses=5, interval=0.01)
+# pyautogui.press("right", presses=6, interval=0.01)
+# pyautogui.press("down", interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_reports()
+# time.sleep(1)
+# pyautogui.press("tab", interval=0.01)
+
+# # Arrivals
+# pyautogui.write("Arrivals: Detailed FO", interval=.01)
+# pyautogui.press("enter", interval=.01)
+# script_config.search_enter_step1()
+# script_config.search_enter_step2()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=9, interval=.01)
+# pyautogui.press("down", presses=2, interval=.01)
+# time.sleep(1)
+# pyautogui.press("right", interval=.01)
+# pyautogui.press("tab", presses=13, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Arrivals: Config
+# script_config.config_report()
+# time.sleep(1)
+# pyautogui.hotkey("ctrl", "a", interval=.01)
+# pyautogui.write(script_config.td_dd_mm, interval=.01)
+# pyautogui.press("tab", presses=2, interval=.01)
+# time.sleep(1)
+# pyautogui.write(script_config.td_dd_mm, interval=.01)
+# pyautogui.press("tab", presses=4, interval=.01)
+# time.sleep(.75)
+# pyautogui.write(script_config.Room_Type, interval=.01)
+# pyautogui.press("tab", presses=38, interval=.01)
+# pyautogui.press("delete", interval=.01)
+# time.sleep(.5)
+# pyautogui.press("tab", presses=9, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # Arrivals: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# script_config.download_as_download()
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Arrivals: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# arrival_url = pyperclip.paste()
+
+# arrival_file = f"res_detail_{script_config.download_id(arrival_url)}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# arrival = os.path.join(script_config.path_.__add__(r"\Downloads"), arrival_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# script_config.tab_reserve(1)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_reports()
+# time.sleep(1)
+# pyautogui.press("tab", interval=0.01)
+
+# # Departures
+# pyautogui.write("departure_all", interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_enter_step1()
+# script_config.search_enter_step2()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=9, interval=0.01)
+# pyautogui.press("down", presses=2, interval=0.01)
+# time.sleep(1)
+# pyautogui.press("right", interval=.01)
+# pyautogui.press("tab", presses=13, interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# # Departures: Config
+# script_config.config_report()
+# time.sleep(1)
+# pyautogui.press("tab", presses=3, interval=0.01)
+# time.sleep(.75)
+# pyautogui.write(script_config.Room_Type, interval=.01)
+# pyautogui.press("tab", presses=10, interval=.01)
+# pyautogui.press("space", interval=.01) # Pseudo Rooms
+# time.sleep(.5)
+# pyautogui.press("tab", presses=12, interval=.01)
+# pyautogui.press("space", interval=.01) # Membership Type
+# time.sleep(.75)
+# pyautogui.press("tab", interval=.01)
+# pyautogui.press("space", interval=.01) # Membership Level
+# time.sleep(.75)
+# pyautogui.press("tab", presses=11, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # Departures: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# script_config.download_as_download()
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Departures: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# departure_url = pyperclip.paste()
+
+# departure_file = f"departure_all_{script_config.download_id(departure_url)}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# departure = os.path.join(script_config.path_.__add__(r"\Downloads"), departure_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# script_config.tab_reserve(1)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_reports()
+# time.sleep(1)
+# pyautogui.press("tab", interval=0.01)
+
+# # History and Forecast
+# pyautogui.write("History and Forecast FO", interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_enter_step1()
+# script_config.search_enter_step2()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=9, interval=0.01)
+# pyautogui.press("down", presses=2, interval=0.01)
+# time.sleep(1)
+# pyautogui.press("right", interval=.01)
+# pyautogui.press("tab", presses=13, interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# # History and Forecast: Config
+# script_config.config_report()
+# time.sleep(1)
+# pyautogui.hotkey("ctrl", "a", interval=.01)
+# pyautogui.write(script_config.ytd_dd_mm, interval=.01)
+# pyautogui.press("tab", interval=.01)
+# time.sleep(1)
+# pyautogui.write("+5", interval=.01)
+# pyautogui.press("tab", presses=18, interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# # History and Forecast: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# script_config.download_as_download()
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # History and Forecast: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# history_forecast_url = pyperclip.paste()
+
+# history_forecast_file = f"history_forecast_{script_config.download_id(history_forecast_url)}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# history_forecast = os.path.join(script_config.path_.__add__(r"\Downloads"), history_forecast_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# # History and Forecast (AVC)
+# # History and Forecast (AVC): Config
+# script_config.tab_reserve(12)
+# pyautogui.press("space", interval=.01) # Pseudo Rooms
+# time.sleep(.5)
+# pyautogui.press("tab", presses=12, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # History and Forecast (AVC): Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# script_config.download_as_download()
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # History and Forecast (AVC): Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# history_forecast_AVC_url = pyperclip.paste()
+
+# history_forecast_AVC_file = f"history_forecast_{script_config.download_id(history_forecast_AVC_url)}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# history_forecast_AVC = os.path.join(script_config.path_.__add__(r"\Downloads"), history_forecast_AVC_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# script_config.tab_reserve(1)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_reports()
+# time.sleep(1)
+# pyautogui.press("tab", interval=0.01)
+
+# # Forecast
+# pyautogui.write("resfutureoccupancy", interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_enter_step1()
+# script_config.search_enter_step2()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=9, interval=0.01)
+# pyautogui.press("down", presses=2, interval=0.01)
+# time.sleep(1)
+# pyautogui.press("right", interval=.01)
+# pyautogui.press("tab", presses=13, interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# # Forecast: Config
+# script_config.config_report()
+# time.sleep(1)
+# pyautogui.hotkey("ctrl", "a", interval=.01)
+# pyautogui.write(script_config.td_dd_mm, interval=.01)
+# pyautogui.press("tab", interval=.01)
+# time.sleep(1)
+# pyautogui.write(script_config.td_dd_mm, interval=.01)
+# pyautogui.press("tab", presses=5, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # Forecast: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# script_config.download_as_download()
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Forecast: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# resfutureoccupancy_url = pyperclip.paste()
+
+# resfutureoccupancy_file = f"resfutureoccupancy_{script_config.download_id(resfutureoccupancy_url)}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# resfutureoccupancy = os.path.join(script_config.path_.__add__(r"\Downloads"), resfutureoccupancy_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# script_config.tab_reserve(1)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_reports()
+# time.sleep(1)
+# pyautogui.press("tab", interval=0.01)
+
+# # Room Upgrade
+# pyautogui.write("Journal by Cashier and Transaction Code", interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_enter_step1()
+# script_config.search_enter_step2()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=9, interval=0.01)
+# pyautogui.press("down", presses=2, interval=0.01)
+# time.sleep(1)
+# pyautogui.press("right", interval=.01)
+# pyautogui.press("tab", presses=13, interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# # Room Upgrade: Config
+# script_config.config_report()
+# time.sleep(1)
+# pyautogui.hotkey("ctrl", "a", interval=.01)
+# pyautogui.write(script_config.ytd_dd_mm, interval=.01)
+# pyautogui.press("tab", interval=0.01)
+# time.sleep(1)
+# pyautogui.write(script_config.ytd_dd_mm, interval=.01)
+# pyautogui.press("tab", presses=4, interval=0.01)
+# time.sleep(1)
+# pyautogui.write("10203", interval=.01)
+# pyautogui.press("tab", presses=12, interval=0.01)
+# pyautogui.press("enter", interval=.01)
+# # Room Upgrade: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# script_config.download_as_download()
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Room Upgrade: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# room_upgrade_url = pyperclip.paste()
+
+# room_upgrade_file = f"finjrnlbytrans_{script_config.download_id(room_upgrade_url)}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# room_upgrade = os.path.join(script_config.path_.__add__(r"\Downloads"), room_upgrade_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# # Late Checkout: Config
+# script_config.tab_reserve(13)
+# time.sleep(1)
+# pyautogui.write("10200,10400", interval=.01)
+# pyautogui.press("tab", presses=13, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # Late Checkout: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# script_config.download_as_download()
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Late Checkout: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# late_checkout_url = pyperclip.paste()
+
+# late_checkout_file = f"finjrnlbytrans_{script_config.download_id(late_checkout_url)}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# late_checkout = os.path.join(script_config.path_.__add__(r"\Downloads"), late_checkout_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# # Tour Commission: Config
+# script_config.tab_reserve(13)
+# time.sleep(1)
+# pyautogui.write("62710", interval=.01)
+# pyautogui.press("tab", presses=13, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # Tour Commission: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# script_config.download_as_download()
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Tour Commission: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# tour_commission_url = pyperclip.paste()
+
+# tour_commission_file = f"finjrnlbytrans_{script_config.download_id(tour_commission_url)}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# tour_commission = os.path.join(script_config.path_.__add__(r"\Downloads"), tour_commission_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# # Gift Shop: Config
+# script_config.tab_reserve(13)
+# time.sleep(1)
+# pyautogui.write("60600,60601,60630,60631", interval=.01)
+# pyautogui.press("tab", presses=13, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # Gift Shop: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# script_config.download_as_download()
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Gift Shop: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# gift_shop_url = pyperclip.paste()
+
+# gift_shop_file = f"finjrnlbytrans_{script_config.download_id(gift_shop_url)}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# gift_shop = os.path.join(script_config.path_.__add__(r"\Downloads"), gift_shop_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# # Room Upgrade MTD: Config
+# script_config.tab_reserve(18)
+# time.sleep(1)
+# pyautogui.write(f"{script_config.ytd.replace(day=1).strftime("%d%m")}", interval=.01)
+# pyautogui.press("tab", interval=.01)
+# time.sleep(1)
+# pyautogui.write(f"{script_config.ytd_dd_mm}", interval=.01)
+# pyautogui.press("tab", presses=4, interval=0.01)
+# time.sleep(1)
+# pyautogui.write("10203", interval=.01)
+# pyautogui.press("tab", presses=13, interval=0.01)
+# pyautogui.press("enter", interval=.01)
+# # Room Upgrade MTD: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("esc", interval=.01)
+# time.sleep(.15)
+# pyautogui.press("enter", interval=.01)
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# script_config.download_as_download()
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Room Upgrade MTD: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# room_upgrade_mtd_url = pyperclip.paste()
+
+# room_upgrade_mtd_file = f"finjrnlbytrans_{script_config.download_id(room_upgrade_mtd_url)}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# room_upgrade_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), room_upgrade_mtd_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# # Late Checkout MTD: Config
+# script_config.tab_reserve(13)
+# time.sleep(1)
+# pyautogui.write("10200,10400", interval=.01)
+# pyautogui.press("tab", presses=13, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # Late Checkout MTD: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# script_config.download_as_download()
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Late Checkout MTD: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# late_checkout_mtd_url = pyperclip.paste()
+
+# late_checkout_mtd_file = f"finjrnlbytrans_{script_config.download_id(late_checkout_mtd_url)}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# late_checkout_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), late_checkout_mtd_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# # Tour Commission MTD: Config
+# script_config.tab_reserve(13)
+# time.sleep(1)
+# pyautogui.write("62710", interval=.01)
+# pyautogui.press("tab", presses=13, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # Tour Commission MTD: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# script_config.download_as_download()
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Tour Commission MTD: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# tour_commission_mtd_url = pyperclip.paste()
+
+# tour_commission_mtd_file = f"finjrnlbytrans_{script_config.download_id(tour_commission_mtd_url)}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# tour_commission_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), tour_commission_mtd_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# # Gift Shop MTD: Config
+# script_config.tab_reserve(13)
+# time.sleep(1)
+# pyautogui.write("60600,60601,60630,60631", interval=.01)
+# pyautogui.press("tab", presses=13, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # Gift Shop MTD: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# script_config.download_as_download()
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # Gift Shop MTD: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# gift_shop_mtd_url = pyperclip.paste()
+
+# gift_shop_mtd_file = f"finjrnlbytrans_{script_config.download_id(gift_shop_mtd_url)}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# gift_shop_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), gift_shop_mtd_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# script_config.tab_reserve(1)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_reports()
+# time.sleep(1)
+# pyautogui.press("tab", interval=0.01)
+
+# # ARR Immigration
+# pyautogui.write("immigration_report", interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_enter_step1()
+# script_config.search_enter_step2()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=9, interval=0.01)
+# pyautogui.press("down", presses=2, interval=0.01)
+# time.sleep(1)
+# pyautogui.press("right", interval=.01)
+# pyautogui.press("tab", presses=13, interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# # ARR Immigration: Config
+# script_config.config_report()
+# time.sleep(1)
+# pyautogui.press("tab", presses=3, interval=0.01)
+# pyautogui.press("space", interval=.01)
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # ARR Immigration: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", presses=2, interval=.01)
+# script_config.download_as_download_s()
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # ARR Immigration: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# arr_immigration_url = pyperclip.paste()
+
+# arr_immigration_file = f"immigration_report_{script_config.download_id(arr_immigration_url)}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# arr_immigration = os.path.join(script_config.path_.__add__(r"\Downloads"), arr_immigration_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# # DEP Immigration: Config
+# script_config.tab_reserve(4)
+# time.sleep(1)
+# pyautogui.write("CHECKED OUT,DEPARTURE", interval=.01)
+# pyautogui.press("tab", presses=4, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # DEP Immigration: Save
+# script_config.download_as()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# script_config.download_as_download_s()
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # DEP Immigration: Download
+# script_config.download_page()
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.hotkey("ctrl", "l", interval=.01)
+# pyautogui.hotkey("ctrl", "c", interval=.01)
+# dep_immigration_url = pyperclip.paste()
+
+# dep_immigration_file = f"immigration_report_{script_config.download_id(dep_immigration_url)}.XML"
+
+# pyautogui.hotkey("ctrl", "j", interval=.01)
+# time.sleep(.25)
+# pyautogui.press("tab", presses=6, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# dep_immigration = os.path.join(script_config.path_.__add__(r"\Downloads"), dep_immigration_file)
+
+# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+# path_OTH = script_config.path_share.__add__(r"\OTH")
+
+# ori_excel_file = "Briefing.xlsx"
+# path_ori_excel = os.path.join(path_OTH, ori_excel_file)
+
+# path_td_excel = os.path.join(path_OTH, f"{script_config.td_dot_dd_mm_yy}.xlsx")
+
+# wb = load_workbook(path_ori_excel)
+# wb.save(path_td_excel)
+
+# tree = xml.etree.ElementTree.parse(arrival)
+# root = tree.getroot()
+
+# arr_row = 1
+
+# for _ in root.findall(".//G_RESERVATION"):
+#     arr_row += 1
+
+# os.startfile(path_td_excel)
+# time.sleep(1.5)
+# if pygetwindow.getWindowsWithTitle("Excel"):
+#     pygetwindow.getWindowsWithTitle("Excel")[0].activate()
+#     pygetwindow.getWindowsWithTitle("Excel")[0].maximize()
+# if not pygetwindow.getWindowsWithTitle("Excel"):
+#      sys.exit()
+# time.sleep(.5)
+# pyautogui.hotkey("ctrl", "g")
+# pyautogui.write("a16")
+# pyautogui.press("enter")
+# pyautogui.hotkey("shift", "space")
+# time.sleep(.15)
+# with pyautogui.hold("ctrl"):
+#     for _ in range(arr_row - 2):
+#         pyautogui.PAUSE = 0
+#         pyautogui.press("c")
+#         pyautogui.press("+")
+
+# tree = xml.etree.ElementTree.parse(departure)
+# root = tree.getroot()
+
+# dep_row = arr_row
+
+# for _ in root.findall(".//G_ROOM"):
+#     dep_row += 1
+
+# pyautogui.hotkey("ctrl", "g")
+# pyautogui.write(f"a{arr_row + 17}")
+# pyautogui.press("enter")
+# pyautogui.hotkey("shift", "space")
+# time.sleep(.15)
+# with pyautogui.hold("ctrl"):
+#     for _ in range((dep_row - arr_row) - 1):
+#         pyautogui.PAUSE = 0
+#         pyautogui.press("c")
+#         pyautogui.press("+")
+# pyautogui.hotkey("ctrl", "home")
+# pyautogui.press("down", presses=2)
+# pyautogui.hotkey("ctrl", "s")
+# pyautogui.hotkey("alt", "f4")
+
+# script_config.stay_excel()
+
+# wb = load_workbook(path_td_excel)
+
+# ws = "Ori Format"
+# ws = wb[ws]
+# ws.title = f"{script_config.td_dot_dd_mm_yy}"
+
+# ws["A2"] = f"Daily Briefing\n{script_config.td_full_d} {script_config.td_full_m} {script_config.td_short_date}, {script_config.td_yyyy}"
+
+# tree = xml.etree.ElementTree.parse(history_forecast)
+# root = tree.getroot()
+
+# for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED_DATE/G_CONSIDERED_DATE"):
+#     hu = _.find("HOUSE_USE_ROOMS").text if _.find("HOUSE_USE_ROOMS").text is not None else "N/A"
+#     oc = round(float(_.find("CF_OCCUPANCY").text), 2) if _.find("CF_OCCUPANCY").text is not None else "N/A"
+#     arr = _.find("ARRIVAL_ROOMS").text if _.find("ARRIVAL_ROOMS").text is not None else "-"
+#     dep = _.find("DEPARTURE_ROOMS").text if _.find("DEPARTURE_ROOMS").text is not None else "-"
+#     ppl = _.find("NO_PERSONS").text if _.find("NO_PERSONS").text is not None else "-"
+#     if _.find("CONSIDERED_DATE").text == f"{script_config.td_hp_dd_mm_yy}":
+#         ws["E5"] = arr
+#         ws["E7"] = dep
+#     if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=1)).strftime("%d-%b-%y")}":
+#         ws["M5"] = arr
+#         ws["M7"] = dep
+#     if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=2)).strftime("%d-%b-%y")}":
+#         ws["O5"] = arr
+#         ws["O7"] = dep
+#     if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=3)).strftime("%d-%b-%y")}":
+#         ws["Q5"] = arr
+#         ws["Q7"] = dep
+#     if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=4)).strftime("%d-%b-%y")}":
+#         ws["S5"] = arr
+#         ws["S7"] = dep
+#     if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=5)).strftime("%d-%b-%y")}":
+#         ws["U5"] = arr
+#         ws["U7"] = dep
+
+# tree = xml.etree.ElementTree.parse(history_forecast_AVC)
+# root = tree.getroot()
+
+# for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED_DATE/G_CONSIDERED_DATE"):
+#     cmp = _.find("COMPLIMENTARY_ROOMS").text if _.find("COMPLIMENTARY_ROOMS").text is not None else "-"
+#     if cmp == "0":
+#         cmp = "-"
+#     hu = int(_.find("HOUSE_USE_ROOMS").text if str(_.find("HOUSE_USE_ROOMS").text) else 0)
+#     if hu == "0":
+#         hu = "-"
+#     ns = _.find("NO_SHOW_ROOMS").text if _.find("NO_SHOW_ROOMS").text else "-"
+#     if ns == "0":
+#         ns = "-"
+#     adr = round(float(_.find("CF_AVERAGE_ROOM_RATE").text), 2) if _.find("CF_AVERAGE_ROOM_RATE").text is not None else "-"
+#     arr = _.find("ARRIVAL_ROOMS").text if _.find("ARRIVAL_ROOMS").text is not None else "-"
+#     dep = _.find("DEPARTURE_ROOMS").text if _.find("DEPARTURE_ROOMS").text is not None else "-"
+#     rm = int(_.find("NO_ROOMS").text if str(_.find("NO_ROOMS").text) else 0)
+#     ppl = _.find("NO_PERSONS").text if _.find("NO_PERSONS").text is not None else "-"
+#     if _.find("CONSIDERED_DATE").text == f"{script_config.ytd_hp_dd_mm_yy}":
+#         ws["B5"] = cmp
+#         ws["B7"] = hu
+#         ws["B9"] = ns
+#         ws["B11"] = adr
+#         ws["B11"].number_format = "#,###.##"
+#         ws["B12"] = oc
+#         ws["B12"].number_format = "#.##\"%\""
+#     if _.find("CONSIDERED_DATE").text == f"{script_config.td_hp_dd_mm_yy}":
+#         ws["D4"] = "25-Jul"
+#         ws["F5"] = arr
+#         ws["F7"] = dep
+#         ws["E9"] = rm
+#         ws["G12"] = ppl
+#     if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=1)).strftime("%d-%b-%y")}":
+#         ws["N5"] = arr
+#         ws["N7"] = dep
+#         ws["M9"] = rm
+#         ws["M11"] = (rm - hu) / (327 - hu) * 100
+#         ws["M12"] = ppl
+#     if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=2)).strftime("%d-%b-%y")}":
+#         ws["P5"] = arr
+#         ws["P7"] = dep
+#         ws["O9"] = rm
+#         ws["O11"] = (rm - hu) / (327 - hu) * 100
+#         ws["O12"] = ppl
+#     if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=3)).strftime("%d-%b-%y")}":
+#         ws["R5"] = arr
+#         ws["R7"] = dep
+#         ws["Q9"] = rm
+#         ws["Q11"] = (rm - hu) / (327 - hu) * 100
+#         ws["Q12"] = ppl
+#     if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=4)).strftime("%d-%b-%y")}":
+#         ws["T5"] = arr
+#         ws["T7"] = dep
+#         ws["S9"] = rm
+#         ws["S11"] = (rm - hu) / (327 - hu) * 100
+#         ws["S12"] = ppl
+#     if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=5)).strftime("%d-%b-%y")}":
+#         ws["V5"] = arr
+#         ws["V7"] = dep
+#         ws["U9"] = rm
+#         ws["U11"] = (rm - hu) / (327 - hu) * 100
+#         ws["U12"] = ppl
+
+# cmp = int(ws["B5"].value or 0)
+# hu = int(ws["B7"].value or 0)
+# rm = int(ws["E9"].value or 0)
+
+# ws["E11"] = round(float((rm - (cmp + hu)) / 327 * 100), 2)
+# ws["E11"].number_format = "#.##\"%\""
+
+# tree = xml.etree.ElementTree.parse(resfutureoccupancy)
+# root = tree.getroot()
+
+# for _ in root.findall(".//G_RESV_TYPE"):
+#     adl = _.find("SUMADULTS").text if _.find("SUMADULTS").text is not None else "-"
+#     chd = _.find("SUMCHILDREN").text if _.find("SUMCHILDREN").text is not None else "-"
+#     if _.find(".//D_DATE").text == f"{script_config.td_hp_dd_mm_yy}":
+#         ws["E12"] = adl
+#         ws["E13"] = chd
+
+# tree = xml.etree.ElementTree.parse(room_upgrade)
+# root = tree.getroot()
+
+# for _ in root:
+#     if _.tag == "R_DEBIT":
+#         val = float(_.text)
+#         if _.text == "0":
+#             ws["I5"] = "-"
+#         else:
+#             if val.is_integer():
+#                 ws["I5"] = int(val)
+#                 ws["I5"].number_format = "#,##0"
+#             else:
+#                 ws["I5"] = round(val, 2)
+#                 ws["I5"].number_format = "#,##0.00"
+
+# tree = xml.etree.ElementTree.parse(room_upgrade_mtd)
+# root = tree.getroot()
+
+# for _ in root:
+#     if _.tag == "R_DEBIT":
+#         val = float(_.text)
+#         if _.text == "0":
+#             ws["J5"] = "-"
+#         else:
+#             if val.is_integer():
+#                 ws["J5"] = int(val)
+#                 ws["J5"].number_format = "#,##0"
+#             else:
+#                 ws["J5"] = round(val, 2)
+#                 ws["J5"].number_format = "#,##0.00"
+
+# tree = xml.etree.ElementTree.parse(late_checkout)
+# root = tree.getroot()
+
+# for _ in root:
+#     if _.tag == "R_DEBIT":
+#         val = float(_.text)
+#         if _.text == "0":
+#             ws["I7"] = "-"
+#         else:
+#             if val.is_integer():
+#                 ws["I7"] = int(val)
+#                 ws["I7"].number_format = "#,##0"
+#             else:
+#                 ws["I7"] = round(val, 2)
+#                 ws["I7"].number_format = "#,##0.00"
+
+# tree = xml.etree.ElementTree.parse(late_checkout_mtd)
+# root = tree.getroot()
+
+# for _ in root:
+#     if _.tag == "R_DEBIT":
+#         val = float(_.text)
+#         if _.text == "0":
+#             ws["J7"] = "-"
+#         else:
+#             if val.is_integer():
+#                 ws["J7"] = int(val)
+#                 ws["J7"].number_format = "#,##0"
+#             else:
+#                 ws["J7"] = round(val, 2)
+#                 ws["J7"].number_format = "#,##0.00"
+
+# tree = xml.etree.ElementTree.parse(tour_commission)
+# root = tree.getroot()
+
+# for _ in root:
+#     if _.tag == "R_DEBIT":
+#         val = float(_.text)
+#         if _.text == "0":
+#             ws["I9"] = "-"
+#         else:
+#             if val.is_integer():
+#                 ws["I9"] = int(val)
+#                 ws["I9"].number_format = "#,##0"
+#             else:
+#                 ws["I9"] = round(val, 2)
+#                 ws["I9"].number_format = "#,##0.00"
+
+# tree = xml.etree.ElementTree.parse(tour_commission_mtd)
+# root = tree.getroot()
+
+# for _ in root:
+#     if _.tag == "R_DEBIT":
+#         val = float(_.text)
+#         if _.text == "0":
+#             ws["J9"] = "-"
+#         else:
+#             if val.is_integer():
+#                 ws["J9"] = int(val)
+#                 ws["J9"].number_format = "#,##0"
+#             else:
+#                 ws["J9"] = round(val, 2)
+#                 ws["J9"].number_format = "#,##0.00"
+
+# tree = xml.etree.ElementTree.parse(gift_shop)
+# root = tree.getroot()
+
+# for _ in root:
+#     if _.tag == "R_DEBIT":
+#         val = float(_.text)
+#         if _.text == "0":
+#             ws["I12"] = "-"
+#         else:
+#             if val.is_integer():
+#                 ws["I12"] = int(val)
+#                 ws["I12"].number_format = "#,##0"
+#             else:
+#                 ws["I12"] = round(val, 2)
+#                 ws["I12"].number_format = "#,##0.00"
+
+# tree = xml.etree.ElementTree.parse(gift_shop_mtd)
+# root = tree.getroot()
+
+# for _ in root:
+#     if _.tag == "R_DEBIT":
+#         val = float(_.text)
+#         if _.text == "0":
+#             ws["J12"] = "-"
+#         else:
+#             if val.is_integer():
+#                 ws["J12"] = int(val)
+#                 ws["J12"].number_format = "#,##0"
+#             else:
+#                 ws["J12"] = round(val, 2)
+#                 ws["J12"].number_format = "#,##0.00"
+
+arr_immigration = os.path.join(os.path.dirname(os.path.abspath(__file__)), "immigration_report_142956091.XML")
 
 tree = xml.etree.ElementTree.parse(arr_immigration)
 root = tree.getroot()
@@ -1014,6 +1016,15 @@ for _ in root.findall(".//G_IMMIGRATION"):
 
     set_name = f"{fn} {ln}"
     arr_country[set_name] = nt
+
+arrival = os.path.join(os.path.dirname(os.path.abspath(__file__)), "res_detail_142956722.XML")
+
+briefing = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Briefing.xlsx")
+
+wb = load_workbook(briefing)
+
+ws = "Ori Format"
+ws = wb[ws]
 
 pf = ("PAID", "CTC", "POA", "COA", "POD", "COMP", "MASTER", "COD")
 
@@ -1049,17 +1060,23 @@ for _ in root.findall(".//G_RESERVATION"):
                             cmt = in_cmt
 
     set_name = [ _.strip() for _ in name.split(",")]
-    check_set_name = list(set_name) + [None, None, None]
-    ln, fn, tt = check_set_name[0], check_set_name[1], check_set_name[2]
-    if (ln, fn, tt):
+    title = ["Mr", "Ms", "Mrs", "Miss", "Master", "Dr"]
+    if len(set_name) == 3:
+        ln, fn, tt = set_name[0], set_name[1], set_name[2]
         ws[f"A{arr_start}"] = f"{tt}. {fn} {ln}"
         ws[f"A{arr_start}"].fill = PatternFill(fill_type=None)
-        if len(ln) < 3 or len(fn) < 3 or len(tt) < 3:
+        if str(tt).strip().lower() not in str(title).strip().lower():
             ws[f"A{arr_start}"].fill = red_color
+    if len(set_name) < 3:
+        ln, fn, tt = (set_name + ["", "", ""])[:3]
+        ws[f"A{arr_start}"] = f"{tt}. {fn} {ln}"
+        ws[f"A{arr_start}"].fill = red_color
+    if str(ln).strip() == "" or str(fn).strip() == "" or str(tt).strip() == "":
+        ws[f"A{arr_start}"] = f"{tt}. {fn} {ln}"
+        ws[f"A{arr_start}"].fill = red_color
 
     if "Maintenance".strip().lower() in str(name).strip().lower():
-        for _ in ws[f"A{arr_start}:P{arr_start}"][0]:
-            _.fill = red_color
+        ws[f"A{arr_start}"].fill = red_color
 
     if f"{fn} {ln}" in arr_country:
         ws[f"C{arr_start}"] = arr_country[f"{fn} {ln}"]
@@ -1170,6 +1187,8 @@ for _ in root.findall(".//G_RESERVATION"):
 
     arr_start += 1
 
+dep_immigration = os.path.join(os.path.dirname(os.path.abspath(__file__)), "immigration_report_142956307.XML")
+
 tree = xml.etree.ElementTree.parse(dep_immigration)
 root = tree.getroot()
 
@@ -1182,6 +1201,8 @@ for _ in root.findall(".//G_IMMIGRATION"):
 
     set_name = f"{fn} {ln}"
     dep_country[set_name] = nt
+
+departure = os.path.join(os.path.dirname(os.path.abspath(__file__)), "departure_all_142956320.XML")
 
 tree = xml.etree.ElementTree.parse(departure)
 root = tree.getroot()
@@ -1213,18 +1234,23 @@ for _ in root.findall(".//G_ROOM"):
                         cmt = in_cmt
 
     set_name = [ _.strip() for _ in name.split(",")]
-    check_set_name = list(set_name) + [None, None, None]
-    ln, fn, tt = check_set_name[0], check_set_name[1], check_set_name[2]
-    if (ln, fn, tt):
+    title = ["Mr", "Ms", "Mrs", "Miss", "Master", "Dr"]
+    if len(set_name) == 3:
+        ln, fn, tt = set_name[0], set_name[1], set_name[2]
         ws[f"A{dep_start}"] = f"{tt}. {fn} {ln}"
         ws[f"A{dep_start}"].fill = PatternFill(fill_type=None)
-        if len(ln) < 3 or len(fn) < 3 or len(tt) < 3:
+        if str(tt).strip().lower() not in str(title).strip().lower():
             ws[f"A{dep_start}"].fill = red_color
-
+    if len(set_name) < 3:
+        ln, fn, tt = (set_name + ["", "", ""])[:3]
+        ws[f"A{dep_start}"] = f"{tt}. {fn} {ln}"
+        ws[f"A{dep_start}"].fill = red_color
+    if str(ln).strip() == "" or str(fn).strip() == "" or str(tt).strip() == "":
+        ws[f"A{dep_start}"] = f"{tt}. {fn} {ln}"
+        ws[f"A{dep_start}"].fill = red_color
 
     if "Maintenance".strip().lower() in str(name).strip().lower():
-        for _ in ws[f"A{dep_start}:P{dep_start}"][0]:
-            _.fill = red_color
+        ws[f"A{dep_start}"].fill = red_color
 
     if f"{fn} {ln}" in dep_country:
         ws[f"C{dep_start}"] = dep_country[f"{fn} {ln}"]
@@ -1335,4 +1361,4 @@ for _ in root.findall(".//G_ROOM"):
 
     dep_start += 1
 
-wb.save(path_td_excel)
+wb.save(briefing)
