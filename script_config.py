@@ -104,10 +104,25 @@ def download_as():
      while True:
           if pyautogui.pixelMatchesColor(982, 514, (88, 88, 86), tolerance=10):
                break
+
+def download_as_download():
+     while True:
+          if pyautogui.pixelMatchesColor(980, 635, (6, 108, 122), tolerance=10):
+               break
+
+def download_as_download_s():
+     while True:
+          if pyautogui.pixelMatchesColor(979, 623, (6, 108, 122), tolerance=10):
+               break
           
 def download_page():
      while True:
           if pyautogui.pixelMatchesColor(1508, 53, (39, 35, 32), tolerance=10):
+               break
+
+def stay_excel():
+     while True:
+          if not pyautogui.pixelMatchesColor(1894, 56, (16, 124, 65), tolerance=10):
                break
           
 def download_id(id):

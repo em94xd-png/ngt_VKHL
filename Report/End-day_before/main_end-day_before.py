@@ -18,8 +18,9 @@ script_config.remove_file(daily_report_before)
 
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", script_config.site_OPERA])
-pygetwindow.getWindowsWithTitle("Opera Cloud")[0].activate()
-pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
+if pygetwindow.getWindowsWithTitle("Opera Cloud"):
+     pygetwindow.getWindowsWithTitle("Opera Cloud")[0].activate()
+     pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
 time.sleep(.5)
 
 # In Opera
