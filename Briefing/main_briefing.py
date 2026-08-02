@@ -821,7 +821,7 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
         ws["B12"] = oc
         ws["B12"].number_format = "#.##\"%\""
     if _.find("CONSIDERED_DATE").text == f"{script_config.td_hp_dd_mm_yy}":
-        ws["D4"] = "25-Jul"
+        ws["D4"] = f"{script_config.td.strftime("%#d-%b")}"
         ws["F5"] = arr
         ws["F7"] = dep
         ws["E9"] = rm
