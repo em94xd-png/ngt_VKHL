@@ -63,19 +63,19 @@ def run_script(path, key):
     threading.Thread(target=monitor_process, args=(run_file,), daemon=True).start()
 
 def endday_before():
-    run_script(r"Report\End-day_before\main_end-day_before.py", "endday_before")
+    run_script(r"report\end-day_before\main_end-day_before.py", "endday_before")
 
 def endday_after():
-    run_script(r"Report\End-day_after\main_end-day_after.py", "endday_after")
+    run_script(r"report\end-day_after\main_end-day_after.py", "endday_after")
 
 def tm_rr4():
-    run_script(r"TM, RR4\main_tm_rr4.py", "tm_rr4")
+    run_script(r"tm_rr4\main_tm_rr4.py", "tm_rr4")
 
 def briefing():
-    run_script(r"Briefing\main_briefing.py", "briefing")
+    run_script(r"briefing\main_briefing.py", "briefing")
 
 def fb_print():
-    run_script(r"FB Print\main_fb_print.py", "fb_print")
+    run_script(r"fb_print\main_fb_print.py", "fb_print")
 
 def stop_all():
     global main_file
