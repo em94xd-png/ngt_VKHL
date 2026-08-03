@@ -8,47 +8,45 @@ window_main.geometry("1650+30")
 window_main.attributes("-topmost", True)
 window_main.resizable(False, False)
 
-switch_mode = StringVar()
+mode = StringVar()
 
-def mode_show():
-    get_mode = switch_mode.get()
+def show_mode():
+    get_mode = mode.get()
     if get_mode == "on":
         customtkinter.set_appearance_mode("dark")
     else:
         customtkinter.set_appearance_mode("light")
 
-drop_1_select = StringVar()
-drop_1_link = {}
+theme = StringVar()
+theme_dict = {}
 
 def link_theme():
-    path_1 = os.path.dirname(os.path.abspath(__file__))
-    path_2 = os.path.join(path_1, "themes")
-    for _ in os.listdir(path_2):
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "themes")
+    for _ in os.listdir(path):
         if _.endswith(".json"):
             key_theme = os.path.splitext(_)[0]
-            key_theme_link = os.path.join(path_2, _)
-            drop_1_link[key_theme] = key_theme_link
+            path_key_theme = os.path.join(path, _)
+            theme_dict[key_theme] = path_key_theme
 
 link_theme()
-drop_1_list = list(drop_1_link.keys())
+theme_list = list(theme_dict.keys())
 
 def use_theme(_=None):
-    drop_1_get = drop_1_select.get()
-    if drop_1_get in drop_1_link:
-        to_json = drop_1_link[drop_1_get]
-        with open(to_json, "r", encoding="utf-8") as file:
-            json_file = json.load(file)
-        to_CTkButton = json_file.get("CTkButton", {})
-        fg_color = to_CTkButton.get("fg_color")
-        hover_color = to_CTkButton.get("hover_color")
+    get_theme = theme.get()
+    if get_theme in theme_dict:
+        json_file = theme_dict[get_theme]
+        with open(json_file, "r", encoding="utf-8") as file:
+            theme_json = json.load(file)
+        fg_color = theme_json.get("CTkButton", {}).get("fg_color")
+        hover_color = theme_json.get("CTkButton", {}).get("hover_color")
         if fg_color and hover_color:
-            for _ in [button_1, button_2, button_3]:
+            for _ in [button_endday_before, button_endday_after, button_tm_rr4, button_briefing, button_fb_print]:
                 _.configure(fg_color=fg_color, hover_color=hover_color)
 
-link_file_process = {"endday_before": None, "endday_after": None, "FB_print": None}
+main_file = {"endday_before": None, "endday_after": None, "tm_rr4": None, "briefing": None, "fb_print": None}
 
 def block_button(state):
-    for _ in [button_1, button_2, button_3]:
+    for _ in [button_endday_before, button_endday_after, button_tm_rr4, button_briefing, button_fb_print]:
         _.configure(state=state)
 
 def monitor_process(_):
@@ -56,52 +54,64 @@ def monitor_process(_):
     window_main.after(0, lambda: block_button("normal"))
 
 def run_script(path, key):
-    global link_file_process
-    if link_file_process[key] and link_file_process[key].poll() is None:
+    global main_file
+    if main_file[key] and main_file[key].poll() is None:
         return
     block_button("disabled")
     run_file = subprocess.Popen(["python", path])
-    link_file_process[key] = run_file
+    main_file[key] = run_file
     threading.Thread(target=monitor_process, args=(run_file,), daemon=True).start()
 
 def endday_before():
-    run_script(r"report\end-day_before\main_end-day_before.py", "endday_before")
+    run_script(r"Report\End-day_before\main_end-day_before.py", "endday_before")
 
 def endday_after():
-    run_script(r"report\end-day_after\main_end-day_after.py", "endday_after")
+    run_script(r"Report\End-day_after\main_end-day_after.py", "endday_after")
 
-def FB_print():
-    run_script(r"fb print\main_FB_print.py", "FB_print")
+def tm_rr4():
+    run_script(r"TM, RR4\main_tm_rr4.py", "tm_rr4")
+
+def briefing():
+    run_script(r"Briefing\main_briefing.py", "briefing")
+
+def fb_print():
+    run_script(r"FB Print\main_fb_print.py", "fb_print")
 
 def stop_all():
-    global link_file_process
-    for _ in link_file_process.values():
+    global main_file
+    for _ in main_file.values():
         if _ and _.poll() is None:
             _.terminate()
     block_button("normal")
 
-frame_1 = customtkinter.CTkFrame(master=window_main)
-frame_1.pack(padx=2.5, pady=2.5, fill="both", expand=True)
+frame_main = customtkinter.CTkFrame(master=window_main)
+frame_main.pack(padx=2.5, pady=2.5, fill="both", expand=True)
 
-switch = customtkinter.CTkSwitch(master=frame_1, variable=switch_mode, onvalue="on", offvalue="off", width=1, text="", command=mode_show)
-switch.pack(anchor=E)
+switch_mode = customtkinter.CTkSwitch(master=frame_main, variable=mode, onvalue="on", offvalue="off", width=1, text="", command=show_mode)
+switch_mode.pack(anchor=E)
 
-label_1 = customtkinter.CTkLabel(master=frame_1, text="OI", font=("Sans-serif", 20))
-label_1.pack(pady=(10, 25))
+label_title = customtkinter.CTkLabel(master=frame_main, text="OI", font=("Sans-serif", 20))
+label_title.pack(pady=(10, 25))
 
-button_1 = customtkinter.CTkButton(master=frame_1, text="Before", command=endday_before)
-button_1.pack(pady=0)
+button_endday_before = customtkinter.CTkButton(master=frame_main, text="Before", command=endday_before)
+button_endday_before.pack(pady=0)
 
-button_2 = customtkinter.CTkButton(master=frame_1, text="After", command=endday_after)
-button_2.pack(pady=(7.5, 0))
+button_endday_after = customtkinter.CTkButton(master=frame_main, text="After", command=endday_after)
+button_endday_after.pack(pady=(7.5, 0))
 
-button_3 = customtkinter.CTkButton(master=frame_1, text="FB Print", command=FB_print)
-button_3.pack(pady=(7.5, 0))
+button_tm_rr4 = customtkinter.CTkButton(master=frame_main, text="TM, RR4", command=tm_rr4)
+button_tm_rr4.pack(pady=(7.5, 0))
 
-button_stop = customtkinter.CTkButton(master=frame_1, text="Stop", fg_color=["#BEC7C9", "#495054"], hover_color="#E05454", command=stop_all)
-button_stop.pack(padx=5, pady=(55, 5))
+button_briefing = customtkinter.CTkButton(master=frame_main, text="Briefing", command=briefing)
+button_briefing.pack(pady=(7.5, 0))
 
-drop_1 = customtkinter.CTkComboBox(master=frame_1, variable=drop_1_select, values=drop_1_list, command=use_theme)
-drop_1.pack()
+button_fb_print = customtkinter.CTkButton(master=frame_main, text="FB Print", command=fb_print)
+button_fb_print.pack(pady=(7.5, 0))
+
+button_stop_all = customtkinter.CTkButton(master=frame_main, text="Stop", fg_color=["#BEC7C9", "#495054"], hover_color="#E05454", command=stop_all)
+button_stop_all.pack(padx=5, pady=(55, 5))
+
+combobox_theme = customtkinter.CTkComboBox(master=frame_main, variable=theme, values=theme_list, command=use_theme)
+combobox_theme.pack()
 
 window_main.mainloop()
