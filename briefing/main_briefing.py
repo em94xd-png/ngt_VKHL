@@ -1,7 +1,7 @@
 from openpyxl import *
 from datetime import *
 from openpyxl.styles import PatternFill
-import time, os, xml.etree.ElementTree, sys, pyautogui, subprocess, pygetwindow, pyperclip, win32con, win32gui
+import time, os, xml.etree.ElementTree, sys, pyautogui, subprocess, pygetwindow, pyperclip, win32con, win32gui, json
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -1004,6 +1004,11 @@ for _ in root:
                 ws["J12"] = round(val, 2)
                 ws["J12"].number_format = "#,##0.00"
 
+current_path = os.path.dirname(os.path.abspath(__file__))
+
+with open((os.path.join(current_path, "bf_ct.json")), "r", encoding="utf-8") as file:
+    bf_ct_json = json.load(file)
+
 tree = xml.etree.ElementTree.parse(arr_immigration)
 root = tree.getroot()
 
@@ -1013,9 +1018,13 @@ for _ in root.findall(".//G_IMMIGRATION"):
     fn = _.find("FIRST_NAME").text if _.find("FIRST_NAME") is not None else "-"
     ln = _.find("LAST_NAME").text if _.find("LAST_NAME") is not None else "-"
     nt = _.find("NATIONALITY").text if _.find("NATIONALITY") is not None else "-"
+    ct = None
+    for nt_imm, cd in bf_ct_json.items():
+        if nt in nt_imm:
+            ct = cd
 
     set_name = f"{fn} {ln}"
-    arr_country[set_name] = nt
+    arr_country[set_name] = ct
 
 pf = ("PAID", "CTC", "POA", "COA", "POD", "COMP", "MASTER", "COD")
 
@@ -1188,9 +1197,13 @@ for _ in root.findall(".//G_IMMIGRATION"):
     fn = _.find("FIRST_NAME").text if _.find("FIRST_NAME") is not None else "-"
     ln = _.find("LAST_NAME").text if _.find("LAST_NAME") is not None else "-"
     nt = _.find("NATIONALITY").text if _.find("NATIONALITY") is not None else "-"
+    ct = None
+    for nt_imm, cd in bf_ct_json.items():
+        if nt in nt_imm:
+            ct = cd
 
     set_name = f"{fn} {ln}"
-    dep_country[set_name] = nt
+    dep_country[set_name] = ct
 
 tree = xml.etree.ElementTree.parse(departure)
 root = tree.getroot()
