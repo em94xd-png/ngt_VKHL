@@ -121,10 +121,11 @@ def run_script():
             if not os.path.exists(path_td_snf_excel):
                 if not os.path.exists(fr"{script_config.path_share}\OTH"):
                     sys.exit()
-                shutil.copy(os.path.join(os.path.dirname(os.path.abspath("get_data.xlsx"))), path_td_snf_excel)
+                current_path = os.path.dirname(sys.executable)
+                shutil.copy(os.path.join(current_path, "get_data.xlsx"), path_td_snf_excel)
                 if os.path.exists(path_td_snf_excel):
                     continue
-        time.sleep(1)
+        time.sleep(.5)
 
 def block_button(state):
     for _ in [btn1]:

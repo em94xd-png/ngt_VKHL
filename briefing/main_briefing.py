@@ -1,4 +1,4 @@
-from openpyxl import *
+from openpyxl import load_workbook
 from datetime import *
 from openpyxl.styles import PatternFill
 import time, os, xml.etree.ElementTree, sys, pyautogui, subprocess, pygetwindow, pyperclip, win32con, win32gui, json
@@ -700,7 +700,7 @@ win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
 
 path_OTH = script_config.path_share.__add__(r"\OTH")
 
-ori_excel_file = "Briefing.xlsx"
+ori_excel_file = "briefing.xlsx"
 path_ori_excel = os.path.join(path_OTH, ori_excel_file)
 
 path_td_excel = os.path.join(path_OTH, f"{script_config.td_dot_dd_mm_yy}.xlsx")
@@ -1006,7 +1006,7 @@ for _ in root:
 
 current_path = os.path.dirname(os.path.abspath(__file__))
 
-with open((os.path.join(current_path, "bf_ct.json")), "r", encoding="utf-8") as file:
+with open(os.path.join(current_path, "bf_ct.json"), "r", encoding="utf-8") as file:
     bf_ct_json = json.load(file)
 
 tree = xml.etree.ElementTree.parse(arr_immigration)
@@ -1020,7 +1020,7 @@ for _ in root.findall(".//G_IMMIGRATION"):
     nt = _.find("NATIONALITY").text if _.find("NATIONALITY") is not None else "-"
     ct = None
     for nt_imm, cd in bf_ct_json.items():
-        if nt in nt_imm:
+        if str(nt).strip().lower() in str(nt_imm).strip().lower():
             ct = cd
 
     set_name = f"{fn} {ln}"
@@ -1088,27 +1088,37 @@ for _ in root.findall(".//G_RESERVATION"):
     if "MI Squared".strip().lower() in str(cmt).strip().lower():
         ws[f"D{arr_start}"] = f"{rm}\nMI Squared"
     if "Booking.com".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nBooking.com"
+        ws[f"D{arr_start}"] = f"{rm}\nBooking.com"
     if "BG Asia".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nBG Asia"
+        ws[f"D{arr_start}"] = f"{rm}\nBG Asia"
     if "Siam Tours".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nSiam Tours"
+        ws[f"D{arr_start}"] = f"{rm}\nSiam Tours"
     if "Travelbullz".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nTravelbullz"
+        ws[f"D{arr_start}"] = f"{rm}\nTravelbullz"
     if "BTC".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nBTC"
+        ws[f"D{arr_start}"] = f"{rm}\nBTC"
     if "DERTOUR".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nGo Vacation"
+        ws[f"D{arr_start}"] = f"{rm}\nGo Vacation"
     if "Expedia".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nExpedia"
+        ws[f"D{arr_start}"] = f"{rm}\nExpedia"
     if "DNATA".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nDNATA"
+        ws[f"D{arr_start}"] = f"{rm}\nDNATA"
     if "Miki".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nMiki Travel"
+        ws[f"D{arr_start}"] = f"{rm}\nMiki Travel"
     if "Rak".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nRak Journeys"
+        ws[f"D{arr_start}"] = f"{rm}\nRak Journeys"
     if "Hotelbeds".strip().lower() in str(ta).strip().lower():
-            ws[f"D{arr_start}"] = f"{rm}\nHotelbeds"
+        ws[f"D{arr_start}"] = f"{rm}\nHotelbeds"
+    if "LOTi".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nLOTi"
+    if "Ctrip".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nCtrip"
+    if "Moon Holidays".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nMoon Holidays"
+    if "Martin4T".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nMartin4Travel"
+    if "Taecho".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nTaecho"
 
     if vip is not None:
         ws[f"F{arr_start}"] = vip
@@ -1199,7 +1209,7 @@ for _ in root.findall(".//G_IMMIGRATION"):
     nt = _.find("NATIONALITY").text if _.find("NATIONALITY") is not None else "-"
     ct = None
     for nt_imm, cd in bf_ct_json.items():
-        if nt in nt_imm:
+        if str(nt).strip().lower() in str(nt_imm).strip().lower():
             ct = cd
 
     set_name = f"{fn} {ln}"
@@ -1284,6 +1294,16 @@ for _ in root.findall(".//G_ROOM"):
         ws[f"D{dep_start}"] = f"{rm}\nRak Journeys"
     if "Hotelbeds".strip().lower() in str(ta).strip().lower():
         ws[f"D{dep_start}"] = f"{rm}\nHotelbeds"
+    if "LOTi".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nLOTi"
+    if "Ctrip".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nCtrip"
+    if "Moon Holidays".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nMoon Holidays"
+    if "Martin4T".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nMartin4Travel"
+    if "Taecho".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nTaecho"
 
     if vip is not None:
         ws[f"F{dep_start}"] = vip
