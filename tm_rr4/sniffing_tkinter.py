@@ -1,6 +1,7 @@
 import tkinter, threading, os, sys, pygetwindow, pyautogui, pyperclip, time, openpyxl, shutil
 from pystray import Icon, MenuItem, Menu
 from PIL import Image, ImageDraw
+from datetime import datetime
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -80,7 +81,7 @@ wd.protocol("WM_DELETE_WINDOW", exit_it)
 
 snf = False
 
-def get_data():
+def get_pin():
     global snf
     if not snf:
         snf = True
@@ -109,7 +110,7 @@ def run_script():
                     pn = step_copy(6)
                     wb = openpyxl.load_workbook(path_td_snf_excel)
                     ws3 = wb["Sheet3"]
-                    ws3.append([ln, fn, bd, ct, pn])
+                    ws3.append([ln, fn, bd, ct, pn, datetime.now().time().replace(microsecond=0)])
                     wb.save(path_td_snf_excel)
                     wb.close()
                     while True:
@@ -121,16 +122,17 @@ def run_script():
             if not os.path.exists(path_td_snf_excel):
                 if not os.path.exists(fr"{script_config.path_share}\OTH"):
                     sys.exit()
-                shutil.copy(os.path.join(os.path.dirname(os.path.abspath("get_data.xlsx"))), path_td_snf_excel)
+                current_path = os.path.dirname(sys.executable)
+                shutil.copy(os.path.join(current_path, "get_pin.xlsx"), path_td_snf_excel)
                 if os.path.exists(path_td_snf_excel):
                     continue
-        time.sleep(1)
+        time.sleep(.5)
 
 def block_button(state):
     for _ in [btn1]:
         _.configure(state=state)
 
-btn1 = tkinter.Button(master=wd, text="run_it", width=15, command=get_data)
+btn1 = tkinter.Button(master=wd, text="run_it", width=15, command=get_pin)
 btn1.pack(pady=30)
 
 btn2 = tkinter.Button(master=wd, text="stop_it", width=15, command=stop_it)
