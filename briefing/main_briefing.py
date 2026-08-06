@@ -1060,7 +1060,7 @@ for _ in root.findall(".//G_RESERVATION"):
                             cmt = in_cmt
 
     set_name = [ _.strip() for _ in name.split(",")]
-    title = ["Mr", "Ms", "Mrs", "Miss", "Master", "Dr"]
+    title = ["Mr", "Ms", "Mrs", "Miss", "Master", "Dr", "Khun"]
     if len(set_name) == 3:
         ln, fn, tt = set_name[0], set_name[1], set_name[2]
         ws[f"A{arr_start}"] = f"{tt}. {fn} {ln}"
@@ -1119,6 +1119,10 @@ for _ in root.findall(".//G_RESERVATION"):
         ws[f"D{arr_start}"] = f"{rm}\nMartin4Travel"
     if "Taecho".strip().lower() in str(ta).strip().lower():
         ws[f"D{arr_start}"] = f"{rm}\nTaecho"
+    if "Trip.com".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nTrip.com"
+    if "Vibes Asia".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nVibes Asia"
 
     if vip is not None:
         ws[f"F{arr_start}"] = vip
@@ -1245,7 +1249,7 @@ for _ in root.findall(".//G_ROOM"):
                         cmt = in_cmt
 
     set_name = [ _.strip() for _ in name.split(",")]
-    title = ["Mr", "Ms", "Mrs", "Miss", "Master", "Dr"]
+    title = ["Mr", "Ms", "Mrs", "Miss", "Master", "Dr", "Khun"]
     if len(set_name) == 3:
         ln, fn, tt = set_name[0], set_name[1], set_name[2]
         ws[f"A{dep_start}"] = f"{tt}. {fn} {ln}"
@@ -1304,6 +1308,10 @@ for _ in root.findall(".//G_ROOM"):
         ws[f"D{dep_start}"] = f"{rm}\nMartin4Travel"
     if "Taecho".strip().lower() in str(ta).strip().lower():
         ws[f"D{dep_start}"] = f"{rm}\nTaecho"
+    if "Trip.com".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nTrip.com"
+    if "Vibes Asia".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nVibes Asia"
 
     if vip is not None:
         ws[f"F{dep_start}"] = vip
