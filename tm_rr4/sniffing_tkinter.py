@@ -1,6 +1,7 @@
 import tkinter, threading, os, sys, pygetwindow, pyautogui, pyperclip, time, openpyxl, shutil
 from pystray import Icon, MenuItem, Menu
 from PIL import Image, ImageDraw
+from datetime import datetime
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -109,7 +110,7 @@ def run_script():
                     pn = step_copy(6)
                     wb = openpyxl.load_workbook(path_td_snf_excel)
                     ws3 = wb["Sheet3"]
-                    ws3.append([ln, fn, bd, ct, pn])
+                    ws3.append([ln, fn, bd, ct, pn, datetime.now().time().replace(microsecond=0)])
                     wb.save(path_td_snf_excel)
                     wb.close()
                     while True:
