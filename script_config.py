@@ -231,3 +231,27 @@ def return_print_default():
     pyautogui.press("up", presses=3, interval=.01)
     pyautogui.press("tab", presses=3, interval=.01)
     pyautogui.press("enter", interval=.01)
+
+ori_excel_file = "briefing.xlsx"
+path_OTH = path_share.__add__(r"\OTH")
+path_ori_excel = os.path.join(path_OTH, ori_excel_file)
+
+from openpyxl import load_workbook
+wb = load_workbook(path_ori_excel)
+ws = wb.active
+
+vac_file = "hkvacroom_145571862.XML"
+
+import xml.etree.ElementTree
+tree = xml.etree.ElementTree.parse(os.path.join(os.path.dirname(os.path.abspath(__file__)), vac_file))
+root = tree.getroot()
+
+for _ in root.findall(".//G_ROOM"):
+    suite = _.find("ROOM").text 
+    if _.find("RESV_STATUS").text != "Arrival":
+
+        ws["G43"] = suite
+
+
+
+wb.save(path_ori_excel)
