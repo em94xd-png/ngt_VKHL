@@ -1,4 +1,4 @@
-import tkinter, threading, os, sys, pygetwindow, pyautogui, pyperclip, time, openpyxl, shutil
+import tkinter, threading, os, sys, pygetwindow, pyautogui, pyperclip, time, openpyxl, shutil, win32event, win32api, winerror
 from pystray import Icon, MenuItem, Menu
 from PIL import Image, ImageDraw
 from datetime import datetime
@@ -6,6 +6,16 @@ from datetime import datetime
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import script_config
+
+MUTEX_NAME = "my_unique_tkinter_app_mutex_name"
+
+mutex = win32event.CreateMutex(None, False, MUTEX_NAME)
+last_error = win32api.GetLastError()
+
+if last_error == winerror.ERROR_ALREADY_EXISTS:
+    root = tkinter.Tk()
+    root.withdraw()
+    sys.exit()
 
 td_snf_excel = f"get_{script_config.td_dot_dd_mm_yy}.xlsx"
 path_td_snf_excel = os.path.join(fr"{script_config.path_share}\OTH", td_snf_excel)
