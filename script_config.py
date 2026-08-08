@@ -203,12 +203,11 @@ def print_page_config(set_copy, set_both, set_segment):
             break
     time.sleep(.25)
     pyautogui.press("tab", interval=.01)
-    time.sleep(1)
     pyautogui.press("enter", interval=.01)
     while True:
         if not pyautogui.pixelMatchesColor(1362, 150, (31, 121, 199), tolerance=10):
             break
-    time.sleep(.25)
+    time.sleep(1.5)
     pyautogui.hotkey("ctrl", "w", interval=.01)
     time.sleep(.5)
 
