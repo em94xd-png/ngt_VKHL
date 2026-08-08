@@ -177,9 +177,7 @@ def print_page_config(set_copy, set_both, set_segment):
         if pyautogui.pixelMatchesColor(562, 575, (111, 145, 192), tolerance=10):
             break
     time.sleep(.25)
-    pyautogui.press("tab", presses=3, interval=.01)
-    pyautogui.write(f"{set_copy}", interval=.01)
-    pyautogui.press("tab", presses=2, interval=.01)
+    pyautogui.press("tab", presses=5, interval=.01)
     pyautogui.press("enter", interval=.01)
     while True:
         if pyautogui.pixelMatchesColor(771, 707, (47, 55, 248), tolerance=10):
@@ -196,13 +194,16 @@ def print_page_config(set_copy, set_both, set_segment):
         pyautogui.press("tab", presses=3, interval=.01)
         pyautogui.press("up", presses=3, interval=.01)
         pyautogui.press("down", presses=(set_both), interval=.01)
-    pyautogui.press("tab", presses=3, interval=.01)
+    pyautogui.press("tab", presses=2, interval=.01)
+    pyautogui.write(f"{set_copy}", interval=.01)
+    pyautogui.press("tab", interval=.01)
     pyautogui.press("enter", interval=.01)
     while True:
         if not pyautogui.pixelMatchesColor(771, 707, (47, 55, 248), tolerance=10):
             break
     time.sleep(.25)
     pyautogui.press("tab", interval=.01)
+    time.sleep(1)
     pyautogui.press("enter", interval=.01)
     while True:
         if not pyautogui.pixelMatchesColor(1362, 150, (31, 121, 199), tolerance=10):

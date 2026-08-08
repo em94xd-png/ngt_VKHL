@@ -1020,7 +1020,9 @@ for _ in root.findall(".//G_IMMIGRATION"):
     nt = _.find("NATIONALITY").text if _.find("NATIONALITY") is not None else "-"
     ct = None
     for nt_imm, cd in bf_ct_json.items():
-        if str(nt).strip().lower() in str(nt_imm).strip().lower():
+        if str(nt).strip().lower() == str(nt_imm).strip().lower():
+            ct = cd
+        elif str(nt).strip().lower() in str(nt_imm).strip().lower():
             ct = cd
 
     set_name = f"{fn} {ln}"
@@ -1123,6 +1125,16 @@ for _ in root.findall(".//G_RESERVATION"):
         ws[f"D{arr_start}"] = f"{rm}\nTrip.com"
     if "Vibes Asia".strip().lower() in str(ta).strip().lower():
         ws[f"D{arr_start}"] = f"{rm}\nVibes Asia"
+    if "Pegas".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nPegas"
+    if "Trailfinders".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nTrailfinders"
+    if "Thailandeal".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nThailandeal"
+    if "Thai Center".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nThai Center"
+    if "Fly2Thai".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nFly2Thai"
 
     if vip is not None:
         ws[f"F{arr_start}"] = vip
@@ -1312,6 +1324,16 @@ for _ in root.findall(".//G_ROOM"):
         ws[f"D{dep_start}"] = f"{rm}\nTrip.com"
     if "Vibes Asia".strip().lower() in str(ta).strip().lower():
         ws[f"D{dep_start}"] = f"{rm}\nVibes Asia"
+    if "Pegas".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nPegas"
+    if "Trailfinders".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nTrailfinders"
+    if "Thailandeal".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nThailandeal"
+    if "Thai Center".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nThai Center"
+    if "Fly2Thai".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nFly2Thai"
 
     if vip is not None:
         ws[f"F{dep_start}"] = vip
