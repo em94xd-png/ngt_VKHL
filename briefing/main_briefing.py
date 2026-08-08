@@ -1129,6 +1129,12 @@ for _ in root.findall(".//G_RESERVATION"):
         ws[f"D{arr_start}"] = f"{rm}\nPegas"
     if "Trailfinders".strip().lower() in str(ta).strip().lower():
         ws[f"D{arr_start}"] = f"{rm}\nTrailfinders"
+    if "Thailandeal".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nThailandeal"
+    if "Thai Center".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nThai Center"
+    if "Fly2Thai".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nFly2Thai"
 
     if vip is not None:
         ws[f"F{arr_start}"] = vip
@@ -1322,6 +1328,12 @@ for _ in root.findall(".//G_ROOM"):
         ws[f"D{dep_start}"] = f"{rm}\nPegas"
     if "Trailfinders".strip().lower() in str(ta).strip().lower():
         ws[f"D{dep_start}"] = f"{rm}\nTrailfinders"
+    if "Thailandeal".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nThailandeal"
+    if "Thai Center".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nThai Center"
+    if "Fly2Thai".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nFly2Thai"
 
     if vip is not None:
         ws[f"F{dep_start}"] = vip
