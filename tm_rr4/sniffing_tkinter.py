@@ -108,66 +108,75 @@ def stop_it():
 def run_script():
     global snf
     while snf:
-        if pygetwindow.getWindowsWithTitle(main_panel):
-            main_title = pygetwindow.getWindowsWithTitle(main_panel)[0]
-            if os.path.exists(path_td_snf_excel):
-                if not main_title.isMinimized:
-                    main_title.activate()
-                    time.sleep(.5)
-                    ln = step_copy(3)
-                    fn = step_copy(4)
-                    bd = step_copy(9)
-                    ct = step_copy(5)
-                    pn = step_copy(6)
-                    wb = openpyxl.load_workbook(path_td_snf_excel)
-                    ws3 = wb["Sheet3"]
-                    ws3.append([ln, fn, bd, ct, pn, datetime.now().time().replace(microsecond=0)])
-                    wb.save(path_td_snf_excel)
-                    wb.close()
-                    while True:
-                        pygetwindow.getWindowsWithTitle(main_panel)
-                        if not pygetwindow.getWindowsWithTitle(main_panel):
-                            pygetwindow.getWindowsWithTitle(sub_panel)
-                            if not pygetwindow.getWindowsWithTitle(sub_panel):
-                                break
-            if not os.path.exists(path_td_snf_excel):
-                if not os.path.exists(fr"{script_config.path_share}\OTH"):
-                    sys.exit()
-                current_path = os.path.dirname(sys.executable)
-                shutil.copy(os.path.join(current_path, "get_pin.xlsx"), path_td_snf_excel)
+        try:
+            if pygetwindow.getWindowsWithTitle(main_panel):
+                main_title = pygetwindow.getWindowsWithTitle(main_panel)[0]
                 if os.path.exists(path_td_snf_excel):
-                    continue
-        time.sleep(.5)
-        if pygetwindow.getWindowsWithTitle(main_panel_2):
-            main_title_2 = pygetwindow.getWindowsWithTitle(main_panel_2)[0]
-            if os.path.exists(path_td_snf_excel):
-                if not main_title_2.isMinimized:
-                    main_title_2.activate()
-                    time.sleep(.5)
-                    ln = step_copy(3)
-                    fn = step_copy(4)
-                    bd = step_copy(9)
-                    ct = step_copy(5)
-                    pn = step_copy(6)
-                    wb = openpyxl.load_workbook(path_td_snf_excel)
-                    ws3 = wb["Sheet3"]
-                    ws3.append([ln, fn, bd, ct, pn, datetime.now().time().replace(microsecond=0)])
-                    wb.save(path_td_snf_excel)
-                    wb.close()
-                    while True:
-                        pygetwindow.getWindowsWithTitle(main_panel_2)
-                        if not pygetwindow.getWindowsWithTitle(main_panel_2):
-                            pygetwindow.getWindowsWithTitle(sub_panel)
-                            if not pygetwindow.getWindowsWithTitle(sub_panel):
-                                break
-            if not os.path.exists(path_td_snf_excel):
-                if not os.path.exists(fr"{script_config.path_share}\OTH"):
-                    sys.exit()
-                current_path = os.path.dirname(sys.executable)
-                shutil.copy(os.path.join(current_path, "get_pin.xlsx"), path_td_snf_excel)
+                    if not main_title.isMinimized:
+                        main_title.activate()
+                        time.sleep(.5)
+                        ln = step_copy(3)
+                        fn = step_copy(4)
+                        bd = step_copy(9)
+                        ct = step_copy(5)
+                        pn = step_copy(6)
+                        wb = openpyxl.load_workbook(path_td_snf_excel)
+                        ws3 = wb["Sheet3"]
+                        ws3.append([ln, fn, bd, ct, pn, datetime.now().time().replace(microsecond=0)])
+                        wb.save(path_td_snf_excel)
+                        wb.close()
+                        while True:
+                            pygetwindow.getWindowsWithTitle(main_panel)
+                            if not pygetwindow.getWindowsWithTitle(main_panel):
+                                pygetwindow.getWindowsWithTitle(sub_panel)
+                                if not pygetwindow.getWindowsWithTitle(sub_panel):
+                                    break
+                if not os.path.exists(path_td_snf_excel):
+                    if not os.path.exists(fr"{script_config.path_share}\OTH"):
+                        sys.exit()
+                    current_path = os.path.dirname(sys.executable)
+                    shutil.copy(os.path.join(current_path, "get_pin.xlsx"), path_td_snf_excel)
+                    if os.path.exists(path_td_snf_excel):
+                        continue
+
+            if pygetwindow.getWindowsWithTitle(main_panel_2):
+                main_title_2 = pygetwindow.getWindowsWithTitle(main_panel_2)[0]
                 if os.path.exists(path_td_snf_excel):
-                    continue
-        time.sleep(.5)
+                    if not main_title_2.isMinimized:
+                        main_title_2.activate()
+                        time.sleep(.5)
+                        ln = step_copy(3)
+                        fn = step_copy(4)
+                        bd = step_copy(9)
+                        ct = step_copy(5)
+                        pn = step_copy(6)
+                        wb = openpyxl.load_workbook(path_td_snf_excel)
+                        ws3 = wb["Sheet3"]
+                        ws3.append([ln, fn, bd, ct, pn, datetime.now().time().replace(microsecond=0)])
+                        wb.save(path_td_snf_excel)
+                        wb.close()
+                        while True:
+                            pygetwindow.getWindowsWithTitle(main_panel_2)
+                            if not pygetwindow.getWindowsWithTitle(main_panel_2):
+                                pygetwindow.getWindowsWithTitle(sub_panel)
+                                if not pygetwindow.getWindowsWithTitle(sub_panel):
+                                    break
+                if not os.path.exists(path_td_snf_excel):
+                    if not os.path.exists(fr"{script_config.path_share}\OTH"):
+                        sys.exit()
+                    current_path = os.path.dirname(sys.executable)
+                    shutil.copy(os.path.join(current_path, "get_pin.xlsx"), path_td_snf_excel)
+                    if os.path.exists(path_td_snf_excel):
+                        continue
+            time.sleep(.5)
+        except:
+            while True:
+                pygetwindow.getWindowsWithTitle(main_panel)
+                pygetwindow.getWindowsWithTitle(main_panel_2)
+                if not pygetwindow.getWindowsWithTitle(main_panel) or not pygetwindow.getWindowsWithTitle(main_panel_2):
+                    pygetwindow.getWindowsWithTitle(sub_panel)
+                    if not pygetwindow.getWindowsWithTitle(sub_panel):
+                        break
 
 def block_button(state):
     for _ in [btn1]:
