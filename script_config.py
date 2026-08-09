@@ -230,3 +230,41 @@ def return_print_default():
     pyautogui.press("up", presses=3, interval=.01)
     pyautogui.press("tab", presses=3, interval=.01)
     pyautogui.press("enter", interval=.01)
+
+path_OTH = path_share.__add__(r"\OTH")
+path_td_excel = os.path.join(path_OTH, f"{td_dot_dd_mm_yy}.xlsx")
+
+# os.startfile(path_td_excel)
+
+# pyautogui.hotkey("win", "d", interval=.01)
+
+# subprocess.run(["cmd", "/c", "start", "msedge", f"https://app.reviewpro.com/myPage?fd=2026-01-01&td=2026-08-09&prevFd=2025-01-01&prevTd=2025-08-09&fdManagement=2026-01-01&tdManagement=2026-08-09&lang=en&pid=581134&indexType=GRI&pageId=5d70c1889b6b4944d2ff1bd3"])
+
+# if pygetwindow.getWindowsWithTitle("Work"):
+#     pygetwindow.getWindowsWithTitle("Work")[0].activate()
+#     pygetwindow.getWindowsWithTitle("Work")[0].maximize()
+
+# while True:
+#     if pyautogui.pixelMatchesColor(867, 119, (1, 76, 183), tolerance=10):
+#         break
+
+# zoom_out(10)
+# zoom_in(10)
+
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# pyautogui.press("tab", interval=.01)
+# pyautogui.press("space", interval=.01)
+# pyautogui.press("tab", interval=.01)
+# pyautogui.press("down", presses=7, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# pyautogui.press("tab", presses=7, interval=.01)
+# pyautogui.press("space", interval=.01)
+
+# while True:
+#     if pyautogui.pixelMatchesColor(1060, 715, (21, 121, 52), tolerance=10):
+#         break
+
+# pyautogui.hotkey("ctrl", "shift", "s", interval=.01)
+# pyautogui.click
+pyautogui.displayMousePosition()
