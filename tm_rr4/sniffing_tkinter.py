@@ -20,7 +20,7 @@ if last_error == winerror.ERROR_ALREADY_EXISTS:
 td_snf_excel = f"get_{script_config.td_dot_dd_mm_yy}.xlsx"
 path_td_snf_excel = os.path.join(fr"{script_config.path_share}\OTH", td_snf_excel)
 
-main_panel = "Guest information panel"
+main_panel_1 = "Guest information panel"
 main_panel_2 = "Preview Panel"
 sub_panel = "Scanning manager"
 
@@ -109,11 +109,11 @@ def run_script():
     global snf
     while snf:
         try:
-            if pygetwindow.getWindowsWithTitle(main_panel):
-                main_title = pygetwindow.getWindowsWithTitle(main_panel)[0]
+            if pygetwindow.getWindowsWithTitle(main_panel_1):
+                main_title_1 = pygetwindow.getWindowsWithTitle(main_panel_1)[0]
                 if os.path.exists(path_td_snf_excel):
-                    if not main_title.isMinimized:
-                        main_title.activate()
+                    if not main_title_1.isMinimized:
+                        main_title_1.activate()
                         time.sleep(.5)
                         ln = step_copy(3)
                         fn = step_copy(4)
@@ -126,8 +126,8 @@ def run_script():
                         wb.save(path_td_snf_excel)
                         wb.close()
                         while True:
-                            pygetwindow.getWindowsWithTitle(main_panel)
-                            if not pygetwindow.getWindowsWithTitle(main_panel):
+                            pygetwindow.getWindowsWithTitle(main_panel_1)
+                            if not pygetwindow.getWindowsWithTitle(main_panel_1):
                                 pygetwindow.getWindowsWithTitle(sub_panel)
                                 if not pygetwindow.getWindowsWithTitle(sub_panel):
                                     break
@@ -138,7 +138,6 @@ def run_script():
                     shutil.copy(os.path.join(current_path, "get_pin.xlsx"), path_td_snf_excel)
                     if os.path.exists(path_td_snf_excel):
                         continue
-
             if pygetwindow.getWindowsWithTitle(main_panel_2):
                 main_title_2 = pygetwindow.getWindowsWithTitle(main_panel_2)[0]
                 if os.path.exists(path_td_snf_excel):
@@ -171,9 +170,9 @@ def run_script():
             time.sleep(.5)
         except:
             while True:
-                pygetwindow.getWindowsWithTitle(main_panel)
+                pygetwindow.getWindowsWithTitle(main_panel_1)
                 pygetwindow.getWindowsWithTitle(main_panel_2)
-                if not pygetwindow.getWindowsWithTitle(main_panel) or not pygetwindow.getWindowsWithTitle(main_panel_2):
+                if not pygetwindow.getWindowsWithTitle(main_panel_1) or not pygetwindow.getWindowsWithTitle(main_panel_2):
                     pygetwindow.getWindowsWithTitle(sub_panel)
                     if not pygetwindow.getWindowsWithTitle(sub_panel):
                         break
