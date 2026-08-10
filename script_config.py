@@ -231,8 +231,8 @@ def return_print_default():
     pyautogui.press("tab", presses=3, interval=.01)
     pyautogui.press("enter", interval=.01)
 
-path_OTH = path_share.__add__(r"\OTH")
-path_td_excel = os.path.join(path_OTH, f"{td_dot_dd_mm_yy}.xlsx")
+# path_OTH = path_share.__add__(r"\OTH")
+# path_td_excel = os.path.join(path_OTH, f"{td_dot_dd_mm_yy}.xlsx")
 
 # os.startfile(path_td_excel)
 
@@ -267,4 +267,4 @@ path_td_excel = os.path.join(path_OTH, f"{td_dot_dd_mm_yy}.xlsx")
 
 # pyautogui.hotkey("ctrl", "shift", "s", interval=.01)
 # pyautogui.click
-pyautogui.displayMousePosition()
+# pyautogui.displayMousePosition()

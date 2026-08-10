@@ -134,7 +134,7 @@ pyautogui.hotkey("ctrl", "a", interval=.01)
 pyautogui.write(script_config.ytd_dd_mm, interval=.01)
 pyautogui.press("tab", presses=7, interval=.01)
 pyautogui.press("space", interval=.01) # Pseudo Rooms
-time.sleep(.5)
+time.sleep(.75)
 pyautogui.press("tab", presses=10, interval=.01)
 pyautogui.press("space", interval=.01) # Notes
 time.sleep(1)
