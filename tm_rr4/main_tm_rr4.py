@@ -344,12 +344,6 @@ rr_ws = rr_wb[rr_ws]
 rr_ws.title = "Sheet1"
 rr_wb.save(path_rr_excel)
 
-td_snf_excel = f"get_{script_config.td_dot_dd_mm_yy}.xlsx"
-
-if not os.path.exists(os.path.join(fr"{script_config.path_share}\OTH", td_snf_excel)):
-     path_td_snf_excel = os.path.join(fr"{script_config.path_share}\OTH", td_snf_excel)
-     shutil.copy(os.path.join(fr"{script_config.path_share}\OTH", "get_pin.xlsx"), path_td_snf_excel)
-
 os.startfile(path_tm_excel)
 os.startfile(path_rr_excel)
 
