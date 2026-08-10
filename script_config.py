@@ -85,6 +85,11 @@ def search_enter_step2():
         if pyautogui.pixelMatchesColor(1854, 337, (6, 108, 122), tolerance=10):
             break
 
+def search_enter_step3():
+    while True:
+        if pyautogui.pixelMatchesColor(1897, 525, (6, 108, 122), tolerance=10):
+            break
+
 def config_report():
     while True:
         if pyautogui.pixelMatchesColor(214, 244, (255, 255, 255), tolerance=0):
