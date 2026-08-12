@@ -912,10 +912,10 @@ for _ in root:
         else:
             if val.is_integer():
                 ws["I5"] = int(val)
-                ws["I5"].number_format = "#"
+                ws["I5"].number_format = "#,###"
             else:
                 ws["I5"] = round(val, 2)
-                ws["I5"].number_format = "#.##"
+                ws["I5"].number_format = "#,###.##"
 
 tree = xml.etree.ElementTree.parse(room_upgrade_mtd)
 root = tree.getroot()
@@ -928,10 +928,10 @@ for _ in root:
         else:
             if val.is_integer():
                 ws["J5"] = int(val)
-                ws["J5"].number_format = "#"
+                ws["J5"].number_format = "#,###"
             else:
                 ws["J5"] = round(val, 2)
-                ws["J5"].number_format = "#.##"
+                ws["J5"].number_format = "#,###.##"
 
 tree = xml.etree.ElementTree.parse(late_checkout)
 root = tree.getroot()
@@ -944,10 +944,10 @@ for _ in root:
         else:
             if val.is_integer():
                 ws["I7"] = int(val)
-                ws["I7"].number_format = "#"
+                ws["I7"].number_format = "#,###"
             else:
                 ws["I7"] = round(val, 2)
-                ws["I7"].number_format = "#.##"
+                ws["I7"].number_format = "#,###.##"
 
 tree = xml.etree.ElementTree.parse(late_checkout_mtd)
 root = tree.getroot()
@@ -960,10 +960,10 @@ for _ in root:
         else:
             if val.is_integer():
                 ws["J7"] = int(val)
-                ws["J7"].number_format = "#"
+                ws["J7"].number_format = "#,###"
             else:
                 ws["J7"] = round(val, 2)
-                ws["J7"].number_format = "#.##"
+                ws["J7"].number_format = "#,###.##"
 
 tree = xml.etree.ElementTree.parse(tour_commission)
 root = tree.getroot()
@@ -976,10 +976,10 @@ for _ in root:
         else:
             if val.is_integer():
                 ws["I9"] = int(val)
-                ws["I9"].number_format = "#"
+                ws["I9"].number_format = "#,###"
             else:
                 ws["I9"] = round(val, 2)
-                ws["I9"].number_format = "#.##"
+                ws["I9"].number_format = "#,###.##"
 
 tree = xml.etree.ElementTree.parse(tour_commission_mtd)
 root = tree.getroot()
@@ -992,10 +992,10 @@ for _ in root:
         else:
             if val.is_integer():
                 ws["J9"] = int(val)
-                ws["J9"].number_format = "#"
+                ws["J9"].number_format = "#,###"
             else:
                 ws["J9"] = round(val, 2)
-                ws["J9"].number_format = "#.##"
+                ws["J9"].number_format = "#,###.##"
 
 tree = xml.etree.ElementTree.parse(gift_shop)
 root = tree.getroot()
@@ -1008,10 +1008,10 @@ for _ in root:
         else:
             if val.is_integer():
                 ws["I12"] = int(val)
-                ws["I12"].number_format = "#"
+                ws["I12"].number_format = "#,###"
             else:
                 ws["I12"] = round(val, 2)
-                ws["I12"].number_format = "#.##"
+                ws["I12"].number_format = "#,###.##"
 
 tree = xml.etree.ElementTree.parse(gift_shop_mtd)
 root = tree.getroot()
@@ -1024,10 +1024,10 @@ for _ in root:
         else:
             if val.is_integer():
                 ws["J12"] = int(val)
-                ws["J12"].number_format = "#"
+                ws["J12"].number_format = "#,###"
             else:
                 ws["J12"] = round(val, 2)
-                ws["J12"].number_format = "#.##"
+                ws["J12"].number_format = "#,###.##"
 
 current_path = os.path.dirname(os.path.abspath(__file__))
 
