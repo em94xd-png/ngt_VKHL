@@ -11,8 +11,6 @@ if not os.path.exists(f"{script_config.path_share}"):
 
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", script_config.site_OPERA])
-time.sleep(.5)
-subprocess.run(["cmd", "/c", "start", "msedge", script_config.site_OPERA])
 
 if pygetwindow.getWindowsWithTitle("Opera Cloud"):
      pygetwindow.getWindowsWithTitle("Opera Cloud")[0].restore()

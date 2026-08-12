@@ -14,8 +14,6 @@ script_config.remove_file(script_config.daily_report_path)
 
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", script_config.site_OPERA])
-time.sleep(.5)
-subprocess.run(["cmd", "/c", "start", "msedge", script_config.site_OPERA])
 
 if pygetwindow.getWindowsWithTitle("Opera Cloud"):
      pygetwindow.getWindowsWithTitle("Opera Cloud")[0].restore()
