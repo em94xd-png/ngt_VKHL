@@ -1,7 +1,7 @@
 import tkinter, threading, os, sys, pygetwindow, pyautogui, pyperclip, time, openpyxl, shutil, win32event, win32api, winerror
 from pystray import Icon, MenuItem, Menu
 from PIL import Image, ImageDraw
-from datetime import datetime
+from datetime import datetime, date, timedelta
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -17,7 +17,7 @@ if last_error == winerror.ERROR_ALREADY_EXISTS:
     root.withdraw()
     sys.exit()
 
-td_snf_excel = f"get_{script_config.td_dot_dd_mm_yy}.xlsx"
+td_snf_excel = f"get_{datetime.now().strftime("%d.%m.%y")}.xlsx"
 path_td_snf_excel = os.path.join(fr"{script_config.path_share}\OTH", td_snf_excel)
 
 main_panel_1 = "Guest information panel"
@@ -168,6 +168,9 @@ def run_script():
                     if os.path.exists(path_td_snf_excel):
                         continue
             time.sleep(.5)
+            if os.path.exists(os.path.join(fr"{script_config.path_share}\OTH", f"get_{(date.today() - timedelta(days=2)).strftime("%d.%m.%y")}.xlsx")):
+                os.remove(os.path.join(fr"{script_config.path_share}\OTH", f"get_{(date.today() - timedelta(days=2)).strftime("%d.%m.%y")}.xlsx"))
+                continue
         except:
             while True:
                 pygetwindow.getWindowsWithTitle(main_panel_1)
