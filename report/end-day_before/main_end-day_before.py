@@ -16,13 +16,12 @@ os.makedirs(script_config.daily_report_path.__add__(r"\Before Closeday"), exist_
 daily_report_before = script_config.daily_report_path + r"\Before Closeday"
 script_config.remove_file(daily_report_before)
 
-pyautogui.hotkey("win", "d", interval=.01)
-
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", script_config.site_OPERA])
 if pygetwindow.getWindowsWithTitle("Opera Cloud"):
-     pygetwindow.getWindowsWithTitle("Opera Cloud")[0].activate()
+     pygetwindow.getWindowsWithTitle("Opera Cloud")[0].minimize()
      pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
+     pygetwindow.getWindowsWithTitle("Opera Cloud")[0].activate()
 time.sleep(.5)
 
 # In Opera

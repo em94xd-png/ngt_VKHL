@@ -12,13 +12,12 @@ pyautogui.FAILSAFE = True
 if not os.path.exists(f"{script_config.path_share}"):
      sys.exit()
 
-pyautogui.hotkey("win", "d", interval=.01)
-
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", f"{script_config.site_OPERA}"])
 if pygetwindow.getWindowsWithTitle("Opera Cloud"):
-     pygetwindow.getWindowsWithTitle("Opera Cloud")[0].activate()
-     pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
+    pygetwindow.getWindowsWithTitle("Opera Cloud")[0].minimize()
+    pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
+    pygetwindow.getWindowsWithTitle("Opera Cloud")[0].activate()
 time.sleep(.5)
 
 # In Opera

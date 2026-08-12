@@ -273,3 +273,7 @@ def return_print_default():
 # pyautogui.hotkey("ctrl", "shift", "s", interval=.01)
 # pyautogui.click
 # pyautogui.displayMousePosition()
+
+pygetwindow.getWindowsWithTitle("Opera Cloud")[0].minimize()
+pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
+pygetwindow.getWindowsWithTitle("Opera Cloud")[0].activate()
