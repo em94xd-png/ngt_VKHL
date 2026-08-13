@@ -16,12 +16,11 @@ os.makedirs(script_config.daily_report_path.__add__(r"\Before Closeday"), exist_
 daily_report_before = script_config.daily_report_path + r"\Before Closeday"
 script_config.remove_file(daily_report_before)
 
-pyautogui.hotkey("win", "d", interval=.01)
-
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", script_config.site_OPERA])
+
 if pygetwindow.getWindowsWithTitle("Opera Cloud"):
-     pygetwindow.getWindowsWithTitle("Opera Cloud")[0].activate()
+     pygetwindow.getWindowsWithTitle("Opera Cloud")[0].restore()
      pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
 time.sleep(.5)
 
@@ -48,7 +47,7 @@ script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
-time.sleep(1)
+script_config.search_enter_step3()
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=14, interval=.01)
 pyautogui.press("enter", interval=.01)
@@ -86,7 +85,7 @@ script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
-time.sleep(1)
+script_config.search_enter_step3()
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=14, interval=.01)
 pyautogui.press("enter", interval=.01)
@@ -123,7 +122,7 @@ script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
-time.sleep(1)
+script_config.search_enter_step3()
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=.01)
 pyautogui.press("enter", interval=.01)
@@ -134,7 +133,17 @@ pyautogui.hotkey("ctrl", "a", interval=.01)
 pyautogui.write(script_config.ytd_dd_mm, interval=.01)
 pyautogui.press("tab", presses=7, interval=.01)
 pyautogui.press("space", interval=.01) # Pseudo Rooms
-time.sleep(.5)
+
+while True:
+     if pyautogui.pixelMatchesColor(36, 429, (6, 108, 122), tolerance=10):
+          break
+
+time.sleep(1)
+
+while True:
+     if pyautogui.pixelMatchesColor(36, 429, (6, 108, 122), tolerance=10):
+          break
+
 pyautogui.press("tab", presses=10, interval=.01)
 pyautogui.press("space", interval=.01) # Notes
 time.sleep(1)
@@ -177,7 +186,7 @@ script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(1)
+script_config.search_enter_step3()
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
@@ -228,7 +237,7 @@ script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(1)
+script_config.search_enter_step3()
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
@@ -316,7 +325,7 @@ script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(1)
+script_config.search_enter_step3()
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
@@ -371,7 +380,7 @@ script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(1)
+script_config.search_enter_step3()
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)

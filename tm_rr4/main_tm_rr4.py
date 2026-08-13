@@ -11,12 +11,11 @@ pyautogui.FAILSAFE = True
 if not os.path.exists(f"{script_config.path_share}"):
      sys.exit()
 
-pyautogui.hotkey("win", "d", interval=.01)
-
 # Open Opera
-subprocess.run(["cmd", "/c", "start", "msedge", f"{script_config.site_OPERA}"])
+subprocess.run(["cmd", "/c", "start", "msedge", script_config.site_OPERA])
+
 if pygetwindow.getWindowsWithTitle("Opera Cloud"):
-     pygetwindow.getWindowsWithTitle("Opera Cloud")[0].activate()
+     pygetwindow.getWindowsWithTitle("Opera Cloud")[0].restore()
      pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
 time.sleep(.5)
 
@@ -43,7 +42,7 @@ script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
-time.sleep(1)
+script_config.search_enter_step3()
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=.01)
 pyautogui.press("enter", interval=.01)
@@ -229,10 +228,18 @@ for _ in range(ws1.max_row, 1, -1):
      nt = ws1.cell(row=_, column=6).value
      if nt == "THA":
           ws1.delete_rows(_, amount=1)
+     if nt and "-" in nt:
+          ws1.delete_rows(_, amount=1)
+     if len(nt) > 3:
+          ws1.delete_rows(_, amount=1)
 
 for _ in range(ws2.max_row, 4, -1):
      pn = ws2.cell(row=_, column=15).value
      if pn is None or pn == "":
+          ws2.delete_rows(_, amount=1)
+     if pn is not None and str(pn).strip().replace(" ", "").isalpha():
+          ws2.delete_rows(_, amount=1)
+     if pn and "-" in pn:
           ws2.delete_rows(_, amount=1)
 
 for _ in range(ws2.max_row, 4, -1):
@@ -343,12 +350,6 @@ for _ in rr_wb.sheetnames:
 rr_ws = rr_wb[rr_ws]
 rr_ws.title = "Sheet1"
 rr_wb.save(path_rr_excel)
-
-td_snf_excel = f"get_{script_config.td_dot_dd_mm_yy}.xlsx"
-
-if not os.path.exists(os.path.join(fr"{script_config.path_share}\OTH", td_snf_excel)):
-     path_td_snf_excel = os.path.join(fr"{script_config.path_share}\OTH", td_snf_excel)
-     shutil.copy(os.path.join(fr"{script_config.path_share}\OTH", "get_pin.xlsx"), path_td_snf_excel)
 
 os.startfile(path_tm_excel)
 os.startfile(path_rr_excel)

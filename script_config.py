@@ -85,6 +85,11 @@ def search_enter_step2():
         if pyautogui.pixelMatchesColor(1854, 337, (6, 108, 122), tolerance=10):
             break
 
+def search_enter_step3():
+    while True:
+        if pyautogui.pixelMatchesColor(1897, 525, (6, 108, 122), tolerance=10):
+            break
+
 def config_report():
     while True:
         if pyautogui.pixelMatchesColor(214, 244, (255, 255, 255), tolerance=0):
@@ -230,3 +235,46 @@ def return_print_default():
     pyautogui.press("up", presses=3, interval=.01)
     pyautogui.press("tab", presses=3, interval=.01)
     pyautogui.press("enter", interval=.01)
+
+# path_OTH = path_share.__add__(r"\OTH")
+# path_td_excel = os.path.join(path_OTH, f"{td_dot_dd_mm_yy}.xlsx")
+
+# os.startfile(path_td_excel)
+
+# subprocess.run(["cmd", "/c", "start", "msedge", f"https://app.reviewpro.com/myPage?fd=2026-01-01&td=2026-08-09&prevFd=2025-01-01&prevTd=2025-08-09&fdManagement=2026-01-01&tdManagement=2026-08-09&lang=en&pid=581134&indexType=GRI&pageId=5d70c1889b6b4944d2ff1bd3"])
+
+# if pygetwindow.getWindowsWithTitle("Work"):
+#     pygetwindow.getWindowsWithTitle("Work")[0].restore()
+#     pygetwindow.getWindowsWithTitle("Work")[0].maximize()
+
+# time.sleep(.5)
+# zoom_out(10)
+# zoom_in(5)
+
+# while True:
+#     if pyautogui.pixelMatchesColor(1043, 490, (21, 121, 52), tolerance=10):
+#         break
+
+# zoom_in(5)
+
+# pyautogui.press("tab", presses=2, interval=.01)
+# pyautogui.press("space", interval=.01)
+# pyautogui.press("tab", interval=.01)
+# pyautogui.press("space", interval=.01)
+# pyautogui.press("tab", interval=.01)
+# pyautogui.press("down", presses=7, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# pyautogui.press("tab", presses=7, interval=.01)
+# pyautogui.press("space", interval=.01)
+# pyautogui.hotkey("ctrl", "shift", "s", interval=.01)
+# pyautogui.moveTo(1132, 973)
+# pyautogui.dragTo(845, 685, button="left")
+
+# while True:
+#     if pyautogui.pixelMatchesColor(1122, 823, (21, 121, 52), tolerance=10):
+#         break
+
+# pyautogui.press("tab", interval=.01)
+# pyautogui.press("enter", interval=.01)
+
+# pyautogui.displayMousePosition()

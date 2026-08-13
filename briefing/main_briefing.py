@@ -12,12 +12,11 @@ pyautogui.FAILSAFE = True
 if not os.path.exists(f"{script_config.path_share}"):
      sys.exit()
 
-pyautogui.hotkey("win", "d", interval=.01)
-
 # Open Opera
-subprocess.run(["cmd", "/c", "start", "msedge", f"{script_config.site_OPERA}"])
+subprocess.run(["cmd", "/c", "start", "msedge", script_config.site_OPERA])
+
 if pygetwindow.getWindowsWithTitle("Opera Cloud"):
-     pygetwindow.getWindowsWithTitle("Opera Cloud")[0].activate()
+     pygetwindow.getWindowsWithTitle("Opera Cloud")[0].restore()
      pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
 time.sleep(.5)
 
@@ -44,7 +43,7 @@ script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
-time.sleep(1)
+script_config.search_enter_step3()
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=.01)
 pyautogui.press("enter", interval=.01)
@@ -106,7 +105,7 @@ script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(1)
+script_config.search_enter_step3()
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
@@ -169,7 +168,7 @@ script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(1)
+script_config.search_enter_step3()
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
@@ -260,7 +259,7 @@ script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(1)
+script_config.search_enter_step3()
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
@@ -316,7 +315,7 @@ script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(1)
+script_config.search_enter_step3()
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
@@ -624,7 +623,7 @@ script_config.search_enter_step2()
 time.sleep(.5)
 pyautogui.press("tab", presses=9, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
-time.sleep(1)
+script_config.search_enter_step3()
 pyautogui.press("right", interval=.01)
 pyautogui.press("tab", presses=13, interval=0.01)
 pyautogui.press("enter", interval=0.01)
@@ -821,7 +820,10 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
         ws["B11"] = adr
         ws["B11"].number_format = "#,###.##"
         ws["B12"] = oc
-        ws["B12"].number_format = "#.##\"%\""
+        if (ws["B12"].value).is_integer():
+            ws["B12"].number_format = "#\"%\""
+        elif round(float(ws["B12"].value), 2):
+            ws["B12"].number_format = "#.##\"%\""
     if _.find("CONSIDERED_DATE").text == f"{script_config.td_hp_dd_mm_yy.upper()}":
         ws["D4"] = f"{script_config.td.strftime("%#d-%b")}"
         ws["F5"] = arr
@@ -833,30 +835,50 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
         ws["N7"] = dep
         ws["M9"] = rm
         ws["M11"] = (rm - hu) / (327 - hu) * 100
+        if (ws["M11"].value).is_integer():
+            ws["M11"].number_format = "#\"%\""
+        elif round(float(ws["M11"].value), 2):
+            ws["M11"].number_format = "#.##\"%\""
         ws["M12"] = ppl
     if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=2)).strftime("%d-%b-%y").upper()}":
         ws["P5"] = arr
         ws["P7"] = dep
         ws["O9"] = rm
         ws["O11"] = (rm - hu) / (327 - hu) * 100
+        if (ws["O11"].value).is_integer():
+            ws["O11"].number_format = "#\"%\""
+        elif round(float(ws["O11"].value), 2):
+            ws["O11"].number_format = "#.##\"%\""
         ws["O12"] = ppl
     if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=3)).strftime("%d-%b-%y").upper()}":
         ws["R5"] = arr
         ws["R7"] = dep
         ws["Q9"] = rm
         ws["Q11"] = (rm - hu) / (327 - hu) * 100
+        if (ws["Q11"].value).is_integer():
+            ws["Q11"].number_format = "#\"%\""
+        elif round(float(ws["Q11"].value), 2):
+            ws["Q11"].number_format = "#.##\"%\""
         ws["Q12"] = ppl
     if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=4)).strftime("%d-%b-%y").upper()}":
         ws["T5"] = arr
         ws["T7"] = dep
         ws["S9"] = rm
         ws["S11"] = (rm - hu) / (327 - hu) * 100
+        if (ws["S11"].value).is_integer():
+            ws["S11"].number_format = "#\"%\""
+        elif round(float(ws["S11"].value), 2):
+            ws["S11"].number_format = "#.##\"%\""
         ws["S12"] = ppl
     if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=5)).strftime("%d-%b-%y").upper()}":
         ws["V5"] = arr
         ws["V7"] = dep
         ws["U9"] = rm
         ws["U11"] = (rm - hu) / (327 - hu) * 100
+        if (ws["U11"].value).is_integer():
+            ws["U11"].number_format = "#\"%\""
+        elif round(float(ws["U11"].value), 2):
+            ws["U11"].number_format = "#.##\"%\""
         ws["U12"] = ppl
 
 cmp = int(ws["B5"].value or 0 if ws["B5"].value != "-" else 0)
@@ -864,7 +886,10 @@ hu = int(ws["B7"].value or 0 if ws["B7"].value != "-" else 0)
 rm = int(ws["E9"].value or 0 if ws["E9"].value != "-" else 0)
 
 ws["E11"] = round(float((rm - (cmp + hu)) / 327 * 100), 2)
-ws["E11"].number_format = "#.##\"%\""
+if (ws["E11"].value).is_integer():
+    ws["E11"].number_format = "#\"%\""
+elif round(float(ws["E11"].value), 2):
+    ws["E11"].number_format = "#.##\"%\""
 
 tree = xml.etree.ElementTree.parse(resfutureoccupancy)
 root = tree.getroot()
@@ -887,10 +912,10 @@ for _ in root:
         else:
             if val.is_integer():
                 ws["I5"] = int(val)
-                ws["I5"].number_format = "#,##0"
+                ws["I5"].number_format = "#,###"
             else:
                 ws["I5"] = round(val, 2)
-                ws["I5"].number_format = "#,##0.00"
+                ws["I5"].number_format = "#,###.##"
 
 tree = xml.etree.ElementTree.parse(room_upgrade_mtd)
 root = tree.getroot()
@@ -903,10 +928,10 @@ for _ in root:
         else:
             if val.is_integer():
                 ws["J5"] = int(val)
-                ws["J5"].number_format = "#,##0"
+                ws["J5"].number_format = "#,###"
             else:
                 ws["J5"] = round(val, 2)
-                ws["J5"].number_format = "#,##0.00"
+                ws["J5"].number_format = "#,###.##"
 
 tree = xml.etree.ElementTree.parse(late_checkout)
 root = tree.getroot()
@@ -919,10 +944,10 @@ for _ in root:
         else:
             if val.is_integer():
                 ws["I7"] = int(val)
-                ws["I7"].number_format = "#,##0"
+                ws["I7"].number_format = "#,###"
             else:
                 ws["I7"] = round(val, 2)
-                ws["I7"].number_format = "#,##0.00"
+                ws["I7"].number_format = "#,###.##"
 
 tree = xml.etree.ElementTree.parse(late_checkout_mtd)
 root = tree.getroot()
@@ -935,10 +960,10 @@ for _ in root:
         else:
             if val.is_integer():
                 ws["J7"] = int(val)
-                ws["J7"].number_format = "#,##0"
+                ws["J7"].number_format = "#,###"
             else:
                 ws["J7"] = round(val, 2)
-                ws["J7"].number_format = "#,##0.00"
+                ws["J7"].number_format = "#,###.##"
 
 tree = xml.etree.ElementTree.parse(tour_commission)
 root = tree.getroot()
@@ -951,10 +976,10 @@ for _ in root:
         else:
             if val.is_integer():
                 ws["I9"] = int(val)
-                ws["I9"].number_format = "#,##0"
+                ws["I9"].number_format = "#,###"
             else:
                 ws["I9"] = round(val, 2)
-                ws["I9"].number_format = "#,##0.00"
+                ws["I9"].number_format = "#,###.##"
 
 tree = xml.etree.ElementTree.parse(tour_commission_mtd)
 root = tree.getroot()
@@ -967,10 +992,10 @@ for _ in root:
         else:
             if val.is_integer():
                 ws["J9"] = int(val)
-                ws["J9"].number_format = "#,##0"
+                ws["J9"].number_format = "#,###"
             else:
                 ws["J9"] = round(val, 2)
-                ws["J9"].number_format = "#,##0.00"
+                ws["J9"].number_format = "#,###.##"
 
 tree = xml.etree.ElementTree.parse(gift_shop)
 root = tree.getroot()
@@ -983,10 +1008,10 @@ for _ in root:
         else:
             if val.is_integer():
                 ws["I12"] = int(val)
-                ws["I12"].number_format = "#,##0"
+                ws["I12"].number_format = "#,###"
             else:
                 ws["I12"] = round(val, 2)
-                ws["I12"].number_format = "#,##0.00"
+                ws["I12"].number_format = "#,###.##"
 
 tree = xml.etree.ElementTree.parse(gift_shop_mtd)
 root = tree.getroot()
@@ -999,10 +1024,10 @@ for _ in root:
         else:
             if val.is_integer():
                 ws["J12"] = int(val)
-                ws["J12"].number_format = "#,##0"
+                ws["J12"].number_format = "#,###"
             else:
                 ws["J12"] = round(val, 2)
-                ws["J12"].number_format = "#,##0.00"
+                ws["J12"].number_format = "#,###.##"
 
 current_path = os.path.dirname(os.path.abspath(__file__))
 
@@ -1135,6 +1160,10 @@ for _ in root.findall(".//G_RESERVATION"):
         ws[f"D{arr_start}"] = f"{rm}\nThai Center"
     if "Fly2Thai".strip().lower() in str(ta).strip().lower():
         ws[f"D{arr_start}"] = f"{rm}\nFly2Thai"
+    if "Travel Exclusive".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nTravel Exclusive"
+    if "Fun Siam".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nFun Siam"
 
     if vip is not None:
         ws[f"F{arr_start}"] = vip
@@ -1336,6 +1365,10 @@ for _ in root.findall(".//G_ROOM"):
         ws[f"D{dep_start}"] = f"{rm}\nThai Center"
     if "Fly2Thai".strip().lower() in str(ta).strip().lower():
         ws[f"D{dep_start}"] = f"{rm}\nFly2Thai"
+    if "Travel Exclusive".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nTravel Exclusive"
+    if "Fun Siam".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nFun Siam"
 
     if vip is not None:
         ws[f"F{dep_start}"] = vip
@@ -1418,3 +1451,4 @@ for _ in root.findall(".//G_ROOM"):
     dep_start += 1
 
 wb.save(path_td_excel)
+wb.close()
