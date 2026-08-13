@@ -138,7 +138,7 @@ while True:
      if pyautogui.pixelMatchesColor(36, 429, (6, 108, 122), tolerance=10):
           break
 
-time.sleep(.5)
+time.sleep(1)
 
 while True:
      if pyautogui.pixelMatchesColor(36, 429, (6, 108, 122), tolerance=10):
