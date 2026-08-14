@@ -237,15 +237,15 @@ def return_print_default():
     pyautogui.press("enter", interval=.01)
 
 # path_OTH = path_share.__add__(r"\OTH")
-# path_td_excel = os.path.join(path_OTH, f"{td_dot_dd_mm_yy}.xlsx")
+# path_td_excel = os.path.join(path_OTH, f"briefing_2.xlsx")
 
 # os.startfile(path_td_excel)
 
 # subprocess.run(["cmd", "/c", "start", "msedge", f"https://app.reviewpro.com/myPage?fd=2026-01-01&td=2026-08-09&prevFd=2025-01-01&prevTd=2025-08-09&fdManagement=2026-01-01&tdManagement=2026-08-09&lang=en&pid=581134&indexType=GRI&pageId=5d70c1889b6b4944d2ff1bd3"])
 
-# if pygetwindow.getWindowsWithTitle("Work"):
-#     pygetwindow.getWindowsWithTitle("Work")[0].restore()
-#     pygetwindow.getWindowsWithTitle("Work")[0].maximize()
+# if pygetwindow.getWindowsWithTitle("Review"):
+#     pygetwindow.getWindowsWithTitle("Review")[0].restore()
+#     pygetwindow.getWindowsWithTitle("Review")[0].maximize()
 
 # time.sleep(.5)
 # zoom_out(10)
@@ -276,5 +276,32 @@ def return_print_default():
 
 # pyautogui.press("tab", interval=.01)
 # pyautogui.press("enter", interval=.01)
+
+# if pygetwindow.getWindowsWithTitle("Excel"):
+#     pygetwindow.getWindowsWithTitle("Excel")[0].restore()
+#     pygetwindow.getWindowsWithTitle("Excel")[0].maximize()
+#     pygetwindow.getWindowsWithTitle("Excel")[0].activate()
+
+# stay_excel()
+
+# pyautogui.hotkey("ctrl", "g", interval=.01)
+# pyautogui.write("j2", interval=.01)
+# pyautogui.press("enter", interval=.01)
+# pyautogui.hotkey("ctrl", "v", interval=.01)
+# pyautogui.press("alt", interval=.01)
+# pyautogui.write("jp", interval=.01)
+# pyautogui.write("p", interval=.01)
+
+# if pygetwindow.getWindowsWithTitle("Review"):
+#     pygetwindow.getWindowsWithTitle("Review")[0].restore()
+#     pygetwindow.getWindowsWithTitle("Review")[0].maximize()
+#     pygetwindow.getWindowsWithTitle("Review")[0].activate()
+
+# while True:
+#     if pyautogui.pixelMatchesColor(1122, 823, (21, 121, 52), tolerance=10):
+#         break
+
+
+
 
 # pyautogui.displayMousePosition()
