@@ -1164,6 +1164,16 @@ for _ in root.findall(".//G_RESERVATION"):
         ws[f"D{arr_start}"] = f"{rm}\nTravel Exclusive"
     if "Fun Siam".strip().lower() in str(ta).strip().lower():
         ws[f"D{arr_start}"] = f"{rm}\nFun Siam"
+    if "Elevate Tourism".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nElevate Tourism"
+    if "W2M".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nW2M"
+    if "Versailles".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nClub Eldorado"
+    if "Destinations of".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nDOTW"
+    if "DTH".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nDTH"
 
     if vip is not None:
         ws[f"F{arr_start}"] = vip
@@ -1369,6 +1379,16 @@ for _ in root.findall(".//G_ROOM"):
         ws[f"D{dep_start}"] = f"{rm}\nTravel Exclusive"
     if "Fun Siam".strip().lower() in str(ta).strip().lower():
         ws[f"D{dep_start}"] = f"{rm}\nFun Siam"
+    if "Elevate Tourism".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nElevate Tourism"
+    if "W2M".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nW2M"
+    if "Versailles".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nClub Eldorado"
+    if "Destinations of".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nDOTW"
+    if "DTH".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nDTH"
 
     if vip is not None:
         ws[f"F{dep_start}"] = vip
