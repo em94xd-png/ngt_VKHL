@@ -125,6 +125,8 @@ def run_script():
                         ws3.append([ln, fn, bd, ct, pn, datetime.now().time().replace(microsecond=0)])
                         wb.save(path_td_snf_excel)
                         wb.close()
+                        if os.path.exists(os.path.join(fr"{script_config.path_share}\OTH", f"get_{(date.today() - timedelta(days=2)).strftime("%d.%m.%y")}.xlsx")):
+                            os.remove(os.path.join(fr"{script_config.path_share}\OTH", f"get_{(date.today() - timedelta(days=2)).strftime("%d.%m.%y")}.xlsx"))
                         while True:
                             pygetwindow.getWindowsWithTitle(main_panel_1)
                             if not pygetwindow.getWindowsWithTitle(main_panel_1):
@@ -154,6 +156,8 @@ def run_script():
                         ws3.append([ln, fn, bd, ct, pn, datetime.now().time().replace(microsecond=0)])
                         wb.save(path_td_snf_excel)
                         wb.close()
+                        if os.path.exists(os.path.join(fr"{script_config.path_share}\OTH", f"get_{(date.today() - timedelta(days=2)).strftime("%d.%m.%y")}.xlsx")):
+                            os.remove(os.path.join(fr"{script_config.path_share}\OTH", f"get_{(date.today() - timedelta(days=2)).strftime("%d.%m.%y")}.xlsx"))
                         while True:
                             pygetwindow.getWindowsWithTitle(main_panel_2)
                             if not pygetwindow.getWindowsWithTitle(main_panel_2):
@@ -168,9 +172,6 @@ def run_script():
                     if os.path.exists(path_td_snf_excel):
                         continue
             time.sleep(.5)
-            if os.path.exists(os.path.join(fr"{script_config.path_share}\OTH", f"get_{(date.today() - timedelta(days=2)).strftime("%d.%m.%y")}.xlsx")):
-                os.remove(os.path.join(fr"{script_config.path_share}\OTH", f"get_{(date.today() - timedelta(days=2)).strftime("%d.%m.%y")}.xlsx"))
-                continue
         except:
             while True:
                 pygetwindow.getWindowsWithTitle(main_panel_1)
