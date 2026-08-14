@@ -223,6 +223,8 @@ for _ in range(ws1.max_row, 1, -1):
      pn = ws1.cell(row=_, column=5).value
      if pn is None or pn == "":
           ws1.delete_rows(_, amount=1)
+     if pn and "." in pn:
+          ws1.delete_rows(_, amount=1)
 
 for _ in range(ws1.max_row, 1, -1):
      nt = ws1.cell(row=_, column=6).value
@@ -240,6 +242,8 @@ for _ in range(ws2.max_row, 4, -1):
      if pn is not None and str(pn).strip().replace(" ", "").isalpha():
           ws2.delete_rows(_, amount=1)
      if pn and "-" in pn:
+          ws2.delete_rows(_, amount=1)
+     if pn and "." in pn:
           ws2.delete_rows(_, amount=1)
 
 for _ in range(ws2.max_row, 4, -1):
