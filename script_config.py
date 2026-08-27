@@ -52,7 +52,7 @@ daily_report_path = fr"{path_share}\Daily's Report\Report {ytd_yyyy}\{ytd_order_
 
 def first_OPERA_open():
     while True:
-        if pyautogui.pixelMatchesColor(7, 391, (244, 243, 239), tolerance=0):
+        if pyautogui.pixelMatchesColor(7, 391, (251, 249, 248), tolerance=0):
             break
 
 def zoom_out(_):
@@ -67,32 +67,32 @@ def zoom_in(_):
 
 def main_OPERA_menu():
     while True:
-        if pyautogui.pixelMatchesColor(139, 129, ( 70,  70,  68), tolerance=0):
+        if pyautogui.pixelMatchesColor(139, 129, (48,  54,  76), tolerance=0):
             break
 
 def search_reports():
     while True:
-        if pyautogui.pixelMatchesColor(252, 245, (88, 88, 86), tolerance=0):
+        if pyautogui.pixelMatchesColor(320, 275, (60,  66,  91), tolerance=10):
             break
 
 def search_enter_step1():
     while True:
-        if pyautogui.pixelMatchesColor(1854, 337, (204, 204, 204), tolerance=10):
+        if pyautogui.pixelMatchesColor(1853, 361, (246, 246, 246), tolerance=10):
             break
 
 def search_enter_step2():
     while True:
-        if pyautogui.pixelMatchesColor(1854, 337, (6, 108, 122), tolerance=10):
+        if pyautogui.pixelMatchesColor(1853, 361, (49,  45,  42), tolerance=10):
             break
 
 def search_enter_step3():
     while True:
-        if pyautogui.pixelMatchesColor(1897, 525, (6, 108, 122), tolerance=10):
+        if pyautogui.pixelMatchesColor(1712, 554, (49,  45,  42), tolerance=10):
             break
 
 def config_report():
     while True:
-        if pyautogui.pixelMatchesColor(214, 244, (255, 255, 255), tolerance=0):
+        if pyautogui.pixelMatchesColor(320, 275, (255, 255, 255), tolerance=10):
             break
 
 def wait_report():
@@ -107,17 +107,17 @@ def tab_reserve(times):
 
 def download_as():
      while True:
-          if pyautogui.pixelMatchesColor(982, 514, (88, 88, 86), tolerance=10):
+          if pyautogui.pixelMatchesColor(982, 514, (60,  66,  91), tolerance=10):
                break
 
 def download_as_download():
      while True:
-          if pyautogui.pixelMatchesColor(980, 635, (6, 108, 122), tolerance=10):
+          if pyautogui.pixelMatchesColor(980, 635, (49,  45,  42), tolerance=10):
                break
 
 def download_as_download_s():
      while True:
-          if pyautogui.pixelMatchesColor(979, 623, (6, 108, 122), tolerance=10):
+          if pyautogui.pixelMatchesColor(979, 623, (49,  45,  42), tolerance=10):
                break
           
 def download_page():
