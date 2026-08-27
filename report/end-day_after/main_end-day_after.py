@@ -35,249 +35,336 @@ script_config.search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
-# VKHL Arrivals
-pyautogui.write("Arrivals: Detailed FO", interval=.01)
-pyautogui.press("enter", interval=.01)
-script_config.search_enter_step1()
-script_config.search_enter_step2()
-time.sleep(.5)
-pyautogui.press("tab", presses=9, interval=.01)
-pyautogui.press("down", presses=2, interval=.01)
-script_config.search_enter_step3()
-pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=13, interval=.01)
-pyautogui.press("enter", interval=.01)
-# VKHL Arrivals: Config
-script_config.config_report()
-time.sleep(1)
-pyautogui.hotkey("ctrl", "a", interval=.01)
-pyautogui.write(script_config.td_dd_mm, interval=.01)
-pyautogui.press("tab", presses=2, interval=.01)
-time.sleep(1)
-pyautogui.write(script_config.td_dd_mm, interval=.01)
-pyautogui.press("tab", presses=4, interval=.01)
-time.sleep(.75)
-pyautogui.write(script_config.Room_Type, interval=.01)
-pyautogui.press("tab", presses=38, interval=.01)
-pyautogui.press("delete", interval=.01)
-time.sleep(.5)
-pyautogui.press("tab", presses=11, interval=.01)
-pyautogui.press("enter", interval=0.01)
-# VKHL Arrivals: Save
-script_config.wait_report()
-pyautogui.click(600, 84, interval=0.01)
-time.sleep(.5)
-pyautogui.hotkey("ctrl", "s", interval=.01)
-time.sleep(1)
-pyautogui.hotkey("ctrl", "f", interval=.01)
-script_config.tab_reserve(2)
-time.sleep(0.1)
-pyautogui.press("enter", interval=0.01)
-pyautogui.write(script_config.daily_report_path)
-pyautogui.press("enter", interval=0.01)
-time.sleep(.5)
-pyautogui.hotkey("ctrl", "f", interval=.01)
-pyautogui.press("tab", presses=5, interval=.01)
+# # VKHL Arrivals
+# pyautogui.write("Arrivals: Detailed FO", interval=.01)
+# pyautogui.press("enter", interval=.01)
+# script_config.search_enter_step1()
+# script_config.search_enter_step2()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=8, interval=.01)
+# pyautogui.press("down", presses=2, interval=.01)
+# script_config.search_enter_step3()
+# pyautogui.press("tab", presses=12, interval=.01)
+# pyautogui.press("enter", interval=.01)
+# # VKHL Arrivals: Config
+# script_config.config_report()
+# time.sleep(1)
+# pyautogui.hotkey("ctrl", "a", interval=.01)
+# pyautogui.write(script_config.td_dd_mm, interval=.01)
+# pyautogui.press("tab", interval=.01)
+# time.sleep(1)
+# pyautogui.write(script_config.td_dd_mm, interval=.01)
+# pyautogui.press("tab", presses=4, interval=.01)
+# time.sleep(.75)
+# pyautogui.write(script_config.Room_Type, interval=.01)
+# pyautogui.press("tab", presses=12, interval=.01)
+# pyautogui.press("delete", interval=.01)
+# time.sleep(.5)
+# pyautogui.press("tab", presses=8, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # VKHL Arrivals: Save
+# script_config.wait_report()
+# pyautogui.click(600, 84, interval=0.01)
+# time.sleep(.5)
+# pyautogui.hotkey("ctrl", "s", interval=.01)
+# time.sleep(1)
+# pyautogui.hotkey("ctrl", "f", interval=.01)
+# script_config.tab_reserve(2)
+# time.sleep(0.1)
+# pyautogui.press("enter", interval=0.01)
+# pyautogui.write(script_config.daily_report_path)
+# pyautogui.press("enter", interval=0.01)
+# time.sleep(.5)
+# pyautogui.hotkey("ctrl", "f", interval=.01)
+# pyautogui.press("tab", presses=5, interval=.01)
 
-VKHL_Arrivals = "4. VKHL Arrivals"
+# VKHL_Arrivals = "4. VKHL Arrivals"
 
-pyautogui.write(VKHL_Arrivals, interval=.01)
-pyautogui.press("tab", presses=3, interval=.01)
-pyautogui.press("enter", interval=0.01)
-time.sleep(0.5)
-pyautogui.hotkey("ctrl", "w")
-time.sleep(0.5)
+# pyautogui.write(VKHL_Arrivals, interval=.01)
+# pyautogui.press("tab", presses=3, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# time.sleep(0.5)
+# pyautogui.hotkey("ctrl", "w")
+# time.sleep(0.5)
 
-# VKHL Guests INH (Comp)
-script_config.tab_reserve(54)
-# VKHL Guests INH (Comp): Config
-pyautogui.press("right", interval=0.01)
-pyautogui.press("tab", presses=4, interval=0.01)
-time.sleep(1)
-pyautogui.write(script_config.Room_Class, interval=.01)
-pyautogui.press("tab", interval=0.01)
-pyautogui.press("delete", interval=0.01)
-time.sleep(.5)
-pyautogui.press("tab", presses=13, interval=0.01)
-pyautogui.press("space", interval=0.01) # Zero Rates Only
-time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=0.01)
-pyautogui.press("space", interval=0.01) # Departures
-time.sleep(.5)
-pyautogui.press("tab", presses=33, interval=0.01)
-pyautogui.press("enter", interval=0.01)
-# VKHL Guests INH (Comp): Save
-script_config.wait_report()
-pyautogui.click(600, 84, interval=0.01)
-time.sleep(.5)
-pyautogui.hotkey("ctrl", "s", interval=.01)
-time.sleep(1)
-pyautogui.hotkey("ctrl", "f", interval=.01)
-script_config.tab_reserve(2)
-time.sleep(0.1)
-pyautogui.press("enter", interval=0.01)
-pyautogui.write(script_config.daily_report_path)
-pyautogui.press("enter", interval=0.01)
-time.sleep(.5)
-pyautogui.press("tab", presses=6, interval=.01)
+# # VKHL Guests INH (Comp)
+# pyautogui.click(749, 316, interval=.01)
 
-VKHL_Guests_INH_Comp = "6. VKHL Guests INH (Comp)"
+# while True:
+#      if pyautogui.pixelMatchesColor(749, 316, (22, 21, 19), tolerance=10):
+#           break
 
-pyautogui.write(VKHL_Guests_INH_Comp, interval=.01)
-pyautogui.press("tab", presses=3, interval=.01)
-pyautogui.press("enter", interval=0.01)
-time.sleep(0.5)
-pyautogui.hotkey("ctrl", "w")
-time.sleep(0.5)
-script_config.tab_reserve(3)
-pyautogui.press("enter", interval=0.01)
-script_config.search_reports()
-time.sleep(1)
-pyautogui.press("tab", interval=0.01)
+# time.sleep(.5)
 
-# VKHL Departures
-pyautogui.write("departure_all", interval=.01)
-pyautogui.press("enter", interval=0.01)
-script_config.search_enter_step1()
-script_config.search_enter_step2()
-time.sleep(.5)
-pyautogui.press("tab", presses=9, interval=0.01)
-pyautogui.press("down", presses=2, interval=0.01)
-script_config.search_enter_step3()
-pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=13, interval=0.01)
-pyautogui.press("enter", interval=0.01)
-# VKHL Departures: Config
-script_config.config_report()
-time.sleep(1)
-pyautogui.press("tab", presses=3, interval=0.01)
-time.sleep(.75)
-pyautogui.write(script_config.Room_Type, interval=.01)
-pyautogui.press("tab", presses=10, interval=.01)
-pyautogui.press("space", interval=.01) # Pseudo Rooms
-time.sleep(.5)
-pyautogui.press("tab", presses=12, interval=.01)
-pyautogui.press("space", interval=.01) # Membership Type
-time.sleep(.75)
-pyautogui.press("tab", interval=.01)
-pyautogui.press("space", interval=.01) # Membership Level
-time.sleep(.75)
-pyautogui.press("tab", presses=13, interval=.01)
-pyautogui.press("enter", interval=0.01)
-# VKHL Departures: Save
-script_config.wait_report()
-pyautogui.click(600, 84, interval=0.01)
-time.sleep(.5)
-pyautogui.hotkey("ctrl", "s", interval=.01)
-time.sleep(1)
-pyautogui.hotkey("ctrl", "f", interval=.01)
-script_config.tab_reserve(2)
-time.sleep(0.1)
-pyautogui.press("enter", interval=0.01)
-pyautogui.write(script_config.daily_report_path)
-pyautogui.press("enter", interval=0.01)
-time.sleep(.5)
-pyautogui.press("tab", presses=6, interval=.01)
+# while True:
+#      if pyautogui.pixelMatchesColor(749, 316, (22, 21, 19), tolerance=10):
+#           break
+     
+# # VKHL Guests INH (Comp): Config
+# pyautogui.press("tab", presses=5, interval=0.01)
+# time.sleep(1)
+# pyautogui.write(script_config.Room_Class, interval=.01)
+# pyautogui.press("tab", interval=0.01)
+# pyautogui.press("delete", interval=0.01)
+# time.sleep(.5)
+# pyautogui.click(279, 569, interval=.01) # Zero Rates Only
 
-VKHL_Departures = "5. VKHL Departures"
+# while True:
+#      if pyautogui.pixelMatchesColor(279, 569, (22, 21, 19), tolerance=10):
+#           break
 
-pyautogui.write(VKHL_Departures, interval=.01)
-pyautogui.press("tab", presses=3, interval=.01)
-pyautogui.press("enter", interval=0.01)
-time.sleep(0.5)
-pyautogui.hotkey("ctrl", "w")
-time.sleep(0.5)
-script_config.tab_reserve(3)
-pyautogui.press("enter", interval=0.01)
-script_config.search_reports()
-time.sleep(1)
-pyautogui.press("tab", interval=0.01)
+# time.sleep(.5)
 
-# VKHL Guests INH
-pyautogui.write("gibyroom", interval=.01)
-pyautogui.press("enter", interval=0.01)
-script_config.search_enter_step1()
-script_config.search_enter_step2()
-time.sleep(.5)
-pyautogui.press("tab", presses=9, interval=0.01)
-pyautogui.press("down", presses=2, interval=0.01)
-script_config.search_enter_step3()
-pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=13, interval=0.01)
-pyautogui.press("enter", interval=0.01)
-# VKHL Guests INH: Config
-script_config.config_report()
-time.sleep(1)
-pyautogui.press("tab", interval=.01)
-time.sleep(.75)
-pyautogui.write(script_config.Room_Type, interval=.01)
-pyautogui.press("tab", presses=14, interval=.01)
-pyautogui.press("space", interval=.01) # Include Internal Notes
-time.sleep(.5)
-pyautogui.press("tab", interval=.01)
-pyautogui.write("Resv. - GEN", interval=.01)
-time.sleep(.5)
-pyautogui.press("tab", presses=8, interval=.01)
-pyautogui.press("enter", interval=0.01)
-# VKHL Guests INH: Save
-script_config.wait_report()
-pyautogui.click(600, 84, interval=0.01)
-time.sleep(.5)
-pyautogui.hotkey("ctrl", "s", interval=.01)
-time.sleep(1)
-pyautogui.hotkey("ctrl", "f", interval=.01)
-script_config.tab_reserve(2)
-time.sleep(0.1)
-pyautogui.press("enter", interval=0.01)
-pyautogui.write(script_config.daily_report_path)
-pyautogui.press("enter", interval=0.01)
-time.sleep(.5)
-pyautogui.press("tab", presses=6, interval=.01)
+# while True:
+#      if pyautogui.pixelMatchesColor(279, 569, (22, 21, 19), tolerance=10):
+#           break
+     
+# pyautogui.click(745, 568, interval=.01) # Departures
 
-VKHL_Guests_INH = "6. VKHL Guests INH"
+# while True:
+#      if pyautogui.pixelMatchesColor(745, 568, (22, 21, 19), tolerance=10):
+#           break
 
-pyautogui.write(VKHL_Guests_INH, interval=.01)
-pyautogui.press("tab", presses=3, interval=.01)
-pyautogui.press("enter", interval=0.01)
-time.sleep(0.5)
-pyautogui.hotkey("ctrl", "w")
-time.sleep(0.5)
+# time.sleep(.5)
 
-# VKHL VIP Guests INH
-script_config.tab_reserve(19)
-# VKHL VIP Guests INH: Config
-pyautogui.press("space", interval=.01) # VIP Only
-time.sleep(1)
-pyautogui.press("tab", presses=20, interval=.01)
-pyautogui.press("enter", interval=0.01)
-# VKHL VIP Guests INH: Save
-script_config.wait_report()
-pyautogui.click(600, 84, interval=0.01)
-time.sleep(.5)
-pyautogui.hotkey("ctrl", "s", interval=.01)
-time.sleep(1)
-pyautogui.hotkey("ctrl", "f", interval=.01)
-script_config.tab_reserve(2)
-time.sleep(0.1)
-pyautogui.press("enter", interval=0.01)
-pyautogui.write(script_config.daily_report_path)
-pyautogui.press("enter", interval=0.01)
-time.sleep(.5)
-pyautogui.press("tab", presses=6, interval=.01)
+# while True:
+#      if pyautogui.pixelMatchesColor(745, 568, (22, 21, 19), tolerance=10):
+#           break
+     
+# pyautogui.press("tab", presses=11, interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# # VKHL Guests INH (Comp): Save
+# script_config.wait_report()
+# pyautogui.click(600, 84, interval=0.01)
+# time.sleep(.5)
+# pyautogui.hotkey("ctrl", "s", interval=.01)
+# time.sleep(1)
+# pyautogui.hotkey("ctrl", "f", interval=.01)
+# script_config.tab_reserve(2)
+# time.sleep(0.1)
+# pyautogui.press("enter", interval=0.01)
+# pyautogui.write(script_config.daily_report_path)
+# pyautogui.press("enter", interval=0.01)
+# time.sleep(.5)
+# pyautogui.press("tab", presses=6, interval=.01)
 
-VKHL_VIP_Guests_INH = "3. VKHL VIP Guests INH"
+# VKHL_Guests_INH_Comp = "6. VKHL Guests INH (Comp)"
 
-pyautogui.write(VKHL_VIP_Guests_INH, interval=.01)
-pyautogui.press("tab", presses=3, interval=.01)
-pyautogui.press("enter", interval=0.01)
-time.sleep(0.5)
-pyautogui.hotkey("ctrl", "w")
-time.sleep(0.5)
-script_config.tab_reserve(3)
-pyautogui.press("enter", interval=0.01)
-script_config.search_reports()
-time.sleep(1)
-pyautogui.press("tab", interval=0.01)
+# pyautogui.write(VKHL_Guests_INH_Comp, interval=.01)
+# pyautogui.press("tab", presses=3, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# time.sleep(0.5)
+# pyautogui.hotkey("ctrl", "w")
+# time.sleep(0.5)
+# script_config.tab_reserve(3)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_reports()
+# time.sleep(1)
+# pyautogui.press("tab", interval=0.01)
+
+# # VKHL Departures
+# pyautogui.write("departure_all", interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_enter_step1()
+# script_config.search_enter_step2()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=8, interval=0.01)
+# pyautogui.press("down", presses=2, interval=0.01)
+# script_config.search_enter_step3()
+# pyautogui.press("tab", presses=12, interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# # VKHL Departures: Config
+# script_config.config_report()
+# time.sleep(1)
+# pyautogui.press("tab", presses=3, interval=0.01)
+# time.sleep(.75)
+# pyautogui.write(script_config.Room_Type, interval=.01)
+# pyautogui.press("tab", interval=0.01)
+# time.sleep(.5)
+# pyautogui.click(36, 499, interval=.01) # Pseudo Rooms
+
+# while True:
+#      if pyautogui.pixelMatchesColor(36, 499, (22, 21, 19), tolerance=10):
+#           break
+
+# time.sleep(.5)
+
+# while True:
+#      if pyautogui.pixelMatchesColor(36, 499, (22, 21, 19), tolerance=10):
+#           break
+
+# pyautogui.click(35, 632, interval=.01) # Membership Type
+
+# while True:
+#      if pyautogui.pixelMatchesColor(35, 632, (22, 21, 19), tolerance=10):
+#           break
+
+# time.sleep(.5)
+
+# while True:
+#      if pyautogui.pixelMatchesColor(35, 632, (22, 21, 19), tolerance=10):
+#           break
+
+# while True:
+#      if pyautogui.pixelMatchesColor(280, 631, (255, 255, 255), tolerance=10):
+#           break
+
+# pyautogui.click(280, 631, interval=.01) # Membership Level
+
+# while True:
+#      if pyautogui.pixelMatchesColor(280, 631, (22, 21, 19), tolerance=10):
+#           break
+
+# time.sleep(.5)
+
+# while True:
+#      if pyautogui.pixelMatchesColor(280, 631, (22, 21, 19), tolerance=10):
+#           break
+
+# while True:
+#      if pyautogui.pixelMatchesColor(622, 638, (27, 26, 24), tolerance=10):
+#           break
+     
+# pyautogui.press("tab", presses=23, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# time.sleep(100)
+# # VKHL Departures: Save
+# script_config.wait_report()
+# pyautogui.click(600, 84, interval=0.01)
+# time.sleep(.5)
+# pyautogui.hotkey("ctrl", "s", interval=.01)
+# time.sleep(1)
+# pyautogui.hotkey("ctrl", "f", interval=.01)
+# script_config.tab_reserve(2)
+# time.sleep(0.1)
+# pyautogui.press("enter", interval=0.01)
+# pyautogui.write(script_config.daily_report_path)
+# pyautogui.press("enter", interval=0.01)
+# time.sleep(.5)
+# pyautogui.press("tab", presses=6, interval=.01)
+
+# VKHL_Departures = "5. VKHL Departures"
+
+# pyautogui.write(VKHL_Departures, interval=.01)
+# pyautogui.press("tab", presses=3, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# time.sleep(0.5)
+# pyautogui.hotkey("ctrl", "w")
+# time.sleep(0.5)
+# script_config.tab_reserve(3)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_reports()
+# time.sleep(1)
+# pyautogui.press("tab", interval=0.01)
+
+# # VKHL Guests INH
+# pyautogui.write("gibyroom", interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_enter_step1()
+# script_config.search_enter_step2()
+# time.sleep(.5)
+# pyautogui.press("tab", presses=8, interval=0.01)
+# pyautogui.press("down", presses=2, interval=0.01)
+# script_config.search_enter_step3()
+# pyautogui.press("tab", presses=12, interval=0.01)
+# pyautogui.press("enter", interval=0.01)
+# # VKHL Guests INH: Config
+# script_config.config_report()
+# time.sleep(1)
+# pyautogui.press("tab", interval=.01)
+# time.sleep(.75)
+# pyautogui.write(script_config.Room_Type, interval=.01)
+# pyautogui.press("tab", interval=.01)
+# time.sleep(.5)
+# pyautogui.click(279, 561, interval=.01) # Include Internal Notes
+
+# while True:
+#      if pyautogui.pixelMatchesColor(279, 561, (22, 21, 19), tolerance=10):
+#           break
+
+# time.sleep(.5)
+
+# while True:
+#      if pyautogui.pixelMatchesColor(279, 561, (22, 21, 19), tolerance=10):
+#           break
+     
+# pyautogui.press("tab", interval=.01)
+# pyautogui.write("Resv. - GEN", interval=.01)
+# time.sleep(.5)
+# pyautogui.press("tab", presses=8, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # VKHL Guests INH: Save
+# script_config.wait_report()
+# pyautogui.click(600, 84, interval=0.01)
+# time.sleep(.5)
+# pyautogui.hotkey("ctrl", "s", interval=.01)
+# time.sleep(1)
+# pyautogui.hotkey("ctrl", "f", interval=.01)
+# script_config.tab_reserve(2)
+# time.sleep(0.1)
+# pyautogui.press("enter", interval=0.01)
+# pyautogui.write(script_config.daily_report_path)
+# pyautogui.press("enter", interval=0.01)
+# time.sleep(.5)
+# pyautogui.press("tab", presses=6, interval=.01)
+
+# VKHL_Guests_INH = "6. VKHL Guests INH"
+
+# pyautogui.write(VKHL_Guests_INH, interval=.01)
+# pyautogui.press("tab", presses=3, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# time.sleep(0.5)
+# pyautogui.hotkey("ctrl", "w")
+# time.sleep(0.5)
+
+# # VKHL VIP Guests INH
+# # VKHL VIP Guests INH: Config
+# pyautogui.click(35, 373, interval=.01) # VIP Only
+
+# while True:
+#      if pyautogui.pixelMatchesColor(35, 373, (22, 21, 19), tolerance=10):
+#           break
+
+# time.sleep(.5)
+
+# while True:
+#      if pyautogui.pixelMatchesColor(35, 373, (22, 21, 19), tolerance=10):
+#           break
+
+# while True:
+#      if pyautogui.pixelMatchesColor(388, 380, (32, 31, 29), tolerance=10):
+#           break
+     
+# pyautogui.press("tab", presses=16, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# # VKHL VIP Guests INH: Save
+# script_config.wait_report()
+# pyautogui.click(600, 84, interval=0.01)
+# time.sleep(.5)
+# pyautogui.hotkey("ctrl", "s", interval=.01)
+# time.sleep(1)
+# pyautogui.hotkey("ctrl", "f", interval=.01)
+# script_config.tab_reserve(2)
+# time.sleep(0.1)
+# pyautogui.press("enter", interval=0.01)
+# pyautogui.write(script_config.daily_report_path)
+# pyautogui.press("enter", interval=0.01)
+# time.sleep(.5)
+# pyautogui.press("tab", presses=6, interval=.01)
+
+# VKHL_VIP_Guests_INH = "3. VKHL VIP Guests INH"
+
+# pyautogui.write(VKHL_VIP_Guests_INH, interval=.01)
+# pyautogui.press("tab", presses=3, interval=.01)
+# pyautogui.press("enter", interval=0.01)
+# time.sleep(0.5)
+# pyautogui.hotkey("ctrl", "w")
+# time.sleep(0.5)
+# script_config.tab_reserve(3)
+# pyautogui.press("enter", interval=0.01)
+# script_config.search_reports()
+# time.sleep(1)
+# pyautogui.press("tab", interval=0.01)
 
 # History and Forecast
 pyautogui.write("History and Forecast FO", interval=.01)
