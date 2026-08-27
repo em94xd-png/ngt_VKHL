@@ -201,7 +201,7 @@ departure = os.path.join(script_config.path_.__add__(r"\Downloads"), departure_f
 # history_forecast_url = pyperclip.paste()
 
 # history_forecast_file = f"history_forecast_{script_config.download_id(history_forecast_url)}.XML"
-history_forecast_file = "history_forecast_149158893.XML"
+history_forecast_file = "history_forecast_149161229.XML"
 
 # pyautogui.hotkey("ctrl", "j", interval=.01)
 # time.sleep(.25)
@@ -237,7 +237,7 @@ history_forecast = os.path.join(script_config.path_.__add__(r"\Downloads"), hist
 # history_forecast_AVC_url = pyperclip.paste()
 
 # history_forecast_AVC_file = f"history_forecast_{script_config.download_id(history_forecast_AVC_url)}.XML"
-history_forecast_AVC_file = "history_forecast_149158924.XML"
+history_forecast_AVC_file = "history_forecast_149160630.XML"
 
 # pyautogui.hotkey("ctrl", "j", interval=.01)
 # time.sleep(.25)

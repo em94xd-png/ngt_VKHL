@@ -128,23 +128,37 @@ script_config.config_report()
 time.sleep(1)
 pyautogui.hotkey("ctrl", "a", interval=.01)
 pyautogui.write(script_config.ytd_dd_mm, interval=.01)
-pyautogui.press("tab", presses=7, interval=.01)
-pyautogui.press("space", interval=.01) # Pseudo Rooms
+pyautogui.press("tab", interval=.01)
+time.sleep(.5)
+pyautogui.click(35, 444, interval=.01) # Pseudo Rooms
 
 while True:
-     if pyautogui.pixelMatchesColor(36, 429, (6, 108, 122), tolerance=10):
+     if pyautogui.pixelMatchesColor(35, 444, (22, 21, 19), tolerance=10):
           break
 
-time.sleep(1)
+time.sleep(.5)
 
 while True:
-     if pyautogui.pixelMatchesColor(36, 429, (6, 108, 122), tolerance=10):
+     if pyautogui.pixelMatchesColor(35, 444, (22, 21, 19), tolerance=10):
           break
 
-pyautogui.press("tab", presses=10, interval=.01)
-pyautogui.press("space", interval=.01) # Notes
-time.sleep(1)
-pyautogui.press("tab", presses=9, interval=.01)
+pyautogui.click(35, 521, interval=.01) # Notes
+
+while True:
+     if pyautogui.pixelMatchesColor(35, 521, (22, 21, 19), tolerance=10):
+          break
+
+time.sleep(.5)
+
+while True:
+     if pyautogui.pixelMatchesColor(35, 521, (22, 21, 19), tolerance=10):
+          break
+
+while True:
+     if pyautogui.pixelMatchesColor(622, 529, (99, 98, 97), tolerance=10):
+          break
+
+pyautogui.press("tab", presses=14, interval=.01)
 pyautogui.press("enter", interval=.01)
 # Guests in house Pseudo room Rate Check: Save
 script_config.wait_report()
@@ -181,21 +195,20 @@ pyautogui.press("enter", interval=0.01)
 script_config.search_enter_step1()
 script_config.search_enter_step2()
 time.sleep(.5)
-pyautogui.press("tab", presses=9, interval=0.01)
+pyautogui.press("tab", presses=8, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
 script_config.search_enter_step3()
-pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=13, interval=0.01)
+pyautogui.press("tab", presses=12, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Expected Arrival: Config
 script_config.config_report()
 time.sleep(1)
 pyautogui.hotkey("ctrl", "a", interval=.01)
 pyautogui.write(script_config.ytd_dd_mm, interval=.01)
-pyautogui.press("tab", presses=2, interval=0.01)
+pyautogui.press("tab", interval=0.01)
 time.sleep(1)
 pyautogui.write(script_config.ytd_dd_mm, interval=.01)
-pyautogui.press("tab", presses=53, interval=0.01)
+pyautogui.press("tab", presses=24, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Expected Arrival: Save
 script_config.wait_report()
@@ -232,16 +245,16 @@ pyautogui.press("enter", interval=0.01)
 script_config.search_enter_step1()
 script_config.search_enter_step2()
 time.sleep(.5)
-pyautogui.press("tab", presses=9, interval=0.01)
+pyautogui.press("tab", presses=8, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
 script_config.search_enter_step3()
-pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=13, interval=0.01)
+pyautogui.press("tab", presses=12, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Out of Service by Reason: Config
 script_config.config_report()
 time.sleep(1)
 pyautogui.press("tab", presses=2, interval=0.01)
+time.sleep(1)
 pyautogui.write(
     "HRA,HRB,HRC,HRD,HSA,HSB,HSC,HSD,HSE,HVA,HVB,HVC,BANQ,PSEU", interval=0.01
 )
@@ -320,21 +333,38 @@ pyautogui.press("enter", interval=0.01)
 script_config.search_enter_step1()
 script_config.search_enter_step2()
 time.sleep(.5)
-pyautogui.press("tab", presses=9, interval=0.01)
+pyautogui.press("tab", presses=8, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
 script_config.search_enter_step3()
-pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=13, interval=0.01)
+pyautogui.press("tab", presses=12, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Credit Limit: Config
 script_config.config_report()
 time.sleep(1)
-pyautogui.press("tab", presses=4, interval=0.01)
-pyautogui.press("space", interval=0.01) # Pseudo Rooms
+pyautogui.click(35, 409, interval=.01) # Pseudo Rooms
+
+while True:
+     if pyautogui.pixelMatchesColor(35, 409, (22, 21, 19), tolerance=10):
+          break
+
 time.sleep(.5)
-pyautogui.press("tab", presses=12, interval=0.01)
-pyautogui.press("space", interval=0.01) # Include Internal Notes
+
+while True:
+     if pyautogui.pixelMatchesColor(35, 409, (22, 21, 19), tolerance=10):
+          break
+
+pyautogui.click(1211, 465, interval=.01) # Include Internal Notes
+
+while True:
+     if pyautogui.pixelMatchesColor(1211, 465, (22, 21, 19), tolerance=10):
+          break
+
 time.sleep(.5)
+
+while True:
+     if pyautogui.pixelMatchesColor(1211, 465, (22, 21, 19), tolerance=10):
+          break
+
 pyautogui.press("tab", interval=0.01)
 pyautogui.write("Resv. - GEN", interval=0.01)
 time.sleep(0.5)
@@ -375,11 +405,10 @@ pyautogui.press("enter", interval=0.01)
 script_config.search_enter_step1()
 script_config.search_enter_step2()
 time.sleep(.5)
-pyautogui.press("tab", presses=9, interval=0.01)
+pyautogui.press("tab", presses=8, interval=0.01)
 pyautogui.press("down", presses=2, interval=0.01)
 script_config.search_enter_step3()
-pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=13, interval=0.01)
+pyautogui.press("tab", presses=12, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Rebate and Correction Transactions: Config
 script_config.config_report()
@@ -389,10 +418,21 @@ pyautogui.write(script_config.ytd_dd_mm, interval=.01)
 pyautogui.press("tab", interval=0.01)
 time.sleep(1)
 pyautogui.write(script_config.ytd_dd_mm, interval=.01)
-pyautogui.press("tab", presses=5, interval=0.01)
-pyautogui.press("space", interval=0.01)
+pyautogui.press("tab", interval=0.01)
 time.sleep(.5)
-pyautogui.press("tab", presses=13, interval=0.01)
+pyautogui.click(35, 409, interval=.01)
+
+while True:
+     if pyautogui.pixelMatchesColor(35, 409, (22, 21, 19), tolerance=10):
+          break
+
+time.sleep(.5)
+
+while True:
+     if pyautogui.pixelMatchesColor(35, 409, (22, 21, 19), tolerance=10):
+          break
+
+pyautogui.press("tab", presses=10, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Rebate and Correction Transactions: Save
 script_config.wait_report()
