@@ -227,7 +227,6 @@ while True:
      
 pyautogui.press("tab", presses=23, interval=.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(100)
 # VKHL Departures: Save
 script_config.wait_report()
 pyautogui.click(600, 84, interval=0.01)
@@ -427,7 +426,6 @@ while True:
 
 pyautogui.press("tab", presses=11, interval=.01)
 pyautogui.press("enter", interval=0.01)
-time.sleep(100)
 # History and Forecast (AVC): Save
 script_config.wait_report()
 pyautogui.click(600, 84, interval=0.01)

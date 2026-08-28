@@ -8,85 +8,102 @@ import script_config
 
 pyautogui.FAILSAFE = True
 
-# if not os.path.exists(f"{script_config.path_share}"):
-#      sys.exit()
+if not os.path.exists(f"{script_config.path_share}"):
+     sys.exit()
 
-# # Open Opera
-# subprocess.run(["cmd", "/c", "start", "msedge", script_config.site_OPERA])
+# Open Opera
+subprocess.run(["cmd", "/c", "start", "msedge", script_config.site_OPERA])
 
-# if pygetwindow.getWindowsWithTitle("Opera Cloud"):
-#      pygetwindow.getWindowsWithTitle("Opera Cloud")[0].restore()
-#      pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
-# time.sleep(.5)
+if pygetwindow.getWindowsWithTitle("Opera Cloud"):
+     pygetwindow.getWindowsWithTitle("Opera Cloud")[0].restore()
+     pygetwindow.getWindowsWithTitle("Opera Cloud")[0].maximize()
+time.sleep(.5)
 
-# # In Opera
-# script_config.first_OPERA_open()
-# script_config.zoom_out(10)
-# script_config.zoom_in(3)
-# script_config.main_OPERA_menu()
+# In Opera
+script_config.first_OPERA_open()
+script_config.zoom_out(10)
+script_config.zoom_in(3)
+script_config.main_OPERA_menu()
 
-# # To report search
-# pyautogui.press("tab", presses=5, interval=0.01)
-# pyautogui.press("right", presses=6, interval=0.01)
-# pyautogui.press("down", interval=0.01)
-# pyautogui.press("enter", interval=0.01)
-# script_config.search_reports()
-# time.sleep(1)
-# pyautogui.press("tab", interval=0.01)
+# To report search
+pyautogui.press("tab", presses=5, interval=0.01)
+pyautogui.press("right", presses=6, interval=0.01)
+pyautogui.press("down", interval=0.01)
+pyautogui.press("enter", interval=0.01)
+script_config.search_reports()
+time.sleep(1)
+pyautogui.press("tab", interval=0.01)
 
-# # Immigration Report
-# pyautogui.write("immigration_report", interval=.01)
-# pyautogui.press("enter", interval=.01)
-# script_config.search_enter_step1()
-# script_config.search_enter_step2()
-# time.sleep(.5)
-# pyautogui.press("tab", presses=9, interval=.01)
-# pyautogui.press("down", presses=2, interval=.01)
-# script_config.search_enter_step3()
-# pyautogui.press("right", interval=.01)
-# pyautogui.press("tab", presses=13, interval=.01)
-# pyautogui.press("enter", interval=.01)
-# # Immigration Report: Config
-# script_config.config_report()
-# time.sleep(1)
-# pyautogui.hotkey("ctrl", "a", interval=.01)
-# pyautogui.write(script_config.ytd_dd_mm, interval=.01)
-# pyautogui.press("tab", interval=.01)
-# time.sleep(1)
-# pyautogui.write("ARRIVAL", interval=.01)
-# pyautogui.press("tab", presses=2, interval=.01)
-# pyautogui.press("space", interval=.01)
-# time.sleep(.5)
-# pyautogui.press("tab", presses=2, interval=.01)
-# pyautogui.press("enter", interval=.01)
-# # Immigration Report: Save
-# script_config.download_as()
-# time.sleep(.5)
-# pyautogui.press("tab", presses=2, interval=.01)
-# pyautogui.press("space", presses=2, interval=.01)
-# script_config.download_as_download_s()
-# pyautogui.press("tab", presses=2, interval=.01)
-# pyautogui.press("enter", interval=.01)
-# # Immigration Report: Download
-# script_config.download_page()
-# pyautogui.hotkey("ctrl", "j", interval=.01)
-# time.sleep(.25)
-# pyautogui.hotkey("ctrl", "l", interval=.01)
-# pyautogui.hotkey("ctrl", "c", interval=.01)
-# immigration_url = pyperclip.paste()
+# Immigration Report
+pyautogui.write("immigration_report", interval=.01)
+pyautogui.press("enter", interval=.01)
+script_config.search_enter_step1()
+script_config.search_enter_step2()
+time.sleep(.5)
+pyautogui.press("tab", presses=8, interval=.01)
+pyautogui.press("down", presses=2, interval=.01)
+script_config.search_enter_step3()
+pyautogui.press("tab", presses=12, interval=.01)
+pyautogui.press("enter", interval=.01)
+# Immigration Report: Config
+script_config.config_report()
+time.sleep(1)
+pyautogui.hotkey("ctrl", "a", interval=.01)
+pyautogui.write(script_config.ytd_dd_mm, interval=.01)
+pyautogui.press("tab", interval=.01)
+time.sleep(1)
+pyautogui.write("ARRIVAL", interval=.01)
+pyautogui.press("tab", interval=.01)
+time.sleep(.5)
+pyautogui.click(35, 375, interval=.01)
 
-# immigration_file = f"immigration_report_{script_config.download_id(immigration_url)}.XML"
-immigration_file = "immigration_report_149156949.XML"
+while True:
+     if pyautogui.pixelMatchesColor(35, 375, (22, 21, 19), tolerance=10):
+          break
 
-# pyautogui.hotkey("ctrl", "j", interval=.01)
-# time.sleep(.25)
-# pyautogui.press("tab", presses=6, interval=.01)
-# pyautogui.press("space", interval=.01)
+time.sleep(.5)
+
+while True:
+     if pyautogui.pixelMatchesColor(35, 375, (22, 21, 19), tolerance=10):
+          break
+
+pyautogui.press("tab", presses=2, interval=.01)
+pyautogui.press("space", interval=.01) # Download As...
+# Immigration Report: Save
+script_config.download_as()
+pyautogui.click(896, 596, interval=.01)
+
+while True:
+     if pyautogui.pixelMatchesColor(896, 596, (22, 21, 19), tolerance=10):
+          break
+
+time.sleep(.5)
+
+while True:
+     if pyautogui.pixelMatchesColor(896, 596, (22, 21, 19), tolerance=10):
+          break
+
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("space", interval=.01)
+# Immigration Report: Download
+script_config.download_page()
+pyautogui.hotkey("ctrl", "j", interval=.01)
+time.sleep(.25)
+pyautogui.hotkey("ctrl", "l", interval=.01)
+pyautogui.hotkey("ctrl", "c", interval=.01)
+immigration_url = pyperclip.paste()
+
+immigration_file = f"immigration_report_{script_config.download_id(immigration_url)}.XML"
+
+pyautogui.hotkey("ctrl", "j", interval=.01)
+time.sleep(.25)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
 
 immigration = os.path.join(script_config.path_.__add__(r"\Downloads"), immigration_file)
 
-# download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
-# win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
 
 os.makedirs(fr"{script_config.path_share}\OTH", exist_ok=True)
 

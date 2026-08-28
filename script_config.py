@@ -107,7 +107,7 @@ def tab_reserve(times):
 
 def download_as():
      while True:
-          if pyautogui.pixelMatchesColor(982, 514, (60,  66,  91), tolerance=10):
+          if pyautogui.pixelMatchesColor(985, 512, (60,  66,  91), tolerance=10):
                break
 
 def download_as_download():
