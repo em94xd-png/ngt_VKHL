@@ -1343,6 +1343,12 @@ for _ in root.findall(".//G_RESERVATION"):
         ws[f"D{arr_start}"] = f"{rm}\nY.A.L"
     if "Fly East".strip().lower() in str(ta).strip().lower():
         ws[f"D{arr_start}"] = f"{rm}\nFly East"
+    if "Klook Travel".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nKlook Travel"
+    if "Meier's".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nMeier's"
+    if "MG Group".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nMG Group"
 
     if vip is not None:
         ws[f"F{arr_start}"] = vip
@@ -1562,6 +1568,12 @@ for _ in root.findall(".//G_ROOM"):
         ws[f"D{dep_start}"] = f"{rm}\nY.A.L"
     if "Fly East".strip().lower() in str(ta).strip().lower():
         ws[f"D{dep_start}"] = f"{rm}\nFly East"
+    if "Klook Travel".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nKlook Travel"
+    if "Meier's".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nMeier's"
+    if "MG Group".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nMG Group"
 
     if vip is not None:
         ws[f"F{dep_start}"] = vip
