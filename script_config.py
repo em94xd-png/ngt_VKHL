@@ -129,15 +129,7 @@ def not_stay_excel():
     while True:
         if not pyautogui.pixelMatchesColor(1894, 56, (16, 124, 65), tolerance=10):
             break
-          
-def download_id(id):
-     parse_url = urlparse(id)
-     query_url = parse_qs(parse_url.query)
-     if "rep" in query_url:
-          rep_id = query_url["rep"][0]
-          split_id = rep_id.split("_")[1]
-          return split_id
-     
+
 def sw_date_format(ad, be, ad2):
      if ad and ad.strip() != "":
           try:

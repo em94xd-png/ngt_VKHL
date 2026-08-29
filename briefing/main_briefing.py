@@ -1,7 +1,7 @@
 from openpyxl import load_workbook
 from datetime import *
 from openpyxl.styles import PatternFill
-import time, os, xml.etree.ElementTree, sys, pyautogui, subprocess, pygetwindow, pyperclip, win32con, win32gui, json
+import time, os, xml.etree.ElementTree, sys, pyautogui, subprocess, pygetwindow, pyperclip, win32con, win32gui, json, re
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -82,21 +82,21 @@ pyautogui.press("space", interval=.01)
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
 time.sleep(.25)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.25)
 pyautogui.hotkey("ctrl", "l", interval=.01)
 pyautogui.hotkey("ctrl", "c", interval=.01)
 arrival_url = pyperclip.paste()
-
-arrival_file = f"res_detail_{script_config.download_id(arrival_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-arrival = os.path.join(script_config.path_.__add__(r"\Downloads"), arrival_file)
+arrival_file = f"res_detail_{re.search(r"(\d+)\.[xX][mM][lL]", arrival_url).group(1)}.XML"
+pyautogui.hotkey("ctrl", "w", interval=.01)
 
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+arrival = os.path.join(script_config.path_.__add__(r"\Downloads"), arrival_file)
 
 script_config.tab_reserve(1)
 pyautogui.press("enter", interval=0.01)
@@ -189,21 +189,21 @@ pyautogui.press("space", interval=.01)
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
 time.sleep(.25)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.25)
 pyautogui.hotkey("ctrl", "l", interval=.01)
 pyautogui.hotkey("ctrl", "c", interval=.01)
 departure_url = pyperclip.paste()
-
-departure_file = f"departure_all_{script_config.download_id(departure_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-departure = os.path.join(script_config.path_.__add__(r"\Downloads"), departure_file)
+departure_file = f"departure_all_{re.search(r"(\d+)\.[xX][mM][lL]", departure_url).group(1)}.XML"
+pyautogui.hotkey("ctrl", "w", interval=.01)
 
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+departure = os.path.join(script_config.path_.__add__(r"\Downloads"), departure_file)
 
 script_config.tab_reserve(1)
 pyautogui.press("enter", interval=0.01)
@@ -252,21 +252,21 @@ pyautogui.press("space", interval=.01)
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
 time.sleep(.25)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.25)
 pyautogui.hotkey("ctrl", "l", interval=.01)
 pyautogui.hotkey("ctrl", "c", interval=.01)
 history_forecast_url = pyperclip.paste()
-
-history_forecast_file = f"history_forecast_{script_config.download_id(history_forecast_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-history_forecast = os.path.join(script_config.path_.__add__(r"\Downloads"), history_forecast_file)
+history_forecast_file = f"history_forecast_{re.search(r"(\d+)\.[xX][mM][lL]", history_forecast_url).group(1)}.XML"
+pyautogui.hotkey("ctrl", "w", interval=.01)
 
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+history_forecast = os.path.join(script_config.path_.__add__(r"\Downloads"), history_forecast_file)
 
 # History and Forecast (AVC)
 # History and Forecast (AVC): Config
@@ -305,21 +305,21 @@ pyautogui.press("space", interval=.01)
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
 time.sleep(.25)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.25)
 pyautogui.hotkey("ctrl", "l", interval=.01)
 pyautogui.hotkey("ctrl", "c", interval=.01)
 history_forecast_AVC_url = pyperclip.paste()
-
-history_forecast_AVC_file = f"history_forecast_{script_config.download_id(history_forecast_AVC_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-history_forecast_AVC = os.path.join(script_config.path_.__add__(r"\Downloads"), history_forecast_AVC_file)
+history_forecast_AVC_file = f"history_forecast_{re.search(r"(\d+)\.[xX][mM][lL]", history_forecast_AVC_url).group(1)}.XML"
+pyautogui.hotkey("ctrl", "w", interval=.01)
 
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+history_forecast_AVC = os.path.join(script_config.path_.__add__(r"\Downloads"), history_forecast_AVC_file)
 
 script_config.tab_reserve(1)
 pyautogui.press("enter", interval=0.01)
@@ -368,21 +368,21 @@ pyautogui.press("space", interval=.01)
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
 time.sleep(.25)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.25)
 pyautogui.hotkey("ctrl", "l", interval=.01)
 pyautogui.hotkey("ctrl", "c", interval=.01)
 resfutureoccupancy_url = pyperclip.paste()
-
-resfutureoccupancy_file = f"resfutureoccupancy_{script_config.download_id(resfutureoccupancy_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-resfutureoccupancy = os.path.join(script_config.path_.__add__(r"\Downloads"), resfutureoccupancy_file)
+resfutureoccupancy_file = f"resfutureoccupancy_{re.search(r"(\d+)\.[xX][mM][lL]", resfutureoccupancy_url).group(1)}.XML"
+pyautogui.hotkey("ctrl", "w", interval=.01)
 
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+resfutureoccupancy = os.path.join(script_config.path_.__add__(r"\Downloads"), resfutureoccupancy_file)
 
 script_config.tab_reserve(1)
 pyautogui.press("enter", interval=0.01)
@@ -434,21 +434,21 @@ pyautogui.press("space", interval=.01)
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
 time.sleep(.25)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.25)
 pyautogui.hotkey("ctrl", "l", interval=.01)
 pyautogui.hotkey("ctrl", "c", interval=.01)
 room_upgrade_url = pyperclip.paste()
-
-room_upgrade_file = f"finjrnlbytrans_{script_config.download_id(room_upgrade_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-room_upgrade = os.path.join(script_config.path_.__add__(r"\Downloads"), room_upgrade_file)
+room_upgrade_file = f"finjrnlbytrans_{re.search(r"(\d+)\.[xX][mM][lL]", room_upgrade_url).group(1)}.XML"
+pyautogui.hotkey("ctrl", "w", interval=.01)
 
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+room_upgrade = os.path.join(script_config.path_.__add__(r"\Downloads"), room_upgrade_file)
 
 # Late Checkout: Config
 script_config.tab_reserve(9)
@@ -476,21 +476,21 @@ pyautogui.press("space", interval=.01)
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
 time.sleep(.25)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.25)
 pyautogui.hotkey("ctrl", "l", interval=.01)
 pyautogui.hotkey("ctrl", "c", interval=.01)
 late_checkout_url = pyperclip.paste()
-
-late_checkout_file = f"finjrnlbytrans_{script_config.download_id(late_checkout_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-late_checkout = os.path.join(script_config.path_.__add__(r"\Downloads"), late_checkout_file)
+late_checkout_file = f"finjrnlbytrans_{re.search(r"(\d+)\.[xX][mM][lL]", late_checkout_url).group(1)}.XML"
+pyautogui.hotkey("ctrl", "w", interval=.01)
 
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+late_checkout = os.path.join(script_config.path_.__add__(r"\Downloads"), late_checkout_file)
 
 # Tour Commission: Config
 script_config.tab_reserve(9)
@@ -518,21 +518,21 @@ pyautogui.press("space", interval=.01)
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
 time.sleep(.25)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.25)
 pyautogui.hotkey("ctrl", "l", interval=.01)
 pyautogui.hotkey("ctrl", "c", interval=.01)
 tour_commission_url = pyperclip.paste()
-
-tour_commission_file = f"finjrnlbytrans_{script_config.download_id(tour_commission_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-tour_commission = os.path.join(script_config.path_.__add__(r"\Downloads"), tour_commission_file)
+tour_commission_file = f"finjrnlbytrans_{re.search(r"(\d+)\.[xX][mM][lL]", tour_commission_url).group(1)}.XML"
+pyautogui.hotkey("ctrl", "w", interval=.01)
 
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+tour_commission = os.path.join(script_config.path_.__add__(r"\Downloads"), tour_commission_file)
 
 # Gift Shop: Config
 script_config.tab_reserve(9)
@@ -560,21 +560,21 @@ pyautogui.press("space", interval=.01)
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
 time.sleep(.25)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.25)
 pyautogui.hotkey("ctrl", "l", interval=.01)
 pyautogui.hotkey("ctrl", "c", interval=.01)
 gift_shop_url = pyperclip.paste()
-
-gift_shop_file = f"finjrnlbytrans_{script_config.download_id(gift_shop_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-gift_shop = os.path.join(script_config.path_.__add__(r"\Downloads"), gift_shop_file)
+gift_shop_file = f"finjrnlbytrans_{re.search(r"(\d+)\.[xX][mM][lL]", gift_shop_url).group(1)}.XML"
+pyautogui.hotkey("ctrl", "w", interval=.01)
 
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+gift_shop = os.path.join(script_config.path_.__add__(r"\Downloads"), gift_shop_file)
 
 # Room Upgrade MTD: Config
 script_config.tab_reserve(14)
@@ -608,21 +608,21 @@ pyautogui.press("space", interval=.01)
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
 time.sleep(.25)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.25)
 pyautogui.hotkey("ctrl", "l", interval=.01)
 pyautogui.hotkey("ctrl", "c", interval=.01)
 room_upgrade_mtd_url = pyperclip.paste()
-
-room_upgrade_mtd_file = f"finjrnlbytrans_{script_config.download_id(room_upgrade_mtd_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-room_upgrade_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), room_upgrade_mtd_file)
+room_upgrade_mtd_file = f"finjrnlbytrans_{re.search(r"(\d+)\.[xX][mM][lL]", room_upgrade_mtd_url).group(1)}.XML"
+pyautogui.hotkey("ctrl", "w", interval=.01)
 
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+room_upgrade_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), room_upgrade_mtd_file)
 
 # Late Checkout MTD: Config
 script_config.tab_reserve(9)
@@ -650,21 +650,21 @@ pyautogui.press("space", interval=.01)
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
 time.sleep(.25)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.25)
 pyautogui.hotkey("ctrl", "l", interval=.01)
 pyautogui.hotkey("ctrl", "c", interval=.01)
 late_checkout_mtd_url = pyperclip.paste()
-
-late_checkout_mtd_file = f"finjrnlbytrans_{script_config.download_id(late_checkout_mtd_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-late_checkout_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), late_checkout_mtd_file)
+late_checkout_mtd_file = f"finjrnlbytrans_{re.search(r"(\d+)\.[xX][mM][lL]", late_checkout_mtd_url).group(1)}.XML"
+pyautogui.hotkey("ctrl", "w", interval=.01)
 
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+late_checkout_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), late_checkout_mtd_file)
 
 # Tour Commission MTD: Config
 script_config.tab_reserve(9)
@@ -692,21 +692,21 @@ pyautogui.press("space", interval=.01)
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
 time.sleep(.25)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.25)
 pyautogui.hotkey("ctrl", "l", interval=.01)
 pyautogui.hotkey("ctrl", "c", interval=.01)
 tour_commission_mtd_url = pyperclip.paste()
-
-tour_commission_mtd_file = f"finjrnlbytrans_{script_config.download_id(tour_commission_mtd_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-tour_commission_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), tour_commission_mtd_file)
+tour_commission_mtd_file = f"finjrnlbytrans_{re.search(r"(\d+)\.[xX][mM][lL]", tour_commission_mtd_url).group(1)}.XML"
+pyautogui.hotkey("ctrl", "w", interval=.01)
 
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+tour_commission_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), tour_commission_mtd_file)
 
 # Gift Shop MTD: Config
 script_config.tab_reserve(9)
@@ -734,21 +734,21 @@ pyautogui.press("space", interval=.01)
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
 time.sleep(.25)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.25)
 pyautogui.hotkey("ctrl", "l", interval=.01)
 pyautogui.hotkey("ctrl", "c", interval=.01)
 gift_shop_mtd_url = pyperclip.paste()
-
-gift_shop_mtd_file = f"finjrnlbytrans_{script_config.download_id(gift_shop_mtd_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-gift_shop_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), gift_shop_mtd_file)
+gift_shop_mtd_file = f"finjrnlbytrans_{re.search(r"(\d+)\.[xX][mM][lL]", gift_shop_mtd_url).group(1)}.XML"
+pyautogui.hotkey("ctrl", "w", interval=.01)
 
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+gift_shop_mtd = os.path.join(script_config.path_.__add__(r"\Downloads"), gift_shop_mtd_file)
 
 script_config.tab_reserve(1)
 pyautogui.press("enter", interval=0.01)
@@ -804,21 +804,21 @@ pyautogui.press("space", interval=.01)
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
 time.sleep(.25)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.25)
 pyautogui.hotkey("ctrl", "l", interval=.01)
 pyautogui.hotkey("ctrl", "c", interval=.01)
 arr_immigration_url = pyperclip.paste()
-
-arr_immigration_file = f"immigration_report_{script_config.download_id(arr_immigration_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-arr_immigration = os.path.join(script_config.path_.__add__(r"\Downloads"), arr_immigration_file)
+arr_immigration_file = f"immigration_report_{re.search(r"(\d+)\.[xX][mM][lL]", arr_immigration_url).group(1)}.XML"
+pyautogui.hotkey("ctrl", "w", interval=.01)
 
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+arr_immigration = os.path.join(script_config.path_.__add__(r"\Downloads"), arr_immigration_file)
 
 # DEP Immigration: Config
 script_config.tab_reserve(3)
@@ -846,21 +846,21 @@ pyautogui.press("space", interval=.01)
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
 time.sleep(.25)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.25)
 pyautogui.hotkey("ctrl", "l", interval=.01)
 pyautogui.hotkey("ctrl", "c", interval=.01)
 dep_immigration_url = pyperclip.paste()
-
-dep_immigration_file = f"immigration_report_{script_config.download_id(dep_immigration_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-dep_immigration = os.path.join(script_config.path_.__add__(r"\Downloads"), dep_immigration_file)
+dep_immigration_file = f"immigration_report_{re.search(r"(\d+)\.[xX][mM][lL]", dep_immigration_url).group(1)}.XML"
+pyautogui.hotkey("ctrl", "w", interval=.01)
 
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+dep_immigration = os.path.join(script_config.path_.__add__(r"\Downloads"), dep_immigration_file)
 
 path_OTH = script_config.path_share.__add__(r"\OTH")
 
