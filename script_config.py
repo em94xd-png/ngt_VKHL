@@ -120,6 +120,11 @@ def download_page():
         if pyautogui.pixelMatchesColor(1508, 53, (39, 35, 32), tolerance=10):
             break
 
+def not_download_page():
+    while True:
+        if not pyautogui.pixelMatchesColor(1508, 53, (39, 35, 32), tolerance=10):
+            break
+
 def stay_excel():
     while True:
         if pyautogui.pixelMatchesColor(1894, 56, (16, 124, 65), tolerance=10):
