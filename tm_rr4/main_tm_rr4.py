@@ -1,6 +1,6 @@
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
-import openpyxl, json, os, shutil, pyautogui, subprocess, pygetwindow, time, pyperclip, sys, win32gui, win32con, xml.etree.ElementTree
+import openpyxl, json, os, shutil, pyautogui, subprocess, pygetwindow, time, pyperclip, sys, win32gui, win32con, xml.etree.ElementTree, re
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -40,11 +40,10 @@ pyautogui.press("enter", interval=.01)
 script_config.search_enter_step1()
 script_config.search_enter_step2()
 time.sleep(.5)
-pyautogui.press("tab", presses=9, interval=.01)
+pyautogui.press("tab", presses=8, interval=.01)
 pyautogui.press("down", presses=2, interval=.01)
 script_config.search_enter_step3()
-pyautogui.press("right", interval=.01)
-pyautogui.press("tab", presses=13, interval=.01)
+pyautogui.press("tab", presses=12, interval=.01)
 pyautogui.press("enter", interval=.01)
 # Immigration Report: Config
 script_config.config_report()
@@ -54,38 +53,58 @@ pyautogui.write(script_config.ytd_dd_mm, interval=.01)
 pyautogui.press("tab", interval=.01)
 time.sleep(1)
 pyautogui.write("ARRIVAL", interval=.01)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
+pyautogui.press("tab", interval=.01)
 time.sleep(.5)
+pyautogui.click(35, 375, interval=.01)
+
+while True:
+     if pyautogui.pixelMatchesColor(35, 375, (22, 21, 19), tolerance=10):
+          break
+
+time.sleep(.5)
+
+while True:
+     if pyautogui.pixelMatchesColor(35, 375, (22, 21, 19), tolerance=10):
+          break
+
 pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("enter", interval=.01)
+pyautogui.press("space", interval=.01) # Download As...
 # Immigration Report: Save
 script_config.download_as()
+pyautogui.click(896, 596, interval=.01)
+
+while True:
+     if pyautogui.pixelMatchesColor(896, 596, (22, 21, 19), tolerance=10):
+          break
+
 time.sleep(.5)
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", presses=2, interval=.01)
-script_config.download_as_download_s()
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("enter", interval=.01)
+
+while True:
+     if pyautogui.pixelMatchesColor(896, 596, (22, 21, 19), tolerance=10):
+          break
+
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("space", interval=.01)
 # Immigration Report: Download
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
 time.sleep(.25)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+script_config.not_download_page()
+time.sleep(.5)
 pyautogui.hotkey("ctrl", "l", interval=.01)
 pyautogui.hotkey("ctrl", "c", interval=.01)
 immigration_url = pyperclip.paste()
-
-immigration_file = f"immigration_report_{script_config.download_id(immigration_url)}.XML"
-
-pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
-pyautogui.press("tab", presses=6, interval=.01)
-pyautogui.press("space", interval=.01)
-
-immigration = os.path.join(script_config.path_.__add__(r"\Downloads"), immigration_file)
+immigration_file = f"immigration_report_{re.search(r"(\d+)\.[xX][mM][lL]", immigration_url).group(1)}.XML"
+pyautogui.hotkey("ctrl", "w", interval=.01)
 
 download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
 win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+immigration = os.path.join(script_config.path_.__add__(r"\Downloads"), immigration_file)
 
 os.makedirs(fr"{script_config.path_share}\OTH", exist_ok=True)
 
@@ -223,6 +242,8 @@ for _ in range(ws1.max_row, 1, -1):
      pn = ws1.cell(row=_, column=5).value
      if pn is None or pn == "":
           ws1.delete_rows(_, amount=1)
+     if pn and "." in pn:
+          ws1.delete_rows(_, amount=1)
 
 for _ in range(ws1.max_row, 1, -1):
      nt = ws1.cell(row=_, column=6).value
@@ -230,7 +251,7 @@ for _ in range(ws1.max_row, 1, -1):
           ws1.delete_rows(_, amount=1)
      if nt and "-" in nt:
           ws1.delete_rows(_, amount=1)
-     if len(nt) > 3:
+     if nt and len(nt) > 3:
           ws1.delete_rows(_, amount=1)
 
 for _ in range(ws2.max_row, 4, -1):
@@ -240,6 +261,8 @@ for _ in range(ws2.max_row, 4, -1):
      if pn is not None and str(pn).strip().replace(" ", "").isalpha():
           ws2.delete_rows(_, amount=1)
      if pn and "-" in pn:
+          ws2.delete_rows(_, amount=1)
+     if pn and "." in pn:
           ws2.delete_rows(_, amount=1)
 
 for _ in range(ws2.max_row, 4, -1):

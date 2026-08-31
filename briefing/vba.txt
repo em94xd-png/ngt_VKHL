@@ -1,0 +1,32 @@
+Sub AutoFitMergeCellPicture()
+    Dim pic As Shape
+    Dim targetRange As Range
+    Dim targetWidth As Double, targetHeight As Double
+    
+    On Error Resume Next
+    For Each pic In Selection.ShapeRange
+
+        If pic.TopLeftCell.MergeCells Then
+            Set targetRange = pic.TopLeftCell.MergeArea
+        Else
+            Set targetRange = pic.TopLeftCell
+        End If
+        
+        targetWidth = targetRange.Width - 4
+        targetHeight = targetRange.Height - 4
+        
+        pic.LockAspectRatio = msoTrue
+        
+        pic.Width = targetWidth
+        If pic.Height > targetHeight Then
+            pic.Height = targetHeight
+        End If
+        
+        pic.Width = pic.Width - 100
+
+        pic.Left = targetRange.Left + (targetRange.Width - pic.Width) / 2
+        pic.Top = targetRange.Top + (targetRange.Height - pic.Height) / 2
+        
+    Next pic
+End Sub
+

@@ -52,7 +52,7 @@ daily_report_path = fr"{path_share}\Daily's Report\Report {ytd_yyyy}\{ytd_order_
 
 def first_OPERA_open():
     while True:
-        if pyautogui.pixelMatchesColor(7, 391, (244, 243, 239), tolerance=0):
+        if pyautogui.pixelMatchesColor(7, 391, (251, 249, 248), tolerance=0):
             break
 
 def zoom_out(_):
@@ -67,32 +67,32 @@ def zoom_in(_):
 
 def main_OPERA_menu():
     while True:
-        if pyautogui.pixelMatchesColor(139, 129, ( 70,  70,  68), tolerance=0):
+        if pyautogui.pixelMatchesColor(139, 129, (48,  54,  76), tolerance=0):
             break
 
 def search_reports():
     while True:
-        if pyautogui.pixelMatchesColor(252, 245, (88, 88, 86), tolerance=0):
+        if pyautogui.pixelMatchesColor(320, 275, (60,  66,  91), tolerance=10):
             break
 
 def search_enter_step1():
     while True:
-        if pyautogui.pixelMatchesColor(1854, 337, (204, 204, 204), tolerance=10):
+        if pyautogui.pixelMatchesColor(1853, 361, (246, 246, 246), tolerance=10):
             break
 
 def search_enter_step2():
     while True:
-        if pyautogui.pixelMatchesColor(1854, 337, (6, 108, 122), tolerance=10):
+        if pyautogui.pixelMatchesColor(1853, 361, (49,  45,  42), tolerance=10):
             break
 
 def search_enter_step3():
     while True:
-        if pyautogui.pixelMatchesColor(1897, 525, (6, 108, 122), tolerance=10):
+        if pyautogui.pixelMatchesColor(1712, 554, (49,  45,  42), tolerance=10):
             break
 
 def config_report():
     while True:
-        if pyautogui.pixelMatchesColor(214, 244, (255, 255, 255), tolerance=0):
+        if pyautogui.pixelMatchesColor(320, 275, (255, 255, 255), tolerance=10):
             break
 
 def wait_report():
@@ -106,43 +106,35 @@ def tab_reserve(times):
         pyautogui.hotkey("shift", "tab")
 
 def download_as():
-     while True:
-          if pyautogui.pixelMatchesColor(982, 514, (88, 88, 86), tolerance=10):
-               break
+    while True:
+        if pyautogui.pixelMatchesColor(985, 512, (60,  66,  91), tolerance=10):
+            break
 
-def download_as_download():
-     while True:
-          if pyautogui.pixelMatchesColor(980, 635, (6, 108, 122), tolerance=10):
-               break
-
-def download_as_download_s():
-     while True:
-          if pyautogui.pixelMatchesColor(979, 623, (6, 108, 122), tolerance=10):
-               break
+def download_as_2():
+    while True:
+        if pyautogui.pixelMatchesColor(988, 498, (60,  66,  91), tolerance=10):
+            break
           
 def download_page():
-     while True:
-          if pyautogui.pixelMatchesColor(1508, 53, (39, 35, 32), tolerance=10):
-               break
+    while True:
+        if pyautogui.pixelMatchesColor(1508, 53, (39, 35, 32), tolerance=10):
+            break
+
+def not_download_page():
+    while True:
+        if not pyautogui.pixelMatchesColor(1508, 53, (39, 35, 32), tolerance=10):
+            break
 
 def stay_excel():
-     while True:
-          if pyautogui.pixelMatchesColor(1894, 56, (16, 124, 65), tolerance=10):
-               break
+    while True:
+        if pyautogui.pixelMatchesColor(1894, 56, (16, 124, 65), tolerance=10):
+            break
 
 def not_stay_excel():
-     while True:
-          if not pyautogui.pixelMatchesColor(1894, 56, (16, 124, 65), tolerance=10):
-               break
-          
-def download_id(id):
-     parse_url = urlparse(id)
-     query_url = parse_qs(parse_url.query)
-     if "rep" in query_url:
-          rep_id = query_url["rep"][0]
-          split_id = rep_id.split("_")[1]
-          return split_id
-     
+    while True:
+        if not pyautogui.pixelMatchesColor(1894, 56, (16, 124, 65), tolerance=10):
+            break
+
 def sw_date_format(ad, be, ad2):
      if ad and ad.strip() != "":
           try:
@@ -237,15 +229,15 @@ def return_print_default():
     pyautogui.press("enter", interval=.01)
 
 # path_OTH = path_share.__add__(r"\OTH")
-# path_td_excel = os.path.join(path_OTH, f"{td_dot_dd_mm_yy}.xlsx")
+# path_td_excel = os.path.join(path_OTH, f"briefing_2.xlsx")
 
 # os.startfile(path_td_excel)
 
 # subprocess.run(["cmd", "/c", "start", "msedge", f"https://app.reviewpro.com/myPage?fd=2026-01-01&td=2026-08-09&prevFd=2025-01-01&prevTd=2025-08-09&fdManagement=2026-01-01&tdManagement=2026-08-09&lang=en&pid=581134&indexType=GRI&pageId=5d70c1889b6b4944d2ff1bd3"])
 
-# if pygetwindow.getWindowsWithTitle("Work"):
-#     pygetwindow.getWindowsWithTitle("Work")[0].restore()
-#     pygetwindow.getWindowsWithTitle("Work")[0].maximize()
+# if pygetwindow.getWindowsWithTitle("Review"):
+#     pygetwindow.getWindowsWithTitle("Review")[0].restore()
+#     pygetwindow.getWindowsWithTitle("Review")[0].maximize()
 
 # time.sleep(.5)
 # zoom_out(10)
@@ -276,5 +268,32 @@ def return_print_default():
 
 # pyautogui.press("tab", interval=.01)
 # pyautogui.press("enter", interval=.01)
+
+# if pygetwindow.getWindowsWithTitle("Excel"):
+#     pygetwindow.getWindowsWithTitle("Excel")[0].restore()
+#     pygetwindow.getWindowsWithTitle("Excel")[0].maximize()
+#     pygetwindow.getWindowsWithTitle("Excel")[0].activate()
+
+# stay_excel()
+
+# pyautogui.hotkey("ctrl", "g", interval=.01)
+# pyautogui.write("j2", interval=.01)
+# pyautogui.press("enter", interval=.01)
+# pyautogui.hotkey("ctrl", "v", interval=.01)
+# pyautogui.press("alt", interval=.01)
+# pyautogui.write("jp", interval=.01)
+# pyautogui.write("p", interval=.01)
+
+# if pygetwindow.getWindowsWithTitle("Review"):
+#     pygetwindow.getWindowsWithTitle("Review")[0].restore()
+#     pygetwindow.getWindowsWithTitle("Review")[0].maximize()
+#     pygetwindow.getWindowsWithTitle("Review")[0].activate()
+
+# while True:
+#     if pyautogui.pixelMatchesColor(1122, 823, (21, 121, 52), tolerance=10):
+#         break
+
+
+
 
 # pyautogui.displayMousePosition()
