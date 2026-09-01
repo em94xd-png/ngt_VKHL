@@ -30,3 +30,25 @@ Sub AutoFitMergeCellPicture()
     Next pic
 End Sub
 
+-------------------------
+
+Sub Macro1()
+'
+' Macro1 Macro
+'
+
+'
+    ActiveWindow.SmallScroll Down:=0
+    Rows("16:16").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Selection.Insert Shift:=xlDown
+
+    ActiveWindow.SmallScroll Down:=2
+    Rows("25:25").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Selection.Insert Shift:=xlDown
+
+End Sub
+
