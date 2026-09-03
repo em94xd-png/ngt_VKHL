@@ -884,7 +884,7 @@ path_ori_excel = os.path.join(path_OTH, ori_excel_file)
 
 path_td_excel = os.path.join(path_OTH, f"{script_config.td_dot_dd_mm_yy}.xlsm")
 
-wb = load_workbook(path_ori_excel)
+wb = load_workbook(path_ori_excel, keep_vba=True)
 wb.save(path_td_excel)
 
 os.startfile(path_td_excel)
@@ -945,7 +945,7 @@ pyautogui.hotkey("alt", "f4")
 
 script_config.not_stay_excel()
 
-wb = load_workbook(path_td_excel)
+wb = load_workbook(path_td_excel, keep_vba=True)
 
 ws = "Ori Format"
 ws = wb[ws]

@@ -239,8 +239,10 @@ def num_row(num):
 # import xml.etree.ElementTree
 
 # path_OTH = path_share.__add__(r"\OTH")
-# path_td_excel = os.path.join(path_OTH, f"briefing_2.xlsx")
-
+# path_td_excel = os.path.join(path_OTH, f"{td_dot_dd_mm_yy}.xlsx")
+# from openpyxl import load_workbook
+# wb = load_workbook(path_td_excel, keep_vba=True)
+# wb.save(os.path.join(path_OTH, f"{td_dot_dd_mm_yy}.xlsm"))
 # os.startfile(path_td_excel)
 # time.sleep(2.5)
 
