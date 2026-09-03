@@ -228,72 +228,83 @@ def return_print_default():
     pyautogui.press("tab", presses=3, interval=.01)
     pyautogui.press("enter", interval=.01)
 
+def num_row(num):
+    vba = ""
+    for _ in range(num):
+        vba += "    Application.CutCopyMode = False\n"
+        vba += "    Selection.Copy\n"
+        vba += "    Selection.Insert Shift:=xlDown\n"
+    return vba
+
+# import xml.etree.ElementTree
+
 # path_OTH = path_share.__add__(r"\OTH")
-# path_td_excel = os.path.join(path_OTH, f"briefing_2.xlsx")
-
+# path_td_excel = os.path.join(path_OTH, f"{td_dot_dd_mm_yy}.xlsx")
+# from openpyxl import load_workbook
+# wb = load_workbook(path_td_excel, keep_vba=True)
+# wb.save(os.path.join(path_OTH, f"{td_dot_dd_mm_yy}.xlsm"))
 # os.startfile(path_td_excel)
-
-# subprocess.run(["cmd", "/c", "start", "msedge", f"https://app.reviewpro.com/myPage?fd=2026-01-01&td=2026-08-09&prevFd=2025-01-01&prevTd=2025-08-09&fdManagement=2026-01-01&tdManagement=2026-08-09&lang=en&pid=581134&indexType=GRI&pageId=5d70c1889b6b4944d2ff1bd3"])
-
-# if pygetwindow.getWindowsWithTitle("Review"):
-#     pygetwindow.getWindowsWithTitle("Review")[0].restore()
-#     pygetwindow.getWindowsWithTitle("Review")[0].maximize()
-
-# time.sleep(.5)
-# zoom_out(10)
-# zoom_in(5)
-
-# while True:
-#     if pyautogui.pixelMatchesColor(1043, 490, (21, 121, 52), tolerance=10):
-#         break
-
-# zoom_in(5)
-
-# pyautogui.press("tab", presses=2, interval=.01)
-# pyautogui.press("space", interval=.01)
-# pyautogui.press("tab", interval=.01)
-# pyautogui.press("space", interval=.01)
-# pyautogui.press("tab", interval=.01)
-# pyautogui.press("down", presses=7, interval=.01)
-# pyautogui.press("enter", interval=.01)
-# pyautogui.press("tab", presses=7, interval=.01)
-# pyautogui.press("space", interval=.01)
-# pyautogui.hotkey("ctrl", "shift", "s", interval=.01)
-# pyautogui.moveTo(1132, 973)
-# pyautogui.dragTo(845, 685, button="left")
-
-# while True:
-#     if pyautogui.pixelMatchesColor(1122, 823, (21, 121, 52), tolerance=10):
-#         break
-
-# pyautogui.press("tab", interval=.01)
-# pyautogui.press("enter", interval=.01)
+# time.sleep(2.5)
 
 # if pygetwindow.getWindowsWithTitle("Excel"):
-#     pygetwindow.getWindowsWithTitle("Excel")[0].restore()
-#     pygetwindow.getWindowsWithTitle("Excel")[0].maximize()
 #     pygetwindow.getWindowsWithTitle("Excel")[0].activate()
+#     pygetwindow.getWindowsWithTitle("Excel")[0].maximize()
 
 # stay_excel()
 
-# pyautogui.hotkey("ctrl", "g", interval=.01)
-# pyautogui.write("j2", interval=.01)
-# pyautogui.press("enter", interval=.01)
-# pyautogui.hotkey("ctrl", "v", interval=.01)
+# pyautogui.hotkey("alt", "f11", interval=.01)
 # pyautogui.press("alt", interval=.01)
-# pyautogui.write("jp", interval=.01)
-# pyautogui.write("p", interval=.01)
+# pyautogui.press("i", interval=.01)
+# pyautogui.press("m", interval=.01)
 
-# if pygetwindow.getWindowsWithTitle("Review"):
-#     pygetwindow.getWindowsWithTitle("Review")[0].restore()
-#     pygetwindow.getWindowsWithTitle("Review")[0].maximize()
-#     pygetwindow.getWindowsWithTitle("Review")[0].activate()
+# arrival = "res_detail_149894403.XML"
 
-# while True:
-#     if pyautogui.pixelMatchesColor(1122, 823, (21, 121, 52), tolerance=10):
-#         break
+# tree = xml.etree.ElementTree.parse(arrival)
+# root = tree.getroot()
+
+# arr = root.findall(".//G_RESERVATION")
+# arr_row = 1 + len(arr)
+
+# departure = "departure_all_149894413.XML"
+
+# tree = xml.etree.ElementTree.parse(departure)
+# root = tree.getroot()
+
+# dep = root.findall(".//G_ROOM")
+# dep_row = 1 + len(dep)
+
+# def num_row(num):
+#     vba = ""
+#     for _ in range(num):
+#         vba += "    Application.CutCopyMode = False\n"
+#         vba += "    Selection.Copy\n"
+#         vba += "    Selection.Insert Shift:=xlDown\n"
+#     return vba
+
+# set_guest_num = f"""Sub Macro1()
+# '
+# ' Macro1 Macro
+# '
+
+# '
+#     ActiveWindow.SmallScroll Down:=0
+#     Rows("16:16").Select
+# {num_row(arr_row - 2)}
+
+#     ActiveWindow.SmallScroll Down:=2
+#     Rows("{arr_row + 17}:{arr_row + 17}").Select
+# {num_row(dep_row - 2)}
+    
+# End Sub
+# """
+
+# import pyperclip
+
+# pyperclip.copy(set_guest_num)
+# time.sleep(.5)
+# pyautogui.hotkey("ctrl", "v", interval=.01)
+# pyautogui.press("f5", interval=.01)
+# pyautogui.hotkey("alt", "f4", interval=.01)
 
 
-
-
-# pyautogui.displayMousePosition()
+# print(set_guest_num)

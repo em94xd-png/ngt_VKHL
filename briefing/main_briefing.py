@@ -879,67 +879,73 @@ dep_immigration = os.path.join(script_config.path_.__add__(r"\Downloads"), dep_i
 
 path_OTH = script_config.path_share.__add__(r"\OTH")
 
-ori_excel_file = "briefing.xlsx"
+ori_excel_file = "briefing.xlsm"
 path_ori_excel = os.path.join(path_OTH, ori_excel_file)
 
-path_td_excel = os.path.join(path_OTH, f"{script_config.td_dot_dd_mm_yy}.xlsx")
+path_td_excel = os.path.join(path_OTH, f"{script_config.td_dot_dd_mm_yy}.xlsm")
 
-wb = load_workbook(path_ori_excel)
+wb = load_workbook(path_ori_excel, keep_vba=True)
 wb.save(path_td_excel)
-
-tree = xml.etree.ElementTree.parse(arrival)
-root = tree.getroot()
-
-arr_row = 1
-
-for _ in root.findall(".//G_RESERVATION"):
-    arr_row += 1
 
 os.startfile(path_td_excel)
 time.sleep(2.5)
+
 if pygetwindow.getWindowsWithTitle("Excel"):
     pygetwindow.getWindowsWithTitle("Excel")[0].activate()
     pygetwindow.getWindowsWithTitle("Excel")[0].maximize()
 if not pygetwindow.getWindowsWithTitle("Excel"):
      sys.exit()
+
 script_config.stay_excel()
-pyautogui.hotkey("ctrl", "g")
-pyautogui.write("a16")
-pyautogui.press("enter")
-pyautogui.hotkey("shift", "space")
-time.sleep(.15)
-with pyautogui.hold("ctrl"):
-    for _ in range(arr_row - 2):
-        pyautogui.PAUSE = 0
-        pyautogui.press("c")
-        pyautogui.press("+")
+
+pyautogui.hotkey("alt", "f11", interval=.01)
+pyautogui.press("alt", interval=.01)
+pyautogui.press("i", interval=.01)
+pyautogui.press("m", interval=.01)
+
+tree = xml.etree.ElementTree.parse(arrival)
+root = tree.getroot()
+
+arr = root.findall(".//G_RESERVATION")
+arr_row = 1 + len(arr)
 
 tree = xml.etree.ElementTree.parse(departure)
 root = tree.getroot()
 
-dep_row = arr_row
+dep = root.findall(".//G_ROOM")
+dep_row = 1 + len(dep)
 
-for _ in root.findall(".//G_ROOM"):
-    dep_row += 1
+set_row = f"""Sub Macro1()
+'
+' Macro1 Macro
+'
 
-pyautogui.hotkey("ctrl", "g")
-pyautogui.write(f"a{arr_row + 17}")
-pyautogui.press("enter")
-pyautogui.hotkey("shift", "space")
-time.sleep(.15)
-with pyautogui.hold("ctrl"):
-    for _ in range((dep_row - arr_row) - 1):
-        pyautogui.PAUSE = 0
-        pyautogui.press("c")
-        pyautogui.press("+")
-pyautogui.hotkey("ctrl", "home")
-pyautogui.press("down", presses=2)
+'
+    ActiveWindow.SmallScroll Down:=0
+    Rows("16:16").Select
+{script_config.num_row(arr_row - 2)}
+
+    ActiveWindow.SmallScroll Down:=2
+    Rows("{arr_row + 17}:{arr_row + 17}").Select
+{script_config.num_row(dep_row - 2)}
+    
+End Sub
+"""
+
+pyperclip.copy(set_row)
+time.sleep(.25)
+pyautogui.hotkey("ctrl", "v", interval=.01)
+pyautogui.press("f5", interval=.01)
+pyautogui.hotkey("alt", "f4")
+
+script_config.stay_excel()
+
 pyautogui.hotkey("ctrl", "s")
 pyautogui.hotkey("alt", "f4")
 
 script_config.not_stay_excel()
 
-wb = load_workbook(path_td_excel)
+wb = load_workbook(path_td_excel, keep_vba=True)
 
 ws = "Ori Format"
 ws = wb[ws]
@@ -1672,3 +1678,292 @@ for _ in root.findall(".//G_ROOM"):
 
 wb.save(path_td_excel)
 wb.close()
+
+subprocess.run(["cmd", "/c", "start", "msedge", f"https://app.reviewpro.com/myPage?fd=2026-01-01&td=2026-08-09&prevFd=2025-01-01&prevTd=2025-08-09&fdManagement=2026-01-01&tdManagement=2026-08-09&lang=en&pid=581134&indexType=GRI&pageId=5d70c1889b6b4944d2ff1bd3"])
+
+if pygetwindow.getWindowsWithTitle("page"):
+    pygetwindow.getWindowsWithTitle("page")[0].restore()
+    pygetwindow.getWindowsWithTitle("page")[0].maximize()
+
+time.sleep(.5)
+script_config.zoom_out(10)
+script_config.zoom_in(3)
+
+while True:
+    if pyautogui.pixelMatchesColor(1022, 370, (21, 121, 52), tolerance=10):
+        break
+
+script_config.zoom_in(7)
+
+pyautogui.press("tab", presses=2, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", interval=.01)
+pyautogui.press("down", presses=7, interval=.01)
+pyautogui.press("enter", interval=.01)
+pyautogui.press("tab", presses=7, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.hotkey("ctrl", "shift", "s", interval=.01)
+pyautogui.moveTo(1132, 890)
+pyautogui.dragTo(844, 603, button="left")
+
+while True:
+    if pyautogui.pixelMatchesColor(1106, 679, (21, 121, 52), tolerance=10):
+        break
+
+pyautogui.press("tab", interval=.01)
+pyautogui.press("space", interval=.01)
+
+os.startfile(path_td_excel)
+
+if pygetwindow.getWindowsWithTitle("Excel"):
+    pygetwindow.getWindowsWithTitle("Excel")[0].activate()
+    pygetwindow.getWindowsWithTitle("Excel")[0].maximize()
+
+script_config.stay_excel()
+
+pyautogui.hotkey("ctrl", "g", interval=.01)
+pyautogui.write("j1", interval=.01)
+pyautogui.press("enter", interval=.01)
+pyautogui.hotkey("ctrl", "v", interval=.01)
+pyautogui.hotkey("alt", "f11", interval=.01)
+pyautogui.press("alt", interval=.01)
+pyautogui.press("i", interval=.01)
+pyautogui.press("m", interval=.01)
+pyautogui.hotkey("ctrl", "a", interval=.01)
+
+gri_mtd = """Sub AutoFitMergeCellPicture()
+    Dim pic As Shape
+    Dim targetRange As Range
+    Dim targetWidth As Double, targetHeight As Double
+    
+    On Error Resume Next
+    For Each pic In Selection.ShapeRange
+
+        If pic.TopLeftCell.MergeCells Then
+            Set targetRange = pic.TopLeftCell.MergeArea
+        Else
+            Set targetRange = pic.TopLeftCell
+        End If
+        
+        targetWidth = targetRange.Width - 4
+        targetHeight = targetRange.Height - 4
+        
+        pic.LockAspectRatio = msoTrue
+        
+        pic.Width = targetWidth
+        If pic.Height > targetHeight Then
+            pic.Height = targetHeight
+        End If
+        
+        pic.Width = pic.Width - 100
+
+        pic.Left = targetRange.Left + (targetRange.Width - pic.Width) / 2
+        pic.Top = targetRange.Top + (targetRange.Height - pic.Height) - 170
+        
+    Next pic
+End Sub
+"""
+
+pyperclip.copy(gri_mtd)
+pyautogui.hotkey("ctrl", "v", interval=.01)
+pyautogui.press("f5", interval=.01)
+pyautogui.hotkey("alt", "f4", interval=.01)
+time.sleep(.5)
+
+if pygetwindow.getWindowsWithTitle("page"):
+    pygetwindow.getWindowsWithTitle("page")[0].activate()
+
+pyautogui.hotkey("ctrl", "shift", "s", interval=.01)
+pyautogui.moveTo(659, 866)
+pyautogui.dragTo(334, 584, button="left")
+pyautogui.press("tab", interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.5)
+
+if pygetwindow.getWindowsWithTitle("Excel"):
+    pygetwindow.getWindowsWithTitle("Excel")[0].activate()
+
+script_config.stay_excel()
+
+pyautogui.hotkey("ctrl", "g", interval=.01)
+pyautogui.write("l1", interval=.01)
+pyautogui.press("enter", interval=.01)
+pyautogui.hotkey("ctrl", "v", interval=.01)
+pyautogui.hotkey("alt", "f11", interval=.01)
+pyautogui.hotkey("ctrl", "a", interval=.01)
+
+nps_mtd = """Sub AutoFitMergeCellPicture()
+    Dim pic As Shape
+    Dim targetRange As Range
+    Dim targetWidth As Double, targetHeight As Double
+    
+    On Error Resume Next
+    For Each pic In Selection.ShapeRange
+
+        If pic.TopLeftCell.MergeCells Then
+            Set targetRange = pic.TopLeftCell.MergeArea
+        Else
+            Set targetRange = pic.TopLeftCell
+        End If
+        
+        targetWidth = targetRange.Width - 4
+        targetHeight = targetRange.Height - 4
+        
+        pic.LockAspectRatio = msoTrue
+        
+        pic.Width = targetWidth
+        If pic.Height > targetHeight Then
+            pic.Height = targetHeight
+        End If
+        
+        pic.Width = pic.Width - 100
+
+        pic.Left = targetRange.Left + (targetRange.Width - pic.Width) / 2
+        pic.Top = targetRange.Top + (targetRange.Height - pic.Height) - 191
+        
+    Next pic
+End Sub
+"""
+
+pyperclip.copy(nps_mtd)
+pyautogui.hotkey("ctrl", "v", interval=.01)
+pyautogui.press("f5", interval=.01)
+pyautogui.hotkey("alt", "f4", interval=.01)
+time.sleep(.5)
+
+if pygetwindow.getWindowsWithTitle("page"):
+    pygetwindow.getWindowsWithTitle("page")[0].activate()
+
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", interval=.01)
+pyautogui.press("down", presses=14, interval=.01)
+pyautogui.press("enter", interval=.01)
+pyautogui.press("tab", presses=7, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.hotkey("ctrl", "shift", "s", interval=.01)
+pyautogui.moveTo(1132, 890)
+pyautogui.dragTo(844, 603, button="left")
+
+while True:
+    if pyautogui.pixelMatchesColor(1106, 679, (21, 121, 52), tolerance=10):
+        break
+
+pyautogui.press("tab", interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.5)
+
+if pygetwindow.getWindowsWithTitle("Excel"):
+    pygetwindow.getWindowsWithTitle("Excel")[0].activate()
+
+script_config.stay_excel()
+
+pyautogui.hotkey("ctrl", "g", interval=.01)
+pyautogui.write("d1", interval=.01)
+pyautogui.press("enter", interval=.01)
+pyautogui.hotkey("ctrl", "v", interval=.01)
+pyautogui.hotkey("alt", "f11", interval=.01)
+pyautogui.hotkey("ctrl", "a", interval=.01)
+
+gri_ytd = """Sub AutoFitMergeCellPicture()
+    Dim pic As Shape
+    Dim targetRange As Range
+    Dim targetWidth As Double, targetHeight As Double
+    
+    On Error Resume Next
+    For Each pic In Selection.ShapeRange
+
+        If pic.TopLeftCell.MergeCells Then
+            Set targetRange = pic.TopLeftCell.MergeArea
+        Else
+            Set targetRange = pic.TopLeftCell
+        End If
+        
+        targetWidth = targetRange.Width - 4
+        targetHeight = targetRange.Height - 4
+        
+        pic.LockAspectRatio = msoTrue
+        
+        pic.Width = targetWidth
+        If pic.Height > targetHeight Then
+            pic.Height = targetHeight
+        End If
+        
+        pic.Width = pic.Width - 100
+
+        pic.Left = targetRange.Left + (targetRange.Width - pic.Width) - 50
+        pic.Top = targetRange.Top + (targetRange.Height - pic.Height) - 162
+        
+    Next pic
+End Sub
+"""
+
+pyperclip.copy(gri_ytd)
+pyautogui.hotkey("ctrl", "v", interval=.01)
+pyautogui.press("f5", interval=.01)
+pyautogui.hotkey("alt", "f4", interval=.01)
+time.sleep(.5)
+
+if pygetwindow.getWindowsWithTitle("page"):
+    pygetwindow.getWindowsWithTitle("page")[0].activate()
+
+pyautogui.hotkey("ctrl", "shift", "s", interval=.01)
+pyautogui.moveTo(659, 866)
+pyautogui.dragTo(334, 584, button="left")
+pyautogui.press("tab", interval=.01)
+pyautogui.press("space", interval=.01)
+time.sleep(.5)
+
+if pygetwindow.getWindowsWithTitle("Excel"):
+    pygetwindow.getWindowsWithTitle("Excel")[0].activate()
+
+script_config.stay_excel()
+
+pyautogui.hotkey("ctrl", "g", interval=.01)
+pyautogui.write("h1", interval=.01)
+pyautogui.press("enter", interval=.01)
+pyautogui.hotkey("ctrl", "v", interval=.01)
+pyautogui.hotkey("alt", "f11", interval=.01)
+pyautogui.hotkey("ctrl", "a", interval=.01)
+
+nps_ytd = """Sub AutoFitMergeCellPicture()
+    Dim pic As Shape
+    Dim targetRange As Range
+    Dim targetWidth As Double, targetHeight As Double
+    
+    On Error Resume Next
+    For Each pic In Selection.ShapeRange
+
+        If pic.TopLeftCell.MergeCells Then
+            Set targetRange = pic.TopLeftCell.MergeArea
+        Else
+            Set targetRange = pic.TopLeftCell
+        End If
+        
+        targetWidth = targetRange.Width - 4
+        targetHeight = targetRange.Height - 4
+        
+        pic.LockAspectRatio = msoTrue
+        
+        pic.Width = targetWidth
+        If pic.Height > targetHeight Then
+            pic.Height = targetHeight
+        End If
+        
+        pic.Width = pic.Width - 20
+
+        pic.Left = targetRange.Left + (targetRange.Width - pic.Width) / 1.7
+        pic.Top = targetRange.Top + (targetRange.Height - pic.Height) - 196
+        
+    Next pic
+End Sub
+"""
+
+pyperclip.copy(nps_ytd)
+pyautogui.hotkey("ctrl", "v", interval=.01)
+pyautogui.press("f5", interval=.01)
+pyautogui.hotkey("alt", "f4", interval=.01)
+time.sleep(.5)
