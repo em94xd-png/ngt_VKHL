@@ -106,7 +106,7 @@ time.sleep(1)
 pyautogui.write(script_config.Room_Class, interval=.01)
 pyautogui.press("tab", interval=0.01)
 pyautogui.press("delete", interval=0.01)
-time.sleep(.5)
+time.sleep(.75)
 pyautogui.click(279, 569, interval=.01) # Zero Rates Only
 
 while True:
@@ -646,9 +646,17 @@ pyautogui.press("down", presses=2, interval=.01)
 pyautogui.press("right", presses=1, interval=.01)
 pyautogui.press("enter", interval=.01)
 
+while True:
+     if not pyautogui.pixelMatchesColor(320, 275, (60,  66,  91), tolerance=10):
+          break
+
+while True:
+     if pyautogui.pixelMatchesColor(646, 270, (246, 250, 252), tolerance=10):
+          break
+
 def search_enter_step4():
     while True:
-        if pyautogui.pixelMatchesColor(28, 376, (131, 158, 167), tolerance=10):
+        if not pyautogui.pixelMatchesColor(28, 376, (163, 163, 162), tolerance=10):
             break
 
 search_enter_step4()

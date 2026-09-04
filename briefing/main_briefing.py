@@ -1370,6 +1370,8 @@ for _ in root.findall(".//G_RESERVATION"):
         ws[f"D{arr_start}"] = f"{rm}\nMeier's"
     if "MG Group".strip().lower() in str(ta).strip().lower():
         ws[f"D{arr_start}"] = f"{rm}\nMG Group"
+    if "Agoda".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nAgoda"
 
     if vip is not None:
         ws[f"F{arr_start}"] = vip
@@ -1414,14 +1416,24 @@ for _ in root.findall(".//G_RESERVATION"):
             ws[f"F{arr_start}"] = f"VIP2\n{memb}"
 
     if not "MI Squared".strip().lower() in str(cmt).strip().lower():
-        if "JADE/RUBY".strip().lower() in str(cmt).strip().lower():
-            ws[f"F{arr_start}"] = f"VIPO\nJADE"
-        if "DIAMOND".strip().lower() in str(cmt).strip().lower():
-            ws[f"F{arr_start}"] = f"VIPO\nDIAMOND"
-        if "PLATINUM".strip().lower() in str(cmt).strip().lower():
-            ws[f"F{arr_start}"] = f"VIPO\nPLATINUM"
-        if "ROYAL".strip().lower() in str(cmt).strip().lower():
-            ws[f"F{arr_start}"] = f"VIPO\nROYAL"
+        if vip not in ["VIP1", "VIP2"]:
+            if "JADE/RUBY".strip().lower() in str(cmt).strip().lower():
+                ws[f"F{arr_start}"] = f"VIPO\nJADE"
+            if "DIAMOND".strip().lower() in str(cmt).strip().lower():
+                ws[f"F{arr_start}"] = f"VIPO\nDIAMOND"
+            if "PLATINUM".strip().lower() in str(cmt).strip().lower():
+                ws[f"F{arr_start}"] = f"VIPO\nPLATINUM"
+            if "ROYAL".strip().lower() in str(cmt).strip().lower():
+                ws[f"F{arr_start}"] = f"VIPO\nROYAL"
+        if vip in ["VIP1", "VIP2"]:
+            if "JADE/RUBY".strip().lower() in str(cmt).strip().lower():
+                ws[f"F{arr_start}"] = f"{vip}\nJADE"
+            if "DIAMOND".strip().lower() in str(cmt).strip().lower():
+                ws[f"F{arr_start}"] = f"{vip}\nDIAMOND"
+            if "PLATINUM".strip().lower() in str(cmt).strip().lower():
+                ws[f"F{arr_start}"] = f"{vip}\nPLATINUM"
+            if "ROYAL".strip().lower() in str(cmt).strip().lower():
+                ws[f"F{arr_start}"] = f"{vip}\nROYAL"
     if "MI Squared".strip().lower() in str(cmt).strip().lower():
         if diff_date.days < 7:
             ws[f"F{arr_start}"] = "-"
@@ -1595,6 +1607,8 @@ for _ in root.findall(".//G_ROOM"):
         ws[f"D{dep_start}"] = f"{rm}\nMeier's"
     if "MG Group".strip().lower() in str(ta).strip().lower():
         ws[f"D{dep_start}"] = f"{rm}\nMG Group"
+    if "Agoda".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nAgoda"
 
     if vip is not None:
         ws[f"F{dep_start}"] = vip
@@ -1639,14 +1653,24 @@ for _ in root.findall(".//G_ROOM"):
             ws[f"F{dep_start}"] = f"VIP2\n{memb}"
 
     if not "MI Squared".strip().lower() in str(cmt).strip().lower():
-        if "JADE/RUBY".strip().lower() in str(cmt).strip().lower():
-            ws[f"F{dep_start}"] = f"VIPO\nJADE"
-        if "DIAMOND".strip().lower() in str(cmt).strip().lower():
-            ws[f"F{dep_start}"] = f"VIPO\nDIAMOND"
-        if "PLATINUM".strip().lower() in str(cmt).strip().lower():
-            ws[f"F{dep_start}"] = f"VIPO\nPLATINUM"
-        if "ROYAL".strip().lower() in str(cmt).strip().lower():
-            ws[f"F{dep_start}"] = f"VIPO\nROYAL"
+        if vip not in ["VIP1", "VIP2"]:
+            if "JADE/RUBY".strip().lower() in str(cmt).strip().lower():
+                ws[f"F{dep_start}"] = f"VIPO\nJADE"
+            if "DIAMOND".strip().lower() in str(cmt).strip().lower():
+                ws[f"F{dep_start}"] = f"VIPO\nDIAMOND"
+            if "PLATINUM".strip().lower() in str(cmt).strip().lower():
+                ws[f"F{dep_start}"] = f"VIPO\nPLATINUM"
+            if "ROYAL".strip().lower() in str(cmt).strip().lower():
+                ws[f"F{dep_start}"] = f"VIPO\nROYAL"
+        if vip in ["VIP1", "VIP2"]:
+            if "JADE/RUBY".strip().lower() in str(cmt).strip().lower():
+                ws[f"F{dep_start}"] = f"{vip}\nJADE"
+            if "DIAMOND".strip().lower() in str(cmt).strip().lower():
+                ws[f"F{dep_start}"] = f"{vip}\nDIAMOND"
+            if "PLATINUM".strip().lower() in str(cmt).strip().lower():
+                ws[f"F{dep_start}"] = f"{vip}\nPLATINUM"
+            if "ROYAL".strip().lower() in str(cmt).strip().lower():
+                ws[f"F{dep_start}"] = f"{vip}\nROYAL"
     if "MI Squared".strip().lower() in str(cmt).strip().lower():
         if diff_date.days < 7:
             ws[f"F{dep_start}"] = "-"
