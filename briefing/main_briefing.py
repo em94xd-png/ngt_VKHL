@@ -1709,7 +1709,7 @@ if pygetwindow.getWindowsWithTitle("page"):
     pygetwindow.getWindowsWithTitle("page")[0].restore()
     pygetwindow.getWindowsWithTitle("page")[0].maximize()
 
-time.sleep(.5)
+time.sleep(.75)
 script_config.zoom_out(10)
 script_config.zoom_in(3)
 
