@@ -117,13 +117,13 @@ def download_as_2():
           
 def download_page():
     while True:
-        if pyautogui.pixelMatchesColor(1508, 53, (39, 35, 32), tolerance=10):
+        if pyautogui.pixelMatchesColor(1508, 52, (39, 35, 32), tolerance=10):
             time.sleep(.5)
             break
 
 def not_download_page():
     while True:
-        if not pyautogui.pixelMatchesColor(1508, 53, (39, 35, 32), tolerance=10):
+        if not pyautogui.pixelMatchesColor(1508, 52, (39, 35, 32), tolerance=10):
             break
 
 def stay_excel():
