@@ -83,6 +83,8 @@ while True:
      if pyautogui.pixelMatchesColor(896, 596, (22, 21, 19), tolerance=10):
           break
 
+time.sleep(.5)
+
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("space", interval=.01)
 # Immigration Report: Download

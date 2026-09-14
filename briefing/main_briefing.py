@@ -76,6 +76,8 @@ while True:
      if pyautogui.pixelMatchesColor(895, 581, (22, 21, 19), tolerance=10):
           break
 
+time.sleep(.5)
+
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("space", interval=.01)
 # Arrivals: Download
@@ -183,6 +185,8 @@ time.sleep(.5)
 while True:
      if pyautogui.pixelMatchesColor(895, 581, (22, 21, 19), tolerance=10):
           break
+
+time.sleep(.5)
      
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("space", interval=.01)
@@ -248,6 +252,8 @@ while True:
      if pyautogui.pixelMatchesColor(895, 581, (22, 21, 19), tolerance=10):
           break
 
+time.sleep(.5)
+
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("space", interval=.01)
 # History and Forecast: Download
@@ -301,6 +307,8 @@ time.sleep(.5)
 while True:
      if pyautogui.pixelMatchesColor(895, 581, (22, 21, 19), tolerance=10):
           break
+
+time.sleep(.5)
 
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("space", interval=.01)
@@ -365,6 +373,8 @@ time.sleep(.5)
 while True:
      if pyautogui.pixelMatchesColor(895, 581, (22, 21, 19), tolerance=10):
           break
+
+time.sleep(.5)
 
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("space", interval=.01)
@@ -433,6 +443,8 @@ while True:
      if pyautogui.pixelMatchesColor(895, 581, (22, 21, 19), tolerance=10):
           break
 
+time.sleep(.5)
+
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("space", interval=.01)
 # Room Upgrade: Download
@@ -475,6 +487,8 @@ time.sleep(.5)
 while True:
      if pyautogui.pixelMatchesColor(895, 581, (22, 21, 19), tolerance=10):
           break
+
+time.sleep(.5)
 
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("space", interval=.01)
@@ -519,6 +533,8 @@ while True:
      if pyautogui.pixelMatchesColor(895, 581, (22, 21, 19), tolerance=10):
           break
 
+time.sleep(.5)
+
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("space", interval=.01)
 # Tour Commission: Download
@@ -561,6 +577,8 @@ time.sleep(.5)
 while True:
      if pyautogui.pixelMatchesColor(895, 581, (22, 21, 19), tolerance=10):
           break
+
+time.sleep(.5)
 
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("space", interval=.01)
@@ -611,6 +629,8 @@ while True:
      if pyautogui.pixelMatchesColor(895, 581, (22, 21, 19), tolerance=10):
           break
 
+time.sleep(.5)
+
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("space", interval=.01)
 # Room Upgrade MTD: Download
@@ -653,6 +673,8 @@ time.sleep(.5)
 while True:
      if pyautogui.pixelMatchesColor(895, 581, (22, 21, 19), tolerance=10):
           break
+
+time.sleep(.5)
 
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("space", interval=.01)
@@ -697,6 +719,8 @@ while True:
      if pyautogui.pixelMatchesColor(895, 581, (22, 21, 19), tolerance=10):
           break
 
+time.sleep(.5)
+
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("space", interval=.01)
 # Tour Commission MTD: Download
@@ -739,6 +763,8 @@ time.sleep(.5)
 while True:
      if pyautogui.pixelMatchesColor(895, 581, (22, 21, 19), tolerance=10):
           break
+
+time.sleep(.5)
 
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("space", interval=.01)
@@ -811,6 +837,8 @@ while True:
      if pyautogui.pixelMatchesColor(896, 596, (22, 21, 19), tolerance=10):
           break
 
+time.sleep(.5)
+
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("space", interval=.01)
 # ARR Immigration: Download
@@ -853,6 +881,8 @@ time.sleep(.5)
 while True:
      if pyautogui.pixelMatchesColor(896, 596, (22, 21, 19), tolerance=10):
           break
+
+time.sleep(.5)
 
 pyautogui.press("tab", presses=3, interval=.01)
 pyautogui.press("space", interval=.01)
@@ -1709,7 +1739,7 @@ if pygetwindow.getWindowsWithTitle("page"):
     pygetwindow.getWindowsWithTitle("page")[0].restore()
     pygetwindow.getWindowsWithTitle("page")[0].maximize()
 
-time.sleep(.5)
+time.sleep(.75)
 script_config.zoom_out(10)
 script_config.zoom_in(3)
 
@@ -1718,6 +1748,8 @@ while True:
         break
 
 script_config.zoom_in(7)
+
+time.sleep(.5)
 
 pyautogui.press("tab", presses=2, interval=.01)
 pyautogui.press("space", interval=.01)

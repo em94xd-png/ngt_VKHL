@@ -53,7 +53,7 @@ time.sleep(1)
 pyautogui.write(script_config.td_dd_mm, interval=.01)
 pyautogui.press("tab", presses=3, interval=0.01)
 time.sleep(.75)
-pyautogui.write("BFB01E,BFB01I,BFB02E,BFB02I,BFB03I,BFB04I", interval=.01)
+pyautogui.write("BFB01E,BFB01I,BFB02E,BFB02I,BFB03I,BFB04I,BFB05I", interval=.01)
 pyautogui.press("tab", presses=8, interval=0.01)
 pyautogui.press("enter", interval=0.01)
 # Package Forecast: Print

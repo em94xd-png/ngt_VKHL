@@ -99,6 +99,8 @@ time.sleep(.5)
 while True:
      if pyautogui.pixelMatchesColor(749, 316, (22, 21, 19), tolerance=10):
           break
+
+time.sleep(.5)
      
 # VKHL Guests INH (Comp): Config
 pyautogui.press("tab", presses=5, interval=0.01)
