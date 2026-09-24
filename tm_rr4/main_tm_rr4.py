@@ -90,7 +90,7 @@ pyautogui.press("space", interval=.01)
 # Immigration Report: Download
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
+time.sleep(.5)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 pyautogui.press("tab", presses=6, interval=.01)
