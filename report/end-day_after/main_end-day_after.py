@@ -108,7 +108,7 @@ time.sleep(1)
 pyautogui.write(script_config.Room_Class, interval=.01)
 pyautogui.press("tab", interval=0.01)
 pyautogui.press("delete", interval=0.01)
-time.sleep(.75)
+time.sleep(1)
 pyautogui.click(279, 569, interval=.01) # Zero Rates Only
 
 while True:
