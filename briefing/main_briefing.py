@@ -1467,10 +1467,11 @@ for _ in root.findall(".//G_RESERVATION"):
             if "ROYAL".strip().lower() in str(cmt).strip().lower():
                 ws[f"F{arr_start}"] = f"{vip}\nROYAL"
     if "MI Squared".strip().lower() in str(cmt).strip().lower():
-        if diff_date.days < 7:
-            ws[f"F{arr_start}"] = "-"
-        if diff_date.days >= 7:
-            ws[f"F{arr_start}"] = "VIPS"
+        if vip not in ["VIP1", "VIP2"]:
+            if diff_date.days < 7:
+                ws[f"F{arr_start}"] = "-"
+            if diff_date.days >= 7:
+                ws[f"F{arr_start}"] = "VIPS"
 
     if chd is not None:
         ws[f"H{arr_start}"] = f"{adl}+{chd}"
@@ -1706,10 +1707,11 @@ for _ in root.findall(".//G_ROOM"):
             if "ROYAL".strip().lower() in str(cmt).strip().lower():
                 ws[f"F{dep_start}"] = f"{vip}\nROYAL"
     if "MI Squared".strip().lower() in str(cmt).strip().lower():
-        if diff_date.days < 7:
-            ws[f"F{dep_start}"] = "-"
-        if diff_date.days >= 7:
-            ws[f"F{dep_start}"] = "VIPS"
+        if vip not in ["VIP1", "VIP2"]:
+            if diff_date.days < 7:
+                ws[f"F{dep_start}"] = "-"
+            if diff_date.days >= 7:
+                ws[f"F{dep_start}"] = "VIPS"
 
     if chd is not None:
         ws[f"H{dep_start}"] = f"{adl}+{chd}"
