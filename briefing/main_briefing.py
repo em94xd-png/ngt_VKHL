@@ -83,7 +83,7 @@ pyautogui.press("space", interval=.01)
 # Arrivals: Download
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
+time.sleep(.75)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -193,7 +193,7 @@ pyautogui.press("space", interval=.01)
 # Departures: Download
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
+time.sleep(.75)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -259,7 +259,7 @@ pyautogui.press("space", interval=.01)
 # History and Forecast: Download
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
+time.sleep(.75)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -315,7 +315,7 @@ pyautogui.press("space", interval=.01)
 # History and Forecast (AVC): Download
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
+time.sleep(.75)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -381,7 +381,7 @@ pyautogui.press("space", interval=.01)
 # Forecast: Download
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
+time.sleep(.75)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -450,7 +450,7 @@ pyautogui.press("space", interval=.01)
 # Room Upgrade: Download
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
+time.sleep(.75)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -495,7 +495,7 @@ pyautogui.press("space", interval=.01)
 # Late Checkout: Download
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
+time.sleep(.75)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -540,7 +540,7 @@ pyautogui.press("space", interval=.01)
 # Tour Commission: Download
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
+time.sleep(.75)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -585,7 +585,7 @@ pyautogui.press("space", interval=.01)
 # Gift Shop: Download
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
+time.sleep(.75)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -636,7 +636,7 @@ pyautogui.press("space", interval=.01)
 # Room Upgrade MTD: Download
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
+time.sleep(.75)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -681,7 +681,7 @@ pyautogui.press("space", interval=.01)
 # Late Checkout MTD: Download
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
+time.sleep(.75)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -726,7 +726,7 @@ pyautogui.press("space", interval=.01)
 # Tour Commission MTD: Download
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
+time.sleep(.75)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -771,7 +771,7 @@ pyautogui.press("space", interval=.01)
 # Gift Shop MTD: Download
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
+time.sleep(.75)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -844,7 +844,7 @@ pyautogui.press("space", interval=.01)
 # ARR Immigration: Download
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
+time.sleep(.75)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -889,7 +889,7 @@ pyautogui.press("space", interval=.01)
 # DEP Immigration: Download
 script_config.download_page()
 pyautogui.hotkey("ctrl", "j", interval=.01)
-time.sleep(.25)
+time.sleep(.75)
 pyautogui.press("tab", presses=6, interval=.01)
 pyautogui.press("space", interval=.01)
 pyautogui.press("tab", presses=6, interval=.01)
@@ -1402,6 +1402,8 @@ for _ in root.findall(".//G_RESERVATION"):
         ws[f"D{arr_start}"] = f"{rm}\nMG Group"
     if "Agoda".strip().lower() in str(ta).strip().lower():
         ws[f"D{arr_start}"] = f"{rm}\nAgoda"
+    if "Flyeast".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nFlyeast"
 
     if vip is not None:
         ws[f"F{arr_start}"] = vip
@@ -1465,10 +1467,11 @@ for _ in root.findall(".//G_RESERVATION"):
             if "ROYAL".strip().lower() in str(cmt).strip().lower():
                 ws[f"F{arr_start}"] = f"{vip}\nROYAL"
     if "MI Squared".strip().lower() in str(cmt).strip().lower():
-        if diff_date.days < 7:
-            ws[f"F{arr_start}"] = "-"
-        if diff_date.days >= 7:
-            ws[f"F{arr_start}"] = "VIPS"
+        if vip not in ["VIP1", "VIP2"]:
+            if diff_date.days < 7:
+                ws[f"F{arr_start}"] = "-"
+            if diff_date.days >= 7:
+                ws[f"F{arr_start}"] = "VIPS"
 
     if chd is not None:
         ws[f"H{arr_start}"] = f"{adl}+{chd}"
@@ -1639,6 +1642,8 @@ for _ in root.findall(".//G_ROOM"):
         ws[f"D{dep_start}"] = f"{rm}\nMG Group"
     if "Agoda".strip().lower() in str(ta).strip().lower():
         ws[f"D{dep_start}"] = f"{rm}\nAgoda"
+    if "Flyeast".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nFlyeast"
 
     if vip is not None:
         ws[f"F{dep_start}"] = vip
@@ -1702,10 +1707,11 @@ for _ in root.findall(".//G_ROOM"):
             if "ROYAL".strip().lower() in str(cmt).strip().lower():
                 ws[f"F{dep_start}"] = f"{vip}\nROYAL"
     if "MI Squared".strip().lower() in str(cmt).strip().lower():
-        if diff_date.days < 7:
-            ws[f"F{dep_start}"] = "-"
-        if diff_date.days >= 7:
-            ws[f"F{dep_start}"] = "VIPS"
+        if vip not in ["VIP1", "VIP2"]:
+            if diff_date.days < 7:
+                ws[f"F{dep_start}"] = "-"
+            if diff_date.days >= 7:
+                ws[f"F{dep_start}"] = "VIPS"
 
     if chd is not None:
         ws[f"H{dep_start}"] = f"{adl}+{chd}"
