@@ -238,28 +238,24 @@ def num_row(num):
         vba += "    Selection.Insert Shift:=xlDown\n"
     return vba
 
+# path_OTH = path_share.__add__(r"\OTH")
+
+# ori_excel_file = "02.10.26.xlsm"
+# path_ori_excel = os.path.join(path_OTH, ori_excel_file)
+
+# from openpyxl import load_workbook
+
+# wb = load_workbook(path_ori_excel, keep_vba=True)
+
+# ws = "02.10.26"
+# ws = wb[ws]
+
+
+
 # import xml.etree.ElementTree
 
-# path_OTH = path_share.__add__(r"\OTH")
-# path_td_excel = os.path.join(path_OTH, f"{td_dot_dd_mm_yy}.xlsx")
-# from openpyxl import load_workbook
-# wb = load_workbook(path_td_excel, keep_vba=True)
-# wb.save(os.path.join(path_OTH, f"{td_dot_dd_mm_yy}.xlsm"))
-# os.startfile(path_td_excel)
-# time.sleep(2.5)
-
-# if pygetwindow.getWindowsWithTitle("Excel"):
-#     pygetwindow.getWindowsWithTitle("Excel")[0].activate()
-#     pygetwindow.getWindowsWithTitle("Excel")[0].maximize()
-
-# stay_excel()
-
-# pyautogui.hotkey("alt", "f11", interval=.01)
-# pyautogui.press("alt", interval=.01)
-# pyautogui.press("i", interval=.01)
-# pyautogui.press("m", interval=.01)
-
-# arrival = "res_detail_149894403.XML"
+# arr = "res_detail_155360773.XML"
+# arrival = os.path.join(path_.__add__(r"\Downloads"), arr)
 
 # tree = xml.etree.ElementTree.parse(arrival)
 # root = tree.getroot()
@@ -267,7 +263,8 @@ def num_row(num):
 # arr = root.findall(".//G_RESERVATION")
 # arr_row = 1 + len(arr)
 
-# departure = "departure_all_149894413.XML"
+# dep = "departure_all_155360472.XML"
+# departure = os.path.join(path_.__add__(r"\Downloads"), dep)
 
 # tree = xml.etree.ElementTree.parse(departure)
 # root = tree.getroot()
@@ -275,38 +272,28 @@ def num_row(num):
 # dep = root.findall(".//G_ROOM")
 # dep_row = 1 + len(dep)
 
-# def num_row(num):
-#     vba = ""
-#     for _ in range(num):
-#         vba += "    Application.CutCopyMode = False\n"
-#         vba += "    Selection.Copy\n"
-#         vba += "    Selection.Insert Shift:=xlDown\n"
-#     return vba
+# vac_file = "hkvacroom_155355874.XML"
+# vac = os.path.join(path_.__add__(r"\Downloads"), vac_file)
 
-# set_guest_num = f"""Sub Macro1()
-# '
-# ' Macro1 Macro
-# '
+# tree = xml.etree.ElementTree.parse(vac)
+# root = tree.getroot()
 
-# '
-#     ActiveWindow.SmallScroll Down:=0
-#     Rows("16:16").Select
-# {num_row(arr_row - 2)}
+# rm_collect = []
 
-#     ActiveWindow.SmallScroll Down:=2
-#     Rows("{arr_row + 17}:{arr_row + 17}").Select
-# {num_row(dep_row - 2)}
-    
-# End Sub
-# """
+# for _ in root.findall(".//G_ROOM"):
+#     rm = _.find("ROOM").text
+#     if _.find("RESV_STATUS").text == "Not Reserved":
+#         rm_collect.append(str(int(rm)))
 
-# import pyperclip
+# under_100 = [x for x in rm_collect if int(x) <= 100]
+# over_100 = [x for x in rm_collect if int(x) > 100]
+# under_100_value = ", ".join(under_100)
+# over_100_value = ", ".join(over_100)
+# ws[f"G{arr_row + dep_row + 38}"] = under_100_value
+# ws[f"G{arr_row + dep_row + 39}"] = over_100_value
 
-# pyperclip.copy(set_guest_num)
-# time.sleep(.5)
-# pyautogui.hotkey("ctrl", "v", interval=.01)
-# pyautogui.press("f5", interval=.01)
-# pyautogui.hotkey("alt", "f4", interval=.01)
+# ws[f"P{arr_row + dep_row + 38}"] = len(under_100)
+# ws[f"P{arr_row + dep_row + 39}"] = len(over_100)
 
-
-# print(set_guest_num)
+# wb.save(path_ori_excel)
+# wb.close()
