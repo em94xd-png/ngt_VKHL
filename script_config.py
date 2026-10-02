@@ -240,21 +240,21 @@ def num_row(num):
 
 # path_OTH = path_share.__add__(r"\OTH")
 
-# ori_excel_file = "02.10.26.xlsm"
+# ori_excel_file = "03.10.26.xlsm"
 # path_ori_excel = os.path.join(path_OTH, ori_excel_file)
 
 # from openpyxl import load_workbook
 
 # wb = load_workbook(path_ori_excel, keep_vba=True)
 
-# ws = "02.10.26"
+# ws = "03.10.26"
 # ws = wb[ws]
 
 
 
 # import xml.etree.ElementTree
 
-# arr = "res_detail_155360773.XML"
+# arr = "res_detail_155534034.XML"
 # arrival = os.path.join(path_.__add__(r"\Downloads"), arr)
 
 # tree = xml.etree.ElementTree.parse(arrival)
@@ -263,7 +263,7 @@ def num_row(num):
 # arr = root.findall(".//G_RESERVATION")
 # arr_row = 1 + len(arr)
 
-# dep = "departure_all_155360472.XML"
+# dep = "departure_all_155533612.XML"
 # departure = os.path.join(path_.__add__(r"\Downloads"), dep)
 
 # tree = xml.etree.ElementTree.parse(departure)
@@ -272,7 +272,7 @@ def num_row(num):
 # dep = root.findall(".//G_ROOM")
 # dep_row = 1 + len(dep)
 
-# vac_file = "hkvacroom_155355874.XML"
+# vac_file = "hkvacroom_155542119.XML"
 # vac = os.path.join(path_.__add__(r"\Downloads"), vac_file)
 
 # tree = xml.etree.ElementTree.parse(vac)

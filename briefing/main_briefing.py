@@ -27,6 +27,7 @@ script_config.zoom_in(3)
 script_config.main_OPERA_menu()
 
 # To report search
+time.sleep(.5)
 pyautogui.press("tab", presses=5, interval=0.01)
 pyautogui.press("right", presses=6, interval=0.01)
 pyautogui.press("down", interval=0.01)
@@ -907,6 +908,70 @@ win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
 
 dep_immigration = os.path.join(script_config.path_.__add__(r"\Downloads"), dep_immigration_file)
 
+script_config.tab_reserve(1)
+pyautogui.press("enter", interval=0.01)
+script_config.search_reports()
+time.sleep(1)
+pyautogui.press("tab", interval=0.01)
+
+# Vacant Rooms
+pyautogui.write("Vacant Rooms", interval=.01)
+pyautogui.press("enter", interval=.01)
+script_config.search_enter_step1()
+script_config.search_enter_step2()
+time.sleep(.5)
+pyautogui.press("tab", presses=8, interval=.01)
+pyautogui.press("down", presses=2, interval=.01)
+script_config.search_enter_step3()
+pyautogui.press("tab", presses=12, interval=.01)
+pyautogui.press("enter", interval=.01)
+# Vacant Rooms: Config
+script_config.config_report()
+time.sleep(1)
+pyautogui.press("tab", interval=.01)
+time.sleep(.75)
+pyautogui.write("1H4XK,1H4XT,2U2XKT,2U3XKT", interval=.01)
+pyautogui.press("tab", presses=9, interval=.01)
+pyautogui.press("enter", interval=0.01)
+# Vacant Rooms: Save
+script_config.download_as_2()
+pyautogui.click(895, 581, interval=.01)
+
+while True:
+     if pyautogui.pixelMatchesColor(895, 581, (22, 21, 19), tolerance=10):
+          break
+
+time.sleep(.5)
+
+while True:
+     if pyautogui.pixelMatchesColor(895, 581, (22, 21, 19), tolerance=10):
+          break
+
+time.sleep(.5)
+
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("space", interval=.01)
+# Vacant Rooms: Download
+script_config.download_page()
+pyautogui.hotkey("ctrl", "j", interval=.01)
+time.sleep(.75)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+script_config.not_download_page()
+time.sleep(.5)
+pyautogui.hotkey("ctrl", "l", interval=.01)
+pyautogui.hotkey("ctrl", "c", interval=.01)
+vacant_url = pyperclip.paste()
+vacant_file = f"hkvacroom_{re.search(r"(\d+)\.[xX][mM][lL]", vacant_url).group(1)}.XML"
+pyautogui.hotkey("ctrl", "w", interval=.01)
+
+download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+vacant = os.path.join(script_config.path_.__add__(r"\Downloads"), vacant_file)
+
 path_OTH = script_config.path_share.__add__(r"\OTH")
 
 ori_excel_file = "briefing.xlsm"
@@ -1736,6 +1801,25 @@ for _ in root.findall(".//G_ROOM"):
 
     dep_start += 1
 
+tree = xml.etree.ElementTree.parse(vacant)
+root = tree.getroot()
+
+vacant_room = []
+
+for _ in root.findall(".//G_ROOM"):
+    rm = _.find("ROOM").text
+    if _.find("RESV_STATUS").text == "Not Reserved":
+        vacant_room.append(str(int(rm)))
+
+villa = [x for x in vacant_room if int(x) <= 100]
+building = [x for x in vacant_room if int(x) > 100]
+
+villa_value = ", ".join(villa)
+building_value = ", ".join(building)
+
+ws[f"G{arr_row + dep_row + 38}"] = villa_value
+ws[f"G{arr_row + dep_row + 39}"] = building_value
+
 wb.save(path_td_excel)
 wb.close()
 
@@ -1753,8 +1837,6 @@ while True:
     if pyautogui.pixelMatchesColor(1022, 370, (21, 121, 52), tolerance=10):
         break
 
-script_config.zoom_in(7)
-
 time.sleep(.5)
 
 pyautogui.press("tab", presses=2, interval=.01)
@@ -1766,6 +1848,13 @@ pyautogui.press("down", presses=7, interval=.01)
 pyautogui.press("enter", interval=.01)
 pyautogui.press("tab", presses=7, interval=.01)
 pyautogui.press("space", interval=.01)
+
+while True:
+    if pyautogui.pixelMatchesColor(1022, 370, (21, 121, 52), tolerance=10):
+        break
+
+script_config.zoom_in(7)
+
 pyautogui.hotkey("ctrl", "shift", "s", interval=.01)
 pyautogui.moveTo(1132, 890)
 pyautogui.dragTo(844, 603, button="left")
