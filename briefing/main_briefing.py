@@ -1843,7 +1843,7 @@ if pygetwindow.getWindowsWithTitle("page"):
 
 time.sleep(.75)
 script_config.zoom_out(10)
-script_config.zoom_in(3)
+script_config.zoom_in(2)
 
 while True:
     if pyautogui.pixelMatchesColor(1022, 370, (21, 121, 52), tolerance=10):
@@ -1865,7 +1865,7 @@ while True:
     if pyautogui.pixelMatchesColor(1022, 370, (21, 121, 52), tolerance=10):
         break
 
-script_config.zoom_in(7)
+script_config.zoom_in(8)
 
 pyautogui.hotkey("ctrl", "shift", "s", interval=.01)
 pyautogui.moveTo(1132, 890)

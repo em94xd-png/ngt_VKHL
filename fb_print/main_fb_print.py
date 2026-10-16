@@ -1,4 +1,5 @@
 import subprocess, pyautogui, time, os, pygetwindow, sys
+from datetime import date, timedelta
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -32,40 +33,58 @@ script_config.search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
-# # Package Forecast
-# pyautogui.write("Package Forecast - Detailed", interval=.01)
-# pyautogui.press("enter", interval=0.01)
-# script_config.search_enter_step1()
-# script_config.search_enter_step2()
-# time.sleep(.5)
-# pyautogui.press("tab", presses=8, interval=0.01)
-# pyautogui.press("down", presses=2, interval=0.01)
-# script_config.search_enter_step3()
-# pyautogui.press("tab", presses=12, interval=0.01)
-# pyautogui.press("enter", interval=0.01)
-# # Package Forecast: Config
-# script_config.config_report()
-# time.sleep(1)
-# pyautogui.press("tab", presses=2, interval=0.01)
-# pyautogui.write(script_config.td_dd_mm, interval=.01)
-# pyautogui.press("tab", interval=0.01)
-# time.sleep(1)
-# pyautogui.write(script_config.td_dd_mm, interval=.01)
-# pyautogui.press("tab", presses=3, interval=0.01)
-# time.sleep(.75)
-# pyautogui.write("BFB01E,BFB01I,BFB02E,BFB02I,BFB03I,BFB04I,BFB05I", interval=.01)
-# pyautogui.press("tab", presses=8, interval=0.01)
-# pyautogui.press("enter", interval=0.01)
-# # Package Forecast: Print
-# script_config.wait_report()
-# pyautogui.click(600, 84, interval=0.01)
-# time.sleep(.5)
-# script_config.print_page_config(1, 1, 1)
-# script_config.tab_reserve(3)
-# pyautogui.press("enter", interval=0.01)
-# script_config.search_reports()
-# time.sleep(1)
-# pyautogui.press("tab", interval=0.01)
+# Package Forecast
+pyautogui.write("Package Forecast - Detailed", interval=.01)
+pyautogui.press("enter", interval=0.01)
+script_config.search_enter_step1()
+script_config.search_enter_step2()
+time.sleep(.5)
+pyautogui.press("tab", presses=8, interval=0.01)
+pyautogui.press("down", presses=2, interval=0.01)
+script_config.search_enter_step3()
+pyautogui.press("tab", presses=12, interval=0.01)
+pyautogui.press("enter", interval=0.01)
+# Package Forecast: Config
+script_config.config_report()
+time.sleep(1)
+pyautogui.press("tab", presses=2, interval=0.01)
+pyautogui.write(script_config.td_dd_mm, interval=.01)
+pyautogui.press("tab", interval=0.01)
+time.sleep(1)
+pyautogui.write(script_config.td_dd_mm, interval=.01)
+pyautogui.press("tab", presses=3, interval=0.01)
+time.sleep(.75)
+pyautogui.write("BFB01E,BFB01I,BFB02E,BFB02I,BFB03I,BFB04I,BFB05I", interval=.01)
+pyautogui.press("tab", presses=8, interval=0.01)
+pyautogui.press("enter", interval=0.01)
+# Package Forecast: Print
+script_config.wait_report()
+pyautogui.click(600, 84, interval=0.01)
+time.sleep(.5)
+pyautogui.hotkey("ctrl", "s", interval=.01)
+time.sleep(1)
+pyautogui.hotkey("ctrl", "f", interval=.01)
+script_config.tab_reserve(2)
+time.sleep(0.1)
+pyautogui.press("enter", interval=0.01)
+pyautogui.write(script_config.daily_report_path)
+pyautogui.press("enter", interval=0.01)
+time.sleep(.5)
+pyautogui.press("tab", presses=6, interval=.01)
+
+Package_Forecast = f"Package Forecast {date.today().strftime("%d.%m")}"
+
+pyautogui.write(Package_Forecast, interval=.01)
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("enter", interval=0.01)
+time.sleep(0.5)
+pyautogui.hotkey("ctrl", "w")
+time.sleep(0.5)
+script_config.tab_reserve(3)
+pyautogui.press("enter", interval=0.01)
+script_config.search_reports()
+time.sleep(1)
+pyautogui.press("tab", interval=0.01)
 
 # VKHL Guests INH (Full)
 pyautogui.write("gibyroom", interval=.01)
@@ -94,6 +113,14 @@ script_config.wait_report()
 pyautogui.click(600, 84, interval=0.01)
 time.sleep(.5)
 script_config.print_page_config(2, 1, 1)
+
+Package_Forecast_ytd = f"Package Forecast {(date.today() - timedelta(days=1)).strftime("%d.%m")}"
+
+report_PDF = os.path.join(fr"{script_config.path_share}\Daily's Report\Report {script_config.ytd_yyyy}\{script_config.ytd_order_m} - {script_config.ytd_short_m} {script_config.ytd_yyyy}\{(date.today() - timedelta(days=2)).strftime("%#d")} {script_config.ytd_full_m}", Package_Forecast_ytd).__add__(".PDF")
+report_PDF_to_URL = "file:" + report_PDF.replace("\\", "/")
+subprocess.run(["cmd", "/c", "start", "msedge", report_PDF_to_URL])
+time.sleep(.5)
+script_config.print_page_config(1, 1, 1)
 
 VKHL_Arrivals = "4. VKHL Arrivals"
 
