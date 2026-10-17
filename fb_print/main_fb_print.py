@@ -10,6 +10,9 @@ pyautogui.FAILSAFE = True
 if not os.path.exists(f"{script_config.path_share}"):
      sys.exit()
 
+if not os.path.exists(fr"{script_config.path_share}\Daily's Report\Report {script_config.ytd_yyyy}\{script_config.ytd_order_m} - {script_config.ytd_short_m} {script_config.ytd_yyyy}\{(date.today() - timedelta(days=2)).strftime("%#d")} {script_config.ytd_full_m}\Package Forecast {(date.today() - timedelta(days=1)).strftime("%d.%m")}.PDF"):
+     sys.exit()
+
 # Open Opera
 subprocess.run(["cmd", "/c", "start", "msedge", script_config.site_OPERA])
 

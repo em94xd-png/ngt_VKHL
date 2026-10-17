@@ -1846,7 +1846,7 @@ script_config.zoom_out(10)
 script_config.zoom_in(2)
 
 while True:
-    if pyautogui.pixelMatchesColor(1022, 370, (21, 121, 52), tolerance=10):
+    if pyautogui.pixelMatchesColor(1003, 304, (21, 121, 52), tolerance=10):
         break
 
 time.sleep(.5)
@@ -1862,7 +1862,7 @@ pyautogui.press("tab", presses=7, interval=.01)
 pyautogui.press("space", interval=.01)
 
 while True:
-    if pyautogui.pixelMatchesColor(1022, 370, (21, 121, 52), tolerance=10):
+    if pyautogui.pixelMatchesColor(1003, 304, (21, 121, 52), tolerance=10):
         break
 
 script_config.zoom_in(8)
