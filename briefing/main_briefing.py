@@ -1869,7 +1869,7 @@ script_config.zoom_in(8)
 
 pyautogui.hotkey("ctrl", "shift", "s", interval=.01)
 pyautogui.moveTo(1132, 890)
-time.sleep(.25)
+time.sleep(0.1)
 pyautogui.dragTo(844, 603, button="left")
 
 while True:
@@ -1941,7 +1941,6 @@ if pygetwindow.getWindowsWithTitle("page"):
 
 pyautogui.hotkey("ctrl", "shift", "s", interval=.01)
 pyautogui.moveTo(659, 866)
-time.sleep(.25)
 pyautogui.dragTo(334, 584, button="left")
 pyautogui.press("tab", interval=.01)
 pyautogui.press("space", interval=.01)
@@ -2011,7 +2010,6 @@ pyautogui.press("tab", presses=7, interval=.01)
 pyautogui.press("space", interval=.01)
 pyautogui.hotkey("ctrl", "shift", "s", interval=.01)
 pyautogui.moveTo(1132, 890)
-time.sleep(.25)
 pyautogui.dragTo(844, 603, button="left")
 
 while True:
@@ -2078,7 +2076,6 @@ if pygetwindow.getWindowsWithTitle("page"):
 
 pyautogui.hotkey("ctrl", "shift", "s", interval=.01)
 pyautogui.moveTo(659, 866)
-time.sleep(.25)
 pyautogui.dragTo(334, 584, button="left")
 pyautogui.press("tab", interval=.01)
 pyautogui.press("space", interval=.01)
