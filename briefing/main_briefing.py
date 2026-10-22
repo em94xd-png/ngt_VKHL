@@ -1869,7 +1869,7 @@ script_config.zoom_in(8)
 
 pyautogui.hotkey("ctrl", "shift", "s", interval=.01)
 pyautogui.moveTo(1132, 890)
-time.sleep(0.1)
+time.sleep(.15)
 pyautogui.dragTo(844, 603, button="left")
 
 while True:
