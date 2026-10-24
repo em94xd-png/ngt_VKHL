@@ -847,4 +847,4 @@ time.sleep(0.5)
 # Open 4. VKHL Arrivals
 script_config.print_report_after(VKHL_Arrivals)
 time.sleep(.5)
-pyautogui.press("end", interval=.01)
+pyautogui.hotkey("ctrl", "end", interval=.01)
