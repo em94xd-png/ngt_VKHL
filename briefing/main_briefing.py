@@ -1511,6 +1511,8 @@ for _ in root.findall(".//G_RESERVATION"):
                 ws[f"F{arr_start}"] = f"VIPG\n{memb}"
                 if "repeat".strip().lower() in str(cmt).strip().lower():
                     ws[f"F{arr_start}"] = f"VIPR\n{memb}"
+                if "Last stay".strip().lower() in str(cmt).strip().lower():
+                    ws[f"F{arr_start}"] = f"VIPR\n{memb}"
     if memb in ["PLATINUM"]:
         if vip not in ["VIP1", "VIP2"]:
             ws[f"F{arr_start}"] = f"VIPS\n{memb}"
@@ -1756,6 +1758,8 @@ for _ in root.findall(".//G_ROOM"):
             if vip not in ["VIP1", "VIP2", "VIPS", "VIPR"]:
                 ws[f"F{dep_start}"] = f"VIPG\n{memb}"
                 if "repeat".strip().lower() in str(cmt).strip().lower():
+                    ws[f"F{dep_start}"] = f"VIPR\n{memb}"
+                if "Last stay".strip().lower() in str(cmt).strip().lower():
                     ws[f"F{dep_start}"] = f"VIPR\n{memb}"
     if memb in ["PLATINUM"]:
         if vip not in ["VIP1", "VIP2"]:
