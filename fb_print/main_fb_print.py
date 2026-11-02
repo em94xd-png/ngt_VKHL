@@ -10,7 +10,7 @@ pyautogui.FAILSAFE = True
 if not os.path.exists(f"{script_config.path_share}"):
      sys.exit()
 
-if not os.path.exists(fr"{script_config.path_share}\Daily's Report\Report {script_config.ytd_yyyy}\{script_config.ytd_order_m} - {script_config.ytd_short_m} {script_config.ytd_yyyy}\{(date.today() - timedelta(days=2)).strftime("%#d")} {script_config.ytd_full_m}\Package Forecast {(date.today() - timedelta(days=1)).strftime("%d.%m")}.PDF"):
+if not os.path.exists(fr"{script_config.path_share}\Daily's Report\Report {script_config.ytd_yyyy}\{(date.today() - timedelta(days=2)).strftime("%#m")} - {(date.today() - timedelta(days=2)).strftime("%b")} {script_config.ytd_yyyy}\{(date.today() - timedelta(days=2)).strftime("%#d")} {(date.today() - timedelta(days=2)).strftime("%B")}\Package Forecast {(date.today() - timedelta(days=1)).strftime("%d.%m")}.PDF"):
      sys.exit()
 
 # Open Opera
@@ -66,11 +66,11 @@ script_config.print_page_config(2, 1, 1)
 
 Package_Forecast_YTD = f"Package Forecast {(date.today() - timedelta(days=1)).strftime("%d.%m")}"
 
-report_PDF = os.path.join(fr"{script_config.path_share}\Daily's Report\Report {script_config.ytd_yyyy}\{script_config.ytd_order_m} - {script_config.ytd_short_m} {script_config.ytd_yyyy}\{(date.today() - timedelta(days=2)).strftime("%#d")} {script_config.ytd_full_m}", Package_Forecast_YTD).__add__(".PDF")
+report_PDF = os.path.join(fr"{script_config.path_share}\Daily's Report\Report {script_config.ytd_yyyy}\{(date.today() - timedelta(days=2)).strftime("%#m")} - {(date.today() - timedelta(days=2)).strftime("%b")} {script_config.ytd_yyyy}\{(date.today() - timedelta(days=2)).strftime("%#d")} {(date.today() - timedelta(days=2)).strftime("%B")}", Package_Forecast_YTD).__add__(".PDF")
 report_PDF_to_URL = "file:" + report_PDF.replace("\\", "/")
 subprocess.run(["cmd", "/c", "start", "msedge", report_PDF_to_URL])
 time.sleep(.5)
-script_config.print_page_config(1, 1, 1)
+script_config.print_page_config(2, 1, 1)
 
 VKHL_Arrivals = "4. VKHL Arrivals"
 
@@ -89,6 +89,12 @@ VKHL_Guests_INH = "6. VKHL Guests INH"
 script_config.print_report_after(VKHL_Guests_INH)
 time.sleep(.5)
 script_config.print_page_config(1, 1, 1)
+
+Trial_Balance = "9. Trial Balance"
+
+script_config.print_report_after(Trial_Balance)
+time.sleep(.5)
+script_config.print_page_config(1, 1, 0)
 
 script_config.tab_reserve(3)
 pyautogui.press("enter", interval=0.01)
