@@ -70,7 +70,7 @@ report_PDF = os.path.join(fr"{script_config.path_share}\Daily's Report\Report {s
 report_PDF_to_URL = "file:" + report_PDF.replace("\\", "/")
 subprocess.run(["cmd", "/c", "start", "msedge", report_PDF_to_URL])
 time.sleep(.5)
-script_config.print_page_config(2, 1, 1)
+script_config.print_page_config(1, 1, 1)
 
 VKHL_Arrivals = "4. VKHL Arrivals"
 
