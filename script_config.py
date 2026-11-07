@@ -238,62 +238,46 @@ def num_row(num):
         vba += "    Selection.Insert Shift:=xlDown\n"
     return vba
 
+
+
 # path_OTH = path_share.__add__(r"\OTH")
 
-# ori_excel_file = "03.10.26.xlsm"
+# ori_excel_file = "07.11.26.xlsm"
 # path_ori_excel = os.path.join(path_OTH, ori_excel_file)
 
 # from openpyxl import load_workbook
 
 # wb = load_workbook(path_ori_excel, keep_vba=True)
 
-# ws = "03.10.26"
+# ws = "07.11.26"
 # ws = wb[ws]
 
 
 
 # import xml.etree.ElementTree
 
-# arr = "res_detail_155534034.XML"
-# arrival = os.path.join(path_.__add__(r"\Downloads"), arr)
+# ooo = "hkooobyreason_162021797.XML"
+# out_of = os.path.join(path_.__add__(r"\Downloads"), ooo)
 
-# tree = xml.etree.ElementTree.parse(arrival)
+# tree = xml.etree.ElementTree.parse(out_of)
 # root = tree.getroot()
 
-# arr = root.findall(".//G_RESERVATION")
-# arr_row = 1 + len(arr)
+# ooo_set = []
 
-# dep = "departure_all_155533612.XML"
-# departure = os.path.join(path_.__add__(r"\Downloads"), dep)
+# _ = root.findall(".//LIST_G_ROOM/*")
+# if not _:
+#     ooo_set.append("-")
+# else:
+#     for _ in _:
+#         rm = _.find("ROOM").text
+#         if _.find("ROOM_STATUS").text == "OS":
+#             ooo_set.append(str(int(rm)))
+#         ooo_set.sort(key=int)
 
-# tree = xml.etree.ElementTree.parse(departure)
-# root = tree.getroot()
+# ooo = ", ".join(ooo_set)
 
-# dep = root.findall(".//G_ROOM")
-# dep_row = 1 + len(dep)
+# ws["V1"] = f"Show Room\n\n{ooo}\n\n\nEarly Departure\n\n-"
 
-# vac_file = "hkvacroom_155542119.XML"
-# vac = os.path.join(path_.__add__(r"\Downloads"), vac_file)
-
-# tree = xml.etree.ElementTree.parse(vac)
-# root = tree.getroot()
-
-# rm_collect = []
-
-# for _ in root.findall(".//G_ROOM"):
-#     rm = _.find("ROOM").text
-#     if _.find("RESV_STATUS").text == "Not Reserved":
-#         rm_collect.append(str(int(rm)))
-
-# under_100 = [x for x in rm_collect if int(x) <= 100]
-# over_100 = [x for x in rm_collect if int(x) > 100]
-# under_100_value = ", ".join(under_100)
-# over_100_value = ", ".join(over_100)
-# ws[f"G{arr_row + dep_row + 38}"] = under_100_value
-# ws[f"G{arr_row + dep_row + 39}"] = over_100_value
-
-# ws[f"P{arr_row + dep_row + 38}"] = len(under_100)
-# ws[f"P{arr_row + dep_row + 39}"] = len(over_100)
 
 # wb.save(path_ori_excel)
 # wb.close()

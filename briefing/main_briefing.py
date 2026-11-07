@@ -36,6 +36,77 @@ script_config.search_reports()
 time.sleep(1)
 pyautogui.press("tab", interval=0.01)
 
+# Out of Service by Reason
+pyautogui.write("ooo", interval=0.01)
+pyautogui.press("enter", interval=0.01)
+script_config.search_enter_step1()
+script_config.search_enter_step2()
+time.sleep(.5)
+pyautogui.press("tab", presses=8, interval=0.01)
+pyautogui.press("down", presses=2, interval=0.01)
+script_config.search_enter_step3()
+pyautogui.press("tab", presses=12, interval=0.01)
+pyautogui.press("enter", interval=0.01)
+# Out of Service by Reason: Config
+script_config.config_report()
+time.sleep(1)
+pyautogui.press("tab", presses=3, interval=0.01)
+time.sleep(1)
+pyautogui.write("sw", interval=0.01)
+pyautogui.press("tab", interval=0.01)
+pyautogui.press("down", presses=2, interval=0.01)
+time.sleep(.5)
+pyautogui.press("tab", interval=0.01)
+pyautogui.press("down", interval=0.01)
+time.sleep(.5)
+pyautogui.press("tab", presses=3, interval=0.01)
+pyautogui.press("enter", interval=0.01)
+# Out of Service by Reason: Save
+script_config.download_as_2()
+pyautogui.click(895, 581, interval=.01)
+
+while True:
+     if pyautogui.pixelMatchesColor(895, 581, (22, 21, 19), tolerance=10):
+          break
+
+time.sleep(.5)
+
+while True:
+     if pyautogui.pixelMatchesColor(895, 581, (22, 21, 19), tolerance=10):
+          break
+
+time.sleep(.5)
+
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("space", interval=.01)
+# Out of Service by Reason: Download
+script_config.download_page()
+pyautogui.hotkey("ctrl", "j", interval=.01)
+time.sleep(.75)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+script_config.not_download_page()
+time.sleep(.5)
+pyautogui.hotkey("ctrl", "l", interval=.01)
+pyautogui.hotkey("ctrl", "c", interval=.01)
+ooo_url = pyperclip.paste()
+
+ooo_file = f"hkooobyreason_{re.search(r"(\d+)\.[xX][mM][lL]", ooo_url).group(1)}.XML"
+pyautogui.hotkey("ctrl", "w", interval=.01)
+
+download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+ooo = os.path.join(script_config.path_.__add__(r"\Downloads"), ooo_file)
+
+script_config.tab_reserve(1)
+pyautogui.press("enter", interval=0.01)
+script_config.search_reports()
+time.sleep(1)
+pyautogui.press("tab", interval=0.01)
+
 # Arrivals
 pyautogui.write("Arrivals: Detailed FO", interval=.01)
 pyautogui.press("enter", interval=.01)
@@ -1040,6 +1111,8 @@ pyautogui.hotkey("alt", "f4")
 
 script_config.not_stay_excel()
 
+time.sleep(.5)
+
 wb = load_workbook(path_td_excel, keep_vba=True)
 
 ws = "Ori Format"
@@ -1047,6 +1120,25 @@ ws = wb[ws]
 ws.title = f"{script_config.td_dot_dd_mm_yy}"
 
 ws["A2"] = f"Daily Briefing\n{script_config.td_full_d} {script_config.td_full_m} {script_config.td_short_date}, {script_config.td_yyyy}"
+
+tree = xml.etree.ElementTree.parse(ooo)
+root = tree.getroot()
+
+ooo_set = []
+
+_ = root.findall(".//LIST_G_ROOM/*")
+if not _:
+    ooo_set.append("-")
+else:
+    for _ in _:
+        rm = _.find("ROOM").text
+        if _.find("ROOM_STATUS").text == "OS":
+            ooo_set.append(str(int(rm)))
+        ooo_set.sort(key=int)
+
+ooo_convert = ", ".join(ooo_set)
+
+ws["V1"] = f"Show Room\n\n{ooo_convert}\n\n\nEarly Departure\n\n-"
 
 tree = xml.etree.ElementTree.parse(history_forecast)
 root = tree.getroot()
