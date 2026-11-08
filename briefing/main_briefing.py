@@ -92,7 +92,6 @@ time.sleep(.5)
 pyautogui.hotkey("ctrl", "l", interval=.01)
 pyautogui.hotkey("ctrl", "c", interval=.01)
 ooo_url = pyperclip.paste()
-
 ooo_file = f"hkooobyreason_{re.search(r"(\d+)\.[xX][mM][lL]", ooo_url).group(1)}.XML"
 pyautogui.hotkey("ctrl", "w", interval=.01)
 
@@ -1111,8 +1110,6 @@ pyautogui.hotkey("alt", "f4")
 
 script_config.not_stay_excel()
 
-time.sleep(.5)
-
 wb = load_workbook(path_td_excel, keep_vba=True)
 
 ws = "Ori Format"
@@ -1127,16 +1124,18 @@ root = tree.getroot()
 ooo_set = []
 
 _ = root.findall(".//LIST_G_ROOM/*")
-if not _:
-    ooo_set.append("-")
-else:
-    for _ in _:
-        rm = _.find("ROOM").text
-        if _.find("ROOM_STATUS").text == "OS":
-            ooo_set.append(str(int(rm)))
-        ooo_set.sort(key=int)
 
-ooo_convert = ", ".join(ooo_set)
+for _ in _:
+    if _.find("ROOM") is not None and _.find("ROOM_STATUS") is not None:
+        if _.find("ROOM_STATUS").text == "OS":
+            ooo_set.append(str(int(_.find("ROOM").text)))
+
+ooo_set.sort(key=int)
+
+if not ooo_set:
+    ooo_convert = "-"
+else:
+    ooo_convert = ", ".join(ooo_set)
 
 ws["V1"] = f"Show Room\n\n{ooo_convert}\n\n\nEarly Departure\n\n-"
 

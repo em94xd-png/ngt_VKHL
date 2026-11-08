@@ -256,7 +256,7 @@ def num_row(num):
 
 # import xml.etree.ElementTree
 
-# ooo = "hkooobyreason_162021797.XML"
+# ooo = "hkooobyreason_162205372.XML"
 # out_of = os.path.join(path_.__add__(r"\Downloads"), ooo)
 
 # tree = xml.etree.ElementTree.parse(out_of)
@@ -265,18 +265,20 @@ def num_row(num):
 # ooo_set = []
 
 # _ = root.findall(".//LIST_G_ROOM/*")
-# if not _:
-#     ooo_set.append("-")
-# else:
-#     for _ in _:
-#         rm = _.find("ROOM").text
+
+# for _ in _:
+#     if _.find("ROOM") is not None and _.find("ROOM_STATUS") is not None:
 #         if _.find("ROOM_STATUS").text == "OS":
-#             ooo_set.append(str(int(rm)))
-#         ooo_set.sort(key=int)
+#             ooo_set.append(str(int(_.find("ROOM").text)))
 
-# ooo = ", ".join(ooo_set)
+# ooo_set.sort(key=int)
 
-# ws["V1"] = f"Show Room\n\n{ooo}\n\n\nEarly Departure\n\n-"
+# if not ooo_set:
+#     ooo_convert = "-"
+# else:
+#     ooo_convert = ", ".join(ooo_set)
+
+# ws["V1"] = f"Show Room\n\n{ooo_convert}\n\n\nEarly Departure\n\n-"
 
 
 # wb.save(path_ori_excel)
