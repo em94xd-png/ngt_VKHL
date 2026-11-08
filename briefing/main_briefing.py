@@ -25,9 +25,9 @@ script_config.first_OPERA_open()
 script_config.zoom_out(10)
 script_config.zoom_in(3)
 script_config.main_OPERA_menu()
+time.sleep(.5)
 
 # To report search
-time.sleep(.5)
 pyautogui.press("tab", presses=5, interval=0.01)
 pyautogui.press("right", presses=6, interval=0.01)
 pyautogui.press("down", interval=0.01)
