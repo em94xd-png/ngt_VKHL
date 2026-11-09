@@ -1566,6 +1566,8 @@ for _ in root.findall(".//G_RESERVATION"):
         ws[f"D{arr_start}"] = f"{rm}\nEmerging"
     if "Exotic".strip().lower() in str(ta).strip().lower():
         ws[f"D{arr_start}"] = f"{rm}\nExotic"
+    if "Smiling Albino".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nSmiling Albino"
 
     if vip is not None:
         ws[f"F{arr_start}"] = vip
@@ -1814,6 +1816,8 @@ for _ in root.findall(".//G_ROOM"):
         ws[f"D{dep_start}"] = f"{rm}\nEmerging"
     if "Exotic".strip().lower() in str(ta).strip().lower():
         ws[f"D{dep_start}"] = f"{rm}\nExotic"
+    if "Smiling Albino".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nSmiling Albino"
 
     if vip is not None:
         ws[f"F{dep_start}"] = vip
