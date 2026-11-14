@@ -25,12 +25,82 @@ script_config.first_OPERA_open()
 script_config.zoom_out(10)
 script_config.zoom_in(3)
 script_config.main_OPERA_menu()
+time.sleep(.5)
 
 # To report search
-time.sleep(.5)
 pyautogui.press("tab", presses=5, interval=0.01)
 pyautogui.press("right", presses=6, interval=0.01)
 pyautogui.press("down", interval=0.01)
+pyautogui.press("enter", interval=0.01)
+script_config.search_reports()
+time.sleep(1)
+pyautogui.press("tab", interval=0.01)
+
+# Out of Service by Reason
+pyautogui.write("ooo", interval=0.01)
+pyautogui.press("enter", interval=0.01)
+script_config.search_enter_step1()
+script_config.search_enter_step2()
+time.sleep(.5)
+pyautogui.press("tab", presses=8, interval=0.01)
+pyautogui.press("down", presses=2, interval=0.01)
+script_config.search_enter_step3()
+pyautogui.press("tab", presses=12, interval=0.01)
+pyautogui.press("enter", interval=0.01)
+# Out of Service by Reason: Config
+script_config.config_report()
+time.sleep(1)
+pyautogui.press("tab", presses=3, interval=0.01)
+time.sleep(1)
+pyautogui.write("sw", interval=0.01)
+pyautogui.press("tab", interval=0.01)
+pyautogui.press("down", presses=2, interval=0.01)
+time.sleep(.5)
+pyautogui.press("tab", interval=0.01)
+pyautogui.press("down", interval=0.01)
+time.sleep(.5)
+pyautogui.press("tab", presses=3, interval=0.01)
+pyautogui.press("enter", interval=0.01)
+# Out of Service by Reason: Save
+script_config.download_as_2()
+pyautogui.click(895, 581, interval=.01)
+
+while True:
+     if pyautogui.pixelMatchesColor(895, 581, (22, 21, 19), tolerance=10):
+          break
+
+time.sleep(.5)
+
+while True:
+     if pyautogui.pixelMatchesColor(895, 581, (22, 21, 19), tolerance=10):
+          break
+
+time.sleep(.5)
+
+pyautogui.press("tab", presses=3, interval=.01)
+pyautogui.press("space", interval=.01)
+# Out of Service by Reason: Download
+script_config.download_page()
+pyautogui.hotkey("ctrl", "j", interval=.01)
+time.sleep(.75)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+pyautogui.press("tab", presses=6, interval=.01)
+pyautogui.press("space", interval=.01)
+script_config.not_download_page()
+time.sleep(.5)
+pyautogui.hotkey("ctrl", "l", interval=.01)
+pyautogui.hotkey("ctrl", "c", interval=.01)
+ooo_url = pyperclip.paste()
+ooo_file = f"hkooobyreason_{re.search(r"(\d+)\.[xX][mM][lL]", ooo_url).group(1)}.XML"
+pyautogui.hotkey("ctrl", "w", interval=.01)
+
+download_page = pygetwindow.getWindowsWithTitle("Untitled")[0]
+win32gui.PostMessage(download_page._hWnd, win32con.WM_CLOSE, 0, 0)
+
+ooo = os.path.join(script_config.path_.__add__(r"\Downloads"), ooo_file)
+
+script_config.tab_reserve(1)
 pyautogui.press("enter", interval=0.01)
 script_config.search_reports()
 time.sleep(1)
@@ -1048,6 +1118,27 @@ ws.title = f"{script_config.td_dot_dd_mm_yy}"
 
 ws["A2"] = f"Daily Briefing\n{script_config.td_full_d} {script_config.td_full_m} {script_config.td_short_date}, {script_config.td_yyyy}"
 
+tree = xml.etree.ElementTree.parse(ooo)
+root = tree.getroot()
+
+ooo_set = []
+
+_ = root.findall(".//LIST_G_ROOM/*")
+
+for _ in _:
+    if _.find("ROOM") is not None and _.find("ROOM_STATUS") is not None:
+        if _.find("ROOM_STATUS").text == "OS":
+            ooo_set.append(str(int(_.find("ROOM").text)))
+
+ooo_set.sort(key=int)
+
+if not ooo_set:
+    ooo_convert = "-"
+else:
+    ooo_convert = ", ".join(ooo_set)
+
+ws["V1"] = f"Show Room\n\n{ooo_convert}\n\n\nEarly Departure\n\n-"
+
 tree = xml.etree.ElementTree.parse(history_forecast)
 root = tree.getroot()
 
@@ -1475,6 +1566,10 @@ for _ in root.findall(".//G_RESERVATION"):
         ws[f"D{arr_start}"] = f"{rm}\nEmerging"
     if "Exotic".strip().lower() in str(ta).strip().lower():
         ws[f"D{arr_start}"] = f"{rm}\nExotic"
+    if "Smiling Albino".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nSmiling Albino"
+    if "Odeon".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nOdeon"
 
     if vip is not None:
         ws[f"F{arr_start}"] = vip
@@ -1723,6 +1818,10 @@ for _ in root.findall(".//G_ROOM"):
         ws[f"D{dep_start}"] = f"{rm}\nEmerging"
     if "Exotic".strip().lower() in str(ta).strip().lower():
         ws[f"D{dep_start}"] = f"{rm}\nExotic"
+    if "Smiling Albino".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nSmiling Albino"
+    if "Odeon".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nOdeon"
 
     if vip is not None:
         ws[f"F{dep_start}"] = vip
@@ -1839,37 +1938,49 @@ ws[f"G{arr_row + dep_row + 39}"] = building_value
 wb.save(path_td_excel)
 wb.close()
 
-subprocess.run(["cmd", "/c", "start", "msedge", f"https://app.reviewpro.com/myPage?fd=2026-01-01&td=2026-08-09&prevFd=2025-01-01&prevTd=2025-08-09&fdManagement=2026-01-01&tdManagement=2026-08-09&lang=en&pid=581134&indexType=GRI&pageId=5d70c1889b6b4944d2ff1bd3"])
-
-if pygetwindow.getWindowsWithTitle("page"):
-    pygetwindow.getWindowsWithTitle("page")[0].restore()
-    pygetwindow.getWindowsWithTitle("page")[0].maximize()
-
-time.sleep(.75)
-script_config.zoom_out(10)
-script_config.zoom_in(2)
-
 while True:
-    if pyautogui.pixelMatchesColor(1003, 304, (21, 121, 52), tolerance=10):
+    subprocess.run(["cmd", "/c", "start", "msedge", f"https://app.reviewpro.com/myPage?fd=2026-01-01&td=2026-08-09&prevFd=2025-01-01&prevTd=2025-08-09&fdManagement=2026-01-01&tdManagement=2026-08-09&lang=en&pid=581134&indexType=GRI&pageId=5d70c1889b6b4944d2ff1bd3"])
+
+    if pygetwindow.getWindowsWithTitle("page"):
+        pygetwindow.getWindowsWithTitle("page")[0].restore()
+        pygetwindow.getWindowsWithTitle("page")[0].maximize()
+
+    time.sleep(.75)
+    script_config.zoom_out(10)
+    script_config.zoom_in(2)
+
+    while True:
+        if pyautogui.pixelMatchesColor(1003, 304, (21, 121, 52), tolerance=10):
+            break
+
+    time.sleep(.5)
+
+    pyautogui.press("tab", presses=2, interval=.01)
+    pyautogui.press("space", interval=.01)
+    pyautogui.press("tab", interval=.01)
+    pyautogui.press("space", interval=.01)
+    pyautogui.press("tab", interval=.01)
+    pyautogui.press("down", presses=7, interval=.01)
+    pyautogui.press("enter", interval=.01)
+    pyautogui.press("tab", presses=7, interval=.01)
+    pyautogui.press("space", interval=.01)
+
+    while True:
+        if pyautogui.pixelMatchesColor(1003, 304, (21, 121, 52), tolerance=10):
+            break
+
+    script_config.zoom_in(8)
+
+    while True:
+        if pyautogui.pixelMatchesColor(593, 659, (0, 93, 93), tolerance=10):
+            break
+
+    if pyautogui.pixelMatchesColor(593, 659, (0, 93, 93), tolerance=10):
         break
 
-time.sleep(.5)
-
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
-pyautogui.press("tab", interval=.01)
-pyautogui.press("space", interval=.01)
-pyautogui.press("tab", interval=.01)
-pyautogui.press("down", presses=7, interval=.01)
-pyautogui.press("enter", interval=.01)
-pyautogui.press("tab", presses=7, interval=.01)
-pyautogui.press("space", interval=.01)
-
-while True:
-    if pyautogui.pixelMatchesColor(1003, 304, (21, 121, 52), tolerance=10):
-        break
-
-script_config.zoom_in(8)
+    else:
+        pyautogui.hotkey("ctrl", "w", interval=.01)
+        continue
 
 pyautogui.hotkey("ctrl", "shift", "s", interval=.01)
 pyautogui.moveTo(1132, 890)

@@ -238,62 +238,97 @@ def num_row(num):
         vba += "    Selection.Insert Shift:=xlDown\n"
     return vba
 
+# pyautogui.FAILSAFE = True
+
+# while True:
+#     subprocess.run(["cmd", "/c", "start", "msedge", f"https://app.reviewpro.com/myPage?fd=2026-01-01&td=2026-08-09&prevFd=2025-01-01&prevTd=2025-08-09&fdManagement=2026-01-01&tdManagement=2026-08-09&lang=en&pid=581134&indexType=GRI&pageId=5d70c1889b6b4944d2ff1bd3"])
+
+#     if pygetwindow.getWindowsWithTitle("page"):
+#         pygetwindow.getWindowsWithTitle("page")[0].restore()
+#         pygetwindow.getWindowsWithTitle("page")[0].maximize()
+
+#     time.sleep(.75)
+#     zoom_out(10)
+#     zoom_in(2)
+
+#     while True:
+#         if pyautogui.pixelMatchesColor(1003, 304, (21, 121, 52), tolerance=10):
+#             break
+
+#     time.sleep(.5)
+
+#     pyautogui.press("tab", presses=2, interval=.01)
+#     pyautogui.press("space", interval=.01)
+#     pyautogui.press("tab", interval=.01)
+#     pyautogui.press("space", interval=.01)
+#     pyautogui.press("tab", interval=.01)
+#     pyautogui.press("down", presses=7, interval=.01)
+#     pyautogui.press("enter", interval=.01)
+#     pyautogui.press("tab", presses=7, interval=.01)
+#     pyautogui.press("space", interval=.01)
+
+#     while True:
+#         if pyautogui.pixelMatchesColor(1003, 304, (21, 121, 52), tolerance=10):
+#             break
+
+#     zoom_in(8)
+
+#     while True:
+#         if pyautogui.pixelMatchesColor(593, 659, (0, 93, 93), tolerance=10):
+#             break
+
+#     if pyautogui.pixelMatchesColor(593, 659, (0, 93, 93), tolerance=10):
+#         break
+
+#     else:
+#         pyautogui.hotkey("ctrl", "w", interval=.01)
+#         continue
+
+# pyautogui.hotkey("ctrl", "shift", "s", interval=.01)
+# pyautogui.moveTo(1132, 890)
+# time.sleep(.15)
+# pyautogui.dragTo(844, 603, button="left")
+
 # path_OTH = path_share.__add__(r"\OTH")
 
-# ori_excel_file = "03.10.26.xlsm"
+# ori_excel_file = "07.11.26.xlsm"
 # path_ori_excel = os.path.join(path_OTH, ori_excel_file)
 
 # from openpyxl import load_workbook
 
 # wb = load_workbook(path_ori_excel, keep_vba=True)
 
-# ws = "03.10.26"
+# ws = "07.11.26"
 # ws = wb[ws]
 
 
 
 # import xml.etree.ElementTree
 
-# arr = "res_detail_155534034.XML"
-# arrival = os.path.join(path_.__add__(r"\Downloads"), arr)
+# ooo = "hkooobyreason_162205372.XML"
+# out_of = os.path.join(path_.__add__(r"\Downloads"), ooo)
 
-# tree = xml.etree.ElementTree.parse(arrival)
+# tree = xml.etree.ElementTree.parse(out_of)
 # root = tree.getroot()
 
-# arr = root.findall(".//G_RESERVATION")
-# arr_row = 1 + len(arr)
+# ooo_set = []
 
-# dep = "departure_all_155533612.XML"
-# departure = os.path.join(path_.__add__(r"\Downloads"), dep)
+# _ = root.findall(".//LIST_G_ROOM/*")
 
-# tree = xml.etree.ElementTree.parse(departure)
-# root = tree.getroot()
+# for _ in _:
+#     if _.find("ROOM") is not None and _.find("ROOM_STATUS") is not None:
+#         if _.find("ROOM_STATUS").text == "OS":
+#             ooo_set.append(str(int(_.find("ROOM").text)))
 
-# dep = root.findall(".//G_ROOM")
-# dep_row = 1 + len(dep)
+# ooo_set.sort(key=int)
 
-# vac_file = "hkvacroom_155542119.XML"
-# vac = os.path.join(path_.__add__(r"\Downloads"), vac_file)
+# if not ooo_set:
+#     ooo_convert = "-"
+# else:
+#     ooo_convert = ", ".join(ooo_set)
 
-# tree = xml.etree.ElementTree.parse(vac)
-# root = tree.getroot()
+# ws["V1"] = f"Show Room\n\n{ooo_convert}\n\n\nEarly Departure\n\n-"
 
-# rm_collect = []
-
-# for _ in root.findall(".//G_ROOM"):
-#     rm = _.find("ROOM").text
-#     if _.find("RESV_STATUS").text == "Not Reserved":
-#         rm_collect.append(str(int(rm)))
-
-# under_100 = [x for x in rm_collect if int(x) <= 100]
-# over_100 = [x for x in rm_collect if int(x) > 100]
-# under_100_value = ", ".join(under_100)
-# over_100_value = ", ".join(over_100)
-# ws[f"G{arr_row + dep_row + 38}"] = under_100_value
-# ws[f"G{arr_row + dep_row + 39}"] = over_100_value
-
-# ws[f"P{arr_row + dep_row + 38}"] = len(under_100)
-# ws[f"P{arr_row + dep_row + 39}"] = len(over_100)
 
 # wb.save(path_ori_excel)
 # wb.close()
