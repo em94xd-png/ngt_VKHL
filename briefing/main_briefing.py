@@ -1938,37 +1938,49 @@ ws[f"G{arr_row + dep_row + 39}"] = building_value
 wb.save(path_td_excel)
 wb.close()
 
-subprocess.run(["cmd", "/c", "start", "msedge", f"https://app.reviewpro.com/myPage?fd=2026-01-01&td=2026-08-09&prevFd=2025-01-01&prevTd=2025-08-09&fdManagement=2026-01-01&tdManagement=2026-08-09&lang=en&pid=581134&indexType=GRI&pageId=5d70c1889b6b4944d2ff1bd3"])
-
-if pygetwindow.getWindowsWithTitle("page"):
-    pygetwindow.getWindowsWithTitle("page")[0].restore()
-    pygetwindow.getWindowsWithTitle("page")[0].maximize()
-
-time.sleep(.75)
-script_config.zoom_out(10)
-script_config.zoom_in(2)
-
 while True:
-    if pyautogui.pixelMatchesColor(1003, 304, (21, 121, 52), tolerance=10):
+    subprocess.run(["cmd", "/c", "start", "msedge", f"https://app.reviewpro.com/myPage?fd=2026-01-01&td=2026-08-09&prevFd=2025-01-01&prevTd=2025-08-09&fdManagement=2026-01-01&tdManagement=2026-08-09&lang=en&pid=581134&indexType=GRI&pageId=5d70c1889b6b4944d2ff1bd3"])
+
+    if pygetwindow.getWindowsWithTitle("page"):
+        pygetwindow.getWindowsWithTitle("page")[0].restore()
+        pygetwindow.getWindowsWithTitle("page")[0].maximize()
+
+    time.sleep(.75)
+    script_config.zoom_out(10)
+    script_config.zoom_in(2)
+
+    while True:
+        if pyautogui.pixelMatchesColor(1003, 304, (21, 121, 52), tolerance=10):
+            break
+
+    time.sleep(.5)
+
+    pyautogui.press("tab", presses=2, interval=.01)
+    pyautogui.press("space", interval=.01)
+    pyautogui.press("tab", interval=.01)
+    pyautogui.press("space", interval=.01)
+    pyautogui.press("tab", interval=.01)
+    pyautogui.press("down", presses=7, interval=.01)
+    pyautogui.press("enter", interval=.01)
+    pyautogui.press("tab", presses=7, interval=.01)
+    pyautogui.press("space", interval=.01)
+
+    while True:
+        if pyautogui.pixelMatchesColor(1003, 304, (21, 121, 52), tolerance=10):
+            break
+
+    script_config.zoom_in(8)
+
+    while True:
+        if pyautogui.pixelMatchesColor(593, 659, (0, 93, 93), tolerance=10):
+            break
+
+    if pyautogui.pixelMatchesColor(593, 659, (0, 93, 93), tolerance=10):
         break
 
-time.sleep(.5)
-
-pyautogui.press("tab", presses=2, interval=.01)
-pyautogui.press("space", interval=.01)
-pyautogui.press("tab", interval=.01)
-pyautogui.press("space", interval=.01)
-pyautogui.press("tab", interval=.01)
-pyautogui.press("down", presses=7, interval=.01)
-pyautogui.press("enter", interval=.01)
-pyautogui.press("tab", presses=7, interval=.01)
-pyautogui.press("space", interval=.01)
-
-while True:
-    if pyautogui.pixelMatchesColor(1003, 304, (21, 121, 52), tolerance=10):
-        break
-
-script_config.zoom_in(8)
+    else:
+        pyautogui.hotkey("ctrl", "w", interval=.01)
+        continue
 
 pyautogui.hotkey("ctrl", "shift", "s", interval=.01)
 pyautogui.moveTo(1132, 890)
