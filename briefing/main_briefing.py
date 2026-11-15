@@ -1972,7 +1972,7 @@ while True:
     script_config.zoom_in(8)
 
     while True:
-        if pyautogui.pixelMatchesColor(593, 659, (0, 93, 93), tolerance=10):
+        if pyautogui.pixelMatchesColor(1106, 679, (21, 121, 52), tolerance=10):
             break
 
     if pyautogui.pixelMatchesColor(593, 659, (0, 93, 93), tolerance=10):
