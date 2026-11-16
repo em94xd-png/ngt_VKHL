@@ -1570,6 +1570,8 @@ for _ in root.findall(".//G_RESERVATION"):
         ws[f"D{arr_start}"] = f"{rm}\nSmiling Albino"
     if "Odeon".strip().lower() in str(ta).strip().lower():
         ws[f"D{arr_start}"] = f"{rm}\nOdeon"
+    if "Goibibo".strip().lower() in str(ta).strip().lower():
+        ws[f"D{arr_start}"] = f"{rm}\nGoibibo"
 
     if vip is not None:
         ws[f"F{arr_start}"] = vip
@@ -1822,6 +1824,8 @@ for _ in root.findall(".//G_ROOM"):
         ws[f"D{dep_start}"] = f"{rm}\nSmiling Albino"
     if "Odeon".strip().lower() in str(ta).strip().lower():
         ws[f"D{dep_start}"] = f"{rm}\nOdeon"
+    if "Goibibo".strip().lower() in str(ta).strip().lower():
+        ws[f"D{dep_start}"] = f"{rm}\nGoibibo"
 
     if vip is not None:
         ws[f"F{dep_start}"] = vip
@@ -1972,7 +1976,7 @@ while True:
     script_config.zoom_in(8)
 
     while True:
-        if pyautogui.pixelMatchesColor(593, 659, (0, 93, 93), tolerance=10):
+        if pyautogui.pixelMatchesColor(1106, 679, (21, 121, 52), tolerance=10):
             break
 
     if pyautogui.pixelMatchesColor(593, 659, (0, 93, 93), tolerance=10):
