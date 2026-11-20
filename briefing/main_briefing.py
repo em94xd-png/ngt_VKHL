@@ -1192,10 +1192,12 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
         ws["B11"] = adr
         ws["B11"].number_format = "#,###.##"
         ws["B12"] = oc
-        if (ws["B12"].value).is_integer():
-            ws["B12"].number_format = "#\"%\""
-        elif round(float(ws["B12"].value), 2):
-            ws["B12"].number_format = "#.##\"%\""
+        val_pc = ws["B12"].value
+        if isinstance(val_pc, (int, float)):
+            if float(val_pc).is_integer():
+                ws["B12"].number_format = "#\"%\""
+            else:
+                ws["B12"].number_format = "#.##\"%\""
     if _.find("CONSIDERED_DATE").text == f"{script_config.td_hp_dd_mm_yy.upper()}":
         ws["D4"] = f"{script_config.td.strftime("%#d-%b")}"
         ws["F5"] = arr
@@ -1207,50 +1209,60 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
         ws["N7"] = dep
         ws["M9"] = rm
         ws["M11"] = (rm - hu) / (327 - hu) * 100
-        if (ws["M11"].value).is_integer():
-            ws["M11"].number_format = "#\"%\""
-        elif round(float(ws["M11"].value), 2):
-            ws["M11"].number_format = "#.##\"%\""
+        val_pc = ws["M11"].value
+        if isinstance(val_pc, (int, float)):
+            if float(val_pc).is_integer():
+                ws["M11"].number_format = "#\"%\""
+            else:
+                ws["M11"].number_format = "#.##\"%\""
         ws["M12"] = ppl
     if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=2)).strftime("%d-%b-%y").upper()}":
         ws["P5"] = arr
         ws["P7"] = dep
         ws["O9"] = rm
         ws["O11"] = (rm - hu) / (327 - hu) * 100
-        if (ws["O11"].value).is_integer():
-            ws["O11"].number_format = "#\"%\""
-        elif round(float(ws["O11"].value), 2):
-            ws["O11"].number_format = "#.##\"%\""
+        val_pc = ws["O11"].value
+        if isinstance(val_pc, (int, float)):
+            if float(val_pc).is_integer():
+                ws["O11"].number_format = "#\"%\""
+            else:
+                ws["O11"].number_format = "#.##\"%\""
         ws["O12"] = ppl
     if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=3)).strftime("%d-%b-%y").upper()}":
         ws["R5"] = arr
         ws["R7"] = dep
         ws["Q9"] = rm
         ws["Q11"] = (rm - hu) / (327 - hu) * 100
-        if (ws["Q11"].value).is_integer():
-            ws["Q11"].number_format = "#\"%\""
-        elif round(float(ws["Q11"].value), 2):
-            ws["Q11"].number_format = "#.##\"%\""
+        val_pc = ws["Q11"].value
+        if isinstance(val_pc, (int, float)):
+            if float(val_pc).is_integer():
+                ws["Q11"].number_format = "#\"%\""
+            else:
+                ws["Q11"].number_format = "#.##\"%\""
         ws["Q12"] = ppl
     if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=4)).strftime("%d-%b-%y").upper()}":
         ws["T5"] = arr
         ws["T7"] = dep
         ws["S9"] = rm
         ws["S11"] = (rm - hu) / (327 - hu) * 100
-        if (ws["S11"].value).is_integer():
-            ws["S11"].number_format = "#\"%\""
-        elif round(float(ws["S11"].value), 2):
-            ws["S11"].number_format = "#.##\"%\""
+        val_pc = ws["S11"].value
+        if isinstance(val_pc, (int, float)):
+            if float(val_pc).is_integer():
+                ws["S11"].number_format = "#\"%\""
+            else:
+                ws["S11"].number_format = "#.##\"%\""
         ws["S12"] = ppl
     if _.find("CONSIDERED_DATE").text == f"{(date.today() + timedelta(days=5)).strftime("%d-%b-%y").upper()}":
         ws["V5"] = arr
         ws["V7"] = dep
         ws["U9"] = rm
         ws["U11"] = (rm - hu) / (327 - hu) * 100
-        if (ws["U11"].value).is_integer():
-            ws["U11"].number_format = "#\"%\""
-        elif round(float(ws["U11"].value), 2):
-            ws["U11"].number_format = "#.##\"%\""
+        val_pc = ws["U11"].value
+        if isinstance(val_pc, (int, float)):
+            if float(val_pc).is_integer():
+                ws["U11"].number_format = "#\"%\""
+            else:
+                ws["U11"].number_format = "#.##\"%\""
         ws["U12"] = ppl
 
 cmp = int(ws["B5"].value or 0 if ws["B5"].value != "-" else 0)
@@ -1258,10 +1270,12 @@ hu = int(ws["B7"].value or 0 if ws["B7"].value != "-" else 0)
 rm = int(ws["E9"].value or 0 if ws["E9"].value != "-" else 0)
 
 ws["E11"] = round(float((rm - (cmp + hu)) / 327 * 100), 2)
-if (ws["E11"].value).is_integer():
-    ws["E11"].number_format = "#\"%\""
-elif round(float(ws["E11"].value), 2):
-    ws["E11"].number_format = "#.##\"%\""
+val_pc = ws["E11"].value
+if isinstance(val_pc, (int, float)):
+    if float(val_pc).is_integer():
+        ws["E11"].number_format = "#\"%\""
+    else:
+        ws["E11"].number_format = "#.##\"%\""
 
 tree = xml.etree.ElementTree.parse(resfutureoccupancy)
 root = tree.getroot()
