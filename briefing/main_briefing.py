@@ -1194,7 +1194,7 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
         ws["B12"] = oc
         val_pc = ws["B12"].value
         if isinstance(val_pc, (int, float)):
-            if float(val_pc).is_integer():
+            if round(val_pc, 2).is_integer():
                 ws["B12"].number_format = "#\"%\""
             else:
                 ws["B12"].number_format = "#.##\"%\""
@@ -1211,7 +1211,7 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
         ws["M11"] = (rm - hu) / (327 - hu) * 100
         val_pc = ws["M11"].value
         if isinstance(val_pc, (int, float)):
-            if float(val_pc).is_integer():
+            if round(val_pc, 2).is_integer():
                 ws["M11"].number_format = "#\"%\""
             else:
                 ws["M11"].number_format = "#.##\"%\""
@@ -1223,7 +1223,7 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
         ws["O11"] = (rm - hu) / (327 - hu) * 100
         val_pc = ws["O11"].value
         if isinstance(val_pc, (int, float)):
-            if float(val_pc).is_integer():
+            if round(val_pc, 2).is_integer():
                 ws["O11"].number_format = "#\"%\""
             else:
                 ws["O11"].number_format = "#.##\"%\""
@@ -1235,7 +1235,7 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
         ws["Q11"] = (rm - hu) / (327 - hu) * 100
         val_pc = ws["Q11"].value
         if isinstance(val_pc, (int, float)):
-            if float(val_pc).is_integer():
+            if round(val_pc, 2).is_integer():
                 ws["Q11"].number_format = "#\"%\""
             else:
                 ws["Q11"].number_format = "#.##\"%\""
@@ -1247,7 +1247,7 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
         ws["S11"] = (rm - hu) / (327 - hu) * 100
         val_pc = ws["S11"].value
         if isinstance(val_pc, (int, float)):
-            if float(val_pc).is_integer():
+            if round(val_pc, 2).is_integer():
                 ws["S11"].number_format = "#\"%\""
             else:
                 ws["S11"].number_format = "#.##\"%\""
@@ -1259,7 +1259,7 @@ for _ in root.findall(".//G_GPAGEID/LIST_G_REC_TYPE/G_REC_TYPE/LIST_G_CONSIDERED
         ws["U11"] = (rm - hu) / (327 - hu) * 100
         val_pc = ws["U11"].value
         if isinstance(val_pc, (int, float)):
-            if float(val_pc).is_integer():
+            if round(val_pc, 2).is_integer():
                 ws["U11"].number_format = "#\"%\""
             else:
                 ws["U11"].number_format = "#.##\"%\""
@@ -1272,7 +1272,7 @@ rm = int(ws["E9"].value or 0 if ws["E9"].value != "-" else 0)
 ws["E11"] = round(float((rm - (cmp + hu)) / 327 * 100), 2)
 val_pc = ws["E11"].value
 if isinstance(val_pc, (int, float)):
-    if float(val_pc).is_integer():
+    if round(val_pc, 2).is_integer():
         ws["E11"].number_format = "#\"%\""
     else:
         ws["E11"].number_format = "#.##\"%\""

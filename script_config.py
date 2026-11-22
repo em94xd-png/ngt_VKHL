@@ -332,3 +332,20 @@ def num_row(num):
 
 # wb.save(path_ori_excel)
 # wb.close()
+
+# from openpyxl import load_workbook
+
+# wb = load_workbook(os.path.join(path_share.__add__(r"\OTH"), "23.11.26.xlsm"), keep_vba=True)
+
+# ws = "23.11.26"
+# ws = wb[ws]
+
+# ws["O11"] = 52.0000099061
+# val_pc = ws["O11"].value
+# if isinstance(val_pc, (int, float)):
+#     if round(val_pc, 2).is_integer():
+#         ws["O11"].number_format = "#\"%\""
+#     else:
+#         ws["O11"].number_format = "#.##\"%\""
+
+# wb.save(os.path.join(path_share.__add__(r"\OTH"), "23.11.26.xlsm"))
